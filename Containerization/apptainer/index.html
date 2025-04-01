@@ -1,0 +1,1067 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="TSI McGill Tutorials">
+      
+      
+        <meta name="author" content="Stephan O'Brien (stephan.obrien@mcgill.ca)">
+      
+      
+        <link rel="canonical" href="https://github.com/tsi-mcgill/tsi-tutorials/Containerization/apptainer/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.4">
+    
+    
+      
+        <title>Apptainer - TSI McGill Tutorials</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="sandstone" data-md-color-primary="grey" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#what-is-containerization" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TSI McGill Tutorials" class="md-header__button md-logo" aria-label="TSI McGill Tutorials" data-md-component="logo">
+      
+  <img src="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TSI McGill Tutorials
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Apptainer
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="sandstone" data-md-color-primary="grey" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="gray"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Python/" class="md-tabs__link">
+        
+  
+    
+  
+  Python
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Cpp/" class="md-tabs__link">
+        
+  
+    
+  
+  C++
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Rust/" class="md-tabs__link">
+        
+  
+    
+  
+  Rust
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../VersionControl/" class="md-tabs__link">
+        
+  
+    
+  
+  Version Control
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link">
+        
+  
+    
+  
+  Containerization
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Misc/" class="md-tabs__link">
+        
+  
+    
+  
+  Misc
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TSI McGill Tutorials" class="md-nav__button md-logo" aria-label="TSI McGill Tutorials" data-md-component="logo">
+      
+  <img src="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png" alt="logo">
+
+    </a>
+    TSI McGill Tutorials
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Python/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cpp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C++
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Rust/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rust
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VersionControl/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Version Control
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Containerization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Misc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Misc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Apptainer</h1>
+
+<h2 id="what-is-containerization">What is Containerization?</h2>
+<p>Containerization is a practice in software development in which a single application, or group of applications, is collected into a bundle which includes the application executable and all the libraries and dependencies required to run that application. With this information, the application can be run on any resource that uses the underlying containerization software installed.</p>
+<p>Containerization is made possible due to "namespaces." In Linux, a namespace defines the boundaries of a process' "awareness" of what else is running around it. This essentially means that a process can "see" and interact with everything accessible within its own namespace, but not necessarily what is in other namespaces. With this in mind, we can limit what is accessible from a namespace. For example, we might limit the resources available (RAM, CPU) to a namespace or limit the file access of a namespace. When a process runs on a system, we can "containerize" the process by restricting what the process has access to. This allows the process to be run in isolation from the rest of the system. As far as the containerized process knows, it is in an operating system by itself with no other processes running (other than child processes!).</p>
+<p>There are many types of containerization software (e.g. <a href="https://www.docker.com/">Docker</a>, <a href="https://podman.io/">Podman</a> and <a href="https://apptainer.org/">Apptainer</a>), but at their base level, they behave similarly. For simplicity, consider a container to be made up of two things:</p>
+<ol>
+<li>A file system snapshot. This is a snapshot of the files in a system, including required libraries, executables, input data, etc. Anything that might be required for an application to run.</li>
+<li>A start command. This could be the command required to start an application (e.g. an analysis pipeline, a website, a Python interpreter). The file system snapshot contains everything needed to execute the start command.</li>
+</ol>
+<p>Here we rely on the fact that Linux systems are very similar, so much so that we can use a common Linux kernel to run two different operating systems. Consider OS 1 and OS 2. OS 1 is the "host" system, that is the system on which we will be running the container. OS 2 is going to be an image of a different operating system that we are going to run as a container on OS 1. The image for OS 2 contains the specific files needed (file system snapshot) to run the applications of interest. When we want to create a container, we essentially create a new namespace for the container, copy the files from OS 2 into the file system accessible to the container, and then run commands within the container. From within the namespace of the container, it would appear that we are running OS 2 despite using the Linux kernel of OS 1 to actually execute the code.</p>
+<p>It's worth noting that while containers share the kernel, they don't necessarily emulate an entire operating system. They typically share the kernel and some system resources but maintain separate user spaces.</p>
+<p>We can start to see some of the benefits of using a container emerge:</p>
+<ol>
+<li>
+<p><strong>Dependencies only need to be solved once!</strong> We only need to determine the dependencies once when we create the image. The image can then be used on <strong>any host system</strong> (e.g., OS 1) which has the appropriate containerization software (Apptainer, Docker, Podman, etc.). Furthermore, I could give this image to anyone else who needs to run the same software.</p>
+</li>
+<li>
+<p><strong>Old Difficult Dependencies:</strong> When using older software, it is often difficult to get the dependencies to work on a modern system. For example, if we have old software designed to run on Ubuntu 12.04 and we want to run it on Ubuntu 22.04, we would have to fight through 10 years of development to get the software to work on Ubuntu 22.04. However, we could also just create an image which uses Ubuntu 12.04, install the required software, and then run it as a container on Ubuntu 22.04.</p>
+</li>
+<li>
+<p><strong>Reproducibility:</strong> Containers allow us to share the exact system that code was run on. This removes any system or version-dependent behavior. Imagine we submitted a paper that ran some analysis with some dependency. In between submission and receiving comments, the dependency was updated (from version 1.1 to version 1.2). This introduces a 1% discrepancy depending on which version is used. Since our code heavily depends on this dependency, that 1% discrepancy, which might have been acceptable to the developers, propagates to a larger 10% discrepancy. This could be very difficult to debug if we updated a lot of packages, especially if I need to respond to a reviewer's comments within a tight timeframe! Luckily, I created an image of the analysis at the time of submission. Therefore, I can create a container from that older image and address the reviewer's comments using the version of the code the analysis was initially run with.</p>
+</li>
+</ol>
+<p><strong>See also:</strong>
+- <a href="https://jvns.ca/blog/2016/10/10/what-even-is-a-container/">What even is a container?</a></p>
+<h3 id="containers-vs-virtual-machines">Containers vs Virtual Machines</h3>
+<p>Containers and Virtual Machines (VMs) are similar concepts, but they differ in how they achieve virtualization, particularly from a software and hardware perspective.</p>
+<p>A VM is an entire operating system, including the entire file system, system kernel, and anything else required to run the operating system. Because of this, VMs tend to have larger file sizes than container images.</p>
+<p>On the other hand, a container uses the host system's operating system through a container engine. Therefore, a container only requires the files necessary to run the application or group of applications it is designed for, without using the host system's kernel. This is based on the advanced Linux concept known as "namespaces." Essentially, the container will have its own "namespace" with its version of libraries, separate from the host OS.</p>
+<p>A VM requires dedicated access to real hardware resources (memory, CPU, GPU, etc.). It obtains this using a "hypervisor," a process that allocates parts of the real hardware and creates virtual hardware that the VM will use. For example, if a VM needs to use 20% of the system RAM, the hypervisor would allocate 20% of the available RAM as virtual RAM, which would be used exclusively by the VM. One downside of using VMs is that since only the VM can use the allocated resources, we could never have more than 5 VMs of this configuration active at a time (as it would exceed 100% of the available resources).</p>
+<p>In contrast, a container is executed like a normal process on the host system. Resources can be allocated as they would for any other process on a system. This allows multiple containers to operate simultaneously, with the system scheduler handling resource allocation between them. For example, if both a VM and a container need 20% of the system RAM during operations, the VM will "own" 20% of the RAM for the entire lifetime of the VM. However, the container will only "own" as much RAM as it needs at any given time. Therefore, during periods of low resource usage, such as between expensive operations when the RAM usage drops to, say, 10%, the system can allocate the remaining 10% to other processes.</p>
+<p>Regarding startup time, since containers use the host system, they take seconds to start up (essentially just copying files). In contrast, a VM might require the VM OS to "boot" before starting up, which can take minutes (as it needs to boot an entire operating system before executing a command).</p>
+<p><strong>See also:</strong>
+- <a href="https://dockerlabs.collabnix.com/beginners/difference-vm-containers.html">Difference between Containers and Virtual Machines</a></p>
+<h2 id="apptainersingularity">Apptainer/Singularity</h2>
+<p>Apptainer, formerly known as Singularity, is a <a href="https://en.wikipedia.org/wiki/Singularity_(software)">computer program that performs operating-system-level virtualization</a>, commonly known as containerization. It addresses security concerns associated with other containerization software, making it popular in high-performance computing (HPC) environments. Apptainer enables developers to create and develop code in their preferred environment before packaging it into a Singularity Container Image (SCI). These images can be easily shared with others while ensuring reproducibility in various computing environments.</p>
+<h2 id="pulling-a-pre-exisiting-image">Pulling a Pre-exisiting Image</h2>
+<p>There are numerous sources of pre-existing images. Commonly used ones are <a href="https://hub.docker.com/">DockerHub</a>, <a href="https://ghcr.io">GitHub Container Registry</a>, and <a href="https://singularityhub.github.io/library-api/#/?id=library-api">Library</a>.</p>
+<p>Apptainer can convert Docker images directly into Apptainer images. This is extremely useful, allowing us to piggyback on the work of others. For example, let's say we would like to have the latest version of Python to run a test; we could simply use the latest <a href="https://hub.docker.com/_/python">Python Docker image on DockerHub</a> using something like:</p>
+<div class="highlight"><pre><span></span><code>&gt; apptainer shell docker://python:latest
+</code></pre></div>
+<p>This would create an Apptainer image and start an interactive <code>shell</code> in a container generated from the python:latest image hosted on DockerHub.
+<div class="highlight"><pre><span></span><code>&gt; apptainer shell docker://python:latest
+INFO:    Using cached SIF image
+Apptainer&gt; python --version
+Python 3.12.2
+</code></pre></div>
+If we wanted to access a different version, for example if we needed Python 2.7, we could use:
+<div class="highlight"><pre><span></span><code>&gt; apptainer shell docker://python:2.7   
+INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+Getting image source signatures
+Copying blob 6f4489a7e4cf done  
+Copying blob fd4b47407fc3 done  
+Copying blob dc3f0c679f0f done  
+Copying blob 09b6f03ffac4 done  
+Copying blob b32f6bf7d96d done  
+Copying blob 7e2b2a5af8f6 done  
+Copying blob af4b99ad9ef0 done  
+Copying blob 39db0bc48c26 done  
+Copying blob acb4a89489fc done  
+Copying config 8452137826 done  
+Writing manifest to image destination
+Storing signatures
+2024/03/25 11:06:37  info unpack layer: sha256:7e2b2a5af8f65687add6d864d5841067e23bd435eb1a051be6fe1ea2384946b4
+2024/03/25 11:06:38  info unpack layer: sha256:09b6f03ffac4cb4e42f8ab0bfc480bd3a3fa20e1ddee37784db63bc886b0cbb3
+2024/03/25 11:06:38  info unpack layer: sha256:dc3f0c679f0f4c39597721c1df5cdb4f9685b26bd789a44eeb406835a1800d5f
+2024/03/25 11:06:38  info unpack layer: sha256:fd4b47407fc30b8206971ec60f280b107b00df8007da2fb912ebb8656b53695e
+2024/03/25 11:06:40  info unpack layer: sha256:b32f6bf7d96d26a22dc62da6522f384dcdc936c30c88b233d378e06cf127346d
+2024/03/25 11:06:43  info unpack layer: sha256:6f4489a7e4cfcda98c90d9fb220ab8dbf5e40a7a6d756ed414707967aa96bfbd
+2024/03/25 11:06:43  info unpack layer: sha256:af4b99ad9ef03daa029d78458e669f135a3c41764bbc154e9d56a3d9b2ee7bf1
+2024/03/25 11:06:43  info unpack layer: sha256:39db0bc48c262bd32f4b201a4fad3dde162e73d3d1135fdaab433477156ad816
+2024/03/25 11:06:43  info unpack layer: sha256:acb4a89489fc21e4c05c6ef86dacf640cab884b3b3e207cfd5ad24da02f14661
+INFO:    Creating SIF file...
+Apptainer&gt; python --version
+Python 2.7.18
+</code></pre></div></p>
+<p>We can see that Apptainer will first pull the image in layers from DockerHub before creating a <code>SIF</code> (Singularity Image Format) file. If we leave out the <code>tag</code> when pulling from DockerHub, the <code>latest</code> tag is always chosen.
+<div class="highlight"><pre><span></span><code>&gt; apptainer shell docker://python    
+INFO:    Using cached SIF image
+Apptainer&gt; python --version
+Python 3.12.2
+</code></pre></div></p>
+<h2 id="editing-images-using-sandbox">Editing images using <code>sandbox</code></h2>
+<p>When taking a base image, it is often the case that we're missing packages or we would like to install other packages into that image. For example, the Python container we've been using doesn't have <code>ipython</code>.
+<div class="highlight"><pre><span></span><code>&gt; apptainer shell docker://python
+INFO:    Using cached SIF image
+Apptainer&gt; ipython
+bash: ipython: command not found
+</code></pre></div></p>
+<p>We can create a <code>sandbox</code>, essentially unpacking the contents of the image into a directory, allowing that image to be modified.
+<div class="highlight"><pre><span></span><code>&gt; apptainer build --sandbox python_project docker://python
+INFO:    Starting build...
+Getting image source signatures
+Copying blob 63941d09e532 skipped: already exists  
+Copying blob d68cd2123173 skipped: already exists  
+Copying blob 567db630df8d skipped: already exists  
+Copying blob 09527fa4de8d skipped: already exists  
+Copying blob 5f899db30843 skipped: already exists  
+Copying blob 3cb8f9c23302 skipped: already exists  
+Copying blob 71215d55680c skipped: already exists  
+Copying blob 097431623722 skipped: already exists  
+Copying config 35a79b0576 done  
+Writing manifest to image destination
+Storing signatures
+2024/03/25 11:18:13  info unpack layer: sha256:71215d55680cf0ab2dcc0e1dd65ed76414e3fb0c294249b5b9319a8fa7c398e4
+2024/03/25 11:18:14  info unpack layer: sha256:3cb8f9c23302e175d87a827f0a1c376bd59b1f6949bd3bc24ab8da0d669cdfa0
+2024/03/25 11:18:14  info unpack layer: sha256:5f899db30843f8330d5a40d1acb26bb00e93a9f21bff253f31c20562fa264767
+2024/03/25 11:18:15  info unpack layer: sha256:567db630df8d441ffe43e050ede26996c87e3b33c99f79d4fba0bf6b7ffa0213
+2024/03/25 11:18:19  info unpack layer: sha256:d68cd2123173935e339e3feb56980a0aefd7364ad43ca2b9750699e60fbf74c6
+2024/03/25 11:18:19  info unpack layer: sha256:63941d09e5322b88281f3a325eff9ced5bf2ee45b691aaf8ec2f829bafbd8021
+2024/03/25 11:18:20  info unpack layer: sha256:097431623722383300c03bb41fd162d32346bf6a02a053263f51969eb9746e3d
+2024/03/25 11:18:20  info unpack layer: sha256:09527fa4de8dd73399164c307942cc43652a01fc2bb370e38ae0f806b42b4b18
+INFO:    Creating sandbox directory...
+INFO:    Build complete: python_project
+(base) 
+</code></pre></div></p>
+<p>Here we have run <code>apptainer build --sandbox python_project docker://python</code>. We specify the base image as <code>docker://python</code> (the latest version of the Python image on DockerHub), and we <code>build</code> a <code>--sandbox</code> directory with the name <code>python_project</code>. 
+If we look inside this directory, it will look very similar to what is at <code>/</code> (root directory) of your own machine:
+<div class="highlight"><pre><span></span><code>&gt; ls python_project 
+bin  boot  dev  environment  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  singularity  srv  sys  tmp  usr  var
+</code></pre></div>
+We can then create a new container by executing the following command:
+<div class="highlight"><pre><span></span><code>&gt; apptainer shell --writable python_project
+</code></pre></div>
+Within the container, we can proceed to install ipython.
+<div class="highlight"><pre><span></span><code>pip install ipython
+</code></pre></div>
+To exit the image, type <code>exit</code>. To confirm that <code>ipython</code> is now installed, we can recreate the container using the following command:
+<div class="highlight"><pre><span></span><code>&gt; apptainer shell python_project
+Apptainer&gt; ipython --version
+8.22.2
+</code></pre></div>
+Note that we aren't calling <code>--writable</code> because we no longer need the directory to be writable. We could have the container writable; however, this is bad practice as modifying a container unintentionally might break compatibility with others using the container.</p>
+<h2 id="creating-a-basic-image-using-build">Creating a basic Image using <code>build</code></h2>
+<p>We have now pulled an image from DockerHub, created a modified version of that image, and saved it to a directory.</p>
+<p>Looking at the directory, we notice that it takes up a pretty substantial amount of memory:
+<div class="highlight"><pre><span></span><code>&gt; du -sh ./python_project 
+1.1G    ./python_project
+</code></pre></div></p>
+<p>If we only have a single image that we work with, 1GB might not be too bad, but as we increase the complexity of the project and use more containers, this will quickly take up a lot of space.</p>
+<p>We can build a <code>SIF</code> (Singularity Image Format) file from that directory using:
+<div class="highlight"><pre><span></span><code>&gt; apptainer build python_project.sif python_project
+
+INFO:    Starting build...
+INFO:    Creating SIF file...
+INFO:    Build complete: python_project.sif
+</code></pre></div>
+Note that the format is <code>apptainer build &lt;output_name&gt; &lt;input_name&gt;</code>.</p>
+<p>This command creates a file called <code>python_project.sif</code>, which can be thought of as a compressed version of the <code>python_project</code> directory:
+<div class="highlight"><pre><span></span><code>&gt; du -sh ./*
+1.1G    ./python_project
+346M    ./python_project.sif
+</code></pre></div>
+In this case, the <code>sif</code> file takes up around 1/3 of the storage of the directory.</p>
+<h2 id="apptainer-run-and-apptainer-exec-commands"><code>apptainer run</code> and <code>apptainer exec</code> commands</h2>
+<p>Containers can be given a predefined command to run. This command can be executed using <code>apptainer run &lt;image_name&gt;</code>. For example, with the <code>python_project</code> image:
+<div class="highlight"><pre><span></span><code>&gt; apptainer run python_project.sif 
+Python 3.12.2 (main, Mar 12 2024, 11:02:14) [GCC 12.2.0] on linux
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt; 
+</code></pre></div></p>
+<p>We can see that this puts us into a Python interpreter as designed by the <a href="https://github.com/docker-library/python/blob/ec3500d01443b87701962245a9f465d05007dc8a/3.13-rc/bookworm/Dockerfile#L125">maintainers of this image</a>.</p>
+<p>We can also specify the command to <code>run</code>. Consider the Python script <code>hello.py</code>:
+<div class="highlight"><pre><span></span><code><span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">)</span>
+<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Inside of container!&quot;</span><span class="p">)</span>
+</code></pre></div></p>
+<p>We can run this script using the container:
+<div class="highlight"><pre><span></span><code>&gt; apptainer exec python_project.sif python hello.py
+Hello, world!
+Inside of container!
+</code></pre></div></p>
+<p><code>apptainer run</code> executes the default command specified by the image author, while <code>apptainer exec</code> allows you to run custom commands within a running container.</p>
+<h2 id="binding-file-systems">Binding file systems</h2>
+<p>By default, the Apptainer image will <code>bind</code> directories to the container, allowing them to be accessed from within the container. This behavior may depend on your environment (for example, whether or not a read directory is automatically bound).</p>
+<p>We can explicitly <code>bind</code> directories when executing/running commands using the following syntax:</p>
+<div class="highlight"><pre><span></span><code>apptainer exec -B &lt;/path/to/local/directory&gt;:&lt;/path/to/container/mount/point&gt; image.sif &lt;command&gt;
+</code></pre></div>
+<p>For example:
+<div class="highlight"><pre><span></span><code>&gt; apptainer exec -B $HOME/Downloads:/Downloads python_project.sif bash
+</code></pre></div></p>
+<p>This command mounts the <code>~/Downloads</code> folder to <code>/Downloads</code> within the container and runs <code>bash</code> to get an interactive terminal. We could then access the downloads from <code>/Downloads</code>.</p>
+<p>We can bind multiple directories, for example:</p>
+<div class="highlight"><pre><span></span><code>&gt; apptainer exec -B $HOME/Downloads:/Downloads -B $HOME/Desktop:/Desktop  python_project.sif bash
+</code></pre></div>
+<p>By default, Apptainer will also mount the <code>$HOME</code> directory. This can occasionally be problematic; for example, if you have Python libraries stored in <code>$HOME</code>, they may be picked up when mounting the <code>$HOME</code> directory instead of the libraries stored in the image. You can specify the <code>$HOME</code> directory using <code>--home &lt;dir_name&gt;</code>:</p>
+<div class="highlight"><pre><span></span><code>&gt; apptainer exec --home `pwd` python_project.sif bash                                          
+</code></pre></div>
+<p>This command sets the <code>$HOME</code> to be the current directory when launching the container. </p>
+<h2 id="creating-an-image-from-a-definition-file">Creating an image from a definition file</h2>
+<p>Similar to Docker, we can create an image from a file with a list of instructions.</p>
+<p>Apptainer <code>def</code> files follow this format:
+<div class="highlight"><pre><span></span><code>Bootstrap: docker
+From: ubuntu:{{ VERSION }}
+Stage: build
+
+%arguments
+    VERSION=22.04
+
+%setup
+
+%files
+
+%environment
+
+
+%post
+
+
+%runscript
+
+%startscript
+
+%test
+
+%labels
+
+%help
+</code></pre></div></p>
+<p>We'll walk through these sections one by one.</p>
+<h3 id="preamble">Preamble</h3>
+<div class="highlight"><pre><span></span><code>Bootstrap: docker
+From: ubuntu
+Stage: build
+</code></pre></div>
+<ul>
+<li><code>Bootstrap</code> specifies where we are getting the base image from. In this case, it's <code>docker</code> (DockerHub).</li>
+<li><code>From:</code> specifies the base image. In this case, it will grab the latest Ubuntu image.</li>
+<li><code>Stage:</code> specifies the stage of the build. Multiple stages can be used to simplify the build process and reduce the final file size.</li>
+</ul>
+<h3 id="arguments"><code>%arguments</code></h3>
+<div class="highlight"><pre><span></span><code>Bootstrap: docker
+From: ubuntu:{{ VERSION }}
+Stage: build
+
+%arguments
+    VERSION=22.04
+</code></pre></div>
+<p>Arguments are variables that can be used within the definition file. Using arguments allows us to change variables only in one place rather than multiple instances, preventing bugs.</p>
+<p>In the above example, we've specified an argument <code>VERSION=22.04</code>. This argument is then accessed in the preamble when selecting the Ubuntu image version:</p>
+<p><div class="highlight"><pre><span></span><code>From: ubuntu:{{ VERSION }}
+</code></pre></div>
+This specifies that we will be using <code>ubuntu:22.04</code>.</p>
+<h3 id="setup"><code>%setup</code></h3>
+<p>Setup commands are first executed outside of the container on the host system before starting to build the image.</p>
+<p>For example, suppose we want to compress some files that will later be added to the container:</p>
+<div class="highlight"><pre><span></span><code>%setup
+
+    tar -zcvf files.tar.gz ./*.txt
+</code></pre></div>
+<p>This command would compress all the files ending in <code>.txt</code> in the current directory into <code>files.tar.gz</code> (also in the current directory).</p>
+<h3 id="files"><code>%files</code></h3>
+<p>This is where we can specify files to be copied into the container.
+<div class="highlight"><pre><span></span><code>%files
+    files.tar.gz /opt
+</code></pre></div>
+Here, we are copying the <code>files.tar.gz</code> that was created in the <code>%setup</code> into the <code>/opt</code> directory of the image (<code>/opt/files.tar.gz</code>).</p>
+<h3 id="environment"><code>%environment</code></h3>
+<p>Here we specify environmental variables that we want set within the container.</p>
+<div class="highlight"><pre><span></span><code>%enviroment
+    export PATH=$PATH:/app/bin
+    export DEFAULT_PORT=8001
+</code></pre></div>
+<p>In this example, we set two environmental variables. First, we modify the <code>PATH</code> to include <code>/app/bin</code>, where the hypothetical binaries for our application reside. Second, we specify the <code>DEFAULT_PORT</code> to be <code>8001</code>.</p>
+<p>We can access these variables anytime within the container or the build process.</p>
+<h3 id="post"><code>%post</code></h3>
+<p>In this section, we specify the command we want to run after the base image has downloaded. Environmental variables for the host system are not passed, so this can be considered a clean environment.</p>
+<p>This will likely be the most detailed section of your definition script. For example:</p>
+<div class="highlight"><pre><span></span><code>%post
+    apt-get update &amp;&amp; apt-get install -y gcc
+    pip install ipython
+</code></pre></div>
+<p>In the above example, we are simply updating the Ubuntu base image and installing <code>gcc</code>. We then install <code>ipython</code> using <code>pip</code>.</p>
+<p>This is a simple example, but <code>%post</code> would be the section where dependencies would be installed and/or compiled.</p>
+<h3 id="runscript"><code>%runscript</code></h3>
+<p>This is where we define a set of commands that will be executed when running <code>apptainer run image.sif</code> or when running the image itself as a command (e.g., <code>./image.sif</code>).</p>
+<p>Internally, these commands will form a simple script that will be executed.</p>
+<div class="highlight"><pre><span></span><code>%runscript
+    ipython
+</code></pre></div>
+<p>This example will start an IPython interpreter. We could have something more complicated, such as:</p>
+<div class="highlight"><pre><span></span><code>%runscript
+    echo &quot;Recieved the following arguements $*&quot;
+    ipython $*
+</code></pre></div>
+<p>This will output the arguments passed before executing them with IPython. For example:</p>
+<p><div class="highlight"><pre><span></span><code>&gt; apptainer run ./jupyter.sif --version
+Recieved the following arguements --version
+8.22.2
+</code></pre></div>
+Here, we're passing <code>--version</code> as an argument. This gets passed and run as <code>ipython --version</code>, which gives <code>8.22.2</code>.</p>
+<p>One could use the <code>%runscript</code> section to define a default behavior and how arguments are handled.</p>
+<h3 id="startscript"><code>%startscript</code></h3>
+<p>This is similar to the <code>%runscript</code> section where we create a script to be run when running the container. Specifically, the <code>%startscript</code> runs when the container is launched as an <code>instance</code> rather than a process launched with <code>run</code> or <code>exec</code>. Instances can be considered more of a daemon, which will have a more passive interface. For example, an instance may monitor a port to receive a command that controls its behavior. It might be better to launch a web server as an instance.</p>
+<p>Likewise, if you have multiple steps in a data pipeline, they could be passed between instances which are persistent compared to the analysis target.</p>
+<h3 id="test"><code>%test</code></h3>
+<p>This defines a test script that is run at the end of the build process and can be used to ensure the validity of the built container.</p>
+<p>For example, if we are building a data pipeline, we might want to make sure we get the expected answer.</p>
+<p><div class="highlight"><pre><span></span><code>%test
+    python test_script.py
+    if [ $? -eq 0 ]; then
+        echo &quot;Script executed successfully&quot;
+    else
+        echo &quot;Script failed&quot;
+        exit 1
+    fi
+</code></pre></div>
+Here we are running <code>test_script.py</code>. The output of this code will be accessible using <code>$?</code>, which returns the last return code.</p>
+<p><div class="highlight"><pre><span></span><code>    if [ $? -eq 0 ]; then
+</code></pre></div>
+This line checks if the return code is 0, which is a typical code for a successful execution. In our Python code, we would have a line like:</p>
+<p><div class="highlight"><pre><span></span><code>if successful_test:
+    exit(0)
+else:
+    exit(1)
+</code></pre></div>
+If the code executes successfully, then the return will be 0; otherwise, it will be 1.</p>
+<h3 id="labels"><code>%labels</code></h3>
+<div class="highlight"><pre><span></span><code>%labels
+    Author myuser@example.com
+    Version v0.0.1
+    MyLabel Hello World
+</code></pre></div>
+<p>Here we define a set of labels that are viewable using the <code>apptainer inspect</code> command.</p>
+<p>Versioning can be super important when developing an application. Maintaining an up-to-date version number can prevent a lot of headaches when trying to debug issues.</p>
+<h3 id="help"><code>%help</code></h3>
+<p>Help specifies a help message that will be outputted:</p>
+<div class="highlight"><pre><span></span><code>%help
+    This is a container with jupyter lab and notebook install
+</code></pre></div>
+<p>This can be accessed using:
+<div class="highlight"><pre><span></span><code>apptainer run-help my_container.sif
+</code></pre></div></p>
+<h2 id="example-definition-script">Example definition script</h2>
+<p>Here is an example of a <code>.def</code> file which installs <code>Jupyter</code>, <code>IPython</code>, <code>Matplotlib</code>, and <code>NumPy</code>.</p>
+<div class="highlight"><pre><span></span><code>Bootstrap: docker
+From: python:latest
+
+%post
+    pip install jupyter ipykernel jupyterlab notebook
+    pip install matplotlib numpy
+
+%environment
+    export DEFAULT_PORT=8001
+
+%runscript
+    ipython $*
+
+%startscript
+    jupyter lab --port=$DEFAULT_PORT
+</code></pre></div>
+<p>This can be built with:
+<div class="highlight"><pre><span></span><code>&gt; apptainer build jupyter.sif jupyter.def
+</code></pre></div></p>
+<p>The <code>runscript</code> will take arguments and pass them to IPython. For example:
+<div class="highlight"><pre><span></span><code>&gt; ./jupyter.sif hello.py
+Hello, world!
+Inside of container!
+</code></pre></div></p>
+<p>The <code>startscript</code> will start a Jupyter Lab on port 8001. This can be launched using:
+<div class="highlight"><pre><span></span><code>&gt; apptainer instance start jupyter.sif jupyter-server 
+</code></pre></div></p>
+<p>When navigating to <code>http://localhost:8001</code>, we'll notice that we need to log in. We can get a login code using:"
+<div class="highlight"><pre><span></span><code>&gt; apptainer exec instance://jupyter-server jupyter lab list
+Currently running servers:
+http://localhost:8001/?token=643b97dc15207ca577782ea2e03a3ec1f9337a4445bc1db8 :: /home/obriens/Documents/apptainer
+</code></pre></div></p>
+<p>Clicking on that link will log us in. We need to remember to <code>stop</code> the instance once we're finished.</p>
+<div class="highlight"><pre><span></span><code>&gt; apptainer instance stop jupyter-server            
+</code></pre></div>
+<h2 id="example-of-a-multi-stage-build">Example of a multi-stage build</h2>
+<p>As mentioned earlier, using multi-stage builds can help decrease the final size of the <code>sif</code> file.</p>
+<p>Consider the following <code>C++</code> code:</p>
+<div class="highlight"><span class="filename">convert_units.cpp</span><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;fstream&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">argv</span><span class="p">[]){</span>
+
+<span class="w">    </span><span class="c1">// parse the command passed</span>
+<span class="w">    </span><span class="c1">// Input is in meters</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">atof</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+
+<span class="w">    </span><span class="c1">// convert unit to mm</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">1e3</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// output to a text file</span>
+<span class="w">    </span><span class="n">ofstream</span><span class="w"> </span><span class="n">out_file</span><span class="p">;</span>
+<span class="w">    </span><span class="n">out_file</span><span class="p">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;test.txt&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">out_file</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Also print</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>This will convert meters to mm. We can imagine this being part of a larger data analysis pipeline.</p>
+<p>This can be compiled using:
+<div class="highlight"><pre><span></span><code>g++ convert_units.cpp -o convert_units
+</code></pre></div>
+This will create a binary called <code>convert_units</code>.</p>
+<p>Let's start to build the definition file:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">single_stage.def</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code>Bootstrap: docker
+From: ubuntu
+Stage: build
+
+%files
+    convert_units.cpp /build/convert_units.cpp
+
+%post
+    apt-get update &amp;&amp; apt-get upgrade -y &amp;&amp; apt-get install -y g++
+    g++ /build/convert_units.cpp -o /bin/convert_units
+
+%runscript
+    /bin/convert_units $*
+</code></pre></div></td></tr></table></div>
+<p>Here we have a single stage called <code>build</code>. In this stage, we copy the source code to the <code>/build</code> directory at the <code>%files</code> stage. In the <code>%post</code> stage, we update the OS and install <code>g++</code>, a C++ compiler. We then compile the code to <code>/bin/convert_units</code>. We then specify this as the entry point of the <code>%runscript</code> stage.</p>
+<p>We can run this as:
+<div class="highlight"><pre><span></span><code>&gt; ./single_stage.sif 1.25
+1250
+</code></pre></div></p>
+<p>You'll notice that the <code>convert_units.cpp</code> file is no longer needed once <code>convert_units</code> is compiled. Likewise, we only need <code>g++</code> to compile <code>convert_units</code>; we don't use it later in the file. We could turn this into a multi-stage build:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">multi_stage.def</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div><pre><span></span><code>Bootstrap: docker
+From: ubuntu
+Stage: build
+
+
+%files
+    convert_units.cpp /build/convert_units.cpp
+
+%post
+    apt-get update &amp;&amp; apt-get upgrade -y &amp;&amp; apt-get install -y g++
+    g++ /build/convert_units.cpp -o /build/convert_units
+
+Bootstrap: docker
+From: ubuntu
+Stage: final
+
+<span class="hll">%files from build
+</span>  /build/convert_units /bin/convert_units
+
+%post
+    apt-get update &amp;&amp; apt-get upgrade -y
+
+%runscript
+    /bin/convert_units $*
+</code></pre></div></td></tr></table></div>
+<p>The definition file is similar to the <code>single_stage.def</code> file; however, we have broken this up into two stages. </p>
+<p>The first stage, tagged as <code>build</code>, will add the source file <code>convert_units.cpp</code> to the image, update the OS, install <code>g++</code>, and compile <code>/build/convert_units</code>.</p>
+<p>The second stage, called <code>final</code>, uses the same <code>Bootstrap</code> and base image (<code>ubuntu</code>) as the <code>build</code> stage. However, at the <code>%files</code> stage on line 17, we are only copying the <code>/build/convert_units</code> from the <code>build</code> stage to <code>/bin/convert_units</code> in the <code>final</code> stage. We still want to make sure we have an up-to-date OS (security updates are always important), so we still run <code>apt-get update &amp;&amp; apt-get upgrade -y</code>. Finally, the <code>%runscript</code> stage is only included in the <code>final</code> stage.</p>
+<p>We can see that we get the same behavior from both images:</p>
+<div class="highlight"><pre><span></span><code>&gt; ./single_stage.sif 1.25 ;  ./multi_stage.sif 1.25
+1250
+1250
+</code></pre></div>
+<p>However, when we look at the size of the files, we see a difference:
+<div class="highlight"><pre><span></span><code>&gt; ls -lah ./*_stage.sif
+-rwxr-xr-x 1 obriens obriens  63M Mar 25 14:36 ./multi_stage.sif
+-rwxr-xr-x 1 obriens obriens 142M Mar 25 14:36 ./single_stage.sif
+</code></pre></div></p>
+<p>You'll notice that the <code>multi_stage.sif</code> build is around half the size of <code>single_stage.sif</code>. This is partly due to the <code>multi_stage.sif</code> not containing the source code (<code>convert_units.cpp</code>), but also due to it not containing <code>g++</code>.</p>
+<!-- ## Converting a Docker Image to an Apptainer Image
+
+Here we have a similar image as above written as a Dockerfile:
+<div class="highlight"><pre><span></span><code># syntax=docker/dockerfile:1
+
+FROM ubuntu:latest
+
+RUN apt update &amp;&amp; apt upgrade -y &amp;&amp; apt install -y g++ 
+
+RUN mkdir /app
+COPY ./convert_units.cpp /app
+WORKDIR /app
+RUN g++ convert_units.cpp -o /bin/convert_units
+ENTRYPOINT [&quot;/bin/convert_units&quot;]
+</code></pre></div>
+
+Note we're specifying the entry point to be the compiled executable `/bin/convert_units`.
+
+We can build this with:
+<div class="highlight"><pre><span></span><code>&gt; docker build . -t local/convert_units:latest
+</code></pre></div>
+Where `.` specfies the current directory as the location of the Dockerfile, and we `tag` the version with `-t` with the name `local/convert_units:latest`. 
+
+We can run this as:
+```
+> docker run local/convert_units:latest 10.5  
+10500
+``` -->
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2025 TSI <br> <a href="https://github.com/vuquangtrong/mkdocs-material-blog">Blog Theme</a> / <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "toc.integrate", "header.autohide", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.c011b7c0.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.7389ff0e.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

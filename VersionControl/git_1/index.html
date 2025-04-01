@@ -1,0 +1,1744 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="TSI McGill Tutorials">
+      
+      
+        <meta name="author" content="Stephan O'Brien (stephan.obrien@mcgill.ca)">
+      
+      
+        <link rel="canonical" href="https://github.com/tsi-mcgill/tsi-tutorials/VersionControl/git_1/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.4">
+    
+    
+      
+        <title>Git 1 - TSI McGill Tutorials</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="sandstone" data-md-color-primary="grey" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#about" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TSI McGill Tutorials" class="md-header__button md-logo" aria-label="TSI McGill Tutorials" data-md-component="logo">
+      
+  <img src="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TSI McGill Tutorials
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Git 1
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="sandstone" data-md-color-primary="grey" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="gray"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Python/" class="md-tabs__link">
+        
+  
+    
+  
+  Python
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Cpp/" class="md-tabs__link">
+        
+  
+    
+  
+  C++
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Rust/" class="md-tabs__link">
+        
+  
+    
+  
+  Rust
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link">
+        
+  
+    
+  
+  Version Control
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Containerization/" class="md-tabs__link">
+        
+  
+    
+  
+  Containerization
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Misc/" class="md-tabs__link">
+        
+  
+    
+  
+  Misc
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TSI McGill Tutorials" class="md-nav__button md-logo" aria-label="TSI McGill Tutorials" data-md-component="logo">
+      
+  <img src="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png" alt="logo">
+
+    </a>
+    TSI McGill Tutorials
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Python/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cpp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C++
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Rust/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rust
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Version Control
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Containerization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Containerization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Misc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Misc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Git 1</h1>
+
+<h2 id="about">About</h2>
+<p>In this tutorial we will, we cover the very basics of <a href="https://git-scm.com/">Git</a>.
+Git is a "free and open source" (<a href="https://en.wikipedia.org/wiki/Free_and_open-source_software">FOSS</a>) "distributed version control" system.
+Let's dissect what "distributed version control" means.</p>
+<h3 id="version-control">Version Control</h3>
+<p>Version control is a method to keep track of the history of a code base.
+We can think of this as a list of changes between versions of files from one code version to the next.
+When working with a version of a code base, we will modify individual files within the code base. 
+When we are happy with the new versions of the files, we can <code>commit</code> the changes made, along with a helpful message describing the changes.</p>
+<figure>
+<p><img alt="xkcd:Git Commit" src="../../images/git_version_control.png" style="height:300px;width:500px" />
+  </p>
+<figcaption>Version control (source <a href="https://xkcd.com/1296/">xkcd.com</a>) </figcaption>
+</figure>
+<p>Informative commit messages help identify changes form the previous commit.
+This provides useful information when trying to debug issues with the code and identifying significant changes.
+Knowing the "history" of the code, we can <code>revert</code> to a previous version of the code (or a previous version of a specific file).
+This can help to resolve issues in a code base.</p>
+<div class="admonition info">
+<p class="admonition-title">Aside on version numbers</p>
+<p>For example, if version 1.0.0 had a function with an expensive run time (<code>my_func()</code>).
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">my_func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div></p>
+<p>We changed the function to reduce the run time by changing how some calculation is done, we would <code>commit</code> a message like "implemented faster calculation method for my_func". 
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">my_func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div>
+Upon <code>commit</code>-ing we may decide to increment the version number to 1.1.0.
+Here we changed the second digit.
+This specifices that there has been a minor change to the code.</p>
+<p>After some testing of the code, we now know that the new method introduced an error in the calculation, luckily there is a quick fix.
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">my_func</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div>
+Implementing this fix we may <code>commit</code> the modifed code with a message "resolved bug introduced in v1.1.0 for my_func".
+With this bug resolved, we now decide to increment the versiion number to 1.1.1. 
+Here we changed the final digit, this tells the user that going from 1.1.0 to 1.1.1 is a bug fix.</p>
+<p>After some redesign of our code, we then decide that the <code>my_func</code> function needs a more informative name.
+So we change the name from <code>my_func</code> to <code>calculate_distance</code>, and <code>commit</code> the changes with the message "changing my_func name to calculate_distance to improve readabiltiy".
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">calculate_distance</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div></p>
+<p>Changing the function name would be "API breaking" meaning that code relying on version 1.1.1 will no longer work on the current version. For this reason we would call the version 2.0.0. Here incrementing the first digit tells the user that it is nolonger compatable with version 1.x.y.
+<div class="highlight"><pre><span></span><code><span class="o">...</span>
+
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">6.28</span><span class="p">,</span> <span class="mf">3.14</span><span class="p">]</span>
+<span class="c1"># Workds with v1.* but not v2.*</span>
+<span class="n">distance</span> <span class="o">=</span> <span class="n">my_func</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+<span class="c1"># Workds with v2.* but not with v1.*</span>
+<span class="n">distance</span> <span class="o">=</span> <span class="n">calculate_distance</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+</code></pre></div></p>
+<p>This is known as <a href="https://semver.org/">Semantic Versioning</a>.
+Under this convention versions are named using 3 digits (version a.b.c):
+* a: Major version number (when the API changes)
+* b: Minor version number (when functionality changes in a backwards compatable way)
+* c: Patch version number (when bug fixes are added in a backwards compatiable way)</p>
+<p>It's also common to see x.y.z.-alpha, x.y.z-beta or x.y.z-rc. Here the developers have frozen development for the future x.y.z release, with any further major/minor changes to be included in a future version.
+alpha/beta refer to testing versions with an alpha typically an initial test version open to a small set of interal collaborators, beta refering to a more open or second round of testing which is open to the public. 
+rc would refer to a "release candidate". 
+A rc version would be used for final tests of the full x.y.z version before making it available.
+The differences between x.y.z-rc and x.y.z would only reflect bug fixes found during final testing of the x.y.z-rc branch.</p>
+<p>See <a href="https://safjan.com/software-versioning-schemes/">this post</a> for a discussion of different versioning schemes.</p>
+</div>
+<h3 id="distributed-version-control">Distributed Version Control</h3>
+<p>Distributed version control allows for the entire codebase to be mirrored on every developer's machine, rather than a single location.
+This prevents the codebase from being destroyed either due to a disk failure or by local changes.
+With distributed version control, multiple developers can work on a single code base without conflicting with other developers' work.
+Git allows for remote developers to change code and <code>commit</code> the code to remote <code>repository</code> (e.g. <a href="www.github.com">GitHub</a>), by <code>push</code>-ing their changes. </p>
+<p>Git allows for <code>branch</code>-es.
+These are parallel instances of the codebase, which allow for independent development without interfering with other branches. </p>
+<figure>
+<p><img alt="Branching" src="../../images/git-branching.png" style="height:300px;width:500px" />
+  </p>
+<figcaption>Branching (source <a href="https://www.nobledesktop.com/learn/git/git-branches">nobledesktop.com</a>) </figcaption>
+</figure>
+<p>It is common practice to maintain a <code>main</code> or <code>master</code> branch. 
+This branch reflects the most up to date, yet stable, version of the code.
+When someone wants to develop a new feature, they will <code>branch</code> out from the <code>main</code> branch to create what might be referred to as a "feature" branch.
+With this branch the developer will make the required changes and run tests.
+Once they're happy with the changes, they will then <code>merge</code> their code into the <code>main</code> branch. 
+It is common for integration tests to be passed before allowing anything to be merged into the main branch.</p>
+<h2 id="using-git">Using Git</h2>
+<p>Let create a small project to illustrate how to use git.</p>
+<div class="highlight"><pre><span></span><code>» tree                    [11:05:58]
+.
+├── astro_calculations
+│   ├── __init__.py
+│   └── math_operations.py
+└── test.py
+</code></pre></div>
+<p>Here we have a simple python package called <code>astro_calculations</code>. The folder <code>astro_calculations</code> includes two files <code>math_operations.py</code>, which defines the functions:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">math_operations.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="k">def</span> <span class="nf">sub</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
+
+<span class="k">def</span> <span class="nf">mult</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+
+<span class="k">def</span> <span class="nf">div</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span>    
+</code></pre></div></td></tr></table></div>
+<p>and <code>__init__.py</code> which imports the functions and specifies the <code>__all__</code> list:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">__init__.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">.math_operations</span> <span class="kn">import</span> <span class="n">add</span><span class="p">,</span> <span class="n">sub</span><span class="p">,</span> <span class="n">mult</span><span class="p">,</span> <span class="n">div</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="s2">&quot;sub&quot;</span><span class="p">,</span> <span class="s2">&quot;mult&quot;</span><span class="p">,</span> <span class="s2">&quot;div&quot;</span><span class="p">]</span>
+</code></pre></div></td></tr></table></div></p>
+<p><code>__all__</code> is a special variable in python which defines a list of what is imported when running <code>from package import *</code>.</p>
+<p>We also have a <code>test.py</code> file:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">test.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">astro_calculations</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># Running some test</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">sub</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">mult</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">div</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="mf">0.5</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div></p>
+<p>This defines a set of tests we can use to ensure the correct behavior of the code.</p>
+<h3 id="creating-a-new-repository">Creating a new repository</h3>
+<p>We can create a new repository for the existing <code>astro_calculation</code> codebase by running:
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>init
+</code></pre></div></p>
+<p>From within the project directory. This provides the following output:
+<div class="highlight"><pre><span></span><code>git init                [11:13:43]
+hint: Using &#39;master&#39; as the name for the initial branch. This default branch name
+hint: is subject to change. To configure the initial branch name to use in all
+hint: of your new repositories, which will suppress this warning, call:
+hint: 
+hint:   git config --global init.defaultBranch &lt;name&gt;
+hint: 
+hint: Names commonly chosen instead of &#39;master&#39; are &#39;main&#39;, &#39;trunk&#39; and
+hint: &#39;development&#39;. The just-created branch can be renamed via this command:
+hint: 
+hint:   git branch -m &lt;name&gt;
+Initialized empty Git repository in /raid/RAID1/Tutorials/git-tutorial/.git/
+</code></pre></div></p>
+<p>This also creates a <code>.git</code> folder within the directory.
+The <code>.git</code> folder is the "repository". 
+This folder contains history of the codebase, by tracking changes made to files. 
+If one deletes the <code>.git</code> folder, one deletes the history of the codebase (or at least the local copy of it). 
+With access to the <code>.git</code> folder, a developer can see what has been changed across the entire history of the code, revert to previous versions of the code, check out <code>tagged</code> versions of the code, swap to a different <code>branch</code> of the code and access many other features.
+For now, we'll ignore the <code>.git</code> folder and its contents.</p>
+<h3 id="the-staging-area">The staging area</h3>
+<p>Git uses a "staging area" to prepare changes to the codebase to be committed. </p>
+<figure>
+<p><img alt="Staging Area" src="../../images/git_staging_area.png" style="height:300px;width:500px" />
+  </p>
+<figcaption>Staging Area (source <a href="https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F">git-scm.com</a>) </figcaption>
+</figure>
+<p>After files are modified, we can specify which files are set to be committed by adding them to the staging area. 
+Once we are happy with the files to be committed, we can then commit these changes to the repository (the <code>.git</code> folder).</p>
+<p>We can see the current status of the repo using:
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>status
+</code></pre></div>
+For the <code>astro_calculations</code> example, this yields:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code>On branch master
+
+No commits yet
+
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+    astro_calculations/
+    test.py
+
+nothing added to commit but untracked files present (use &quot;git add&quot; to track)
+</code></pre></div></td></tr></table></div>
+On line 1 the current branch is specified as <code>master</code>. 
+On line 3 it says that we have no commits
+On lines 5-8 we have a list of untracked files. 
+Untracked files are files which are not being tracked by the fit repo.</p>
+<p>From the above, we see that we can use <code>git add &lt;file&gt;</code> to add a file or change to a file, to be committed. 
+We can add all files that have been checked to the commit using <code>git add .</code> . 
+We can add <code>astro_calculations</code> folder and <code>test.py</code> file to the "staging area" with:
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>test.py<span class="w"> </span>astro_calculations/
+</code></pre></div></p>
+<p>Rerunning <code>git status</code> we get:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code>On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use &quot;git rm --cached &lt;file&gt;...&quot; to unstage)
+<span class="hll">    new file:   astro_calculations/__init__.py
+</span><span class="hll">    new file:   astro_calculations/math_operations.py
+</span><span class="hll">    new file:   test.py
+</span></code></pre></div></td></tr></table></div>
+On lines 7-9 we now see that we have new files staged to be committed.
+This is to say that <code>astro_calculations/__init__.py</code>, <code>astro_calculations/math_operations.py</code> and <code>test.py</code> have been added to the staging area.
+The changes to these files haven't yet been committed to the repo.
+To commit changes we use:
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;message&quot;</span>
+</code></pre></div>
+Where "message" is the commit message, an informative description of what has been committed. 
+Since we are adding some initial code to the repo, we might write a commit message like:
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Adding initial code to the repo&quot;</span>
+</code></pre></div>
+Which gives the following output:
+<div class="highlight"><pre><span></span><code>[master (root-commit) 38e2d00] Adding initial code to the repo
+ 3 files changed, 24 insertions(+)
+ create mode 100644 astro_calculations/__init__.py
+ create mode 100644 astro_calculations/math_operations.py
+ create mode 100644 test.py
+</code></pre></div>
+Here we see that 3 files have been changed, with each file having a <code>create mode</code>. 
+This tells the repo that new files have been "created".</p>
+<p>Let's make a change to <code>astro_calculations/math_operations.py</code> to include a modulo function:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">math_operations.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">modulo</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span>
+</code></pre></div></td></tr></table></div></p>
+<p>Running <code>git status</code> we can see that changes to the file have been detected:
+<div class="highlight"><pre><span></span><code>On branch master
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git restore &lt;file&gt;...&quot; to discard changes in working directory)
+    modified:   astro_calculations/math_operations.py
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)
+</code></pre></div>
+We can see that <code>astro_calculations/math_operations.py</code> have been modified, but not yet added to the staging area. </p>
+<h3 id="difference-between-commits-git-diff">Difference between commits <code>git diff</code></h3>
+<p>Let's use <code>git diff</code> to see what has been changed in <code>astro_calculations/math_operations.py</code>.
+<div class="highlight"><pre><span></span><code>git diff astro_calculations/math_operations.py
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>diff<span class="w"> </span>--git<span class="w"> </span>a/astro_calculations/math_operations.py<span class="w"> </span>b/astro_calculations/math_operations.py
+index<span class="w"> </span>fcfdc03..75e7956<span class="w"> </span><span class="m">100644</span>
+---<span class="w"> </span>a/astro_calculations/math_operations.py
++++<span class="w"> </span>b/astro_calculations/math_operations.py
+@@<span class="w"> </span>-9,3<span class="w"> </span>+9,6<span class="w"> </span>@@<span class="w"> </span>def<span class="w"> </span>mult<span class="o">(</span>a,b<span class="o">)</span>:
+
+<span class="w"> </span>def<span class="w"> </span>div<span class="o">(</span>a,b<span class="o">)</span>:
+<span class="w">     </span><span class="k">return</span><span class="w"> </span>a<span class="w"> </span>/<span class="w"> </span>b
++
++def<span class="w"> </span>modulo<span class="o">(</span>a,b<span class="o">)</span>:
++<span class="w">    </span><span class="k">return</span><span class="w"> </span>a<span class="w"> </span>%<span class="w"> </span>b
+</code></pre></div>
+<p>This shows the <code>diff</code> between the current version of the file and the version last committed to the repo.
+We can add the file to the staging area: 
+<div class="highlight"><pre><span></span><code>git add astro_calculations/math_operations.py
+</code></pre></div></p>
+<p>And rerun <code>git status</code> to see:
+<div class="highlight"><pre><span></span><code>On branch master
+Changes to be committed:
+  (use &quot;git restore --staged &lt;file&gt;...&quot; to unstage)
+    modified:   astro_calculations/math_operations.py
+</code></pre></div></p>
+<p>We can commit the change with a useful message:
+<div class="highlight"><pre><span></span><code>git commit -m &quot;Adding modulo function&quot;
+</code></pre></div></p>
+<h2 id="understanding-histories-of-files-git-log">Understanding Histories of files (<code>git log</code>)</h2>
+<p>Git stores the history of a file by tracking the lines that have changed from one commit to the next, rather than storing multiple copies of the same file.
+In terms of storage, this provides a light-weight method to store long histories.
+We can inspect the history of files and repos using the <code>git log</code> command.
+Running <code>git log</code> will show the previous commits of the repo, for example:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll">commit 4bbbf9e19f3d4f6d067ca04258e2f72e342c8e42 (HEAD -&gt; master)
+</span><span class="hll">Author: Ste O Brien &lt;stephan.obrien@mcgill.ca&gt;
+</span><span class="hll">Date:   Fri Jan 26 12:05:25 2024 -0500
+</span>
+<span class="hll">    Adding modulo function
+</span>
+commit 38e2d008831daaaeadcf6466dbe1a375f6cfbc1b
+Author: Ste O Brien &lt;stephan.obrien@mcgill.ca&gt;
+Date:   Fri Jan 26 11:50:29 2024 -0500
+
+    Adding initial code to the repo
+</code></pre></div></td></tr></table></div>
+<p>On line 1 we can see the id for the most recent commit, on line 2 we see the author of that commit, with the date of line 3. 
+On line 5 we see the commit message. 
+In the above example we only have two commits. 
+Let's add a new file:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">astro_calculations/printing.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">print_details</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Calling with arguments </span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s2"> &quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+We'll also add this to be imported into when we run <code>from astro_calculations import *</code>:
+```python title="astro_calculations/<strong>init</strong>.py" linenums="1"   hl_lines="2,3"
+from .math_operations import add, sub, mult, div
+from .printing import print_details
+<strong>all</strong> = ["add", "sub", "mult", "div", "print_details"]
+<div class="highlight"><pre><span></span><code>Add these to the staging area :
+```bash
+git add astro_calculations/__init__.py astro_calculations/printing.py 
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>status
+On<span class="w"> </span>branch<span class="w"> </span>master
+Changes<span class="w"> </span>to<span class="w"> </span>be<span class="w"> </span>committed:
+<span class="w">  </span><span class="o">(</span>use<span class="w"> </span><span class="s2">&quot;git restore --staged &lt;file&gt;...&quot;</span><span class="w"> </span>to<span class="w"> </span>unstage<span class="o">)</span>
+<span class="w">    </span>modified:<span class="w">   </span>astro_calculations/__init__.py
+<span class="w">    </span>new<span class="w"> </span>file:<span class="w">   </span>astro_calculations/printing.py
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Adding printing function&quot;</span>
+<span class="o">[</span>master<span class="w"> </span>d38bd2d<span class="o">]</span><span class="w"> </span>Adding<span class="w"> </span>printing<span class="w"> </span><span class="k">function</span>
+<span class="w"> </span><span class="m">2</span><span class="w"> </span>files<span class="w"> </span>changed,<span class="w"> </span><span class="m">4</span><span class="w"> </span>insertions<span class="o">(</span>+<span class="o">)</span>,<span class="w"> </span><span class="m">2</span><span class="w"> </span>deletions<span class="o">(</span>-<span class="o">)</span>
+<span class="w"> </span>create<span class="w"> </span>mode<span class="w"> </span><span class="m">100644</span><span class="w"> </span>astro_calculations/printing.py
+</code></pre></div>
+<p>This says that we have modified two files, one of which was newly created. 
+Note that it records "insertions" and "deletions" to the files.</p>
+<p>Running <code>git log</code> we can see our new commit:
+<div class="highlight"><pre><span></span><code>commit d38bd2de7b4be9b7ccc843889d1894da96e68a00 (HEAD -&gt; master)
+Author: Ste O Brien &lt;stephan.obrien@mcgill.ca&gt;
+Date:   Fri Jan 26 13:12:47 2024 -0500
+
+    Adding printing function
+
+commit 4bbbf9e19f3d4f6d067ca04258e2f72e342c8e42
+Author: Ste O Brien &lt;stephan.obrien@mcgill.ca&gt;
+Date:   Fri Jan 26 12:05:25 2024 -0500
+
+    Adding modulo function
+
+commit 38e2d008831daaaeadcf6466dbe1a375f6cfbc1b
+Author: Ste O Brien &lt;stephan.obrien@mcgill.ca&gt;
+Date:   Fri Jan 26 11:50:29 2024 -0500
+
+    Adding initial code to the repo
+</code></pre></div></p>
+<p>We can also check the log of an individual file using:
+<div class="highlight"><pre><span></span><code>git log astro_calculations/math_operations.py
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>commit 4bbbf9e19f3d4f6d067ca04258e2f72e342c8e42
+Author: Ste O Brien &lt;stephan.obrien@mcgill.ca&gt;
+Date:   Fri Jan 26 12:05:25 2024 -0500
+
+    Adding modulo function
+
+commit 38e2d008831daaaeadcf6466dbe1a375f6cfbc1b
+Author: Ste O Brien &lt;stephan.obrien@mcgill.ca&gt;
+Date:   Fri Jan 26 11:50:29 2024 -0500
+
+    Adding initial code to the repo
+(END)
+</code></pre></div>
+<p>Recall we've only changed <code>astro_calculations/math_operations.py</code> once since the initial commit.
+The most recent commit, where we added the printing function, isn't included in this file's history. 
+Since the file hasn't changed, there is no need to record any difference to the file.</p>
+<p>If we want to see a more detailed log, we can pass a <code>-p</code> flag to <code>git log</code>:
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>log<span class="w"> </span>-p<span class="w"> </span>astro_calculations/math_operations.py
+</code></pre></div>
+This gives a more detailed description of the changes:
+<div class="highlight"><pre><span></span><code>commit<span class="w"> </span>4bbbf9e19f3d4f6d067ca04258e2f72e342c8e42
+Author:<span class="w"> </span>Ste<span class="w"> </span>O<span class="w"> </span>Brien<span class="w"> </span>&lt;stephan.obrien@mcgill.ca&gt;
+Date:<span class="w">   </span>Fri<span class="w"> </span>Jan<span class="w"> </span><span class="m">26</span><span class="w"> </span><span class="m">12</span>:05:25<span class="w"> </span><span class="m">2024</span><span class="w"> </span>-0500
+
+<span class="w">    </span>Adding<span class="w"> </span>modulo<span class="w"> </span><span class="k">function</span>
+
+diff<span class="w"> </span>--git<span class="w"> </span>a/astro_calculations/math_operations.py<span class="w"> </span>b/astro_calculations/math_operations.py
+index<span class="w"> </span>fcfdc03..259f48e<span class="w"> </span><span class="m">100644</span>
+---<span class="w"> </span>a/astro_calculations/math_operations.py
++++<span class="w"> </span>b/astro_calculations/math_operations.py
+@@<span class="w"> </span>-9,3<span class="w"> </span>+9,6<span class="w"> </span>@@<span class="w"> </span>def<span class="w"> </span>mult<span class="o">(</span>a,b<span class="o">)</span>:
+
+<span class="w"> </span>def<span class="w"> </span>div<span class="o">(</span>a,b<span class="o">)</span>:
+<span class="w">     </span><span class="k">return</span><span class="w"> </span>a<span class="w"> </span>/<span class="w"> </span>b
++
++def<span class="w"> </span>modulo<span class="o">(</span>a,b<span class="o">)</span>:
++<span class="w">    </span><span class="k">return</span><span class="w"> </span>a<span class="w"> </span>%<span class="w"> </span>b
+
+commit<span class="w"> </span>38e2d008831daaaeadcf6466dbe1a375f6cfbc1b
+Author:<span class="w"> </span>Ste<span class="w"> </span>O<span class="w"> </span>Brien<span class="w"> </span>&lt;stephan.obrien@mcgill.ca&gt;
+Date:<span class="w">   </span>Fri<span class="w"> </span>Jan<span class="w"> </span><span class="m">26</span><span class="w"> </span><span class="m">11</span>:50:29<span class="w"> </span><span class="m">2024</span><span class="w"> </span>-0500
+
+<span class="w">    </span>Adding<span class="w"> </span>initial<span class="w"> </span>code<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>repo
+
+diff<span class="w"> </span>--git<span class="w"> </span>a/astro_calculations/math_operations.py<span class="w"> </span>b/astro_calculations/math_operations.py
+new<span class="w"> </span>file<span class="w"> </span>mode<span class="w"> </span><span class="m">100644</span>
+index<span class="w"> </span><span class="m">0000000</span>..fcfdc03
+---<span class="w"> </span>/dev/null
++++<span class="w"> </span>b/astro_calculations/math_operations.py
+@@<span class="w"> </span>-0,0<span class="w"> </span>+1,11<span class="w"> </span>@@
++def<span class="w"> </span>add<span class="o">(</span>a,<span class="w"> </span>b<span class="o">)</span>:
++<span class="w">    </span><span class="k">return</span><span class="w"> </span>a<span class="w"> </span>+<span class="w"> </span>b
++
++def<span class="w"> </span>sub<span class="o">(</span>a,b<span class="o">)</span>:
++<span class="w">    </span><span class="k">return</span><span class="w"> </span>a<span class="w"> </span>-<span class="w"> </span>b
++
++def<span class="w"> </span>mult<span class="o">(</span>a,b<span class="o">)</span>:
++<span class="w">    </span><span class="k">return</span><span class="w"> </span>a<span class="w"> </span>*<span class="w"> </span>b
++
++def<span class="w"> </span>div<span class="o">(</span>a,b<span class="o">)</span>:
++<span class="w">    </span><span class="k">return</span><span class="w"> </span>a<span class="w"> </span>/<span class="w"> </span>b
+</code></pre></div>
+This highlights the actual changes between commits.</p>
+<h2 id="viewing-different-version-of-the-code">Viewing different version of the code</h2>
+<p>We can use the <code>git checkout</code> command to view different version of the code. 
+This is a versatile command, for the moment let's use it to view a previous version of the codebase.
+Use <code>git log</code> to view the previous commits:
+<div class="highlight"><pre><span></span><code>commit d38bd2de7b4be9b7ccc843889d1894da96e68a00 (HEAD -&gt; master)
+Author: Ste O&#39;Brien &lt;stephan.obrien@mcgill.ca&gt;
+Date:   Fri Jan 26 13:12:47 2024 -0500
+
+    Adding printing function
+
+commit 4bbbf9e19f3d4f6d067ca04258e2f72e342c8e42
+Author: Ste O&#39;Brien &lt;stephan.obrien@mcgill.ca&gt;
+Date:   Fri Jan 26 12:05:25 2024 -0500
+
+    Adding modulo function
+
+commit 38e2d008831daaaeadcf6466dbe1a375f6cfbc1b
+Author: Ste O&#39;Brien &lt;stephan.obrien@mcgill.ca&gt;
+Date:   Fri Jan 26 11:50:29 2024 -0500
+
+    Adding initial code to the repo
+</code></pre></div></p>
+<p>Lets checkout the version of the code prior to adding the printing function <code>4bbbf9e19f3d4f6d067ca04258e2f72e342c8e42</code>:
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>4bbbf9e19f3d4f6d067ca04258e2f72e342c8e42
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>Note: switching to &#39;4bbbf9e19f3d4f6d067ca04258e2f72e342c8e42&#39;.
+
+You are in &#39;detached HEAD&#39; state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c &lt;new-branch-name&gt;
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at 4bbbf9e Adding modulo function
+</code></pre></div>
+<p>We can see that <code>astro_calculations/printing.py</code> is no longer in our directory:
+<div class="highlight"><pre><span></span><code>tree                                                                                                                       [13:47:40]
+.
+├── astro_calculations
+│   ├── __init__.py
+│   └── math_operations.py
+└── test.py
+</code></pre></div></p>
+<p>We can switch back to the main branch using <code>git switch -</code>:
+<div class="highlight"><pre><span></span><code>git switch -
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>Previous HEAD position was 4bbbf9e Adding modulo function
+Switched to branch &#39;master&#39;
+</code></pre></div>
+<h3 id="reverting-individual-files">Reverting individual files</h3>
+<p>Let's say we've made some changes to a file and prematurely committed the file.  We might see something like this:
+<div class="highlight"><pre><span></span><code>On branch master
+Changes to be committed:
+  (use &quot;git restore --staged &lt;file&gt;...&quot; to unstage)
+    modified:   astro_calculations/math_operations.py
+</code></pre></div></p>
+<p>We can remove the file from the staging area using:
+<div class="highlight"><pre><span></span><code>git restore --staged astro_calculations/math_operations.py
+</code></pre></div></p>
+<p>This file is now marked as modified but not staged:
+<div class="highlight"><pre><span></span><code>On branch master
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git restore &lt;file&gt;...&quot; to discard changes in working directory)
+    modified:   astro_calculations/math_operations.py
+</code></pre></div></p>
+<p>We note that the file is still modified. If we wanted to undo these changes and revert to the current version in the <code>master</code> branch we could run:
+<div class="highlight"><pre><span></span><code>git checkout master -- astro_calculations/math_operations.py
+</code></pre></div>
+We will now see the <code>master</code> branch version of <code>astro_calculations/math_operations.py</code>. </p>
+<p>Let's say we now know that there was a bug introduced in one of the previous commits. We can access the previous version of the file, prior to that commit by first looking at the log of the file:
+<div class="highlight"><pre><span></span><code>git log -p astro_calculations/math_operations.py
+</code></pre></div>
+For me the initial commit is <code>38e2d008831daaaeadcf6466dbe1a375f6cfbc1b</code>. To revert the file back to this commit:
+<div class="highlight"><pre><span></span><code>git checkout 38e2d008831daaaeadcf6466dbe1a375f6cfbc1b -- astro_calculations/math_operations.py
+</code></pre></div></p>
+<p>We will now see the original version of the file, and the file will be listed as <code>modified</code> when running <code>git status</code>. We can commit this as we would any other change to the code <code>git add astro_calculations/math_operations.py</code>.</p>
+<h2 id="gitignore">Gitignore</h2>
+<p>You might have noticed that if you've tried to run the python code then a <code>astro_calculations/__pycache__/</code> directory was created.
+Running <code>git status</code> you might see:
+<div class="highlight"><pre><span></span><code>Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+    astro_calculations/__pycache__/
+</code></pre></div></p>
+<p>This directory contains the precompiled python code.
+When we create a python module, it can be precompiled rather than compiled at run time. 
+This helps to improve the performance of the code.</p>
+<p>We don't want this precompiled byte code to be committed or tracked. 
+We can exclude files using a <code>.gitignore</code> file. 
+A file which starts with a <code>.</code> will typically be hidden from file browsers and <code>ls</code>. 
+Git will look for the <code>.gitignore</code> file to define what files should be excluded when monitoring the codebase.</p>
+<p>Create a file in the root directory of the repository and add the following lines:
+<div class="highlight"><span class="filename">.gitignore</span><pre><span></span><code># Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+</code></pre></div></p>
+<p>This will exclude any directory with the name <code>__pycache__</code> and any files ending in <code>.pyc</code>, <code>.pyo</code> or <code>.pyd</code>. 
+These are suffices created when compiling python code.
+If we rerun <code>git status</code> we see:
+<div class="highlight"><pre><span></span><code>Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+    .gitignore
+
+nothing added to commit but untracked files present (use &quot;git add&quot; to track)
+</code></pre></div>
+Git sees the <code>.gitignore</code> file and knows to exclude the <code>astro_calculations/__pycache__/</code> directory because it has the <code>__pycache__</code> pattern.
+We should add and commit the <code>.gitignore</code> file. 
+As the project gets more complicated we might want to add additional patterns to this file.
+Standard <code>.gitignore</code> files can be found <a href="https://github.com/github/gitignore/tree/main">here</a>.</p>
+<h2 id="branching">Branching</h2>
+<p>Git uses <code>branch</code>-es to allow the codebase to be modified without affecting the current state of the <code>branch</code>.
+When branching we take an instance of one <code>branch</code> of the code (for example the <code>master</code> or <code>main</code> branch), and spawn a copy of that <code>branch</code> that where we will develop the code further.
+This is particularly useful when developing and testing new features of the code base without disrupting the codebase for other users.</p>
+<h3 id="renaming-branches">Renaming branches</h3>
+<p>We'll start off by using the <code>branch</code> command to rename the <code>master</code> branch.
+First make sure we're on the <code>master</code> branch.
+<div class="highlight"><pre><span></span><code>git checkout master
+</code></pre></div></p>
+<p>Now rename the branch using:
+<div class="highlight"><pre><span></span><code>git branch -M main
+</code></pre></div>
+<code>git status</code> should now show that we are on the <code>main</code> branch:
+<div class="highlight"><pre><span></span><code>On branch main
+...
+</code></pre></div>
+<a href="https://developers.google.com/style/inclusive-documentation">It is good practice to adopt inclusive language standards when programming. </a></p>
+<h3 id="creating-new-branches">Creating new branches</h3>
+<p>We can create a new branch from the current branch we are on using:
+<div class="highlight"><pre><span></span><code>git checkout -b documentation                                                                                                  [9:34:01]
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Switched to a new branch &#39;documentation&#39;
+</code></pre></div></p>
+<p>Here we have used <code>checkout</code> with the <code>-b</code> flag to create a new branch called <code>documentation</code>. 
+Under the hood the <code>-b</code> flag tells git to create a new branch called <code>documentation</code> and then immediately switch to that branch.
+We can use <code>git branch</code> to see the current branched and <code>git branch new-branch</code> to create a new branch called <code>new-branch</code>, without switching to that branch.</p>
+<p>We can change between branches using <code>git checkout &lt;branch_name&gt;</code>.
+For example <code>git checkout main</code> will put us back on the <code>main</code> branch.</p>
+<p>From the <code>documentation</code> branch lets add some <a href="https://google.github.io/styleguide/pyguide.html">doc strings</a> to help document our code:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">astro_calculations/math_operations.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Adds two values together.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      a: input value float or int</span>
+<span class="sd">      b: input value float or int</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">      a + b</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        Two values can be added like:</span>
+
+<span class="sd">        &gt;&gt;&gt; add(1,2)</span>
+<span class="sd">        3</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="k">def</span> <span class="nf">sub</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Subtracts one value from another.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      a: input value float or int</span>
+<span class="sd">      b: input value float or int</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">      a - b</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        Two values can be subtracted like:</span>
+
+<span class="sd">        &gt;&gt;&gt; sub(1,2)</span>
+<span class="sd">        -1</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
+
+<span class="k">def</span> <span class="nf">mult</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Multiplies two values together.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      a: input value float or int</span>
+<span class="sd">      b: input value float or int</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">      a * b</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        Two values can be multiplied like:</span>
+
+<span class="sd">        &gt;&gt;&gt; mult(1,2)</span>
+<span class="sd">        2</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+
+<span class="k">def</span> <span class="nf">div</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Divides one value by another.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      a: input value float or int</span>
+<span class="sd">      b: input value float or int</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">      a / b</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        Two values can be divided like:</span>
+
+<span class="sd">        &gt;&gt;&gt; div(1,2)</span>
+<span class="sd">        0.5</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
+</code></pre></div></td></tr></table></div></p>
+<p>And commit this to the <code>documentation</code> branch. 
+This can be merged into the <code>main</code> branch using the following:
+<div class="highlight"><pre><span></span><code># Change into the main branch
+git checkout main
+</code></pre></div></p>
+<p>Use <code>git merge</code> to merge the <code>documentation</code> branch into the <code>main</code> branch. 
+<div class="highlight"><pre><span></span><code>git merge documentation
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>Updating e4ea138..b1ce3e9
+Fast-forward
+ astro_calculations/math_operations.py | 60 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ astro_calculations/printing.py        | 10 ++++++++++
+ 2 files changed, 70 insertions(+)
+</code></pre></div>
+<p>The documentation branch can then be deleted using:
+<div class="highlight"><pre><span></span><code>git branch -d documentation
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Deleted branch documentation (was b1ce3e9).
+</code></pre></div></p>
+<h3 id="resolving-a-confliction">Resolving a Confliction</h3>
+<p>Let's create two new branches from the current <code>main</code> branch. 
+<div class="highlight"><pre><span></span><code>git checkout -b improve_tests
+</code></pre></div>
+In the <code>improve_tests</code> branch we will improve the testing program <code>test.py</code>.
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">test.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">astro_calculations</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># Testing all values between 0 and 99</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">sub</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">mult</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">div</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span> <span class="o">/</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">x_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="n">y_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+
+<span class="c1"># Testing numpy arrays</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="n">x_arr</span><span class="p">,</span> <span class="n">y_arr</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">x_arr</span> <span class="o">+</span> <span class="n">y_arr</span><span class="p">)))</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">sub</span><span class="p">(</span><span class="n">x_arr</span><span class="p">,</span> <span class="n">y_arr</span><span class="p">)</span> <span class="o">==</span> <span class="n">x_arr</span> <span class="o">-</span> <span class="n">y_arr</span><span class="p">))</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">mult</span><span class="p">(</span><span class="n">x_arr</span><span class="p">,</span> <span class="n">y_arr</span><span class="p">)</span> <span class="o">==</span> <span class="n">x_arr</span> <span class="o">*</span> <span class="n">y_arr</span><span class="p">))</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">div</span><span class="p">(</span><span class="n">x_arr</span><span class="p">,</span> <span class="n">y_arr</span><span class="p">)</span> <span class="o">==</span> <span class="n">x_arr</span> <span class="o">/</span> <span class="n">y_arr</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div>
+Add and commit these changes to the <code>improve_tests</code> branch.</p>
+<p>Create another new branch from the <code>main</code> branch. We can specify a branch to branch from like so:
+<div class="highlight"><pre><span></span><code>git checkout -b advanced_operations main
+</code></pre></div></p>
+<p>In the <code>advanced_operations</code> branch lets add a <code>sqrt</code> function to the <code>math_operations.py</code> file:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">astro_calculations/math_operations.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="o">...</span>
+
+<span class="k">def</span> <span class="nf">sqrt</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the square root if real, or 0 if complex.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      a: input value float or int</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">      np.sqrt(a)</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        Two values can be divided like:</span>
+
+<span class="sd">        &gt;&gt;&gt; sqrt(4)</span>
+<span class="sd">        2</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+</code></pre></div></td></tr></table></div></p>
+<p>Add this function to the <code>__init__.py</code> file:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">astro_calculations/math_operations.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">.math_operations</span> <span class="kn">import</span> <span class="n">add</span><span class="p">,</span> <span class="n">sub</span><span class="p">,</span> <span class="n">mult</span><span class="p">,</span> <span class="n">div</span><span class="p">,</span> <span class="n">sqrt</span>
+<span class="kn">from</span> <span class="nn">.printing</span> <span class="kn">import</span> <span class="n">print_details</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="s2">&quot;sub&quot;</span><span class="p">,</span> <span class="s2">&quot;mult&quot;</span><span class="p">,</span> <span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="s2">&quot;sqrt&quot;</span><span class="p">,</span> <span class="s2">&quot;print_details&quot;</span><span class="p">]</span>
+</code></pre></div></td></tr></table></div></p>
+<p>Let's also add a test case to the <code>test.py</code> file:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">test.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">astro_calculations</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># Running some test</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">sub</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">mult</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">div</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="hll"><span class="k">assert</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div></p>
+<p>So we currently have 3 branches.
+* <code>main</code> a branch one commit behind both of the feature branches
+* <code>improve_tests</code> branch which has modified <code>test.py</code>
+* <code>advanced_operations</code> branch which has modified <code>test.py</code>, <code>astro_calculations/math_operations.py</code> and <code>astro_calculations/__init__.py</code></p>
+<p>We can start merging branches together using <code>git merge</code>. First lets merge <code>improve_tests</code> into main.
+<div class="highlight"><pre><span></span><code>$ git checkout main
+$ git merge improve_tests                                                                                                         [10:57:48]
+Updating b1ce3e9..c28271c
+Fast-forward
+ test.py | 21 ++++++++++++++++-----
+ 1 file changed, 16 insertions(+), 5 deletions(-)
+</code></pre></div></p>
+<p>This merged without any issues. Now lets merge in <code>advanced_operations</code>:
+<div class="highlight"><pre><span></span><code>$ git merge advanced_operations                                                                                                   [10:57:55]
+Auto-merging test.py
+CONFLICT (content): Merge conflict in test.py
+Automatic merge failed; fix conflicts and then commit the result.
+</code></pre></div></p>
+<p>This detects a confliction in the <code>test.py</code>. If we look contents of <code>test.py</code> we will see something like the following:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">test.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">astro_calculations</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="hll"><span class="o">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span> <span class="n">HEAD</span>
+</span><span class="c1"># Testing all values between 0 and 99</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">sub</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">mult</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">div</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span> <span class="o">/</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">x_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="n">y_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+
+<span class="c1"># Testing numpy arrays</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="n">x_arr</span><span class="p">,</span> <span class="n">y_arr</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">x_arr</span> <span class="o">+</span> <span class="n">y_arr</span><span class="p">)))</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">sub</span><span class="p">(</span><span class="n">x_arr</span><span class="p">,</span> <span class="n">y_arr</span><span class="p">)</span> <span class="o">==</span> <span class="n">x_arr</span> <span class="o">-</span> <span class="n">y_arr</span><span class="p">))</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">mult</span><span class="p">(</span><span class="n">x_arr</span><span class="p">,</span> <span class="n">y_arr</span><span class="p">)</span> <span class="o">==</span> <span class="n">x_arr</span> <span class="o">*</span> <span class="n">y_arr</span><span class="p">))</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">div</span><span class="p">(</span><span class="n">x_arr</span><span class="p">,</span> <span class="n">y_arr</span><span class="p">)</span> <span class="o">==</span> <span class="n">x_arr</span> <span class="o">/</span> <span class="n">y_arr</span><span class="p">))</span>
+<span class="hll"><span class="o">=======</span>
+</span><span class="c1"># Running some test</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">sub</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">mult</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">div</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+<span class="hll"><span class="o">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</span> <span class="n">advanced_operations</span>
+</span></code></pre></div></td></tr></table></div>
+Here we can see that the file has been modified to include all changes. 
+The file also lets us know what sections of the code are conflicting and which branch they have been modified from.
+Everything between <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code> and <code>=======</code> (lines 7 and 23) exist in our current branch while everything between <code>=======</code> and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; advanced_operations</code> (lines 23 and 30) is the requested change from the <code>advanced_operations</code> branch.
+We can see that the new changes would undo the changes from the <code>improve_tests</code> branch. 
+We can directly modify this file to resolve the confliction:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">test.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">astro_calculations</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="c1"># Testing all values between 0 and 99</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">sub</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">mult</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">div</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span> <span class="o">/</span> <span class="n">y</span><span class="p">)</span>
+<span class="hll">    <span class="k">assert</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+</span>
+<span class="n">x_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="n">y_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+
+<span class="c1"># Testing numpy arrays</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="n">x_arr</span><span class="p">,</span> <span class="n">y_arr</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">x_arr</span> <span class="o">+</span> <span class="n">y_arr</span><span class="p">)))</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">sub</span><span class="p">(</span><span class="n">x_arr</span><span class="p">,</span> <span class="n">y_arr</span><span class="p">)</span> <span class="o">==</span> <span class="n">x_arr</span> <span class="o">-</span> <span class="n">y_arr</span><span class="p">))</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">mult</span><span class="p">(</span><span class="n">x_arr</span><span class="p">,</span> <span class="n">y_arr</span><span class="p">)</span> <span class="o">==</span> <span class="n">x_arr</span> <span class="o">*</span> <span class="n">y_arr</span><span class="p">))</span>
+<span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">div</span><span class="p">(</span><span class="n">x_arr</span><span class="p">,</span> <span class="n">y_arr</span><span class="p">)</span> <span class="o">==</span> <span class="n">x_arr</span> <span class="o">/</span> <span class="n">y_arr</span><span class="p">))</span>
+<span class="hll"><span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x_arr</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_arr</span><span class="p">]))</span>
+</span></code></pre></div></td></tr></table></div></p>
+<p>Here we note that we now have a <code>sqrt</code> function to test. This is done on lines 13 and 23.
+If you try this test, it will fail because <code>sqrt</code> isn't equipped to handle <code>numpy.array</code>. 
+We change this using the <code>np.vectorize</code> function.
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">astro_calculations.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span>
+<span class="normal">95</span>
+<span class="normal">96</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="o">...</span>
+<span class="k">def</span> <span class="nf">_sqrt</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the square root if real, or 0 if complex.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      a: input value float or int</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">      np.sqrt(a)</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">        Two values can be divided like:</span>
+
+<span class="sd">        &gt;&gt;&gt; sqrt(4)</span>
+<span class="sd">        2</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+<span class="n">sqrt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">_sqrt</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+Here we've renamed the <code>sqrt</code> function to be <code>_sqrt</code> and created a new function <code>sqrt = np.vectorize(_sqrt)</code>. 
+The <code>sqrt</code> function will now call the vectorized <code>_sqrt</code> function, allowing us to pass a <code>numpy.array</code>.</p>
+<h2 id="tagging">Tagging</h2>
+<p>We can <code>tag</code> a specific version of the code. 
+This can be used to signal to users specific versions of the code for use.
+For example, a user may want to use a stable version of the code, rather than using the <code>main</code> branch which may have feature breaking changes in the future.
+We can tag a version using:
+<div class="highlight"><pre><span></span><code>git tag -a v0.1.0 -m &quot;First Release&quot;
+</code></pre></div>
+Here we are adopting the <a href="https://semver.org/">Semantic Versioning</a> convention. We can see existing tags with:
+<div class="highlight"><pre><span></span><code>git tag
+</code></pre></div></p>
+<p>We can always delete a tag using:
+<div class="highlight"><pre><span></span><code>git tag -d &lt;tag-name&gt;
+</code></pre></div></p>
+<h2 id="pushing-to-a-remote-repository">Pushing to a remote repository</h2>
+<p>Git allows for remote repositories. 
+This allows to maintain a hosted copy of the repository, which better protects against loss due to a computer crash.
+There are many free and for profit hosting services such as <a href="https://www.github.com">GitHub</a>, <a href="https://www.gitlab.com">GitLab</a> and <a href="https://bitbucket.org">BitBucket</a>. 
+You can also <a href="https://www.inmotionhosting.com/support/website/git/setting-up-your-remote-repository-with-git/">host your own remote repository</a>.
+Here we'll use GitHub, since GitHub offers free premium accounts for educations institutes (instructions for <a href="https://docs.github.com/en/education/explore-the-benefits-of-teaching-and-learning-with-github-education/github-global-campus-for-students/apply-to-github-global-campus-as-a-student">students</a>, instructions for <a href="https://docs.github.com/en/education/explore-the-benefits-of-teaching-and-learning-with-github-education/github-global-campus-for-teachers">"teachers"</a>).</p>
+<figure>
+<p><img alt="Creating a new repository" src="../../images/github-new.png" />
+  </p>
+<figcaption> Creating a new repository </figcaption>
+</figure>
+<figure>
+<p><img alt="Setup new repo" src="../../images/github-name-repo.png" />
+  </p>
+<figcaption> Setup new repo </figcaption>
+</figure>
+<p>From the newly created repo we can get the url by clicking on the green <code>code</code> button to the top right of the page. </p>
+<figure>
+<p><img alt="Get the remote origin url" src="../../images/github-remote-origin.png" />
+  </p>
+<figcaption> Get the remote origin url </figcaption>
+</figure>
+<p>With the new repo created we can add the remote origin for our repo:
+<div class="highlight"><pre><span></span><code>git remote add origin git@github.com:steob92/astro_calculations.git 
+</code></pre></div>
+If we have initialized the repo with a <code>README.md</code> or  <code>.gitignore</code> file we might want to <code>pull</code> the remote changes into our local repo.
+First let's set the remote origin:
+<div class="highlight"><pre><span></span><code>git branch --set-upstream-to=origin/main main 
+</code></pre></div>
+Next we can try to <code>git pull</code>:
+<div class="highlight"><pre><span></span><code> git pull                                                                                                                        [12:01:38]
+hint: You have divergent branches and need to specify how to reconcile them.
+hint: You can do so by running one of the following commands sometime before
+hint: your next pull:
+hint: 
+hint:   git config pull.rebase false  # merge (the default strategy)
+hint:   git config pull.rebase true   # rebase
+hint:   git config pull.ff only       # fast-forward only
+hint: 
+hint: You can replace &quot;git config&quot; with &quot;git config --global&quot; to set a default
+hint: preference for all repositories. You can also pass --rebase, --no-rebase,
+hint: or --ff-only on the command line to override the configured default per
+hint: invocation.
+fatal: Need to specify how to reconcile divergent branches.
+</code></pre></div></p>
+<p>We have a divergent branch since the remote main has a <code>README.md</code> file. 
+We can follow the default strategy:
+<div class="highlight"><pre><span></span><code>git config pull.rebase false
+</code></pre></div></p>
+<p>And then <code>pull</code>
+<div class="highlight"><pre><span></span><code>git pull --allow-unrelated-histories    
+</code></pre></div></p>
+<p>The <code>--allow-unrealted-histories</code> resolves an issue with <code>README.md</code> not having a history in our local repo:
+<div class="highlight"><pre><span></span><code>Merge made by the &#39;ort&#39; strategy.
+ README.md | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 README.md
+</code></pre></div></p>
+<p>We can then <code>push</code> our local changes to the remote repo:
+<div class="highlight"><pre><span></span><code>git push
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Enumerating objects: 43, done.
+Counting objects: 100% (43/43), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (42/42), done.
+Writing objects: 100% (42/42), 4.89 KiB | 2.45 MiB/s, done.
+Total 42 (delta 9), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (9/9), done.
+To github.com:steob92/astro_calculations.git
+   78f86d6..4a5bc79  main -&gt; main
+</code></pre></div></p>
+<figure>
+<p><img alt="Uploaded changes to GitHub" src="../../images/github-pushed-changes.png" />
+  </p>
+<figcaption> Uploaded changes to GitHub </figcaption>
+</figure>
+<p>We can see the GitHub repo has been changed.</p>
+<p>We can also push our tag to GitHub with:
+<div class="highlight"><pre><span></span><code>$ git push origin v0.1.0
+
+Enumerating objects: 1, done.
+Counting objects: 100% (1/1), done.
+Writing objects: 100% (1/1), 172 bytes | 172.00 KiB/s, done.
+Total 1 (delta 0), reused 0 (delta 0), pack-reused 0
+To github.com:steob92/astro_calculations.git
+ * [new tag]         v0.1.0 -&gt; v0.1.0
+</code></pre></div>
+This tag will appear on the GitHub page under "Releases".</p>
+<p>We can use the editor on github to directly edit the <code>README.md</code> file.</p>
+<p>Once edited we can <code>pull</code> the changes to our local copy using:
+<div class="highlight"><pre><span></span><code>git pull
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), 974 bytes | 974.00 KiB/s, done.
+From github.com:steob92/astro_calculations
+   4a5bc79..82fc7e0  main       -&gt; origin/main
+Updating 4a5bc79..82fc7e0
+Fast-forward
+ README.md | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+</code></pre></div></p>
+<h3 id="remote-branches">Remote Branches</h3>
+<p>Let's create a new branch to improve the documentation:
+<div class="highlight"><pre><span></span><code>git checkout -b update_readme
+</code></pre></div></p>
+<p>Make a small change to <code>README.md</code>:
+<div class="highlight"><span class="filename">README.md</span><pre><span></span><code># astro_calculations
+
+A python package to do some astronomical calculations
+
+Example `add(4,5)`
+</code></pre></div></p>
+<p>Add the file and commit the change.
+We can add a remote origin for this branch using:
+<div class="highlight"><pre><span></span><code>git push --set-upstream origin update_readme
+</code></pre></div></p>
+<p>Once we've added the remote upstream we can make further changes and push them with just <code>git push</code>.</p>
+<p>We can force a deletion of the local <code>update_readme</code> branch using <code>-D</code>:
+<div class="highlight"><pre><span></span><code>git branch -D update_readme                                                                                                     [12:16:22]
+</code></pre></div></p>
+<p>With the branch deleted we can checkout the remote version of the <code>update_readme</code> branch.
+First let's <code>fetch</code> any changes to the remote repo:
+<div class="highlight"><pre><span></span><code>git fetch
+</code></pre></div></p>
+<p>Next let's look at the local and remote branches available. <code>git branch</code> will list the local branches while <code>git branch -r</code> will list the remote branches:
+<div class="highlight"><pre><span></span><code>  origin/main
+  origin/update_readme
+</code></pre></div></p>
+<p>We can checkout the remote branch <code>update_readme</code> using:
+<div class="highlight"><pre><span></span><code>git checkout -b update_readme origin/update_readme 
+</code></pre></div>
+This creates a new branch locally named <code>update_readme</code>  with the upstream <code>origin/update_readme</code>.
+The two names can be different, but it is good practice to keep a consistent naming between remote and local branches.</p>
+<h2 id="closing">Closing</h2>
+<p>In this tutorial we've gone over the basics of the git command line interface (CLI). 
+We've learned the commands used to create a new repository, commit local changes to the repository, create branches to work on new features within our code base, merge these branches back into the main, revert to previous versions and tag specific instances of the code base.
+We finally showed how to push a repository to a remote respository hosting service such as GitHub. 
+In the <a href="../git_2/">next tutorial</a> we'll focus on how to use GitHub as a tool for collaborative development.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2025 TSI <br> <a href="https://github.com/vuquangtrong/mkdocs-material-blog">Blog Theme</a> / <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "toc.integrate", "header.autohide", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.c011b7c0.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.7389ff0e.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1979 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="TSI McGill Tutorials">
+      
+      
+        <meta name="author" content="Stephan O'Brien (stephan.obrien@mcgill.ca)">
+      
+      
+        <link rel="canonical" href="https://github.com/tsi-mcgill/tsi-tutorials/Rust/rust_intro/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.4">
+    
+    
+      
+        <title>Rust intro - TSI McGill Tutorials</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="sandstone" data-md-color-primary="grey" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#what-is-rust" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TSI McGill Tutorials" class="md-header__button md-logo" aria-label="TSI McGill Tutorials" data-md-component="logo">
+      
+  <img src="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TSI McGill Tutorials
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Rust intro
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="sandstone" data-md-color-primary="grey" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="gray"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Python/" class="md-tabs__link">
+        
+  
+    
+  
+  Python
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Cpp/" class="md-tabs__link">
+        
+  
+    
+  
+  C++
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link">
+        
+  
+    
+  
+  Rust
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../VersionControl/" class="md-tabs__link">
+        
+  
+    
+  
+  Version Control
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Containerization/" class="md-tabs__link">
+        
+  
+    
+  
+  Containerization
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Misc/" class="md-tabs__link">
+        
+  
+    
+  
+  Misc
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TSI McGill Tutorials" class="md-nav__button md-logo" aria-label="TSI McGill Tutorials" data-md-component="logo">
+      
+  <img src="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png" alt="logo">
+
+    </a>
+    TSI McGill Tutorials
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Python/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cpp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C++
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rust
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VersionControl/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Version Control
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Containerization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Containerization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Misc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Misc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Rust intro</h1>
+
+<p>In this tutorial, I'll assume that you have some programming experience. I'll also assume that you use programming as a tool and that you don't necessarily have a background in computer science. Our focus will be more on the "hows" rather than the "whys," whenever possible.</p>
+<p>By the end of this tutorial, you will have gained enough knowledge of Rust to begin developing high-performing code. I encourage you to work through the examples at your own pace, attempting to solve issues before reviewing the solutions. For your convenience, unanswered problems are available on <a href="https://github.com/steob92/rust-tutorial/tree/main">GitHub</a>, with the solutions provided in the "solutions" branch.</p>
+<h2 id="what-is-rust">What is Rust?</h2>
+<p>Rust stands out as a high-performance and memory-efficient programming language that emerged from the endeavors of Mozilla's research employees (<a href="https://www.techrepublic.com/article/Rust-not-firefox-is-mozillas-greatest-industry-contribution/">Rust, not Firefox, is Mozilla’s greatest industry contribution</a>). 
+Prioritizing performance and memory safety, Rust utilizes a robust type system and an innovative "ownership" model to guarantee memory safety and thread safety at compile time. 
+This approach aims to address vulnerabilities arising from memory errors, with estimates from Microsoft suggesting that approximately 70% of code vulnerabilities stem from memory-related issues (<a href="https://www.technologyreview.com/2023/02/14/1067869/Rust-worlds-fastest-growing-programming-language/">source</a>).</p>
+<p>Rust's ability to produce fast, efficient, and resilient code has catapulted it to the top of the list as the <a href="https://survey.stackoverflow.co/2023/">most admired language amongst developers</a>. The community of Rust programmers affectionately refers to themselves as "Rustaceans," and the language's unofficial mascot, Ferris the crab:</p>
+<figure>
+<p><img alt="Ferris the Crab" src="../../images/rustacean-flat-happy.png" width="500" />
+  </p>
+<figcaption> Ferris the Crab (https://Rustacean.net). Ferris being a reference to ferrous, a compound that contains iron. </figcaption>
+</figure>
+<h3 id="rust-compared-to-python">Rust Compared to Python</h3>
+<p>When comparing Rust to a language like Python, several key differences become apparent:</p>
+<ul>
+<li>
+<p><strong>Performance</strong>: Rust is renowned for its high performance, often being <a href="https://arxiv.org/abs/2107.11912">comparable to languages like C or C++</a>. Python, on the other hand, tends to be significantly slower than Rust, emphasizing ease of development over raw performance.</p>
+</li>
+<li>
+<p><strong>Type System</strong>: Python is a dynamically typed language, meaning the interpreter infers variable types at runtime, allowing flexibility but increasing the potential for type-related errors. In contrast, Rust requires variables to have known types at compile time, enhancing safety and allowing for optimizations to be made by the compiler.</p>
+</li>
+<li>
+<p><strong>Compilation</strong>: Rust is a compiled language, while Python is interpreted. Python code is executed by an interpreter, converting code to bytecode at runtime, resulting in slower performance. Rust, as a compiled language, produces machine code binaries before runtime, reducing overhead and enabling compiler optimizations for faster, more memory-efficient execution.</p>
+</li>
+<li>
+<p><strong>Memory Management</strong>: Python employs a "garbage collector" to manage memory by periodically checking and freeing memory occupied by variables that go out of scope, impacting speed and memory efficiency. Rust utilizes an "ownership" memory model enforced by the "borrow checker" at compile time. Each variable in Rust has a single owner, and memory is automatically freed when the owner goes out of scope. This approach, without a costly garbage collector, contributes to Rust's fast runtime.</p>
+</li>
+<li>
+<p><strong>Thread Safety</strong>: Python's Global Interpreter Lock (GIL) allows only one CPU-bound thread to execute at a time, ensuring safety across threads but causing a bottleneck for parallel code execution. In Rust, the ownership model, combined with allowing either numerous immutable references or a single mutable reference at a time, guarantees thread safety at compile time without the restrictions posed by a GIL.</p>
+</li>
+<li>
+<p><strong>Package Management</strong>: Both Python and Rust use package management systems to handle external libraries or crates (in Rust). Rust utilizes the <code>cargo</code> package manager and <code>toml</code> files to manage project dependencies, while Python uses tools like <code>pip</code> and <code>requirements.txt</code> to manage packages.</p>
+</li>
+</ul>
+<p>Rust and Python employ different approaches to achieve their goals, with Rust focusing on performance, memory safety, and concurrency, whereas Python emphasizes ease of use and flexibility.</p>
+<h3 id="installing-rust">Installing Rust</h3>
+<p>Comprehensive installation instructions for Rust can be accessed <a href="https://www.Rust-lang.org/learn/get-started">here</a>. The installation process involves utilizing <code>rustup</code>, a tool used for installing both the Rust compiler (<code>rustc</code>) and the package manager (<code>cargo</code>). These tools are compatible with Linux, macOS, and Windows (WSL).
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>--proto<span class="w"> </span><span class="s1">&#39;=https&#39;</span><span class="w"> </span>--tlsv1.2<span class="w"> </span>-sSf<span class="w"> </span>https://sh.rustup.rs<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh
+</code></pre></div></p>
+<p>For alternative methods of installing Rust, refer to <a href="https://forge.Rust-lang.org/infra/other-installation-methods.html">this page</a>.</p>
+<p>For this tutorial, we'll utilize the <a href="https://hub.docker.com/_/Rust">official Rust Docker image</a> to compile and run code within a container. To pull the image, execute:</p>
+<p><div class="highlight"><pre><span></span><code>docker<span class="w"> </span>pull<span class="w"> </span>Rust
+</code></pre></div>
+Create an interactive Docker container using the following command:</p>
+<p><div class="highlight"><pre><span></span><code>docker run -it --rm -v $(pwd):/local_data -w /local_data Rust bash
+</code></pre></div>
+Explanation:</p>
+<ul>
+<li><code>run</code> executes the bash command in an interactive mode (<code>-it</code>) to provide an interactive Bash shell for work.</li>
+<li><code>--rm</code> ensures the container is deleted after use.</li>
+<li><code>-v $(pwd):/local_data</code> mounts the current directory on the local machine to <code>/local_data</code> in the container.</li>
+<li><code>-w /local_data</code> sets the working directory to <code>/local_data</code> within the container.</li>
+</ul>
+<p>(Free) Learning resources:</p>
+<ul>
+<li><a href="https://doc.Rust-lang.org/book/">"The Book", the offical </a></li>
+<li><a href="https://github.com/Rust-lang/Rustlings/">"Rustlings Course on GitHub"</a></li>
+<li><a href="https://www.Rust-lang.org/">"Offical Website"</a></li>
+<li><a href="https://play.Rust-lang.org/?version=stable&amp;mode=debug&amp;edition=2021">"Rust Playground" a web coding enviroment for Rust</a></li>
+<li><a href="https://doc.Rust-lang.org/std/index.html">"Rust Standard Library Crate"</a></li>
+<li><a href="https://Rust-cli.github.io/book/index.html">"Command line apps in Rust"</a></li>
+<li><a href="https://doc.Rust-lang.org/stable/embedded-book/">"The Embedded Rust Book"</a></li>
+</ul>
+<h2 id="basics-of-rust">Basics of Rust</h2>
+<p>In this section we will cover the basics of Rust.</p>
+<h3 id="hello-world">Hello World</h3>
+<p>To create a new project in Rust, utilize the <code>cargo</code> command:
+<div class="highlight"><pre><span></span><code>cargo<span class="w"> </span>new<span class="w"> </span>hello
+</code></pre></div>
+This will create a new directory called <code>hello</code>. 
+<div class="highlight"><pre><span></span><code>-&gt;<span class="w"> </span>ls<span class="w"> </span>-ah<span class="w"> </span>hello
+.<span class="w">  </span>..<span class="w">  </span>.git<span class="w">  </span>.gitignore<span class="w">  </span>Cargo.toml<span class="w">  </span>src
+</code></pre></div></p>
+<p>When using <code>cargo new</code>, a new Rust project is initialized. Alongside creating the project structure, <code>cargo</code> automatically sets up a new Git repository for the package and adds a Rust-specific <code>.gitignore</code> file. 
+The newly created project includes a <code>Cargo.toml</code> file, which serves as the manifest file for the project. 
+This file contains details about the project, including external dependencies, package name, and versions used.
+<div class="highlight"><pre><span></span><code>-&gt;<span class="w"> </span>cat<span class="w"> </span>hello/Cargo.toml<span class="w"> </span>
+<span class="o">[</span>package<span class="o">]</span>
+<span class="nv">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;hello&quot;</span>
+<span class="nv">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span>
+<span class="nv">edition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;2021&quot;</span>
+
+<span class="c1"># See more keys and their definitions at https://doc.Rust-lang.org/cargo/reference/manifest.html</span>
+
+<span class="o">[</span>dependencies<span class="o">]</span>
+</code></pre></div>
+Cargo also sets up a <code>src</code> directory with a <code>main.rs</code> file containing an example program that will print "Hello, world": 
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello.rs</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;Hello, world!&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>In this example, the following points are illustrated:</p>
+<ul>
+<li>Functions in Rust are defined using the <code>fn</code> keyword.</li>
+<li>The <code>main</code> function designates the entry point of the code to the compiler.</li>
+<li>Code blocks are enclosed within <code>{}</code> to denote scopes.</li>
+<li>Rust includes macros (indicated by <code>!</code>, which will be covered later) like <code>println!</code> used to print the string <code>"Hello, world!"</code> to the screen.</li>
+<li>Statements in Rust are terminated with a <code>;</code> (exceptions for when to omit the <code>;</code> will be explained later).</li>
+</ul>
+<p>This example can be compiled using <code>rustc</code>:
+<div class="highlight"><pre><span></span><code>rustc src/main.rs -o main
+</code></pre></div></p>
+<p>to create the executable <code>main</code>.</p>
+<p>Alternatively we can use <code>cargo build</code> to compile:
+<div class="highlight"><pre><span></span><code>-&gt; cargo build
+   Compiling hello v0.1.0 (/local_data/hello)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.28s
+</code></pre></div>
+Executing this command will compile an executable located at <code>target/debug/hello</code>. To run the executable, you can either call the executable directly or use the <code>cargo run</code> command. When using <code>cargo run</code>, if there are changes in the code or if the code hasn't been compiled previously, it automatically triggers the <code>cargo build</code> command before executing the program.</p>
+<div class="highlight"><pre><span></span><code>-&gt; cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.01s
+     Running `target/debug/hello`
+Hello, world!
+</code></pre></div>
+<p>The executable is typically found within a <code>debug</code> folder. By default, Rust generates debug information useful for code analysis and debugging. To create an optimized version for end-users, the <code>--release</code> flag can be utilized:
+<div class="highlight"><pre><span></span><code>-&gt; cargo build --release
+   Compiling hello v0.1.0 (/local_data/hello)
+    Finished release [optimized] target(s) in 0.25s
+</code></pre></div></p>
+<p>This will take longer to compile as <code>rustc</code> is optimizing the code.</p>
+<h3 id="types-in-rust">Types in Rust</h3>
+<p>In Rust, types must be known at compile time. You can explicitly specify the type of a variable using the syntax <code>let my_variable: type = value</code>, where the <code>type</code> is specified after the variable name using a <code>:</code>. The following example demonstrates explicit declaration of variable types on lines 3-6:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">types.rs</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Explicitly declaring the type of the variable</span>
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_integer</span>: <span class="kt">i32</span> <span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+</span><span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_float</span>: <span class="kt">f64</span> <span class="o">=</span><span class="w"> </span><span class="mf">3.14</span><span class="p">;</span>
+</span><span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_character</span>: <span class="kt">char</span> <span class="o">=</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">;</span>
+</span><span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_boolean</span>: <span class="kt">bool</span> <span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+</span>
+<span class="w">    </span><span class="c1">// Rust can infer types in many cases, so explicit annotation is not always necessary</span>
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">inferred_integer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+</span><span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">inferred_float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2.5</span><span class="p">;</span>
+</span><span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">inferred_character</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;B&#39;</span><span class="p">;</span>
+</span><span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">inferred_boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+</span>
+
+<span class="w">    </span><span class="c1">// Explicitly declaring the type of the variable within the passed value</span>
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_integer_in_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">17_</span><span class="k">i8</span><span class="p">;</span>
+</span><span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_float_in_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">6.28_</span><span class="k">f32</span><span class="p">;</span>
+</span><span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_large_unsigned_32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1_000_000_</span><span class="k">u32</span><span class="p">;</span>
+</span>
+
+<span class="w">    </span><span class="c1">// Printing the values along with their types</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;Integer: {} (Type: i32)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">my_integer</span><span class="p">);</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;Float: {} (Type: f64)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">my_float</span><span class="p">);</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;Character: {} (Type: char)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">my_character</span><span class="p">);</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;Boolean: {} (Type: bool)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">my_boolean</span><span class="p">);</span>
+
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;Inferred Integer: {} (Type: inferred)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">inferred_integer</span><span class="p">);</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;Inferred Float: {} (Type: inferred)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">inferred_float</span><span class="p">);</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;Inferred Character: {} (Type: inferred)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">inferred_character</span><span class="p">);</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;Inferred Boolean: {} (Type: inferred)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">inferred_boolean</span><span class="p">);</span>
+
+
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;Integer: {} (Type: inferred from value)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">my_integer_in_value</span><span class="p">);</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;Float: {} (Type: inferred from value)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">my_float_in_value</span><span class="p">);</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;Unsigned: {} (Type: inferred from value)&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">my_large_unsigned_32</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>The Rust compiler features type inference, enabling omission of the variable type, as it can deduce the type based on the assigned value. Internally, the compiler determines the variable's type during compilation based on the provided value. An example illustrating this behavior is demonstrated in lines 9-12 of <code>types.rs</code>.</p>
+<p>Additionally, we can explicitly specify the variable type by adding <code>::&lt;type&gt;</code> after the assigned value. This method is showcased in lines 16-18 of <code>types.rs</code>.</p>
+<p>In Rust, type conversion between different types can be achieved using keywords such as <code>into</code>, <code>try_into</code>, <code>from</code>, <code>try_from</code>, or <code>as</code>. Below are some examples:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">integer_a</span>: <span class="kt">i32</span> <span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">float_b</span>:<span class="kt">f32</span> <span class="o">=</span><span class="w"> </span><span class="n">integer_a</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">f32</span><span class="p">;</span>
+
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">integer_c</span>: <span class="kt">i32</span> <span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// We&#39;re using &quot;try into&quot; here because we could have a negative integer</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">unsigned_d</span>: <span class="kt">u32</span> <span class="o">=</span><span class="w"> </span><span class="n">integer_c</span><span class="p">.</span><span class="n">try_into</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">float_64_e</span>: <span class="kt">f64</span> <span class="o">=</span><span class="w"> </span><span class="mf">6.5</span><span class="p">;</span>
+<span class="w">    </span><span class="c1">// This wont work because going from f64-&gt;f32 loses percision and range</span>
+<span class="w">    </span><span class="c1">// There are also some funky behaviour around inf</span>
+<span class="w">    </span><span class="c1">// let float_32_f: f32 = f32::try_from(float_64_e).unwrap();</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">float_32_f</span>: <span class="kt">f32</span> <span class="o">=</span><span class="w"> </span><span class="n">float_64_e</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">f32</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">float_32_g</span>:<span class="kt">f32</span> <span class="o">=</span><span class="w"> </span><span class="kt">f32</span>::<span class="n">from</span><span class="p">(</span><span class="mf">3.13</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">i8_h</span>:<span class="kt">i8</span> <span class="o">=</span><span class="w"> </span><span class="kt">i8</span>::<span class="n">from</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">u32_i</span><span class="w"> </span>:<span class="kt">u32</span> <span class="o">=</span><span class="w">  </span><span class="kt">u32</span>::<span class="n">try_from</span><span class="p">(</span><span class="mi">8</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<h3 id="ownership-in-rust">Ownership in Rust</h3>
+<p>Ownership and the borrow checker constitute the foundation of Rust's memory management. When dealing with ownership in Rust, it's essential to remember three fundamental rules:</p>
+<ul>
+<li>Every value in Rust has a designated owner.</li>
+<li>At any given time, there can only be a single owner for a value.</li>
+<li>When the owner goes out of scope, the associated value is automatically dropped.</li>
+</ul>
+<p>Let's delve into an example to illustrate this concept:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Ownership Example</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
+
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>In the provided code, a new variable <code>x</code> of type <code>String</code> is created. At line 5, a new variable <code>y</code> is assigned the value of <code>x</code>. Subsequently, attempts to print <code>x</code> and <code>y</code> on lines 6 and 8, respectively, would result in a compilation error:
+<div class="highlight"><pre><span></span><code>error<span class="o">[</span>E0382<span class="o">]</span>:<span class="w"> </span>borrow<span class="w"> </span>of<span class="w"> </span>moved<span class="w"> </span>value:<span class="w"> </span><span class="sb">`</span>x<span class="sb">`</span>
+<span class="w"> </span>--&gt;<span class="w"> </span>src/main.rs:8:20
+<span class="w">  </span><span class="p">|</span>
+<span class="m">3</span><span class="w"> </span><span class="p">|</span><span class="w">     </span><span class="nb">let</span><span class="w"> </span>mut<span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>String::from<span class="o">(</span><span class="s2">&quot;Hello&quot;</span><span class="o">)</span><span class="p">;</span>
+<span class="w">  </span><span class="p">|</span><span class="w">         </span>-----<span class="w"> </span>move<span class="w"> </span>occurs<span class="w"> </span>because<span class="w"> </span><span class="sb">`</span>x<span class="sb">`</span><span class="w"> </span>has<span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="sb">`</span>String<span class="sb">`</span>,<span class="w"> </span>which<span class="w"> </span>does<span class="w"> </span>not<span class="w"> </span>implement<span class="w"> </span>the<span class="w"> </span><span class="sb">`</span>Copy<span class="sb">`</span><span class="w"> </span>trait
+<span class="m">4</span><span class="w"> </span><span class="p">|</span><span class="w">  </span>
+<span class="m">5</span><span class="w"> </span><span class="p">|</span><span class="w">     </span><span class="nb">let</span><span class="w"> </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>x<span class="p">;</span>
+<span class="w">  </span><span class="p">|</span><span class="w">             </span>-<span class="w"> </span>value<span class="w"> </span>moved<span class="w"> </span>here
+...
+<span class="m">8</span><span class="w"> </span><span class="p">|</span><span class="w">     </span>println!<span class="o">(</span><span class="s2">&quot;{}&quot;</span>,<span class="w"> </span>x<span class="o">)</span><span class="p">;</span>
+<span class="w">  </span><span class="p">|</span><span class="w">                    </span>^<span class="w"> </span>value<span class="w"> </span>borrowed<span class="w"> </span>here<span class="w"> </span>after<span class="w"> </span>move
+</code></pre></div></p>
+<p>So what's happening? Well on line 5 we changed the ownership of the part of the memory that holds "Hello". The ownership of this has changed from <code>x</code> to <code>y</code>. Since we can only ever have one owner at a time, <code>x</code> cannot be printed. We could however run this example:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Ownership Example Corrected</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+<span class="hll"><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+</span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
+
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+In the above example once we have finished using <code>y</code> we have passed ownership back to <code>x</code>. </p>
+<p>The fact that all value in Rust only ever has one owner guarentees that we can never acidently drop or delete a value that is still in use. This might seem very limiting and a heavy cost to pay for safety, but we can use "borrowing" to circumvent this issue. 
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Ownership Example Corrected</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
+</span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
+
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>In the above value we have "borrowed" the value of <code>x</code>. By borrowing the values instead of taking ownership, <code>x</code> maintains ownership over the value, allowing different parts of the code to access the value of the value.</p>
+<p>When borrowing values Rust's "borrow checker" will keep track of all refeneces and make sure that we don't have dangling references or data races. Consider the following:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Mutable and immutable borrows</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
+</span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+
+<span class="hll"><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s">&quot;, world&quot;</span><span class="p">;</span>
+</span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+In the preceding example, an immutable reference to <code>x</code> is established in line 5. However, an attempt to modify <code>x</code> occurs in line 8, resulting in a compilation error:
+<div class="highlight"><pre><span></span><code><span class="w">   </span>Compiling<span class="w"> </span>tutorial<span class="w"> </span>v0.1.0<span class="w"> </span><span class="o">(</span>/local_data<span class="o">)</span>
+error<span class="o">[</span>E0502<span class="o">]</span>:<span class="w"> </span>cannot<span class="w"> </span>borrow<span class="w"> </span><span class="sb">`</span>x<span class="sb">`</span><span class="w"> </span>as<span class="w"> </span>mutable<span class="w"> </span>because<span class="w"> </span>it<span class="w"> </span>is<span class="w"> </span>also<span class="w"> </span>borrowed<span class="w"> </span>as<span class="w"> </span>immutable
+<span class="w">  </span>--&gt;<span class="w"> </span>src/main.rs:8:5
+<span class="w">   </span><span class="p">|</span>
+<span class="m">5</span><span class="w">  </span><span class="p">|</span><span class="w">     </span><span class="nb">let</span><span class="w"> </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">&amp;</span>x<span class="p">;</span>
+<span class="w">   </span><span class="p">|</span><span class="w">             </span>--<span class="w"> </span>immutable<span class="w"> </span>borrow<span class="w"> </span>occurs<span class="w"> </span>here
+...
+<span class="m">8</span><span class="w">  </span><span class="p">|</span><span class="w">     </span><span class="nv">x</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;, world&quot;</span><span class="p">;</span>
+<span class="w">   </span><span class="p">|</span><span class="w">     </span>^^^^^^^^^^^^^^<span class="w"> </span>mutable<span class="w"> </span>borrow<span class="w"> </span>occurs<span class="w"> </span>here
+<span class="m">9</span><span class="w">  </span><span class="p">|</span><span class="w">     </span>println!<span class="o">(</span><span class="s2">&quot;{}&quot;</span>,<span class="w"> </span>x<span class="o">)</span><span class="p">;</span>
+<span class="m">10</span><span class="w"> </span><span class="p">|</span><span class="w">     </span>println!<span class="o">(</span><span class="s2">&quot;{}&quot;</span>,<span class="w"> </span>y<span class="o">)</span><span class="p">;</span>
+<span class="w">   </span><span class="p">|</span><span class="w">                    </span>-<span class="w"> </span>immutable<span class="w"> </span>borrow<span class="w"> </span>later<span class="w"> </span>used<span class="w"> </span>here
+
+For<span class="w"> </span>more<span class="w"> </span>information<span class="w"> </span>about<span class="w"> </span>this<span class="w"> </span>error,<span class="w"> </span>try<span class="w"> </span><span class="sb">`</span>rustc<span class="w"> </span>--explain<span class="w"> </span>E0502<span class="sb">`</span>.
+</code></pre></div>
+What's happening in this code? In Rust, strings occupy a fixed memory space. 
+When modifying a String, a new memory allocation is required since the memory size needed to store the string has changed. 
+The <code>+=</code> operator, used to alter the value of <code>x</code>, takes a "mutable" reference to <code>x</code> and then assigns the modified value back to <code>x</code>. 
+Essentially, the <code>+=</code> operator takes ownership of <code>x</code>'s value momentarily and then returns it to the variable <code>x</code>.</p>
+<p>Rust enforces a rule allowing only one mutable reference or any number of immutable references at any given time. 
+This constraint aligns with memory safety principles: preventing a scenario where one part of the code attempts to modify a value while another part tries to read it. 
+Such a situation could lead to a race condition, causing the code's behavior to be undefined and reliant on the order of execution. 
+While it might not appear problematic for sequential code like this, attempting read and write actions across different threads could result in significant issues.</p>
+<p>So how can we work with mutable and immutable references? Consider the following example:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Mutable and immutable references</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">x</span>:<span class="kt">i32</span> <span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+</span>
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">y</span>: <span class="kp">&amp;</span><span class="kt">i32</span> <span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
+</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;y = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">z</span>: <span class="kt">i32</span> <span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+</span><span class="w">    </span><span class="n">z</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;x = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;y = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;z = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">);</span>
+
+
+<span class="hll"><span class="w">    </span><span class="p">{</span>
+</span><span class="hll"><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+</span><span class="hll"><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">another</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
+</span><span class="hll"><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;a = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">);</span>
+</span><span class="hll"><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;another = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">another</span><span class="p">);</span>
+</span><span class="hll"><span class="w">    </span><span class="p">}</span>
+</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;x = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
+
+<span class="hll"><span class="w">    </span><span class="p">{</span>
+</span><span class="hll"><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">b</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+</span><span class="hll"><span class="w">        </span><span class="o">*</span><span class="n">b</span><span class="w"> </span><span class="o">+=</span><span class="w">  </span><span class="mi">10</span><span class="p">;</span>
+</span><span class="hll"><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;b = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+</span><span class="hll">
+</span><span class="hll"><span class="w">    </span><span class="p">}</span>
+</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;x = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">last</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+</span><span class="hll"><span class="w">    </span><span class="o">*</span><span class="n">last</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+</span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;last = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">last</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>In this code snippet, we perform several operations with mutable and immutable references to showcase Rust's ownership and borrowing principles.</p>
+<ul>
+<li>Line 3 initializes a mutable <code>i32</code> assigned to variable <code>x</code>.</li>
+<li>Line 5 creates an immutable reference <code>y</code> to the value of <code>x</code>.</li>
+<li>Line 9 assigns a new value to <code>x</code>. This operation works because we only have a single immutable reference, <code>y</code>. As <code>i32</code> can be copied, <code>z</code> receives a copy of the value of <code>x</code>, not the actual value.</li>
+</ul>
+<p>In lines 17-22, a new scope is created. Here, we transfer ownership of reference <code>y</code> to <code>a</code> and establish a second immutable reference, <code>another</code>, to <code>x</code>. Remembering the three ownership rules ("When the owner goes out of scope, the value will be dropped"), when the scope ends at line 22, the values of <code>a</code> and <code>another</code> are dropped. Since <code>a</code> took ownership of <code>y</code>, there are now 0 immutable references. Any attempt to access <code>y</code> would result in an error.</p>
+<p>In lines 27-32, a new scope introduces a mutable reference <code>b</code> to <code>x</code>. At this point, there are 0 immutable references and 1 mutable reference. Modification of the value behind <code>x</code> is possible by "dereferencing" <code>b</code>, illustrated in line 29 (<code>*b +=  10;</code>), which adds 10 to the actual value <code>b</code> is referencing. When this scope ends at line 32, <code>b</code> is dropped, leaving 0 immutable references and 0 mutable references.</p>
+<p>Finally, lines 35 and 36 create a mutable reference to <code>x</code> and modify its value.</p>
+<p>Throughout this example, <code>x</code> remains the sole owner of the value, never relinquishing ownership. Borrowing the value (<code>y</code>, <code>a</code>, <code>another</code>, <code>b</code>, <code>last</code>) occurs at multiple stages, but <code>x</code> retains ownership. Although <code>y</code> initially held an immutable reference to <code>x</code>, preventing <code>last</code> from taking a mutable reference, ownership of the reference shifted from <code>y</code> to <code>a</code>. Upon <code>a</code>'s scope exit, the immutable reference was dropped. Throughout this code, multiple immutable references or a single mutable reference were consistently present.</p>
+<p>Understanding ownership and borrowing is the most challenging concept in Rust. Proficiency in these concepts is crucial for mastering Rust.</p>
+<h2 id="functional-programming">Functional Programming</h2>
+<p>In Rust, functional programming can be achieved through two primary methods: using functions defined with the <code>fn</code> keyword or leveraging closures.</p>
+<p>Functions, declared using the <code>fn</code> keyword, represent a fundamental approach to functional programming in Rust. They encapsulate blocks of code that can be called multiple times with different arguments.</p>
+<p>Closures, on the other hand, are more powerful and flexible. They are similar to functions but can capture variables from their surrounding environment. Closures allow for defining anonymous functions on the fly, making them highly adaptable for tasks requiring flexibility in behavior and data encapsulation.</p>
+<p>Both functions and closures play integral roles in enabling functional programming paradigms within Rust, offering different levels of flexibility and usability in various scenarios.</p>
+<h3 id="functions">Functions</h3>
+<p>Functions in Rust are defined using the following syntax:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Examples of functions</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="k">fn</span> <span class="nf">add_numbers</span><span class="p">(</span><span class="n">a</span>: <span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="n">b</span>: <span class="kt">i32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">i32</span><span class="p">{</span>
+</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="hll"><span class="k">fn</span> <span class="nf">multiply_numbers</span><span class="p">(</span><span class="n">a</span><span class="w"> </span>:<span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span>:<span class="kt">i32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">i32</span><span class="p">{</span>
+</span><span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span>
+<span class="p">}</span>
+
+<span class="hll"><span class="k">fn</span> <span class="nf">print_numbers</span><span class="p">(</span><span class="n">a</span><span class="w"> </span>:<span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span>:<span class="kt">i32</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{} + {} = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="hll"><span class="k">fn</span> <span class="nf">print_numbers_multiply</span><span class="p">(</span><span class="n">a</span><span class="w"> </span>:<span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span>:<span class="kt">i32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{} * {} = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">add_numbers</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+<span class="w">    </span><span class="n">print_numbers</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">multiply_numbers</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+<span class="w">    </span><span class="n">print_numbers_multiply</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;sum = {}, product = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">sum</span><span class="p">,</span><span class="w"> </span><span class="n">product</span><span class="p">);</span>
+
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>In the example above, three functions are defined using the <code>fn</code> keyword to indicate their creation. When defining functions, specifying the data types of passed arguments is necessary, as demonstrated here by using <code>i32</code> types in all cases. Additionally, if a function returns a value, explicit declaration of the return type is required. Lines 1 and 5 explicitly define the return type as <code>i32</code>, denoted by <code>-&gt; T</code>, where <code>T</code> represents the data type.</p>
+<p>Lines 9 and 13 introduce functions that do not return any value. When a function doesn't return anything, the <code>-&gt;</code> can be omitted. Alternatively, it's possible to explicitly state the absence of a return value using <code>-&gt; ()</code>.</p>
+<p>The functions <code>add_numbers</code> and <code>multiply_numbers</code> both return an <code>i32</code>. However, only <code>add_numbers</code> uses a <code>return</code> keyword. In Rust, if a statement isn't followed by a <code>;</code>, it's assumed to be the return value. In the case of <code>multiply_numbers</code>, the absence of <code>;</code> specifies that the function should return <code>a * b</code>.</p>
+<p>It's important to note that in all these functions, ownership of <code>a</code> and <code>b</code> is taken within the functions. Consequently, when the function's scope ends, both <code>a</code> and <code>b</code> are dropped. While this behavior might not be problematic for <code>i32</code> due to its copy trait, allowing passing a copy of the value rather than the value itself, it's a crucial consideration for other types where ownership might cause different behavior.
+Consider the following example:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Problems with borrowing</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">print_string</span><span class="p">(</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span>: <span class="nb">String</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">(){</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&quot;Save Ferris!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">print_string</span><span class="p">(</span><span class="n">my_string</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>This will give the following error:
+<div class="highlight"><pre><span></span><code>error<span class="o">[</span>E0382<span class="o">]</span>:<span class="w"> </span>borrow<span class="w"> </span>of<span class="w"> </span>moved<span class="w"> </span>value:<span class="w"> </span><span class="sb">`</span>my_string<span class="sb">`</span>
+<span class="w"> </span>--&gt;<span class="w"> </span>src/main.rs:9:20
+<span class="w">  </span><span class="p">|</span>
+<span class="m">7</span><span class="w"> </span><span class="p">|</span><span class="w">     </span><span class="nb">let</span><span class="w"> </span><span class="nv">my_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>String::from<span class="o">(</span><span class="s2">&quot;Save Ferris!&quot;</span><span class="o">)</span><span class="p">;</span>
+<span class="w">  </span><span class="p">|</span><span class="w">         </span>---------<span class="w"> </span>move<span class="w"> </span>occurs<span class="w"> </span>because<span class="w"> </span><span class="sb">`</span>my_string<span class="sb">`</span><span class="w"> </span>has<span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="sb">`</span>String<span class="sb">`</span>,<span class="w"> </span>which<span class="w"> </span>does<span class="w"> </span>not<span class="w"> </span>implement<span class="w"> </span>the<span class="w"> </span><span class="sb">`</span>Copy<span class="sb">`</span><span class="w"> </span>trait
+<span class="m">8</span><span class="w"> </span><span class="p">|</span><span class="w">     </span>print_string<span class="o">(</span>my_string<span class="o">)</span><span class="p">;</span>
+<span class="w">  </span><span class="p">|</span><span class="w">                  </span>---------<span class="w"> </span>value<span class="w"> </span>moved<span class="w"> </span>here
+<span class="m">9</span><span class="w"> </span><span class="p">|</span><span class="w">     </span>println!<span class="o">(</span><span class="s2">&quot;{}&quot;</span>,<span class="w"> </span>my_string<span class="o">)</span><span class="p">;</span>
+<span class="w">  </span><span class="p">|</span><span class="w">                    </span>^^^^^^^^^<span class="w"> </span>value<span class="w"> </span>borrowed<span class="w"> </span>here<span class="w"> </span>after<span class="w"> </span>move
+<span class="w">  </span><span class="p">|</span>
+</code></pre></div>
+Remember that strings have variable lengths, making direct copying non-trivial. Therefore, when <code>print_string</code> receives <code>my_string</code>, it assumes ownership. To address this, we have two solutions: either use the <code>clone</code> method when passing <code>my_string</code> to <code>print_string</code>, or modify <code>print_string</code> to borrow the string by taking a reference instead. The corrected code would appear as follows:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Examples of functions with borrowing</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">print_string</span><span class="p">(</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span>: <span class="nb">String</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">(){</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="k">fn</span> <span class="nf">print_string_borrow</span><span class="p">(</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span>: <span class="kp">&amp;</span><span class="nb">String</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">(){</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&quot;Save Ferris!&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="n">print_string</span><span class="p">(</span><span class="n">my_string</span><span class="p">.</span><span class="n">clone</span><span class="p">());</span>
+<span class="w">    </span><span class="n">print_string_borrow</span><span class="p">(</span><span class="o">&amp;</span><span class="n">my_string</span><span class="p">);</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">my_string</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>Functions can also return tuples. Consider the following:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Example of function returning a tuple</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="k">fn</span> <span class="nf">get_powers</span><span class="p">(</span><span class="w"> </span><span class="n">a</span>: <span class="kt">i32</span> <span class="p">)</span><span class="w"> </span>-&gt; <span class="p">(</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="kt">f32</span><span class="p">){</span>
+</span><span class="w">    </span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">f32</span><span class="p">).</span><span class="n">powf</span><span class="p">(</span><span class="mf">0.33</span><span class="p">))</span>
+<span class="p">}</span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span>:<span class="kt">i32</span> <span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">tup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_powers</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+</span><span class="w">    </span><span class="c1">// Deconstruct tuple</span>
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">)</span><span class="w"> </span>: <span class="p">(</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="kt">f32</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_powers</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+</span>
+<span class="hll"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}, {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">tup</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">tup</span><span class="p">.</span><span class="mi">1</span><span class="w"> </span><span class="p">);</span>
+</span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}, {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>In the example above, a tuple of type <code>(i32, f32)</code> is returned. Line 7 stores the tuple as a variable, while on line 9, explicit deconstruction of the tuple occurs, assigning its elements to variables <code>y</code> and <code>z</code>. Accessing elements of the tuple can be achieved using <code>tup.n</code> to retrieve the nth element.</p>
+<h3 id="closures">Closures</h3>
+<p>Closures in Rust bear similarities to lambda functions found in other programming languages. They offer a concise means to create short blocks of functionality within code. Closures, like functions, can capture and manipulate variables from their enclosing scope. They are defined using the <code>|argument| { body }</code> syntax, where <code>argument</code> represents parameters and <code>body</code> signifies the functionality of the closure.</p>
+<p>An example of a closure definition:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Examples of Closures</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">pi</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mf">3.14_</span><span class="k">f32</span><span class="p">;</span>
+
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">area</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">|</span><span class="n">x</span><span class="o">|</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">;</span>
+</span>
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">print_area</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">|</span><span class="n">x</span><span class="o">|</span><span class="w"> </span><span class="p">{</span>
+</span><span class="hll"><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;Area of circle with radius {} is {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">x</span><span class="p">},</span><span class="w"> </span><span class="n">area</span><span class="p">(</span><span class="n">x</span><span class="p">));</span>
+</span><span class="hll"><span class="w">    </span><span class="p">};</span>
+</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;The area is: {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">area</span><span class="p">(</span><span class="mf">2.</span><span class="p">));</span>
+<span class="w">    </span><span class="n">print_area</span><span class="p">(</span><span class="mf">1.5</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>In lines 4 and 6, two closures are defined. The <code>area</code> closure accepts a variable <code>x</code> and computes the area of a circle with radius <code>x</code>. This closure borrows the value of <code>pi</code> for the duration of its scope. On the other hand, the <code>print_area</code> closure accepts a variable <code>x</code>, prints a statement, and then passes a copy of <code>x</code> to the <code>area</code> closure.</p>
+<h2 id="flow-control">Flow Control</h2>
+<h3 id="if-statements">If statements</h3>
+<p>Rust's <code>if</code> statements follow the subsequent syntax:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">if statements</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="n">a</span><span class="w"> </span>:<span class="kt">i32</span> <span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+
+<span class="hll"><span class="k">if</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="p">{</span>
+</span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;a is greater than 3&quot;</span><span class="p">);</span>
+<span class="hll"><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">{</span>
+</span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;a is less than 3&quot;</span><span class="p">);</span>
+<span class="hll"><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="p">{</span>
+</span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;a is equal to 3&quot;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Note that an <code>if</code> block must start with an <code>if</code> statement and may have only one <code>if</code> branch and at most one <code>else</code> branch. However, multiple <code>else if</code> branches can be included as needed.</p>
+<p><code>if</code> statements are also capable of assigning variables or returning values. Let's consider the following example:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">returning if statements</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="n">a</span><span class="w"> </span>:<span class="kt">i32</span> <span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+
+<span class="hll"><span class="kd">let</span><span class="w"> </span><span class="n">my_string</span><span class="w"> </span>:<span class="nb">String</span> <span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="p">{</span>
+</span><span class="hll"><span class="w">    </span><span class="s">&quot;a is greater than 3&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">()</span>
+</span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">{</span>
+<span class="hll"><span class="w">    </span><span class="s">&quot;a is less than 3&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">()</span>
+</span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="p">{</span>
+<span class="hll"><span class="w">    </span><span class="s">&quot;a is equal to 3&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">()</span>
+</span><span class="hll"><span class="p">};</span>
+</span></code></pre></div></td></tr></table></div>
+Line 2 defines an immutable string <code>my_string</code>, assigned the value from this <code>if</code> block. In lines 4, 6, and 8, the absence of <code>;</code> at the end of these lines allows them to return the <code>String</code> type. Finally, line 9 concludes the assignment by adding a <code>;</code> at the end of the final block.</p>
+<h3 id="match">Match</h3>
+<p><code>match</code> statements in Rust are akin to <code>switch</code> statements found in other programming languages. They enable pattern matching on variables, allowing for concise and comprehensive conditional branching.</p>
+<p>Matching involves specifying the pattern to match against, which can either be a variable or a condition evaluation (e.g., <code>x &gt; 10</code>). It commences with the keyword <code>match</code> and encloses different options within a set of <code>{}</code>. For each pattern, code branches to run are assigned using the <code>=&gt;</code> syntax. </p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">match statements</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">a</span><span class="w"> </span>:<span class="kt">i32</span> <span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+
+<span class="hll"><span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="p">{</span>
+</span><span class="hll"><span class="w">        </span><span class="mi">0</span><span class="o">..=</span><span class="mi">3</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span class="w">            </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;a is less than 3&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="hll"><span class="w">        </span><span class="mi">4</span><span class="o">..=</span><span class="mi">10</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span class="w">            </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;a is greater than 3&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="hll"><span class="w">        </span><span class="mi">3</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span class="w">            </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;a is 3&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="hll"><span class="w">        </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+</span><span class="w">            </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;a is &gt; 10&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="p">{</span>
+</span><span class="hll"><span class="w">        </span><span class="mi">0</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;0&quot;</span><span class="p">,</span>
+</span><span class="hll"><span class="w">        </span><span class="mi">1</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;alpha&quot;</span><span class="p">,</span>
+</span><span class="hll"><span class="w">        </span><span class="mi">2</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;2&quot;</span><span class="p">,</span>
+</span><span class="hll"><span class="w">        </span><span class="mi">3</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;delta&quot;</span><span class="p">,</span>
+</span><span class="hll"><span class="w">        </span><span class="mi">4</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;for&quot;</span><span class="p">,</span>
+</span><span class="hll"><span class="w">        </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;Something else&quot;</span><span class="p">,</span>
+</span><span class="hll"><span class="w">    </span><span class="p">};</span>
+</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;b is {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>In lines 6 and 9, the code searches for values of <code>x</code> within the ranges 0-3 and 4-10, respectively. On line 12, it checks if <code>a</code> equals 3. Finally, on line 15, the default case is defined using <code>_</code>. Each branch in this <code>match</code> statement executes a block of code enclosed within its scope.</p>
+<p>In the example from line 20-27 we are returning a <code>str</code> based on the pattern found. </p>
+<h3 id="loops">Loops</h3>
+<p>Loops in Rust are straightforward and flexible. The <code>loop</code> keyword initiates an infinite loop, allowing code to execute repeatedly within a defined scope until explicitly interrupted by a <code>break</code> statement.</p>
+<p>For instance:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">loop example</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="hll"><span class="w">    </span><span class="k">loop</span><span class="w"> </span><span class="p">{</span>
+</span><span class="w">        </span><span class="n">i</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">3</span><span class="p">{</span>
+<span class="hll"><span class="w">            </span><span class="k">continue</span><span class="p">;</span>
+</span><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="p">{</span>
+<span class="hll"><span class="w">            </span><span class="k">break</span><span class="p">;</span>
+</span><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="p">{</span>
+<span class="w">            </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;i = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>Lines 4-12 constitute the content wrapped within the <code>loop</code> block, as indicated on line 4. At line 7, a <code>continue</code> statement is employed to skip the iteration where <code>i</code> equals 3. Moreover, line 9 utilizes a <code>break</code> statement to exit the loop when the condition <code>i &gt; 10</code> is met.</p>
+<p>In Rust, it is possible to assign labels to loops to facilitate <code>continue</code> or <code>break</code> operations targeting a specific loop. This is achieved using the <code>'name: loop {}</code> syntax:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="hll"><span class="w">    </span><span class="o">&#39;</span><span class="na">astra</span><span class="w"> </span>: <span class="nc">loop</span><span class="w"> </span><span class="p">{</span>
+</span><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="hll">
+</span><span class="w">        </span><span class="o">&#39;</span><span class="na">kafka</span><span class="w"> </span>: <span class="nc">loop</span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="p">{</span>
+<span class="hll"><span class="w">                </span><span class="k">break</span><span class="w"> </span><span class="nl">&#39;astra</span><span class="p">;</span>
+</span><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="p">{</span>
+<span class="hll"><span class="w">                </span><span class="k">break</span><span class="w"> </span><span class="nl">&#39;kafka</span><span class="p">;</span>
+</span><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="p">{</span>
+<span class="w">                </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;i,j = {},{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="n">j</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">i</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+In the provided example, we establish a parent loop named <code>'astra</code>, encompassing the scope from line 4 to line 18. Within <code>'astra</code>, we define a nested loop named <code>'kafka</code>, spanning lines 7 to 16. </p>
+<p>At line 8, a <code>break</code> statement exits the <code>'astra</code> loop if <code>i &gt; 10</code>. Furthermore, line 11 employs a <code>break</code> statement to exit the <code>'kafka</code> loop if <code>j &gt; 3</code>. </p>
+<p>The output of this code will be:
+<div class="highlight"><pre><span></span><code>i,j = 0,0
+i,j = 0,1
+i,j = 0,2
+i,j = 0,3
+i,j = 1,0
+...
+i,j = 10,2
+i,j = 10,3
+</code></pre></div></p>
+<h3 id="for-loops">For Loops</h3>
+<p>For loops in Rust operate on any data that conforms to an iterator. This includes constructs such as <code>for element in list</code> or <code>for i in a range</code>. The syntax used for these loops is as follows:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">n</span>:<span class="kt">i32</span> <span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+
+<span class="hll"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">0</span><span class="o">..</span><span class="n">n</span><span class="p">{</span>
+</span><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;i = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+In this context, we define a range <code>0..n</code>, representing the inclusive range from 0 to 9 (Alternatively, we could use <code>0..=9</code>).</p>
+<p>When dealing with an array or vector of items, we can iterate over them as follows:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_arr</span>: <span class="p">[</span><span class="kt">f32</span><span class="p">;</span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="mf">43.</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14</span><span class="p">];</span>
+</span><span class="hll"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">my_arr</span><span class="p">{</span>
+</span><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="n">a</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">my_arr</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>In the above example, <code>a</code> stores a copy of the values from <code>my_arr</code> rather than a reference to those values. Modifying a will not alter <code>my_arr</code>. However, the behavior slightly differs when working with vectors.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_arr</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="mf">43.</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14</span><span class="p">];</span>
+</span><span class="hll"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">my_arr</span><span class="p">{</span>
+</span><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="n">a</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="hll"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">my_arr</span><span class="p">);</span>
+</span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>The above example will return an error on line 7.
+<div class="highlight"><pre><span></span><code><span class="w">   </span>--&gt;<span class="w"> </span>src/main.rs:7:22
+<span class="w">    </span><span class="p">|</span>
+<span class="m">2</span><span class="w">   </span><span class="p">|</span><span class="w">     </span><span class="nb">let</span><span class="w"> </span>my_arr:<span class="w"> </span>Vec&lt;f32&gt;<span class="w"> </span><span class="o">=</span><span class="w"> </span>vec!<span class="o">[</span><span class="m">1</span>.,2.,3.,43.,<span class="w"> </span><span class="m">3</span>.14<span class="o">]</span><span class="p">;</span>
+<span class="w">    </span><span class="p">|</span><span class="w">         </span>------<span class="w"> </span>move<span class="w"> </span>occurs<span class="w"> </span>because<span class="w"> </span><span class="sb">`</span>my_arr<span class="sb">`</span><span class="w"> </span>has<span class="w"> </span><span class="nb">type</span><span class="w"> </span><span class="sb">`</span>Vec&lt;f32&gt;<span class="sb">`</span>,<span class="w"> </span>which<span class="w"> </span>does<span class="w"> </span>not<span class="w"> </span>implement<span class="w"> </span>the<span class="w"> </span><span class="sb">`</span>Copy<span class="sb">`</span><span class="w"> </span>trait
+<span class="m">3</span><span class="w">   </span><span class="p">|</span><span class="w">     </span><span class="k">for</span><span class="w"> </span>a<span class="w"> </span><span class="k">in</span><span class="w"> </span>my_arr<span class="o">{</span>
+<span class="w">    </span><span class="p">|</span><span class="w">              </span>------<span class="w"> </span><span class="sb">`</span>my_arr<span class="sb">`</span><span class="w"> </span>moved<span class="w"> </span>due<span class="w"> </span>to<span class="w"> </span>this<span class="w"> </span>implicit<span class="w"> </span>call<span class="w"> </span>to<span class="w"> </span><span class="sb">`</span>.into_iter<span class="o">()</span><span class="sb">`</span>
+...
+<span class="m">7</span><span class="w">   </span><span class="p">|</span><span class="w">     </span>println!<span class="o">(</span><span class="s2">&quot;{:?}&quot;</span>,<span class="w"> </span>my_arr<span class="o">)</span><span class="p">;</span>
+<span class="w">    </span><span class="p">|</span><span class="w">                      </span>^^^^^^<span class="w"> </span>value<span class="w"> </span>borrowed<span class="w"> </span>here<span class="w"> </span>after<span class="w"> </span>move
+<span class="w">    </span><span class="p">|</span>
+</code></pre></div></p>
+<p>The error indicates that <code>Vec&lt;f32&gt;</code> doesn't implement the <code>Copy</code> trait. Consequently, when attempting to iterate over its values, Rust borrows the values rather than making copies. As a result, the ownership of these values is temporarily transferred into the for loop's scope at line 5. However, as the loop ends, these borrowed values are automatically dropped, as their ownership wasn't transferred back outside the loop.</p>
+<p>Looking further at the compile output we see:
+<div class="highlight"><pre><span></span><code>help:<span class="w"> </span>consider<span class="w"> </span>iterating<span class="w"> </span>over<span class="w"> </span>a<span class="w"> </span>slice<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span><span class="sb">`</span>Vec&lt;f32&gt;<span class="sb">`</span><span class="err">&#39;</span>s<span class="w"> </span>content<span class="w"> </span>to<span class="w"> </span>avoid<span class="w"> </span>moving<span class="w"> </span>into<span class="w"> </span>the<span class="w"> </span><span class="sb">`</span><span class="k">for</span><span class="sb">`</span><span class="w"> </span>loop
+<span class="w">    </span><span class="p">|</span>
+<span class="m">3</span><span class="w">   </span><span class="p">|</span><span class="w">     </span><span class="k">for</span><span class="w"> </span>a<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">&amp;</span>my_arr<span class="o">{</span>
+<span class="w">    </span><span class="p">|</span><span class="w">              </span>+
+
+For<span class="w"> </span>more<span class="w"> </span>information<span class="w"> </span>about<span class="w"> </span>this<span class="w"> </span>error,<span class="w"> </span>try<span class="w"> </span><span class="sb">`</span>rustc<span class="w"> </span>--explain<span class="w"> </span>E0382<span class="sb">`</span>.
+</code></pre></div>
+Here we see some of the awesome features of the Rust compile. It is smart enough to understand what we are trying to do and suggest a fix to the code. The fixed code would look like:</p>
+<p><div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">vector for loop</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_arr</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="mf">43.</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14</span><span class="p">];</span>
+<span class="hll"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">&amp;</span><span class="n">my_arr</span><span class="p">{</span>
+</span><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="n">a</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">my_arr</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+At line 3, we're iterating over a reference to a slice of the vector. In this instance, the vector slice represents the entire range of the vector.</p>
+<p>We can iterate over tuples to access and combine their values:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Asigning Values in a Loop</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="mf">43.</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14</span><span class="p">];</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">y</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mf">2.</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">5.3</span><span class="p">,</span><span class="mf">0.001</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14</span><span class="p">];</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">z</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mf">0.0_</span><span class="k">f32</span><span class="p">;</span><span class="w"> </span><span class="mi">5</span><span class="p">];</span>
+
+<span class="hll"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">((</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">),</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">iter</span><span class="p">().</span><span class="n">zip</span><span class="p">(</span><span class="o">&amp;</span><span class="n">y</span><span class="p">).</span><span class="n">zip</span><span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="n">x</span><span class="p">.</span><span class="n">len</span><span class="p">()){</span>
+</span><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{},{}&quot;</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="w">        </span><span class="n">z</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>In the provided example, there are three vectors: <code>x</code>, <code>y</code>, and <code>z</code>, where <code>z</code> is a mutable vector.</p>
+<p>At line 6, <code>iter</code> is utilized to obtain an iterable reference to <code>x</code>. Subsequently, it is <code>zip</code>ped with a reference to <code>y</code>, invoking the <code>into_iter</code> method for <code>y</code> (similar to the vector for loop example). This action results in a <code>tuple</code> of type <code>(&amp;f32, &amp;f32)</code>. Additionally, another <code>zip</code> operation is performed with the range <code>0..x.len()</code>, effectively creating a loop over a <code>tuple</code> of <code>((&amp;f32, &amp;f32), usize)</code>.</p>
+<p>Within this loop, values are assigned to <code>z</code>.</p>
+<div class="admonition info">
+<p class="admonition-title">Aside on <code>iter</code> vs <code>into_iter</code></p>
+<p>In the "vector for loop" example, we employed the <code>for a in my_arr</code> syntax, which implicitly calls the <code>into_iter</code> method. The <code>into_iter</code> method, being a generic method, returns either a copy, a reference, or the value itself. On the other hand, the <code>iter</code> method explicitly returns a reference.</p>
+<p>If distinguishing between the two seems perplexing, consider <code>into_iter</code> as moving the value "into" the scope. If ownership needs to be maintained, it's advisable to use <code>iter</code>. Conversely, if the value can be consumed by the scope, <code>into_iter</code> is preferable.</p>
+<p>For a more detailed explanation, refer to <a href="https://stackoverflow.com/questions/34733811/what-is-the-difference-between-iter-and-into-iter">this Stack Overflow question</a>.</p>
+</div>
+<h3 id="looping-the-rust-way">Looping the Rust way</h3>
+<p>In the "Assigning Values in a Loop" section, we explored how to derive values from two vectors to assign to a third vector. However, this approach isn't considered very idiomatic in Rust. A more idiomatic way to achieve this would be:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Idomatic Rust For Loop</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="mf">43.</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14</span><span class="p">];</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">y</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mf">2.</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">5.3</span><span class="p">,</span><span class="mf">0.001</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14</span><span class="p">];</span>
+
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">z</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">iter</span><span class="p">().</span><span class="n">zip</span><span class="p">(</span><span class="o">&amp;</span><span class="n">y</span><span class="p">).</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="o">|</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">).</span><span class="n">collect</span>::<span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+</span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>In this example, we condense the entire loop into a single line of code. Starting with <code>x.iter()</code>, we iterate over references to the values within <code>x</code>. Using the <code>zip</code> function with a reference to <code>y</code> facilitates the iteration over a tuple of type <code>(&amp;f32, &amp;f32)</code>.</p>
+<p>Each tuple undergoes processing within a closure passed to the <code>map</code> method. This closure deconstructs the tuple into two values and adds them together. The <code>collect()</code> method accumulates the values returned by the closure used in the <code>map</code> method.</p>
+<p>The <a href="https://techblog.tonsser.com/posts/what-is-rusts-turbofish">"Turbofish"</a> syntax, <code>collect::&lt;type&gt;()</code>, informs <code>collect</code> about the desired return type. In this instance, using <code>collect::&lt;Vec&lt;f32&gt;&gt;()</code>, we obtain a <code>Vec&lt;f32&gt;</code>.</p>
+<p>Using a reduction, as shown in the 'Idiomatic Rust For Loop' example, is a powerful tool. For instance, suppose we aim to extract all even values from a vector, we could employ:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="o">..</span><span class="mi">100</span><span class="p">;</span>
+</span>
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">even_squared</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">values</span><span class="p">.</span><span class="n">clone</span><span class="p">()</span>
+</span><span class="hll"><span class="w">        </span><span class="p">.</span><span class="n">filter</span><span class="p">(</span><span class="o">|</span><span class="n">x</span><span class="o">|</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+</span><span class="hll"><span class="w">        </span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">x</span><span class="o">|</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
+</span><span class="hll"><span class="w">        </span><span class="p">.</span><span class="n">collect</span>::<span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">i32</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+</span>
+
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">odd_sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">values</span><span class="p">.</span><span class="n">clone</span><span class="p">()</span>
+</span><span class="hll"><span class="w">        </span><span class="p">.</span><span class="n">filter</span><span class="p">(</span><span class="o">|</span><span class="n">x</span><span class="o">|</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+</span><span class="hll"><span class="w">        </span><span class="p">.</span><span class="n">sum</span>::<span class="o">&lt;</span><span class="kt">i32</span><span class="o">&gt;</span><span class="p">();</span>
+</span>
+<span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">even_squared</span><span class="p">);</span>
+<span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;Sum of the odd values = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">odd_sum</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>In the given code, <code>values</code> is a range from 0 to 99 inclusive, represented as a collection of integers (<code>i32</code>). The operations on this range illustrate various methods provided by Rust's Iterator trait.</p>
+<p>Starting from line 4, <code>even_squared</code> is created by cloning the <code>values</code> range. The <code>clone</code> method is used here to avoid consuming the original range, enabling separate iteration over the original range (<code>values</code>) and the cloned range. The <code>filter</code> method is then applied to this cloned range, utilizing a closure (<code>|x| x % 2 == 0</code>) to test each element for evenness by performing a modulo operation and checking if the remainder is zero. Elements satisfying this condition are retained, while those failing the test are discarded. The subsequent <code>map</code> method takes the retained even numbers, squares each value by multiplying it by itself (<code>x * x</code>), and produces a transformed iterator. Finally, the <code>collect</code> method is used to gather the squared even numbers into a <code>Vec&lt;i32&gt;</code>.</p>
+<p>The <code>filter</code> method implicitly calls <code>into_iter</code> on the cloned <code>values</code> range, which temporarily takes ownership of the elements within the scope of the filter operation. After the <code>collect</code> method consumes the iterator, the clone of the <code>values</code> range is no longer needed and gets dropped, releasing its resources.</p>
+<p>Next, between lines 10 and 12, <code>odd_sum</code> is calculated using a similar approach. Here, the <code>filter</code> method is again used on a cloned range of <code>values</code>, but this time with a closure (<code>|x| x % 2 == 1</code>) that filters for odd numbers. The <code>sum</code> method is applied to this filtered iterator to compute the sum of the odd numbers present in the range.</p>
+<p>The code concludes by displaying the vector containing squared even numbers (<code>even_squared</code>) and printing the sum of the odd numbers (<code>odd_sum</code>).</p>
+<h2 id="object-orientated-programming">Object Orientated Programming</h2>
+<p>In contrast to languages like Python and C++, Rust diverges from class-based <a href="https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)">inheritance</a>. 
+It emphasizes struct composition and trait-based <a href="https://en.wikipedia.org/wiki/Polymorphism_(computer_science)">polymorphism</a>. 
+Rather than relying on class inheritance, Rust promotes struct composition, allowing structs to contain instances of other structs or types. 
+Traits, serving as a form of polymorphism, define sets of methods that types can implement, offering shared behaviors across different types without a single inheritance hierarchy. 
+This trait-based approach fosters modularity and flexibility while ensuring safety and performance.</p>
+<h3 id="structs-in-rust">Structs in Rust</h3>
+<p>Structs in Rust form the foundation of object-oriented programming (OOP). They can be seen as collections of variables that serve a related purpose or represent a specific context. </p>
+<p>Consider the example below:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Example of a Struct</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">struct</span> <span class="nc">Point3D</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">x</span>: <span class="kt">f32</span><span class="p">,</span>
+<span class="w">    </span><span class="n">y</span>: <span class="kt">f32</span><span class="p">,</span>
+<span class="w">    </span><span class="n">z</span>: <span class="kt">f32</span><span class="p">,</span>
+<span class="w">    </span><span class="n">coord_system</span>: <span class="nb">String</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>We've created a <code>struct</code> named <code>Point3D</code>, representing a point in 3D space. 
+The <code>struct</code> is defined by encapsulating member data within curly brackets <code>{}</code> after naming it. 
+Within this <code>struct</code>, we've defined fields such as <code>x</code>, <code>y</code>, and <code>z</code>, each having the data type <code>f32</code>, representing the coordinates in the x, y, and z axes, respectively. 
+Additionally, there's a field named <code>coord_system</code> of type <code>String</code>, serving to describe the coordinate system. 
+In Rust, it's common practice to separate each field with a <code>,</code> and a new line for readability. 
+The presence of a trailing <code>,</code> after the last field doesn't cause a compile-time error and is often used to facilitate future struct modifications.</p>
+<p>Methods can be implemented for a <code>struct</code> in Rust, functioning as functions that the <code>struct</code> itself can utilize. These methods can modify the <code>struct</code>, perform actions based on the field data, and more. The <code>impl</code> keyword is used to define these methods:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Example of implementing structs</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="k">impl</span><span class="w"> </span><span class="n">Point3D</span><span class="w"> </span><span class="p">{</span>
+</span>
+<span class="w">    </span><span class="c1">// Return a new Point3D</span>
+<span class="hll"><span class="w">    </span><span class="k">fn</span> <span class="nf">new</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Point3D</span><span class="p">{</span>
+</span><span class="w">        </span><span class="n">Point3D</span><span class="p">{</span>
+<span class="w">            </span><span class="n">x</span>: <span class="mf">0.0_</span><span class="k">f32</span><span class="p">,</span>
+<span class="w">            </span><span class="n">y</span>: <span class="mf">0.0_</span><span class="k">f32</span><span class="p">,</span>
+<span class="w">            </span><span class="n">z</span>: <span class="mf">0.0_</span><span class="k">f32</span><span class="p">,</span>
+<span class="w">            </span><span class="n">coord_system</span>: <span class="s">&quot;cartesian&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Get the magnitude of the Point3D</span>
+<span class="hll"><span class="w">    </span><span class="k">fn</span> <span class="nf">get_magnitude</span><span class="p">(</span><span class="bp">self</span><span class="w"> </span>:<span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">f32</span><span class="p">{</span>
+</span><span class="w">        </span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">x</span><span class="p">.</span><span class="n">powi</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">y</span><span class="p">.</span><span class="n">powi</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">z</span><span class="p">.</span><span class="n">powi</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="w">        </span><span class="p">.</span><span class="n">sqrt</span><span class="p">()</span><span class="w">  </span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Add a constant value to the Point3D</span>
+<span class="hll"><span class="w">    </span><span class="k">fn</span> <span class="nf">add_constant</span><span class="p">(</span><span class="bp">self</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="bp">Self</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span>: <span class="kp">&amp;</span><span class="kt">f32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">(){</span>
+</span><span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">3.0_</span><span class="k">f32</span><span class="p">.</span><span class="n">sqrt</span><span class="p">();</span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">3.0_</span><span class="k">f32</span><span class="p">.</span><span class="n">sqrt</span><span class="p">();</span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">z</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">3.0_</span><span class="k">f32</span><span class="p">.</span><span class="n">sqrt</span><span class="p">();</span>
+<span class="hll"><span class="w">    </span><span class="p">}</span>
+</span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>In the code example above, we've implemented three methods for the <code>Point3D</code> struct.</p>
+<ul>
+<li>
+<p>The <code>new</code> function on line 3 creates and returns a new <code>Point3D</code> with default values at the origin (0, 0, 0). To use it: <code>let mut my_point = Point3D::new();</code></p>
+</li>
+<li>
+<p>Line 14 contains the <code>get_magnitude</code> method, which accesses the struct's data without modifying it. It takes a non-mutable reference to itself (<code>&amp;Self</code>) and returns a <code>f32</code>. To call it: <code>my_point.get_magnitude()</code>.</p>
+</li>
+<li>
+<p>The <code>add_constant</code> method, defined on line 20, modifies the <code>Point3D</code>'s data using a given value. It requires a mutable reference to itself (<code>&amp;mut Self</code>) and takes a non-mutable reference to the constant (<code>&amp;f32</code>). Usage example: <code>my_point.add_constant(&amp;3.14);</code>. By taking a reference to the constant, it prevents ownership issues and avoids unintentional dropping of <code>c</code> after line 24.</p>
+</li>
+</ul>
+<h3 id="traits">Traits</h3>
+<p>Traits in Rust provide a means to define common interfaces that can be implemented by different structs. They enable struct types to share behavior or functionality through shared methods.</p>
+<p>For instance, let's consider the following struct:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Point2D</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">struct</span> <span class="nc">Point2D</span><span class="p">{</span>
+<span class="w">    </span><span class="n">x</span>: <span class="kt">f32</span><span class="p">,</span>
+<span class="w">    </span><span class="n">y</span>: <span class="kt">f32</span><span class="p">,</span>
+<span class="w">    </span><span class="n">coord_system</span>: <span class="nb">String</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>The <code>Point2D</code> struct shares similarities with <code>Point3D</code>. It would be beneficial if these structs had some common methods. To achieve this, we can define a <code>trait</code> that provides a shared interface for both structs. This approach allows for greater code flexibility and consistency. Let's explore this concept:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Trait Example</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">trait</span><span class="w"> </span><span class="n">PointLike</span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">get_magnitude</span><span class="p">(</span><span class="bp">self</span>: <span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">f32</span><span class="p">;</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="bp">Self</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span>: <span class="kp">&amp;</span><span class="kt">f32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">();</span><span class="w">    </span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>The <code>PointLike</code> trait defines a common interface for types that exhibit point-like behavior. For a type to be considered <code>PointLike</code>, it must implement two functions:</p>
+<ul>
+<li><code>get_magnitude</code>: This method calculates the magnitude of the point and returns a <code>f32</code>.</li>
+<li><code>add</code>: Accepts a mutable reference to itself, along with a reference to a <code>f32</code>, and does not return any value.</li>
+</ul>
+<p>Notably, the <code>Point3D</code> struct possesses a method named <code>get_magnitude</code>, aligning with the trait's requirements. However, it lacks a function named <code>add</code>, although it has a similar method called <code>add_constant</code>. To conform <code>Point3D</code> to the <code>PointLike</code> trait, we can provide an implementation that satisfies the trait's functions:</p>
+<p><div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Implementing Traits</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">struct</span> <span class="nc">Point3D</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">x</span>: <span class="kt">f32</span><span class="p">,</span>
+<span class="w">    </span><span class="n">y</span>: <span class="kt">f32</span><span class="p">,</span>
+<span class="w">    </span><span class="n">z</span>: <span class="kt">f32</span><span class="p">,</span>
+<span class="w">    </span><span class="n">coord_system</span>: <span class="nb">String</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<span class="k">trait</span><span class="w"> </span><span class="n">PointLike</span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">get_magnitude</span><span class="p">(</span><span class="bp">self</span>: <span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">f32</span><span class="p">;</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="bp">Self</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span>: <span class="kp">&amp;</span><span class="kt">f32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">();</span><span class="w">    </span>
+<span class="p">}</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">Point3D</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// Return a new Point3D</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">new</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Point3D</span><span class="p">{</span>
+<span class="w">        </span><span class="n">Point3D</span><span class="p">{</span>
+<span class="w">            </span><span class="n">x</span>: <span class="mf">0.0_</span><span class="k">f32</span><span class="p">,</span>
+<span class="w">            </span><span class="n">y</span>: <span class="mf">0.0_</span><span class="k">f32</span><span class="p">,</span>
+<span class="w">            </span><span class="n">z</span>: <span class="mf">0.0_</span><span class="k">f32</span><span class="p">,</span>
+<span class="w">            </span><span class="n">coord_system</span>: <span class="s">&quot;cartesian&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Get the magnitude of the Point3D</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">get_magnitude</span><span class="p">(</span><span class="bp">self</span><span class="w"> </span>:<span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">f32</span><span class="p">{</span>
+<span class="w">        </span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">x</span><span class="p">.</span><span class="n">powi</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">y</span><span class="p">.</span><span class="n">powi</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">z</span><span class="p">.</span><span class="n">powi</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="w">        </span><span class="p">.</span><span class="n">sqrt</span><span class="p">()</span><span class="w">  </span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Add a constant value to the Point3D</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">add_constant</span><span class="p">(</span><span class="bp">self</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="bp">Self</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span>: <span class="kp">&amp;</span><span class="kt">f32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">(){</span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">3.0_</span><span class="k">f32</span><span class="p">.</span><span class="n">sqrt</span><span class="p">();</span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">3.0_</span><span class="k">f32</span><span class="p">.</span><span class="n">sqrt</span><span class="p">();</span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">z</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">3.0_</span><span class="k">f32</span><span class="p">.</span><span class="n">sqrt</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">PointLike</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Point3D</span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">get_magnitude</span><span class="p">(</span><span class="bp">self</span>: <span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">f32</span><span class="p">{</span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">get_magnitude</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="bp">Self</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span>: <span class="kp">&amp;</span><span class="kt">f32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">(){</span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span><span class="w">    </span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+Above, we've implemented the <code>PointLike</code> trait for the <code>Point3D</code> struct, utilizing the methods we had previously defined. Extending this trait implementation to <code>Point2D</code> would involve providing similar implementations for the required trait methods.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">struct</span> <span class="nc">Point2D</span><span class="p">{</span>
+<span class="w">    </span><span class="n">x</span>: <span class="kt">f32</span><span class="p">,</span>
+<span class="w">    </span><span class="n">y</span>: <span class="kt">f32</span><span class="p">,</span>
+<span class="w">    </span><span class="n">coord_system</span>: <span class="nb">String</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">Point2D</span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">new</span><span class="p">()</span>-&gt;<span class="nc">Point2D</span><span class="p">{</span>
+<span class="w">        </span><span class="n">Point2D</span><span class="p">{</span>
+<span class="w">            </span><span class="n">x</span>: <span class="mf">0.0_</span><span class="k">f32</span><span class="p">,</span>
+<span class="w">            </span><span class="n">y</span>: <span class="mf">0.0_</span><span class="k">f32</span><span class="p">,</span>
+<span class="w">            </span><span class="n">coord_system</span>: <span class="s">&quot;cartesian&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="n">PointLike</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Point2D</span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">get_magnitude</span><span class="p">(</span><span class="bp">self</span>: <span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">f32</span><span class="p">{</span>
+<span class="w">        </span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">x</span><span class="p">.</span><span class="n">powi</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">y</span><span class="p">.</span><span class="n">powi</span><span class="p">(</span><span class="mi">2</span><span class="p">)).</span><span class="n">sqrt</span><span class="p">()</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="bp">Self</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span>: <span class="kp">&amp;</span><span class="kt">f32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">(){</span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">/</span><span class="mf">2.0_</span><span class="k">f32</span><span class="p">.</span><span class="n">sqrt</span><span class="p">();</span>
+<span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">/</span><span class="mf">2.0_</span><span class="k">f32</span><span class="p">.</span><span class="n">sqrt</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span><span class="w">    </span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>In the given example, the trait implementation for <code>Point2D</code> directly utilizes existing methods. When implementing traits, we have the flexibility to use pre-existing methods or define new ones. This versatility allows us to employ these implementations within our code as demonstrated.
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Using traits</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">my_3d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Point3D</span>::<span class="n">new</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">my_2d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Point2D</span>::<span class="n">new</span><span class="p">();</span>
+
+<span class="w">    </span><span class="n">my_3d</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="o">&amp;</span><span class="mf">4.5</span><span class="p">);</span>
+<span class="w">    </span><span class="n">my_2d</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="o">&amp;</span><span class="mf">5.0</span><span class="p">);</span>
+
+
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;Magnitude of 3D {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">my_3d</span><span class="p">.</span><span class="n">get_magnitude</span><span class="p">());</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;Magnitude of 2D {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">my_2d</span><span class="p">.</span><span class="n">get_magnitude</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<h3 id="generics">Generics</h3>
+<p>Generic types in Rust bear resemblance to C++ templates. They enable us to write versatile code that isn't tied to specific data types. This allows for more reusable and adaptable code. Consider the following illustration:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">Generic Types</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">Point2D</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">{</span>
+<span class="w">    </span><span class="n">x</span>:<span class="nc">T</span><span class="p">,</span>
+<span class="w">    </span><span class="n">y</span>:<span class="nc">T</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Here we have defined a generic <code>Point2D</code> struct that represents a 2D point in space. This struct is designed to work with any data type, as it utilizes the placeholder type <code>T</code> for both the <code>x</code> and <code>y</code> coordinates. Using this placeholder type allows the struct to remain agnostic to the specific data type used for its coordinates.</p>
+<p>The versatility of this generic struct becomes apparent when implementing methods or functionalities that can work universally across various data types.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">struct</span> <span class="nc">Point2D</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">{</span>
+<span class="w">    </span><span class="n">x</span>:<span class="nc">T</span><span class="p">,</span>
+<span class="w">    </span><span class="n">y</span>:<span class="nc">T</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">impl</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Point2D</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span> <span class="nf">get_x</span><span class="p">(</span><span class="bp">self</span><span class="w"> </span>: <span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kp">&amp;</span><span class="nc">T</span><span class="p">{</span>
+<span class="w">        </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">.</span><span class="n">x</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">fn</span> <span class="nf">get_y</span><span class="p">(</span><span class="bp">self</span><span class="w"> </span>: <span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kp">&amp;</span><span class="nc">T</span><span class="p">{</span>
+<span class="w">        </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">.</span><span class="n">y</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>In the above we have implemented two functions assuming a type <code>T</code>. Each return references of type <code>T</code>. If we wanted to use these we could run:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_point</span><span class="w"> </span>:<span class="nc">Point2D</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Point2D</span><span class="p">{</span><span class="n">x</span>:<span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span>:<span class="mf">4.3</span><span class="p">};</span>
+</span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;x = : {} &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">my_point</span><span class="p">.</span><span class="n">get_x</span><span class="p">());</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;y = : {} &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">my_point</span><span class="p">.</span><span class="n">get_y</span><span class="p">());</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+On line two, we are explicitly specifying the data type as <code>f32</code>.</p>
+<p>We can combine traits and generics to enable custom data types that possess specific traits. Consider the example below:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">struct</span> <span class="nc">PlanetarySystem</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">{</span>
+<span class="w">    </span><span class="n">planet_location</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">planet_name</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<span class="k">impl</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span>: <span class="nc">PointLike</span><span class="o">&gt;</span><span class="w"> </span><span class="n">PlanetarySystem</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span>  <span class="nf">print_distance_from_star</span><span class="p">(</span><span class="bp">self</span><span class="w"> </span>: <span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">(){</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">0</span><span class="o">..</span><span class="bp">self</span><span class="p">.</span><span class="n">planet_location</span><span class="p">.</span><span class="n">len</span><span class="p">(){</span>
+<span class="w">            </span><span class="fm">println!</span><span class="p">(</span>
+<span class="w">                    </span><span class="s">&quot;Distance from {} to it&#39;s star: {} AU&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="bp">self</span><span class="p">.</span><span class="n">planet_name</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="w"> </span>
+<span class="w">                    </span><span class="bp">self</span><span class="p">.</span><span class="n">planet_location</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">get_magnitude</span><span class="p">()</span>
+<span class="w">                </span><span class="p">)</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>Here, we've defined a struct called <code>PlanetarySystem</code> that takes a generic type implementing the <code>PointLike</code> trait. As the <code>PointLike</code> trait includes the <code>get_magnitude</code> method, this code is applicable to any generic type adhering to the <code>PointLike</code> trait. This flexibility allows us to use the code as demonstrated below:</p>
+<div class="highlight"><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">solar_system</span>: <span class="nc">PlanetarySystem</span><span class="o">&lt;</span><span class="n">Point3D</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PlanetarySystem</span><span class="p">{</span>
+<span class="w">        </span><span class="n">planet_location</span>: <span class="nc">vec</span><span class="o">!</span><span class="p">[</span>
+<span class="w">            </span><span class="n">Point3D</span>::<span class="n">new</span><span class="p">(),</span><span class="w"> </span>
+<span class="w">            </span><span class="n">Point3D</span>::<span class="n">new</span><span class="p">(),</span><span class="w"> </span>
+<span class="w">            </span><span class="n">Point3D</span>::<span class="n">new</span><span class="p">()</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="n">planet_name</span>: <span class="nc">vec</span><span class="o">!</span><span class="p">[</span>
+<span class="w">            </span><span class="s">&quot;Mercury&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w"> </span>
+<span class="w">            </span><span class="s">&quot;Venus&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w"> </span>
+<span class="w">            </span><span class="s">&quot;Earth&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">()</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">solar_system</span><span class="p">.</span><span class="n">planet_location</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">add</span><span class="p">(</span><span class="o">&amp;</span><span class="mf">0.39</span><span class="p">);</span>
+<span class="w">    </span><span class="n">solar_system</span><span class="p">.</span><span class="n">planet_location</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">add</span><span class="p">(</span><span class="o">&amp;</span><span class="mf">0.72</span><span class="p">);</span>
+<span class="w">    </span><span class="n">solar_system</span><span class="p">.</span><span class="n">planet_location</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">add</span><span class="p">(</span><span class="o">&amp;</span><span class="mf">1.</span><span class="p">);</span>
+<span class="w">    </span><span class="n">solar_system</span><span class="p">.</span><span class="n">print_distance_from_star</span><span class="p">();</span>
+
+
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">trappst_system</span>: <span class="nc">PlanetarySystem</span><span class="o">&lt;</span><span class="n">Point2D</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PlanetarySystem</span><span class="p">{</span>
+<span class="w">        </span><span class="n">planet_location</span>: <span class="nc">vec</span><span class="o">!</span><span class="p">[</span><span class="n">Point2D</span>::<span class="n">new</span><span class="p">(),</span><span class="w"> </span><span class="n">Point2D</span>::<span class="n">new</span><span class="p">(),</span><span class="w"> </span><span class="n">Point2D</span>::<span class="n">new</span><span class="p">()],</span>
+<span class="w">        </span><span class="n">planet_name</span>: <span class="nc">vec</span><span class="o">!</span><span class="p">[</span><span class="w"> </span><span class="s">&quot;TRAPPIST-1b&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;TRAPPIST-1c&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;TRAPPIST-1e&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">()],</span>
+
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">trappst_system</span><span class="p">.</span><span class="n">planet_location</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">add</span><span class="p">(</span><span class="o">&amp;</span><span class="mf">0.01154</span><span class="p">);</span>
+<span class="w">    </span><span class="n">trappst_system</span><span class="p">.</span><span class="n">planet_location</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="n">add</span><span class="p">(</span><span class="o">&amp;</span><span class="mf">0.01580</span><span class="p">);</span>
+<span class="w">    </span><span class="n">trappst_system</span><span class="p">.</span><span class="n">planet_location</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="n">add</span><span class="p">(</span><span class="o">&amp;</span><span class="mf">0.029</span><span class="p">);</span>
+<span class="w">    </span><span class="n">trappst_system</span><span class="p">.</span><span class="n">print_distance_from_star</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Here, we are defining <code>solar_system</code> as a <code>PlanetarySystem</code> that utilizes a <code>Point3D</code> data type. Subsequently, we invoke the <code>print_distance_from_star</code> method, leveraging the fact that <code>Point3D</code> conforms to <code>PointLike</code> and therefore possesses the <code>get_magnitude</code> method.</p>
+<p>In the context of our <code>PlanetarySystem</code>, the magnitude represents the distance between the planet and the origin, which we designate as the star's location. Running this code yields the following output:</p>
+<div class="highlight"><pre><span></span><code>Distance from Mercury to it&#39;s star: 0.39 AU
+Distance from Venus to it&#39;s star: 0.72 AU
+Distance from Earth to it&#39;s star: 0.99999994 AU
+Distance from TRAPPIST-1b to it&#39;s star: 0.011540001 AU
+Distance from TRAPPIST-1c to it&#39;s star: 0.0158 AU
+Distance from TRAPPIST-1e to it&#39;s star: 0.029 AU
+</code></pre></div>
+<p>In this example, the <code>PlanetarySystem</code> struct doesn't differentiate between using <code>Point3D</code> or <code>Point2D</code>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2025 TSI <br> <a href="https://github.com/vuquangtrong/mkdocs-material-blog">Blog Theme</a> / <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "toc.integrate", "header.autohide", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.c011b7c0.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.7389ff0e.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

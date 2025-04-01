@@ -1,0 +1,2228 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="TSI McGill Tutorials">
+      
+      
+        <meta name="author" content="Stephan O'Brien (stephan.obrien@mcgill.ca)">
+      
+      
+        <link rel="canonical" href="https://github.com/tsi-mcgill/tsi-tutorials/Python/OOP/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.4">
+    
+    
+      
+        <title>Object Orientated Programming and Packaging - TSI McGill Tutorials</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="sandstone" data-md-color-primary="grey" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#object-orientated-programming-and-packaging" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TSI McGill Tutorials" class="md-header__button md-logo" aria-label="TSI McGill Tutorials" data-md-component="logo">
+      
+  <img src="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TSI McGill Tutorials
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Object Orientated Programming and Packaging
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="sandstone" data-md-color-primary="grey" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="gray"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link">
+        
+  
+    
+  
+  Python
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Cpp/" class="md-tabs__link">
+        
+  
+    
+  
+  C++
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Rust/" class="md-tabs__link">
+        
+  
+    
+  
+  Rust
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../VersionControl/" class="md-tabs__link">
+        
+  
+    
+  
+  Version Control
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Containerization/" class="md-tabs__link">
+        
+  
+    
+  
+  Containerization
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Misc/" class="md-tabs__link">
+        
+  
+    
+  
+  Misc
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TSI McGill Tutorials" class="md-nav__button md-logo" aria-label="TSI McGill Tutorials" data-md-component="logo">
+      
+  <img src="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png" alt="logo">
+
+    </a>
+    TSI McGill Tutorials
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cpp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C++
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Rust/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rust
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VersionControl/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Version Control
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Containerization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Containerization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Misc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Misc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="object-orientated-programming-and-packaging">Object Orientated Programming and Packaging</h1>
+<p>So you've gotten your code to the stage where you'd like to provide a stable, usable, code for other to use and to build upon.
+This is a fantastic stage to reach!
+Whether your code is going to be completely open source (visible to everyone in the world) or only usable to a number of collaborators, there are some key things we should keep in mind when making our code available for others to use.</p>
+<p>In this workshop we'll walk taking out code from a simple Python script, to a versitile, well-documented, Python package. We'll be focusing on the following topics:</p>
+<ul>
+<li>Classes and Inheritance</li>
+<li>Documentation</li>
+<li>Packaging</li>
+<li>Testing</li>
+</ul>
+<h2 id="starting-point">Starting Point</h2>
+<p>Let's start with some pre-existing code that we've written and would like to package up.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">analaysis_script.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span><span class="hll"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</span>
+
+<span class="c1"># load in the data from a csv file</span>
+<span class="hll"><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s2">&quot;data.csv&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s2">&quot;#&quot;</span><span class="p">)</span>
+</span><span class="hll">
+</span><span class="hll"><span class="c1"># Get the properties of the data</span>
+</span><span class="hll"><span class="n">data_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</span><span class="hll"><span class="n">data_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</span><span class="hll"><span class="n">data_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</span><span class="hll"><span class="n">data_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</span>
+<span class="c1"># Set the properties of the data in a loop</span>
+<span class="hll"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+</span><span class="hll">    <span class="n">data_mean</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</span><span class="hll">    <span class="n">data_std</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+</span><span class="hll">    <span class="n">data_min</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+</span><span class="hll">    <span class="n">data_max</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</span>
+
+
+<span class="hll"><span class="c1"># Perform a min/max normalization of some columns</span>
+</span><span class="hll"><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+</span><span class="hll"><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+</span><span class="hll">    <span class="n">data</span><span class="p">[:,</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="n">col</span><span class="p">]</span> <span class="o">-</span> <span class="n">data_min</span><span class="p">[</span><span class="n">col</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">data_max</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">-</span> <span class="n">data_min</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+</span>
+<span class="hll"><span class="c1"># Perform a standard normalization of some other columns</span>
+</span><span class="hll"><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+</span><span class="hll"><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+</span><span class="hll">    <span class="n">data</span><span class="p">[:,</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="n">col</span><span class="p">]</span> <span class="o">-</span> <span class="n">data_mean</span><span class="p">[</span><span class="n">col</span><span class="p">])</span> <span class="o">/</span> <span class="n">data_std</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+</span>
+<span class="c1"># Recalculate the properties of the data</span>
+<span class="hll"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+</span><span class="hll">    <span class="n">data_mean</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</span><span class="hll">    <span class="n">data_std</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+</span><span class="hll">    <span class="n">data_min</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+</span><span class="hll">    <span class="n">data_max</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</span>
+
+<span class="c1"># Print out a summary of the datasets</span>
+<span class="hll"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+</span><span class="hll">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Column </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> has a mean value of </span><span class="si">{</span><span class="n">data_mean</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2"> and a standard deviation of </span><span class="si">{</span><span class="n">data_std</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class="hll">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The minimum value is </span><span class="si">{</span><span class="n">data_min</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2"> and the maximum value is </span><span class="si">{</span><span class="n">data_max</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class="hll">    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</span>
+
+<span class="c1"># Plot the data in a histogram</span>
+<span class="hll"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+</span><span class="hll">    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+</span><span class="hll">    <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Column </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class="hll">    <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span>
+
+<span class="c1"># Dump updated data to a file</span>
+<span class="hll"><span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s2">&quot;normalized_data.csv&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+</span>
+<span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Press Enter to continue...&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<p>Let's break this down a little:</p>
+<ul>
+<li>On lines 1-2 we're importing the required libraries, namely <code>numpy</code> and <code>matplotlib</code>. </li>
+<li>On lines 6-12 we're loading in data and assigning empty arrays for properties of our data.</li>
+<li>On lines 15-19 we're assigning to the property arrays.</li>
+<li>On lines 23-26 and 28-31 we're normalizing with either a min/max normalization or a standard normalization.</li>
+<li>On lines 34-38 we're resetting the property arrays.</li>
+<li>On lines 42-45 we're printing out a summary of the data column.</li>
+<li>On lines 49-52 we're plotting the data to a histogram.</li>
+<li>On line 56 we're dumping the modified data to a new CSV file.</li>
+</ul>
+<p>Keeping in mind that we want our code to be versatile, easy to use and well documented, let's consider the following takeaways:</p>
+<ul>
+<li>The user needs to have <code>numpy</code> and <code>matplotlib</code> to run this code. These should be considered <i>requirements</i> or <i>dependencies</i>.</li>
+<li>When we load in data, we perform a number of operations and save some derived data. The user shouldn't need to worry about whether these arrays are getting properly set.</li>
+<li>We want to normalize the data using two similar ideas but different implementations. The user should expect similar interface when using either method to normalize the data.</li>
+<li>When the data is modified, we need to update the derived data. The user again shouldn't need to worry about correctly setting them. This would introduce a potential source of error.</li>
+<li>The derived data is used when printing summaries. We need to make sure these are up-to-date.</li>
+<li>When dumping to a CSV file, there is no check to see if we're overwriting data. This could lead to an unintentional loss of data.</li>
+<li>There is a lot of repeated code. Repeated code is highly susceptible to errors as one needs to make sure the same change is made in multiple places.</li>
+</ul>
+<p>With these points in mind, let's start writing a Python package to make this workflow more user friendly.</p>
+<h1 id="python-package-layout">Python Package Layout</h1>
+<p>Let's start off by created a new directory called <code>my_package</code>. 
+Within <code>my_package</code> we'll create an empty file called <code>__init__.py</code> (here <code>__file__.py</code> is pronounced "dunder file", hence <code>__init__.py</code> is "dunder init", calling it "init" is also understandable). 
+This <code>__init__.py</code> is a special file in Python with a few functions. Firstly <code>__init__.py</code> tells Python that files in this directory can be <code>import</code>-ed into python. 
+Once Python sees <code>__init__.py</code> it knows that any <code>.py</code> file within this directory can be <code>import</code>-ed. 
+Secondly, <code>__init__.py</code> will act as an entry point to the package (or sub-package, more on this later). 
+Within <code>__init__.py</code> we can specify what is <code>import</code>-ed by default using <code>from my_package import *</code>. 
+We can do things like specify alias for functions within <code>__init__.py</code>.
+Let's say we have the following:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">__init__.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="o">...</span>
+<span class="hll"><span class="k">def</span> <span class="nf">my_super_complicated_long_function_name</span><span class="p">():</span>
+</span>    <span class="o">...</span>
+
+
+<span class="n">short_name</span> <span class="o">=</span> <span class="n">my_super_complicated_long_function_name</span>
+</code></pre></div></td></tr></table></div>
+On line 2 we define a cumbersome function name that will be awkward to keep typing out.
+However, on line 6 we assign <code>short_name</code> to be <code>my_super_complicated_long_function_name</code>. 
+We can then import this function as <code>from my_package import short_name</code>.
+We'll come back to this in more detail later, for now let's just stick with an empty <code>my_package/__init__.py</code></p>
+<p>Now let's just copy the <code>analysis_script.py</code> into <code>my_package</code> and wrap the main body of the script into a simple function, which takes the input filename as an argument:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">my_package/analaysis_script.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="hll"><span class="k">def</span> <span class="nf">run_analysis</span><span class="p">(</span><span class="n">input_data</span><span class="p">):</span>
+</span>    <span class="c1"># load in the data from a csv file</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">comments</span><span class="o">=</span><span class="s2">&quot;#&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Get the properties of the data</span>
+    <span class="n">data_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">data_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">data_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">data_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># Set the properties of the data in a loop</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">data_mean</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">data_std</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+        <span class="n">data_min</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+        <span class="n">data_max</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+
+
+    <span class="c1"># Perform a min/max normalization of some columns</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[:,</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="n">col</span><span class="p">]</span> <span class="o">-</span> <span class="n">data_min</span><span class="p">[</span><span class="n">col</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">data_max</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">-</span> <span class="n">data_min</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+
+    <span class="c1"># Perform a standard normalization of some other columns</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+        <span class="n">data</span><span class="p">[:,</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="n">col</span><span class="p">]</span> <span class="o">-</span> <span class="n">data_mean</span><span class="p">[</span><span class="n">col</span><span class="p">])</span> <span class="o">/</span> <span class="n">data_std</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+
+    <span class="c1"># Recalculate the properties of the data</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">data_mean</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">data_std</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+        <span class="n">data_min</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+        <span class="n">data_max</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+
+    <span class="c1"># Print out a summary of the datasets</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Column </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> has a mean value of </span><span class="si">{</span><span class="n">data_mean</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2"> and a standard deviation of </span><span class="si">{</span><span class="n">data_std</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The minimum value is </span><span class="si">{</span><span class="n">data_min</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2"> and the maximum value is </span><span class="si">{</span><span class="n">data_max</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">0.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+    <span class="c1"># Plot the data in a histogram</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">],</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Column </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+    <span class="c1"># Dump updated data to a file</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s2">&quot;normalized_data.csv&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div></p>
+<p>Let's also add a test data file to the base directory, this can be downloaded from here <b> TO DO</b>.</p>
+<p>Our folder layout should look like this:
+<div class="highlight"><pre><span></span><code>.
+├── data.csv
+└── my_package
+    ├── analysis_script.py
+    └── __init__.py
+</code></pre></div></p>
+<p>From here we can try and run the code (I'm using iPython):
+<div class="highlight"><pre><span></span><code>In [1]: from my_package.analysis_script import run_analysis
+In [2]: run_analysis(&quot;./data.csv&quot;)
+</code></pre></div></p>
+<p>Which worked! However, this is only local to this directory. If we change to a different location and try to rerun the above:
+<div class="highlight"><pre><span></span><code>In [1]: from my_package.analysis_script import run_analysis
+---------------------------------------------------------------------------
+ModuleNotFoundError                       Traceback (most recent call last)
+Cell In[1], line 1
+----&gt; 1 from my_package.analysis_script import run_analysis
+
+ModuleNotFoundError: No module named &#39;my_package&#39;
+</code></pre></div></p>
+<p>We want to package to be installed so that we can run the code from anywhere on our system. 
+Let's look at how to do that next.</p>
+<h2 id="environment-wide-install-using-pip-and-pyprojecttoml">Environment-wide install using pip and pyproject.toml</h2>
+<p>There are a few different methods we can choose when creating a package and installing it:</p>
+<ul>
+<li>Append the PYTHONPATH: Using this method we simply modify the location where Python searches when running <code>import</code>. This isn't a good choice, it requires user messing around with environmental variables. Not all users will be comfterble doing this. </li>
+<li>Install using <code>setup.py</code>. This method will compile the Python code to byte code and place it into the correct location for Python to find when running <code>import</code>. Using this method, any user who has <code>pip</code> installed can install our package using <code>pip install .</code>. This isn't a bad option, it is also fairly widely used, however Python standards and package maintainers tend to move away from this method.</li>
+<li>Install using a <code>pyproject.toml</code> file. This is very similar to the <code>setup.py</code> method, except we'll be defining things like package name, file locations, additional data file, project metadata, all within the <code>pyproject.toml</code> file. </li>
+</ul>
+<p><code>pyproject.toml</code> is the preferred method for a number of reasons. 
+Firstly, it is tool agnostic, allowing us to use the installation tools that we are most fimilre with.
+We can also include the requirements/dependencies within the <code>pyproject.toml</code> file.
+A <code>toml</code> file is human-readable file format which uses modern syntax.
+<code>pyproject.toml</code> integrates with other tools such as <code>commitizen</code>.
+<code>pyproject.toml</code> conforms to python standards (<a href="https://peps.python.org/pep-0517/">PEP 517</a>/<a href="https://peps.python.org/pep-0518/">518</a>)!</p>
+<p>Let's start with a simple <code>pyproject.toml</code> file:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">pyproject.toml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[build-system]</span>
+<span class="n">requires</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;setuptools &gt;= 61.0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;setuptools-scm&gt;=8.0&quot;</span><span class="p">]</span>
+<span class="n">build-backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;setuptools.build_meta&quot;</span>
+
+<span class="k">[project]</span>
+<span class="n">dynamic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">]</span>
+<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;my_package&quot;</span>
+<span class="n">requires-python</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&gt;= 3.8&quot;</span>
+<span class="n">dependencies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;numpy&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;matplotlib&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">authors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;Stephan O&#39;Brien&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;stephan.obrien@mcgill.ca&quot;</span><span class="p">},</span>
+<span class="p">]</span>
+<span class="n">maintainers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;Stephan O&#39;Brien&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;stephan.obrien@mcgill.ca&quot;</span><span class="p">}</span>
+<span class="p">]</span>
+<span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;A python package for doing cool stuff&quot;</span>
+<span class="n">readme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;README.md&quot;</span>
+<span class="n">license</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">file</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;LICENSE&quot;</span><span class="p">}</span>
+
+<span class="k">[tool.setuptools]</span>
+<span class="n">packages</span><span class="o">=</span><span class="p">[</span>
+<span class="w">  </span><span class="s2">&quot;my_package&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="p">]</span>
+
+
+<span class="k">[project.urls]</span>
+<span class="n">Homepage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://github.com/steob92/my_package/&quot;</span>
+<span class="n">Documentation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://github.com/steob92/my_package/&quot;</span>
+<span class="n">Repository</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://github.com/steob92/my_package.git&quot;</span>
+<span class="n">Issues</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://github.com/steob92/my_package/issues&quot;</span>
+<span class="n">Changelog</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://github.com/steob92/my_package/blob/main/CHANGELOG.md&quot;</span>
+</code></pre></div></td></tr></table></div></p>
+<p>There's a lot going on in this file. Let's take it apart:
+<div class="highlight"><pre><span></span><code><span class="k">[build-system]</span>
+<span class="n">requires</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;setuptools &gt;= 61.0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;setuptools-scm&gt;=8.0&quot;</span><span class="p">]</span>
+<span class="n">build-backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;setuptools.build_meta&quot;</span>
+</code></pre></div></p>
+<p>Here we are specifying the <code>build-system</code>, essentially what we're using to build the package. 
+In this case we're using <code>setuptools</code>, hence adding it as a requirement with the <code>requires</code> variable.</p>
+<div class="highlight"><pre><span></span><code>[project]
+dynamic = [&quot;version&quot;]
+name = &quot;my_package&quot;
+requires-python = &quot;&gt;= 3.8&quot;
+dependencies = [
+    &quot;numpy&quot;,
+    &quot;matplotlib&quot;,
+]
+authors = [
+  {name = &quot;Stephan O&#39;Brien&quot;, email = &quot;stephan.obrien@mcgill.ca&quot;},
+]
+maintainers = [
+  {name = &quot;Stephan O&#39;Brien&quot;, email = &quot;stephan.obrien@mcgill.ca&quot;}
+]
+description = &quot;A python package for doing cool stuff&quot;
+readme = &quot;README.md&quot;
+license = {file = &quot;LICENSE&quot;}
+</code></pre></div>
+<p>Here we're specifying some metadata about our package, including the name, version, who the authors/maintainers are and a short description. 
+Here we can also specify a README and license file. 
+The README acts as an introduction page about our package. 
+Note here we're also specifying the required python version <code>requires-python = "&gt;= 3.8"</code>. 
+This syntax means that we need a python version which is greater than or equal to 3.8 to run the code.
+We can also specify dependencies using the <code>dependencies</code> keyword. 
+When we start building the package, pip will search for these dependencies within our environment and install them if they don't exist.</p>
+<p><div class="highlight"><pre><span></span><code>[tool.setuptools]
+packages=[
+  &quot;my_package&quot;, 
+]
+</code></pre></div>
+Here we're specifying the packages (and sub-packages) that are to be installed as part of our package. We'll look at this is some more details later.
+<div class="highlight"><pre><span></span><code>[project.urls]
+Homepage = &quot;https://github.com/steob92/my_package/&quot;
+Documentation = &quot;https://github.com/steob92/my_package/&quot;
+Repository = &quot;https://github.com/steob92/my_package.git&quot;
+Issues = &quot;https://github.com/steob92/my_package/issues&quot;
+Changelog = &quot;https://github.com/steob92/my_package/blob/main/CHANGELOG.md&quot;
+</code></pre></div></p>
+<p>Here we're specifying some URLs that users can consult. For example the "Issues" URL will link to the github issues page of this repository.</p>
+<p>With this package in place, we can simply install this package into our environment using <code>pip install .</code>:
+<div class="highlight"><pre><span></span><code>Processing /raid/RAID1/Tutorials/python_packaging_working
+  Installing build dependencies ... done
+  Getting requirements to build wheel ... done
+  Preparing metadata (pyproject.toml) ... done
+Requirement already satisfied: numpy in /home/obriens/mambaforge/envs/dev/lib/python3.11/site-packages (from my_package==0.0.0) (1.26.4)
+Requirement already satisfied: matplotlib in /home/obriens/mambaforge/envs/dev/lib/python3.11/site-packages (from my_package==0.0.0) (3.8.0)
+Requirement already satisfied: contourpy&gt;=1.0.1 in /home/obriens/mambaforge/envs/dev/lib/python3.11/site-packages (from matplotlib-&gt;my_package==0.0.0) (1.2.0)
+Requirement already satisfied: cycler&gt;=0.10 in /home/obriens/mambaforge/envs/dev/lib/python3.11/site-packages (from matplotlib-&gt;my_package==0.0.0) (0.11.0)
+Requirement already satisfied: fonttools&gt;=4.22.0 in /home/obriens/mambaforge/envs/dev/lib/python3.11/site-packages (from matplotlib-&gt;my_package==0.0.0) (4.25.0)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in /home/obriens/mambaforge/envs/dev/lib/python3.11/site-packages (from matplotlib-&gt;my_package==0.0.0) (1.4.4)
+Requirement already satisfied: packaging&gt;=20.0 in /home/obriens/mambaforge/envs/dev/lib/python3.11/site-packages (from matplotlib-&gt;my_package==0.0.0) (23.1)
+Requirement already satisfied: pillow&gt;=6.2.0 in /home/obriens/mambaforge/envs/dev/lib/python3.11/site-packages (from matplotlib-&gt;my_package==0.0.0) (10.2.0)
+Requirement already satisfied: pyparsing&gt;=2.3.1 in /home/obriens/mambaforge/envs/dev/lib/python3.11/site-packages (from matplotlib-&gt;my_package==0.0.0) (3.0.9)
+Requirement already satisfied: python-dateutil&gt;=2.7 in /home/obriens/mambaforge/envs/dev/lib/python3.11/site-packages (from matplotlib-&gt;my_package==0.0.0) (2.8.2)
+Requirement already satisfied: six&gt;=1.5 in /home/obriens/mambaforge/envs/dev/lib/python3.11/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib-&gt;my_package==0.0.0) (1.16.0)
+Building wheels for collected packages: my_package
+  Building wheel for my_package (pyproject.toml) ... done
+  Created wheel for my_package: filename=my_package-0.0.0-py3-none-any.whl size=2183 sha256=dd2ca561171519e9b5755e595d8ae619d67e3ec7593c00e8e29096d29e6b943d
+  Stored in directory: /tmp/pip-ephem-wheel-cache-om8ak4ov/wheels/11/62/fc/593354b5442752b3bf9fa9c9fc8fe5e054389e3b47a6fb69bf
+Successfully built my_package
+Installing collected packages: my_package
+Successfully installed my_package-0.0.0
+</code></pre></div></p>
+<p>This will now work from any directory as long as we're using the same Python environment!</p>
+<h2 id="converting-our-script-into-a-versatile-package-using-object-orientated-programming">Converting our script into a versatile package using Object Orientated Programming</h2>
+<p>As was previously mentioned, <code>my_package/analysis_script.py</code> isn't very versatile. 
+We ideally want something that other users can build upon. 
+To do this we'll convert some data types into classes that we can then build upon. 
+Let's start by making a base data class that we'll build upon. 
+Create a subdirectory called <code>my_package/data</code>, within this directory let's create a <code>base.py</code> file:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">my_package/data/base.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">ndarray</span><span class="p">,</span> <span class="n">savetxt</span>
+</span>
+<span class="hll"><span class="k">class</span> <span class="nc">Base</span><span class="p">:</span>
+</span>
+<span class="hll">    <span class="n">_data</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span class="hll">    <span class="n">data_mean</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class="hll">    <span class="n">data_std</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class="hll">    <span class="n">data_min</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class="hll">    <span class="n">data_max</span> <span class="o">=</span> <span class="mi">0</span>
+</span><span class="hll">    <span class="n">normalize_methods</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;minmax&#39;</span><span class="p">,</span> <span class="s1">&#39;standard&#39;</span><span class="p">]</span>
+</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="hll">    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="hll">        <span class="n">desc_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</span><span class="hll">        <span class="nb">print</span> <span class="p">(</span><span class="n">desc_string</span><span class="p">)</span>
+</span><span class="hll">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>    
+</span>
+
+<span class="hll">    <span class="nd">@property</span>
+</span><span class="hll">    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="hll">        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>
+</span>
+<span class="hll">    <span class="nd">@data</span><span class="o">.</span><span class="n">setter</span>
+</span><span class="hll">    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+</span><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">value</span>
+</span><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">data_mean</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</span><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">data_std</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+</span><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">data_min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+</span><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">data_max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</span><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">data_shape</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+</span>
+
+
+    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">data_string</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Data has a mean value of </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data_mean</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">.</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">data_string</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;Data has a minimum value of </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data_min</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1"> and a maximum value of </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data_max</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="k">return</span> <span class="n">data_string</span>
+
+
+    <span class="k">def</span> <span class="nf">get_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_mean</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_std</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_max</span>
+
+
+<span class="hll">    <span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;minmax&#39;</span><span class="p">):</span>
+</span><span class="hll">
+</span><span class="hll">        <span class="k">if</span> <span class="n">method</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;minmax&#39;</span><span class="p">:</span>
+</span><span class="hll">            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span>  <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_min</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_max</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_min</span><span class="p">)</span>
+</span><span class="hll">
+</span><span class="hll">        <span class="k">elif</span> <span class="n">method</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;standard&#39;</span><span class="p">:</span>
+</span><span class="hll">            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_mean</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_std</span> 
+</span><span class="hll">
+</span><span class="hll">        <span class="k">else</span><span class="p">:</span>
+</span><span class="hll">            <span class="k">raise</span> <span class="ne">RuntimeError</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Method </span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s1"> not implemented. Please use one of </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">normalize_methods</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span>
+
+<span class="hll">    <span class="k">def</span> <span class="nf">to_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+</span><span class="hll">        <span class="n">savetxt</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div></p>
+<p>Some comments:</p>
+<ul>
+<li>On line 1 we're only <code>import</code>-ing what we need to use from <code>numpy</code></li>
+<li>On line 3 we define the name of the class as <code>Base</code></li>
+<li>On lines 5-10 we define some class member and data that we'll be using</li>
+<li>On lines 16-19 we're defining the <code>__str__</code> method which we define the behaviour when we run something like "print (my_base_class)".</li>
+<li>On lines 22-24 we're defining a property called data using the <code>@property</code> decorator. This acts as a "getter", instead of accessing the real data <code>_data</code> the user accesses a copy of the data called <code>data</code>.</li>
+<li>On lines 26-33 we're defining the "setter" of <code>data</code> using the <code>@data.setter</code> decorator. This defines the behaviour when we're assigning values to <code>data</code>. When the user calls <code>my_base_class.data = some_data</code>, they're actually calling this function. This allows for <code>_data</code> to be updated and the data properties to be automatically determined whenever <code>data</code> is modified.</li>
+<li>On lines 47-56 we've defined a <code>normalize</code> function which allows the user to normalize the data using either a min/max or standard normalization based on a keyword. This defaults to a min/max normalization. Since we've set the property <code>data</code>, when we assign with <code>self.data = ...</code> the setter function is called, <code>self._data</code> is updated the data properties (min, max, mean, std) are also recalculated.</li>
+<li>On lines 59-60 we're created a member function to dump the data to a CSV file.</li>
+</ul>
+<div class="admonition info">
+<p class="admonition-title">Aside on data classes</p>
+<p>Python now has a special class type called "Data Classes". 
+Using data classes allows one to create data-based classes like the one above.
+For the sake of illustration, we won't be using data classes in this tutorial.
+See <a href="https://docs.python.org/3/library/dataclasses.html">here</a> for more details.</p>
+</div>
+<p>We now want to make this package visible anyone using this package. Firstly we need to add a <code>__init__.py</code> file to this folder:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code>├── data.csv
+├── my_package
+│   ├── analysis_script.py
+│   ├── data
+│   │   ├── base.py
+<span class="hll">│   │   └── __init__.py
+</span>│   └── __init__.py
+├── normalized_data.csv
+└── pyproject.toml
+</code></pre></div></td></tr></table></div></p>
+<p>Secondly, we need to add this location to the <code>pyproject.toml</code> file:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">[build-system]</span>
+<span class="n">requires</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;setuptools &gt;= 61.0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;setuptools-scm&gt;=8.0&quot;</span><span class="p">]</span>
+<span class="n">build-backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;setuptools.build_meta&quot;</span>
+
+<span class="k">[project]</span>
+<span class="n">dynamic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">]</span>
+<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;my_package&quot;</span>
+<span class="n">requires-python</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&gt;= 3.8&quot;</span>
+<span class="n">dependencies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;numpy&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;matplotlib&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">authors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;Stephan O&#39;Brien&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;stephan.obrien@mcgill.ca&quot;</span><span class="p">},</span>
+<span class="p">]</span>
+<span class="n">maintainers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">  </span><span class="p">{</span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;Stephan O&#39;Brien&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;stephan.obrien@mcgill.ca&quot;</span><span class="p">}</span>
+<span class="p">]</span>
+<span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;A python package for doing cool stuff&quot;</span>
+<span class="n">readme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;README.md&quot;</span>
+<span class="n">license</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">file</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;LICENSE&quot;</span><span class="p">}</span>
+
+<span class="k">[tool.setuptools]</span>
+<span class="n">packages</span><span class="o">=</span><span class="p">[</span>
+<span class="w">  </span><span class="s2">&quot;my_package&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="hll"><span class="w">  </span><span class="s2">&quot;my_package.data&quot;</span><span class="p">,</span><span class="w"> </span>
+</span><span class="p">]</span>
+
+
+<span class="k">[project.urls]</span>
+<span class="n">Homepage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://github.com/steob92/my_package/&quot;</span>
+<span class="n">Documentation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://github.com/steob92/my_package/&quot;</span>
+<span class="n">Repository</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://github.com/steob92/my_package.git&quot;</span>
+<span class="n">Issues</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://github.com/steob92/my_package/issues&quot;</span>
+<span class="n">Changelog</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://github.com/steob92/my_package/blob/main/CHANGELOG.md&quot;</span>
+</code></pre></div></td></tr></table></div></p>
+<p>If we now rerun <code>pip install .</code>, we can now import our base class:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="hll"><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">my_package.data.base</span> <span class="kn">import</span> <span class="n">Base</span>
+</span><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">my_data</span> <span class="o">=</span> <span class="n">Base</span><span class="p">()</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">my_data</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">my_data</span><span class="o">.</span><span class="n">data_min</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="mf">0.010934507239608426</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="n">my_data</span><span class="o">.</span><span class="n">data_max</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">6</span><span class="p">]:</span> <span class="mf">0.9917396588604535</span>
+</code></pre></div></td></tr></table></div></p>
+<p>It is often very useful to have a method or class of randomly generated data for testing pipelines.
+Let's build on top of the <code>Base</code> class by creating a class that will generate random data.
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">my_package/data/random.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">Base</span>
+</span><span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">random</span><span class="p">,</span> <span class="n">normal</span>
+
+<span class="hll"><span class="k">class</span> <span class="nc">RandomData</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+</span>
+    <span class="c1"># Define the implemented methods</span>
+    <span class="n">implemented_methods</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span> <span class="s1">&#39;normal&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> 
+            <span class="n">shape</span><span class="p">,</span> 
+            <span class="n">rnd</span> <span class="o">=</span> <span class="s1">&#39;uniform&#39;</span><span class="p">,</span>
+            <span class="n">mean</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="n">width</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">):</span>
+
+        <span class="c1"># Call the parent&#39;s constructor</span>
+<span class="hll">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>  
+</span>
+        <span class="c1"># Uniform Random Numbers</span>
+        <span class="k">if</span> <span class="n">rnd</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;uniform&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">random</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
+        <span class="c1"># Normal Random Numbers</span>
+        <span class="k">elif</span> <span class="n">rnd</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;normal&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">normal</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="n">mean</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">width</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="n">shape</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Random method &quot;</span><span class="si">{</span><span class="n">rnd</span><span class="si">}</span><span class="s1">&quot; is not implemented. Please use one of the implemented methods </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">implemented_methods</span><span class="si">}</span><span class="s1"> &#39;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div></p>
+<ul>
+<li>Notice on line 1 we're importing using <code>from .base import Base</code>. Here the <code>.base</code> is specifying that we're looking for a file called <code>base.py</code> within the same directory (<code>.</code>). If we wanted to search in the parent directory (one directory above) we'd use <code>from ..base import Base</code>. This is similar to the <code>.</code> and <code>..</code> path when working with <code>bash</code>.</li>
+<li>On line 4 we define the <code>RandomData</code> class, specifying that it inherits from the <code>Base</code> class. This means that <code>RandomData</code> will have all the same functionality as <code>Base</code>, meaning the <code>self.data</code> setter will also work for <code>RandomData</code>.</li>
+<li>On line 17 we're calling the parent class's constructor using <code>super().__init__()</code>. When ever we want to explicitly call the parent class's version of a function, we can call <code>super().function()</code>.</li>
+</ul>
+<p>Since <code>"my_package.data"</code> has already been added to the <code>pyproject.toml</code> file <code>my_package/data/random_data.py</code> will be installed with <code>pip install .</code>. We can try run this:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">my_package.data.random_data</span> <span class="kn">import</span> <span class="n">RandomData</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">my_data</span> <span class="o">=</span> <span class="n">RandomData</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="mi">100</span><span class="p">))</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">my_data</span><span class="o">.</span><span class="n">data_max</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="mf">0.9959056068848283</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">my_data</span><span class="o">.</span><span class="n">data_shape</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div></p>
+<p>You'll notice that the import is pretty long and cumbersome to type. 
+Let's make this a little easier for the user by playing around with the <code>__init__.py</code> files. 
+Firstly let's modify <code>my_package/data/__init__.py</code>:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">my_package/data/__init__.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">.random_data</span> <span class="kn">import</span> <span class="n">RandomData</span>
+</span>
+<span class="c1"># Define what is imported with &#39;from here import *&#39;</span>
+<span class="hll"><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;RandomData&quot;</span><span class="p">]</span>
+</span></code></pre></div></td></tr></table></div>
+Here we're importing <code>RandomData</code> making it easily available from <code>my_package.data</code> rather than <code>my_package.data.random_data</code>. 
+We then create a variable called <code>__all__</code> and assign it to a list (<code>["RandomData"]</code>). This specifies what is imported when running <code>from my_package.data import *</code>.</p>
+<p>Next let's modify <code>my_package/__init__.py</code>:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">my_package/__init__.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">.data</span> <span class="kn">import</span> <span class="n">RandomData</span>
+</span>
+<span class="c1"># Define what is imported with &#39;from here import *&#39;</span>
+<span class="hll"><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;RandomData&quot;</span><span class="p">]</span>
+</span></code></pre></div></td></tr></table></div>
+Notice that we no longer need to import from <code>.data.random_data</code>, we can just import from <code>.data</code>. 
+We can do this because <code>RandomData</code> is already visible within <code>my_package.data</code>. 
+We now have a few ways to import <code>RandomData</code>:</p>
+<ul>
+<li><code>from my_package import *</code></li>
+<li><code>from my_package import RandomData</code></li>
+<li><code>from my_package.data import *</code></li>
+<li><code>from my_package.data import RandomData</code></li>
+<li><code>from my_package.data.random_data import RandomData</code></li>
+</ul>
+<p>A user no longer needs to know that <code>RandomData</code> is nested within <code>data</code>. Reinstalling with <code>pip install .</code>, we can run the previous example with:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span> <span class="nn">my_package</span> <span class="kn">import</span> <span class="n">RandomData</span>
+</span><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">my_data</span> <span class="o">=</span> <span class="n">RandomData</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span><span class="mi">100</span><span class="p">))</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="n">my_data</span><span class="o">.</span><span class="n">data_max</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="mf">0.9959056068848283</span>
+<span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">my_data</span><span class="o">.</span><span class="n">data_shape</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div></p>
+<h2 id="making-a-csv-data-loader">Making a CSV Data loader</h2>
+<p>Now that we have a base class <code>Base</code> and a tester class <code>RandomData</code>, let's add a CSV reader class within the <code>my_package/data</code> directory:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">my_package/data/csv_data.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  </span>
+<span class="normal">  </span>
+<span class="normal">  </span>
+<span class="normal">  </span>
+<span class="normal">  </span>
+<span class="normal">  </span>
+<span class="normal">  </span>
+<span class="normal">  </span>
+<span class="normal">  </span>
+<span class="normal">  </span>
+<span class="normal">  </span>
+<span class="normal">12</span>
+<span class="normal">  </span>
+<span class="normal">  </span>
+<span class="normal">  </span>
+<span class="normal">  </span>
+<span class="normal">  </span>
+<span class="normal">  </span>
+<span class="normal">  </span>
+<span class="normal">  </span>
+<span class="normal">  </span>
+<span class="normal">  </span>
+<span class="normal">  </span>
+<span class="normal">24</span>
+<span class="normal">  </span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">Base</span>
+</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="k">class</span> <span class="nc">CSVData</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">read_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">comments</span> <span class="o">=</span> <span class="s1">&#39;#&#39;</span><span class="p">)</span>
+        <span class="n">n_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">n_cols</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_cols</span><span class="p">):</span>
+            <span class="n">datum</span> <span class="o">=</span> <span class="n">Base</span><span class="p">()</span>
+            <span class="n">datum</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">datum</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div></p>
+<p>Here <code>CSVData</code> doesn't explicitly inherent from <code>Base</code>, but there is an internal data type <code>self.data</code> which is a list of <code>Base</code>. </p>
+<p>Lines 12-21 defines the <code>read_file</code> function which will extract the data from the CSV file and stores each column into a <code>Base</code> data type.</p>
+<p>On lines 23-25 we're defining a class method using the <code>@classmethod</code> decorator. 
+A class method allows us to call functions associated to the class which aren't associated with a specific instance. 
+In this case the <code>from_file</code> method will call <code>__init__</code>, passing the <code>filename</code>.
+This will allow us to generate a new object using <code>CSVData.from_file(filename)</code>.</p>
+<p>Let's update the <code>__init__.py</code> files with the new class:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">my_package/data/__init__.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">.random_data</span> <span class="kn">import</span> <span class="n">RandomData</span>
+</span><span class="kn">from</span> <span class="nn">.csv_data</span> <span class="kn">import</span> <span class="n">CSVData</span>
+
+<span class="hll"><span class="c1"># Define what is imported with &#39;from here import *&#39;</span>
+</span><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;RandomData&quot;</span><span class="p">,</span> <span class="s2">&quot;CSVData&quot;</span><span class="p">]</span>
+</code></pre></div></td></tr></table></div>
+<p>Next let's modify <code>my_package/__init__.py</code>:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">my_package/__init__.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">.data</span> <span class="kn">import</span> <span class="n">RandomData</span><span class="p">,</span> <span class="n">CSVData</span>
+</span>
+<span class="c1"># Define what is imported with &#39;from here import *&#39;</span>
+<span class="hll"><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;RandomData&quot;</span><span class="p">,</span> <span class="s2">&quot;CSVData&quot;</span><span class="p">]</span>
+</span></code></pre></div></td></tr></table></div></p>
+<h2 id="adding-some-package-data">Adding some package data</h2>
+<p>It might be useful to have some data included within the package. 
+This could be some reference data or some test data.
+Let's start by adding the CSV file into our package. 
+We'll add it to <code>my_package/package_data/data.csv</code>. 
+For the package data to be visible, we'll need to add a <code>MANIFEST.in</code> file
+<div class="highlight"><span class="filename">MANIFEST.in</span><pre><span></span><code>include my_package/package_data/*.csv
+</code></pre></div></p>
+<p>Let's then update the <code>CSVData</code> class to have a method to import this data:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">my_package/data/csv_data.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">Base</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="hll"><span class="kn">import</span> <span class="nn">pkg_resources</span>
+</span>
+<span class="k">class</span> <span class="nc">CSVData</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">read_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="n">comments</span> <span class="o">=</span> <span class="s1">&#39;#&#39;</span><span class="p">)</span>
+        <span class="n">n_data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">n_cols</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_cols</span><span class="p">):</span>
+            <span class="n">datum</span> <span class="o">=</span> <span class="n">Base</span><span class="p">()</span>
+            <span class="n">datum</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">datum</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_titanic</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CSVData&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_filename</span><span class="p">(</span><span class="s1">&#39;my_package&#39;</span><span class="p">,</span><span class="s1">&#39;package_data/Titanic.csv&#39;</span><span class="p">))</span>
+</code></pre></div></td></tr></table></div></p>
+<p>Here we're using <code>pkg_resources</code> to access the location of the package data from the installation location.
+Now calling <code>CSVData.get_titanic_data()</code> will return a <code>CSVData</code> object with the dataset loaded.</p>
+<h1 id="documenting-our-code">Documenting Our Code</h1>
+<p>So far we've written code with little-to-no documentation. 
+For a small single-use analysis script, this might be ok.
+However, as our code increases in complexity and we want to start sharing it with others, we need to better document our code.
+Furthermore, we need to remember that undocumented code my become completely unreadable to anyone not in your current mindstate.
+This include ourselves. 
+A very common problem people have is returning to old code and failing to understand the code without hours of reading and debugging.</p>
+<p>In this section we'll look at the following topics:</p>
+<ul>
+<li>Documenting our code with docstrings, providing useful help messages for users.</li>
+<li>Using "type-hinting" to show the data types being used and returned by functions</li>
+<li>Combining the above to easily make documentation pages like <a href="https://numba.readthedocs.io/en/stable/">numba.readthedocs.io</a></li>
+</ul>
+<h2 id="docstrings">Docstrings</h2>
+<p>Docstrings are a standard method used to describe one's code. 
+Docstrings use a format that is well defined and utilised by Python and documenation software.</p>
+<p>Here are some links discussing documenting one's code using docstrings:</p>
+<ul>
+<li><a href="https://realpython.com/documenting-python-code/">Real Python: Documenting Python Code</a></li>
+<li><a href="https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html">Example Google Style Python Docstrings</a></li>
+<li><a href="https://docs.python-guide.org/writing/documentation/">THe Hitchhiker's Guide to Python: Documentation</a></li>
+</ul>
+<p>There are many different standards, but they all use a common syntax, that is a long string defined just after a function/class declaration:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">docstring_example.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">my_function</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A simple function to add two numbers together</span>
+
+<span class="sd">    This function will take in two numbers (a and b) and return their sum (a + b)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    a : float</span>
+<span class="sd">        The first number </span>
+
+<span class="sd">    b : float</span>
+<span class="sd">        The second number</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        The sum of a and b</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</code></pre></div></td></tr></table></div></p>
+<p>Notice that the docstring starts and end with 3 quotation marks <code>"""</code>. 
+It is place directly after the functions/class declaration.
+The first line is a high-level description of the function/class followed by an optional more detailed description.
+We then define <code>Parameters</code> and <code>Returns</code> and list what the parameters/returns are, their type and how they are used.
+We can also add things like examples, tests (which can be evaluated with a module like <a href="https://docs.python.org/3/library/doctest.html">doctest</a>) and any error handling does using <code>raise exception</code> (see <a href="https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html">here</a> for some examples).
+Using a docstring like this, a new developer has a good idea of what the function does and the expected behaviour.
+Futhermore the user can also call the <code>help</code> function to return the docstring:
+<div class="highlight"><pre><span></span><code><span class="n">help</span><span class="p">(</span><span class="n">my_function</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Help on function my_function in module __main__:
+
+my_function(a, b)
+    A simple function to add two numbers together
+
+    This function will take in two numbers (a and b) and return their sum (a + b)
+
+    Parameters
+    ----------
+    a : float
+        The first number 
+
+    b : float
+        The second number
+
+    Returns
+    -------
+    float
+        The sum of a and b
+</code></pre></div>
+This provides a useful resource for the user without the need to dig through the code to determine the expected behaviour of the function.</p>
+<p>Let's start looking at <code>my_package/data/base.py</code> and add some docstrings:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">my_package/data/base.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">ndarray</span>
+
+<span class="k">class</span> <span class="nc">Base</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This is the base class for all the classes in this package.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">_data</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">data_mean</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">data_std</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">data_min</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">data_max</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">normalize_methods</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;minmax&#39;</span><span class="p">,</span> <span class="s1">&#39;standard&#39;</span><span class="p">]</span>
+
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;This is the constructor of the class.&quot;&quot;&quot;</span>
+
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;This is the string representation of the class.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            The name of the class</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">desc_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="n">desc_string</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>    
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;This is the data property.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ndarray</span>
+<span class="sd">            A numpy array of the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>
+
+    <span class="nd">@data</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;This is the setter for the data property.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : ndarray</span>
+<span class="sd">            A numpy array that will be stored as the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_mean</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_std</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_shape</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+
+
+
+    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;This method prints a summary of the data.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            A description of the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">data_string</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Data has shape </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data_shape</span><span class="si">}</span><span class="s1">, with a mean value of </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data_mean</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">.</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">data_string</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;Data has a minimum value of </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data_min</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1"> and a maximum value of </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data_max</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="k">return</span> <span class="n">data_string</span>
+
+
+    <span class="k">def</span> <span class="nf">get_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;This method returns the mean, standard deviation, minimum and maximum of the data.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        (float, float, float)</span>
+<span class="sd">            A tuple with the mean, standard deviation, minimum and maximum of the data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_mean</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_std</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_max</span>
+
+
+    <span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span> <span class="o">=</span> <span class="s1">&#39;minmax&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;This method normalizes the data.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        method : str</span>
+<span class="sd">            The method to use for normalization. Can be &#39;minmax&#39; or &#39;standard&#39;.</span>
+
+<span class="hll"><span class="sd">        Raises</span>
+</span><span class="hll"><span class="sd">        ------</span>
+</span><span class="hll"><span class="sd">        RuntimeError</span>
+</span><span class="hll"><span class="sd">            If `method` has not yet been implemented</span>
+</span><span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">method</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;minmax&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span>  <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_min</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_max</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_min</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">method</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;standard&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_mean</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_std</span> 
+
+        <span class="k">else</span><span class="p">:</span>
+<span class="hll">            <span class="k">raise</span> <span class="ne">RuntimeError</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Method </span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s1"> not implemented. Please use one of </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">normalize_methods</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div></p>
+<p>In the above example we've added docstrings to <code>my_package/data/base.py</code>.
+Notice that the <code>normalize</code> function has the potential to raise a <code>RuntimeError</code> (line 115).
+This potential error steam is documented in the docstring on lines 102-105.</p>
+<h2 id="type-hinting">Type Hinting</h2>
+<p>Type hinting is an excellent way to inform developers and users of what type the arguments and returns are. 
+This is done by labeling arguments and returns with the expected type.
+Let's look again at simple function we used to get the sum of two numbers:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">type_hinting_example.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="k">def</span> <span class="nf">my_function</span><span class="p">(</span><span class="n">a</span> <span class="p">:</span> <span class="nb">float</span> <span class="p">,</span><span class="n">b</span> <span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;A simple function to add two numbers together</span>
+
+<span class="sd">    This function will take in two numbers (a and b) and return their sum (a + b)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    a : float</span>
+<span class="sd">        The first number </span>
+
+<span class="sd">    b : float</span>
+<span class="sd">        The second number</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        The sum of a and b</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</code></pre></div></td></tr></table></div>
+<p>Here on line 1 we modify the function definition to include the data types. 
+We specify the type of <code>a</code> and <code>b</code> using the syntax <code>var : type</code>.
+In this case we use <code>a : float, b : float</code> to indicate that <code>a</code> and <code>b</code> are expected to be of type <code>float</code>.
+Additionally we indicate what the return value is using <code>-&gt; type</code> after the function definition.
+In this case we're returning a float, so <code>def my_function(a : float ,b : float) -&gt; float:</code>. 
+We can also specify default parameters using the syntax <code>var : type = default</code>. For example:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">type_hinting_example.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="k">def</span> <span class="nf">my_function</span><span class="p">(</span><span class="n">a</span> <span class="p">:</span> <span class="nb">float</span> <span class="p">,</span><span class="n">b</span> <span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;A simple function to add two numbers together</span>
+
+<span class="sd">    This function will take in two numbers (a and b) and return their sum (a + b)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    a : float</span>
+<span class="sd">        The first number </span>
+
+<span class="sd">    b : float</span>
+<span class="hll"><span class="sd">        The second number, defaults to 1.</span>
+</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        The sum of a and b</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</code></pre></div></td></tr></table></div></p>
+<p>Here <code>b</code> is of type <code>float</code> and has a default value of <code>1.0</code>. 
+This means that if the user calls <code>my_function(3)</code>, they'll get a return of <code>4</code>, whereas if the user calls <code>my_function(3, 2)</code> they'll get a return of <code>5</code>.</p>
+<p>A very useful package to use when implementing type hinting is the <code>typing</code> library.
+<code>typing</code> has a lot of useful imports, for example:</p>
+<ul>
+<li><code>List[type1, type2, ..., typen]</code>, this can be used when we expect a <code>list</code> of types <code>type1,...,typen</code>.</li>
+<li><code>Tuple[type1, type2, ..., typen]</code>, this can be used when we expect a <code>tuple</code> of types <code>type1,...,typen</code>.</li>
+<li><code>Option[type]</code>, this can be used for optional values</li>
+<li><code>Union[type1, type2]</code>, this can be used when a varibable can have either <code>type1</code> or <code>type2</code>.</li>
+</ul>
+<p>See <a href="https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html">typing cheat sheet</a> for more examples.</p>
+<p>Let's use <code>typing</code> in the <code>my_function</code> example:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">type_hinting_example.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+</span><span class="hll"><span class="k">def</span> <span class="nf">my_function</span><span class="p">(</span><span class="n">a</span> <span class="p">:</span> <span class="nb">float</span> <span class="p">,</span><span class="n">b</span> <span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;A simple function to add two numbers together</span>
+
+<span class="sd">    This function will take in two numbers (a and b) and return their sum (a + b)</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    a : float</span>
+<span class="sd">        The first number </span>
+
+<span class="sd">    b : Optional[float]</span>
+<span class="hll"><span class="sd">        The second number, defaults to 1.</span>
+</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    float</span>
+<span class="sd">        The sum of a and b</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</code></pre></div></td></tr></table></div>
+<p>On line 1 we import <code>Optional</code> from <code>typing</code>.
+On line 2 the <code>my_function</code> definition is updated to reflect that <code>b</code> is an <code>Optional</code> parameter of type <code>float</code>.
+We also update the docstring on line 12 to show that this is an <code>Optional</code> parameter.</p>
+<p>Now that we have an idea of how type hinting works, let's update the <code>my_package/data/base.py</code> file:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">my_package/data/base.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">  1</span>
+<span class="normal">  2</span>
+<span class="normal">  3</span>
+<span class="normal">  4</span>
+<span class="normal">  5</span>
+<span class="normal">  6</span>
+<span class="normal">  7</span>
+<span class="normal">  8</span>
+<span class="normal">  9</span>
+<span class="normal"> 10</span>
+<span class="normal"> 11</span>
+<span class="normal"> 12</span>
+<span class="normal"> 13</span>
+<span class="normal"> 14</span>
+<span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">ndarray</span>
+</span><span class="hll"><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Optional</span>
+</span>
+<span class="k">class</span> <span class="nc">Base</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This is the base class for all the classes in this package.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+<span class="hll">    <span class="n">_data</span> <span class="p">:</span> <span class="n">ndarray</span>
+</span><span class="hll">    <span class="n">data_mean</span> <span class="p">:</span> <span class="nb">float</span>
+</span><span class="hll">    <span class="n">data_std</span> <span class="p">:</span> <span class="nb">float</span>
+</span><span class="hll">    <span class="n">data_min</span> <span class="p">:</span> <span class="nb">float</span>
+</span><span class="hll">    <span class="n">data_max</span> <span class="p">:</span> <span class="nb">float</span>
+</span>
+<span class="hll">    <span class="n">normalize_methods</span> <span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;minmax&#39;</span><span class="p">,</span> <span class="s1">&#39;standard&#39;</span><span class="p">]</span>
+</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;This is the constructor of the class.&quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+
+<span class="hll">    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;This is the string representation of the class.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            The name of the class</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">desc_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="n">desc_string</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>    
+
+
+    <span class="nd">@property</span>
+<span class="hll">    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
+</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;This is the data property.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        ndarray</span>
+<span class="sd">            A numpy array of the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span>
+
+    <span class="nd">@data</span><span class="o">.</span><span class="n">setter</span>
+<span class="hll">    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;This is the setter for the data property.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        value : ndarray</span>
+<span class="sd">            A numpy array that will be stored as the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_mean</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_std</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_shape</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+
+
+
+    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;This method prints a summary of the data.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        str</span>
+<span class="sd">            A description of the data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">data_string</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Data has shape </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data_shape</span><span class="si">}</span><span class="s1">, with a mean value of </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data_mean</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">.</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">data_string</span> <span class="o">+=</span> <span class="sa">f</span><span class="s1">&#39;Data has a minimum value of </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data_min</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1"> and a maximum value of </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data_max</span><span class="si">:</span><span class="s1">0.2f</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="k">return</span> <span class="n">data_string</span>
+
+
+<span class="hll">    <span class="k">def</span> <span class="nf">get_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;This method returns the mean, standard deviation, minimum and maximum of the data.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Tuple[float, float, float]</span>
+<span class="sd">            A tuple with the mean, standard deviation, minimum and maximum of the data.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_mean</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_std</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_min</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_max</span>
+
+
+<span class="hll">    <span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span> <span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;minmax&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span class="w">        </span><span class="sd">&quot;&quot;&quot;This method normalizes the data.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        method : Optional[str]</span>
+<span class="sd">            The method to use for normalization. Can be &#39;minmax&#39; or &#39;standard&#39;.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        RuntimeError</span>
+<span class="sd">            If `method` has not yet been implemented</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">method</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;minmax&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span>  <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_min</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_max</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_min</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">method</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;standard&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_mean</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_std</span> 
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span> <span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Method </span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s1"> not implemented. Please use one of </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">normalize_methods</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div></p>
+<p>On line 2 we import <code>List</code>, <code>Tuple</code> and <code>Optional</code> from <code>typing</code>. 
+On lines 8-12 the types of the class data are added, noting that <code>ndarray</code> was imported on line 1.
+On lines 90, 92 we're utilizing the <code>typing</code> imports in the function definition.
+Some functions don't have a return (e.g. line 48), in these cases we can use the type <code>None</code> to specify that nothing is returned.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2025 TSI <br> <a href="https://github.com/vuquangtrong/mkdocs-material-blog">Blog Theme</a> / <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "toc.integrate", "header.autohide", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.c011b7c0.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.7389ff0e.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

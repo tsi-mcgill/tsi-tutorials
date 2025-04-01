@@ -1,0 +1,1193 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="TSI McGill Tutorials">
+      
+      
+        <meta name="author" content="Stephan O'Brien (stephan.obrien@mcgill.ca)">
+      
+      
+        <link rel="canonical" href="https://github.com/tsi-mcgill/tsi-tutorials/Containerization/docker/Part1/">
+      
+      
+      
+      
+      <link rel="icon" href="../../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.4">
+    
+    
+      
+        <title>Workshop Part 1: Introduction to Docker and Containerization - TSI McGill Tutorials</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="sandstone" data-md-color-primary="grey" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#workshop-part-1-introduction-to-docker-and-containerization" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="TSI McGill Tutorials" class="md-header__button md-logo" aria-label="TSI McGill Tutorials" data-md-component="logo">
+      
+  <img src="../../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TSI McGill Tutorials
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Workshop Part 1: Introduction to Docker and Containerization
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="sandstone" data-md-color-primary="grey" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="gray"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Python/" class="md-tabs__link">
+        
+  
+    
+  
+  Python
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Cpp/" class="md-tabs__link">
+        
+  
+    
+  
+  C++
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Rust/" class="md-tabs__link">
+        
+  
+    
+  
+  Rust
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../VersionControl/" class="md-tabs__link">
+        
+  
+    
+  
+  Version Control
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link">
+        
+  
+    
+  
+  Containerization
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../Misc/" class="md-tabs__link">
+        
+  
+    
+  
+  Misc
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="TSI McGill Tutorials" class="md-nav__button md-logo" aria-label="TSI McGill Tutorials" data-md-component="logo">
+      
+  <img src="../../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png" alt="logo">
+
+    </a>
+    TSI McGill Tutorials
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Python/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Cpp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C++
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Rust/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rust
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../VersionControl/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Version Control
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Containerization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Misc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Misc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="workshop-part-1-introduction-to-docker-and-containerization">Workshop Part 1: Introduction to Docker and Containerization</h1>
+<p>Topics that will be covered:</p>
+<ul>
+<li>
+<p>Introduction to Containerization</p>
+<ul>
+<li>Definition and benefits of containerization</li>
+<li>Differences between virtual machines and containers</li>
+</ul>
+</li>
+<li>
+<p>Docker Basics</p>
+<ul>
+<li>Overview of Docker</li>
+<li>Installing Docker on various platforms</li>
+<li>Basic Docker commands: <code>docker run</code>, <code>docker ps</code>, <code>docker stop</code>, <code>docker rm</code></li>
+</ul>
+</li>
+<li>
+<p>Creating Docker Images</p>
+<ul>
+<li>Writing a simple Dockerfile</li>
+<li>Building and running a Docker image</li>
+<li>Understanding image layers</li>
+</ul>
+</li>
+<li>
+<p>Managing Docker Containers</p>
+<ul>
+<li>Container lifecycle: start, stop, remove</li>
+<li>Docker networking basics</li>
+</ul>
+</li>
+</ul>
+<h1 id="docker-basics">Docker Basics</h1>
+<p>Docker has a streamlined install process for most modern operating systems. Please ensure that Docker is installed and tested on your machine before starting the workshop.</p>
+<h2 id="installing-docker-on-various-platforms">Installing Docker on Various Platforms</h2>
+<h3 id="docker-engine">Docker Engine</h3>
+<p>The Docker Engine can be installed on Windows, macOS, and Linux. Instructions can be found <a href="https://docs.docker.com/engine/install/">here</a>.</p>
+<h3 id="docker-desktop">Docker Desktop</h3>
+<p><a href="https://docs.docker.com/desktop/">Docker Desktop</a> provides a high-level interface for viewing, accessing, and managing your containers and images. There are many useful extensions you can install, such as:</p>
+<ul>
+<li><a href="https://hub.docker.com/extensions/docker/disk-usage-extension">Disk Usage</a>: A tool that "displays and categorizes the disk space used by Docker."</li>
+<li><a href="https://hub.docker.com/extensions/docker/resource-usage-extension">Resource Usage</a>: A tool to monitor the resource usage of your containers.</li>
+<li><a href="https://hub.docker.com/extensions/docker/logs-explorer-extension">Logs Explorer</a>: A tool for examining and filtering logs from your containers.</li>
+</ul>
+<h3 id="creating-and-adding-users-to-the-docker-group">Creating and Adding Users to the <code>docker</code> Group</h3>
+<p>If installing Docker on Linux (including WSL), you might want to add your user to the <code>docker</code> group so that you don't need elevated permissions to run a container. Instructions on how to do this can be found <a href="https://docs.docker.com/engine/install/linux-postinstall/">here</a>.</p>
+<h2 id="getting-ready-for-the-workshop">Getting ready for the Workshop</h2>
+<p>The workshop will require images to be pulled from a remote server, hence requiring internet access. 
+To avoid network congestion, please <code>pull</code> the following images by running the commands below:</p>
+<div class="highlight"><pre><span></span><code>docker pull hello-world
+docker pull python:3.9-slim
+docker pull ubuntu
+</code></pre></div>
+<h2 id="overview-of-docker">Overview of Docker</h2>
+<h1 id="docker-basics_1">Docker Basics</h1>
+<p>Docker is a powerful tool that streamlines the process of building, sharing, and running applications. 
+It uses "containerization" technology to create isolated environments, or containers, for applications and their dependencies. 
+These containers are lightweight, portable, and <strong>consistent</strong>, ensuring that software runs the same way in development, testing, and production environments. 
+By encapsulating an application and its environment, Docker simplifies the management of software projects, enhances productivity, and facilitates continuous integration and delivery (CI/CD). 
+This makes it an essential tool for modern software development and deployment practices.</p>
+<p>Docker and containerization solve the "it works on my machine" problem that one often faces when developing or running an application. 
+Using Docker, a developer can package the required dependencies of an application, providing a stable environment for the application to run, and then pass this environment onto the user to run as an "image."
+Using this "image," a user can then recreate the same environment that the developer intended for running the application and execute the application on their own machine as a "container."
+Critically, this "container" acts as a semi-independent operating system within the host operating system, meaning that potential conflicts arising on the host system can be overcome by the containerized image. 
+For example, if you have a Windows machine and you want to run software developed for Linux, Docker provides a method to run this software as if the host system were Linux.
+Similarly, if the host system has some dependency (for example, Python 3) and the application has some conflicting dependency (for example, Python 2), the container will run the application using the dependencies in the container rather than the host operating system.</p>
+<p>You may have previously heard of "Virtual Machines" (VMs). 
+This is a similar idea to containers, with some important differences.
+VMs work by allocating virtual hardware (e.g., CPU, GPU, RAM, and storage) and installing the entire operating system. 
+This can make them quite resource-intensive.
+A container, on the other hand, uses the fact that Linux systems tend to be very similar, to the extent that the underlying system kernel can be used.
+A container image essentially contains a filesystem snapshot (FSS) and a run command. 
+The FSS can be considered all the files, folders, programs, and libraries required to run the application that the container has been developed for.
+When we create a container from the image, we are essentially loading the FSS into a new local "namespace."
+The host system's resources are then allocated to the container like any other process.
+Within this new namespace, we have access to the versions of files, programs, and libraries that are defined in the FSS (e.g., we might have Python 3.11.1).
+By design, the container cannot "see" outside of the namespace; as far as the container can see, it is the only thing operating on the system.
+The run command defines the default behavior of the container. 
+This could be something like starting a new bash shell, executing a program, or starting a service.</p>
+<p>In summary, the differences between VMs and containers are:</p>
+<ol>
+<li>
+<p>Operating System Requirements:</p>
+<ul>
+<li>A VM requires the full operating system to be installed on the host system.</li>
+<li>A container shares the host system's kernel and includes only the necessary binaries, libraries, and configuration files needed to run a specific application or suite of applications.</li>
+</ul>
+</li>
+<li>
+<p>Resource Allocation and Efficiency:</p>
+<ul>
+<li>VMs require specific resources to be allocated to them, such as CPU, RAM, and storage. These resources are managed by a "hypervisor," which runs on the host system. Each VM operates in isolation with its own OS, leading to higher overhead due to the need to replicate the OS and allocate dedicated resources.</li>
+<li>Containers use the host system’s kernel to run processes and do not require a separate OS. They are managed by the container runtime (e.g., Docker Engine) and leverage the host system’s resources dynamically. Containers are subject to the host's system scheduler, just like any other process, allowing them to be more efficient in terms of resource utilization.</li>
+</ul>
+</li>
+<li>
+<p>Startup Time:</p>
+<ul>
+<li>A VM will require the entire guest operating system to boot before running a process.</li>
+<li>A container does not require a guest operating system, meaning that a process can be started with very little downtime.</li>
+</ul>
+</li>
+<li>
+<p>Isolation:</p>
+<ul>
+<li>VMs provide a different operating system for a process to run on. This provides strong isolation between the host system and any number of guest operating systems.</li>
+<li>Containers provide <strong>process-level isolation</strong>. They are isolated from each other using the host operating system's features like namespaces and cgroups, but they share the same OS kernel.</li>
+</ul>
+</li>
+</ol>
+<h2 id="basic-docker-commands-docker-run-docker-ps-docker-stop-docker-rm">Basic Docker commands: <code>docker run</code>, <code>docker ps</code>, <code>docker stop</code>, <code>docker rm</code></h2>
+<p>Let's start off by using pre-made Docker images to look at some of the fundamental commands.</p>
+<h3 id="docker-run"><code>docker run</code></h3>
+<p>The <code>docker run</code> command can be used to run the default command for a Docker image. For example, let's use the <a href="https://hub.docker.com/_/hello-world">hello-world</a> example:
+<div class="highlight"><pre><span></span><code>docker run hello-world
+</code></pre></div></p>
+<p>If you haven't ran this before, you will see the following:
+<div class="highlight"><pre><span></span><code>Unable to find image &#39;hello-world:latest&#39; locally
+latest: Pulling from library/hello-world
+c1ec31eb5944: Pull complete
+Digest: sha256:94323f3e5e09a8b9515d74337010375a456c909543e1ff1538f5116d38ab3989
+Status: Downloaded newer image for hello-world:latest
+</code></pre></div></p>
+<p>Let's take a moment to break this down:
+<div class="highlight"><pre><span></span><code>Unable to find image &#39;hello-world:latest&#39; locally
+latest: Pulling from library/hello-world
+</code></pre></div>
+Here we can see that Docker cannot find the <code>hello-world:latest</code> image locally and instead pulls an image from <code>library/hello-world</code>. Here Docker is searching container repositories like <a href="https://hub.docker.com/">Docker Hub</a> to find the <code>hello-world</code> image.</p>
+<p>Once the image is finished downloading, a default command is run, which gives the following output:
+<div class="highlight"><pre><span></span><code>Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the &quot;hello-world&quot; image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+</code></pre></div></p>
+<p>This provides some information on what has just happened and suggests that we try running a command like:
+<div class="highlight"><pre><span></span><code>docker run -it ubuntu bash
+</code></pre></div></p>
+<p>So let's do that:
+<div class="highlight"><pre><span></span><code>Unable to find image &#39;ubuntu:latest&#39; locally
+latest: Pulling from library/ubuntu
+9c704ecd0c69: Pull complete
+Digest: sha256:2e863c44b718727c860746568e1d54afd13b2fa71b160f5cd9058fc436217b30
+Status: Downloaded newer image for ubuntu:latest
+root@b52ba93a0cc5:/#
+</code></pre></div>
+Once again, we didn't have the <code>ubuntu:latest</code> image available locally, so Docker downloaded this image. 
+We notice now that we are left with a prompt:
+<div class="highlight"><pre><span></span><code>root@a1fe94f95dc6:/#
+</code></pre></div>
+Let's breakdown the command we just ran:
+<div class="highlight"><pre><span></span><code>docker run -it ubuntu bash
+</code></pre></div>
+Here we've used <code>run</code> to specify that we want to run an image in a container. <code>-it</code> specifies that we want an interactive shell (<code>-i</code> allows STDIN to remain open for sending commands, and <code>-t</code> allocates a text terminal for running commands within the shell). We specified the image as <code>ubuntu</code>; however, unlike the previous example (<code>hello-world:latest</code>), we didn't specify the "tag" or "version" to use, so by default, the "latest" tag will be used for the <code>ubuntu</code> image. Finally, we specified the command we wanted to run, <code>bash</code>, which starts a new bash shell. </p>
+<p>In summary, using <code>docker run -it ubuntu bash</code>, we have started a container running <code>ubuntu</code> (specifically <code>ubuntu:latest</code> by default), configured an interactive terminal (<code>-it</code>) for command interaction, and initiated a bash shell (<code>bash</code>) within the container.</p>
+<p>Jumping back into the container we can run commands like:
+<div class="highlight"><pre><span></span><code>root@a1fe94f95dc6:/# whoami
+root
+</code></pre></div>
+This tells us that the current user is <code>root</code>. 
+<div class="highlight"><pre><span></span><code>root@a1fe94f95dc6:/# hostname
+a1fe94f95dc6
+</code></pre></div>
+This tells us the name of the host as viewed from within the docker container. Notice that this will be different to the name of your system. As far as the container knows, it is running on a seperate system called <code>a1fe94f95dc6</code>.
+<div class="highlight"><pre><span></span><code>root@a1fe94f95dc6:/# echo &quot;Hello&quot;
+Hello
+</code></pre></div>
+Many commonly used commands are preinstalled in the Ubuntu Docker image.
+When we want to exit, we simply type:
+<div class="highlight"><pre><span></span><code>root@a1fe94f95dc6:/# exit
+exit
+</code></pre></div></p>
+<p>We can run commands directly by specifying the command:
+<div class="highlight"><pre><span></span><code>docker run -it ubuntu top
+</code></pre></div></p>
+<p>This will run the <code>top</code> command, which is useful for viewing processes running on the machine. You should see output similar to this:
+<div class="highlight"><pre><span></span><code>top - 14:56:11 up 47 min,  0 user,  load average: 0.02, 0.07, 0.08
+Tasks:   1 total,   1 running,   0 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.2 us,  0.3 sy,  0.0 ni, 99.3 id,  0.1 wa,  0.0 hi,  0.1 si,  0.0 st
+MiB Mem :   7536.3 total,   5033.9 free,   2113.9 used,    621.6 buff/cache
+MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.   5422.5 avail Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+    1 root      20   0    8864   5012   2908 R   0.0   0.1   0:00.02 top
+</code></pre></div></p>
+<p>Notice that there is only one process running. This is because the container is isolated and cannot see processes outside of its own environment. As far as the container is concerned, it operates in isolation with no other processes running. To quit <code>top</code>, simply press <code>q</code>.</p>
+<h3 id="docker-ps"><code>docker ps</code></h3>
+<p>Let's run a Docker container with a command, but this time let's run it in the background without using <code>-it</code>. Instead, we'll use <code>-d</code> to "detach" the container:
+<div class="highlight"><pre><span></span><code>docker run -d ubuntu sh -c &quot;while true; do echo &#39;Hello, Docker!&#39;; sleep 60; done&quot;
+</code></pre></div>
+The command we ran will start with an <code>ubuntu</code> image and execute <code>sh -c "while true; do echo 'Hello, Docker!'; sleep 60; done"</code>. This will start a new <code>sh</code> shell, which loops indefinitely and prints "Hello, Docker!" every 60 seconds.</p>
+<p>The output we should see is something like this:</p>
+<p><div class="highlight"><pre><span></span><code>5af71a22c48073e0feccea5d6b6100ee1d428449fbef74b95324a29b6cfc6d18
+</code></pre></div>
+This is the container's ID, which we can later use to access the container. Notably, we don't immediately see the "Hello, Docker!" output. However, when we run:</p>
+<p><div class="highlight"><pre><span></span><code>docker ps
+</code></pre></div>
+We will see:
+<div class="highlight"><pre><span></span><code>CONTAINER ID   IMAGE     COMMAND                  CREATED         STATUS         PORTS     NAMES
+5af71a22c480   ubuntu    &quot;sh -c &#39;while true; …&quot;   2 minutes ago   Up 2 minutes             nostalgic_hertz
+</code></pre></div>
+Here we can see the containers currently running. The output displays the container ID, the image being used, the command that was run, the time it was created, the current status, any exposed ports (more on this later), and a container name.</p>
+<p>We can view the output of the container using the <code>docker logs</code> command. Here, we can either pass the container ID or the container name:</p>
+<p><div class="highlight"><pre><span></span><code>docker logs 5af71a22c480
+Hello, Docker!
+Hello, Docker!
+Hello, Docker!
+Hello, Docker!
+Hello, Docker!
+</code></pre></div>
+or 
+<div class="highlight"><pre><span></span><code>docker logs nostalgic_hertz
+Hello, Docker!
+Hello, Docker!
+Hello, Docker!
+Hello, Docker!
+Hello, Docker!
+Hello, Docker!
+</code></pre></div></p>
+<p>Giving a name to a container makes it easier to identify and manage. We can assign a name to a container using the <code>--name</code> flag when launching it:
+<div class="highlight"><pre><span></span><code>docker run -d --name greeter ubuntu sh -c &quot;while true; do echo &#39;Hello, Docker!&#39;; sleep 60; done&quot;
+</code></pre></div></p>
+<p>In this example, <code>--name greeter</code> names the container as "greeter". We can verify this by using <code>docker ps</code>:
+<div class="highlight"><pre><span></span><code>docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS     NAMES
+34e6f000f761   ubuntu    &quot;sh -c &#39;while true; …&quot;   44 seconds ago   Up 42 seconds             greeter
+5af71a22c480   ubuntu    &quot;sh -c &#39;while true; …&quot;   7 minutes ago    Up 7 minutes              nostalgic_hertz
+</code></pre></div></p>
+<p>By default, <code>docker ps</code> shows only active containers. To view all containers, including those that have exited, we use <code>docker ps -a</code>, which might display something like this:
+<div class="highlight"><pre><span></span><code>docker ps -a
+CONTAINER ID   IMAGE         COMMAND                  CREATED             STATUS                         PORTS     NAMES
+34e6f000f761   ubuntu        &quot;sh -c &#39;while true; …&quot;   13 minutes ago      Up 12 minutes                            greeter
+5af71a22c480   ubuntu        &quot;sh -c &#39;while true; …&quot;   19 minutes ago      Up 19 minutes                            nostalgic_hertz
+b1709a781e28   ubuntu        &quot;pwd&quot;                    About an hour ago   Exited (0) About an hour ago             laughing_lumiere
+f02b7d8ca480   ubuntu        &quot;ls&quot;                     About an hour ago   Exited (0) About an hour ago             lucid_curran
+120a97deeb54   ubuntu        &quot;ls /home/obriens/&quot;      About an hour ago   Exited (2) About an hour ago             silly_swartz
+aee56c00887d   ubuntu        &quot;ls&quot;                     About an hour ago   Exited (0) About an hour ago             great_payne
+7f344b33f26f   ubuntu        &quot;whoami&quot;                 About an hour ago   Exited (0) About an hour ago             flamboyant_mahavira
+05317adbd6b3   ubuntu        &quot;hostname&quot;               About an hour ago   Exited (0) About an hour ago             laughing_tesla
+</code></pre></div></p>
+<p>This output shows two running containers (<code>greeter</code> and <code>nostalgic_hertz</code>) and several containers that have exited but are still present.</p>
+<h3 id="docker-stop"><code>docker stop</code></h3>
+<p>Let's examine our active containers:
+<div class="highlight"><pre><span></span><code>docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS     NAMES
+34e6f000f761   ubuntu    &quot;sh -c &#39;while true; …&quot;   15 minutes ago   Up 15 minutes             greeter
+5af71a22c480   ubuntu    &quot;sh -c &#39;while true; …&quot;   22 minutes ago   Up 22 minutes             nostalgic_hertz
+</code></pre></div></p>
+<p>To stop a container, use <code>docker stop</code> followed by either the container name or ID:
+<div class="highlight"><pre><span></span><code>docker stop 5af71a22c480
+</code></pre></div></p>
+<p>This command may take a few seconds to complete. When <code>docker stop</code> is invoked, it sends a <code>SIGTERM</code> signal to the process running inside the container. <code>SIGTERM</code> is a soft request for the process to finish. If the process is designed to handle this signal, it may initiate a graceful shutdown.</p>
+<p>After sending <code>SIGTERM</code>, Docker waits for 10 seconds (by default) to allow for a graceful shutdown. If the process does not terminate gracefully within this time frame, Docker then sends a <code>SIGKILL</code> signal, which forcefully terminates the process.</p>
+<p>In summary, <code>docker stop</code> attempts to gracefully terminate the program inside the container. If the program does not respond to <code>SIGTERM</code>, Docker resorts to forcefully terminating it with <code>SIGKILL</code>.</p>
+<h3 id="docker-rm"><code>docker rm</code></h3>
+<p>Similar to the <code>rm</code> command in Unix-like systems, <code>docker rm</code> removes a container. Let's first review our running containers:</p>
+<div class="highlight"><pre><span></span><code>CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS     NAMES
+34e6f000f761   ubuntu    &quot;sh -c &#39;while true; …&quot;   29 minutes ago   Up 29 minutes             greeter
+</code></pre></div>
+<p>Now, let's try to remove the <code>greeter</code> container:
+<div class="highlight"><pre><span></span><code> docker rm greeter
+Error response from daemon: You cannot remove a running container 34e6f000f76147c340648064e1e0356d483142f8ad6cb02fcb228a536c0ac39a. Stop the container before attempting removal or force remove
+</code></pre></div>
+We need to stop a container before removing it:
+<div class="highlight"><pre><span></span><code>docker stop greeter &amp;&amp; docker rm greeter
+</code></pre></div></p>
+<p>Checking with <code>docker ps</code> confirms that the <code>greeter</code> container has been stopped. Running <code>docker ps -a</code> shows that <code>greeter</code> is no longer listed, but <code>nostalgic_hertz</code> is still there. We can remove it using:
+<div class="highlight"><pre><span></span><code>docker rm nostalgic_hertz
+</code></pre></div></p>
+<p>Stale containers can consume memory over time. To remove all exited containers, you can use:
+<div class="highlight"><pre><span></span><code>docker container prune
+</code></pre></div></p>
+<p>This command prompts for confirmation before deleting the containers permanently.</p>
+<h2 id="creating-docker-images">Creating Docker Images</h2>
+<p>Up until now, we've been using pre-made Docker images. However, there may come a time when we need to create our own custom image.</p>
+<h3 id="writing-a-simple-dockerfile">Writing a Simple Dockerfile</h3>
+<p>The first step in creating a Docker image is to write a <code>Dockerfile</code>. This file contains instructions on how to build the image. Let's start by writing a short Python program that will serve as the entry point for our image. We'll call this script <code>app.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">generate_random_numbers</span><span class="p">(</span><span class="n">num_points</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">num_points</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">calculate_statistics</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+    <span class="n">std_dev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mean</span><span class="p">,</span> <span class="n">std_dev</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">num_points</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># Size of the random number list</span>
+    <span class="n">numbers</span> <span class="o">=</span> <span class="n">generate_random_numbers</span><span class="p">(</span><span class="n">num_points</span><span class="p">)</span>
+    <span class="n">mean</span><span class="p">,</span> <span class="n">std_dev</span> <span class="o">=</span> <span class="n">calculate_statistics</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generated </span><span class="si">{</span><span class="n">num_points</span><span class="si">}</span><span class="s2"> random numbers&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean: </span><span class="si">{</span><span class="n">mean</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Standard Deviation: </span><span class="si">{</span><span class="n">std_dev</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>This program generates 1000 random numbers using <code>NumPy</code> and prints their mean and standard deviation. Note that <code>NumPy</code> is a requirement for this program, so we should create a <code>requirements.txt</code>file:
+<div class="highlight"><pre><span></span><code>numpy
+</code></pre></div></p>
+<p>Now, let's put together the <code>Dockerfile</code>:
+<div class="highlight"><pre><span></span><code># Use the official Python image from the Docker Hub
+FROM python:3.9-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the requirements.txt file into the container
+COPY requirements.txt .
+
+# Install the dependencies specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of the application code into the container
+COPY app.py .
+
+# Specify the command to run the application
+CMD [&quot;python&quot;, &quot;app.py&quot;]
+</code></pre></div></p>
+<p>Let's walk through this <code>Dockerfile</code>:</p>
+<ul>
+<li>
+<p><code>FROM python:3.9-slim</code>: This line specifies that we're using the official Python image from Docker Hub, specifically Python 3.9 in its slim variant.</p>
+</li>
+<li>
+<p><code>WORKDIR /app</code>: Sets the working directory inside the container to <code>/app</code>. If the directory doesn't exist, it will be created.</p>
+</li>
+<li>
+<p><code>COPY requirements.txt .</code>: Copies the <code>requirements.txt</code> file from the host into the <code>/app</code> directory in the container.</p>
+</li>
+<li>
+<p><code>RUN pip install --no-cache-dir -r requirements.txt</code>: Installs the Python dependencies listed in <code>requirements.txt</code> using <code>pip</code>. The <code>--no-cache-dir</code> flag ensures that downloaded files aren't cached, which can reduce the size of the final image.</p>
+</li>
+<li>
+<p><code>COPY app.py .</code>: Copies app.py from the host into the /app directory in the container.</p>
+</li>
+<li>
+<p><code>CMD ["python", "app.py"]</code>: Specifies the command to run when the container starts. In this case, it executes python app.py within the /app directory.</p>
+</li>
+</ul>
+<p>It's common practice to use all caps when specifying <code>Dockerfile</code> keywords (<code>FROM</code>, <code>COPY</code>, <code>WORKDIR</code>, <code>RUN</code>, <code>CMD</code>). This helps differentiate them from commands within the scripts being run inside the container.</p>
+<p>Creating custom Docker images allows you to package your applications with all their dependencies, ensuring consistency and reproducibility across different environments.</p>
+<h3 id="building-and-running-a-docker-image">Building and Running a Docker Image</h3>
+<p>Now that we have everything we need, let's build the image. Replace <code>obriens</code> with your Docker Hub username if you intend to push this image to Docker Hub:</p>
+<p><div class="highlight"><pre><span></span><code>docker build . -t obriens/part1:latest 
+</code></pre></div>
+This command searches for a file named <code>Dockerfile</code> in the current directory (specified with <code>.</code>), builds the Docker image, and tags it (<code>-t</code>) as <code>obriens/part1:latest</code>. The username (<code>obriens</code> in this case) is specified to indicate where the image will be pushed if you decide to upload it to Docker Hub. The output will resemble something like this:
+<div class="highlight"><pre><span></span><code>docker build . -t obriens/part1:latest                                                                       130 ↵
+[+] Building 17.2s (11/11)
+...
+ =&gt; =&gt; writing image sha256:016e858e57ceb90b7b12b2aa8ec0b79642ad20d0ef356c8453e7bc6f2fc78d03                       0.0s
+ =&gt; =&gt; naming to docker.io/obriens/part1:latest                                             
+</code></pre></div>
+The build process involves multiple stages (<code>[1/5]</code> to <code>[5/5]</code>), where each stage corresponds to a command in your Dockerfile. The final stage (<code>CMD ["python", "app.py"]</code>) specifies the command that will be executed when the container starts. Each command creates a separate "layer" of the image, with subsequent layers building upon previous ones.</p>
+<p>To run our newly built image as a container, use the <code>docker run</code> command:
+<div class="highlight"><pre><span></span><code>docker run --rm -it obriens/part1:latest
+</code></pre></div>
+Here, the <code>--rm</code> flag automatically removes the container once the process inside it finishes. The output should show something like:
+<div class="highlight"><pre><span></span><code>Generated 1000 random numbers
+Mean: 0.4942313233338699
+Standard Deviation: 0.28658542837100653 
+</code></pre></div>
+When building the image, we didn't specify the filename (<code>Dockerfile</code>) explicitly because Docker defaults to looking for a file named <code>Dockerfile</code>. However, you can specify a different filename if needed.</p>
+<p>Let's create a development version of our image by modifying <code>app.py</code> to include a message indicating it's running from the development container:</p>
+<div class="highlight"><pre><span></span><code>...
+# Copy the rest of the application code into the container
+COPY app.py .
+
+RUN echo &quot;print (&#39;Ran from dev container&#39;)&quot; &gt;&gt; app.py
+
+# Specify the command to run the application
+CMD [&quot;python&quot;, &quot;app.py&quot;]
+</code></pre></div>
+<p>This modification uses <code>echo</code> to append a line to <code>app.py</code> that prints "Ran from dev container". Now, build the development version using a different <code>Dockerfile</code> (<code>Dockerfile.dev</code>) and tag it as <code>obriens/part1:dev</code>:
+<div class="highlight"><pre><span></span><code>docker build . -f Dockerfile.dev -t obriens/part1:dev
+</code></pre></div>
+Notice that we specified the filename with <code>-f Dockerfile.dev</code> and changed the tag to <code>obriens/part1:dev</code>. If you try to run <code>obriens/part1</code> without specifying a tag, Docker defaults to the latest tag. For example:
+<div class="highlight"><pre><span></span><code> docker run --rm -it obriens/part1
+Generated 1000 random numbers
+Mean: 0.5130255869429714
+Standard Deviation: 0.29060466306009264
+</code></pre></div>
+This will run the <code>latest</code> tagged image. However, when running the development version:
+<div class="highlight"><pre><span></span><code>docker run --rm -it obriens/part1:dev
+Generated 1000 random numbers
+Mean: 0.5011963504428272
+Standard Deviation: 0.28711061209965844
+Ran from dev container
+</code></pre></div>
+The output will include the additional message from <code>app.py</code> indicating it's running from the development container.</p>
+<p>Using multiple tags (<code>latest</code>, <code>dev</code>, etc.) is useful for specifying different versions or configurations of your Docker image. It helps manage different stages of development or deployment scenarios effectively.</p>
+<h4 id="why-use-different-tags-for-images">Why Use Different Tags for Images?</h4>
+<p>In the example provided, different tags serve several key purposes:</p>
+<ol>
+<li>
+<p><strong>Version Control and Stability</strong>: Tags like <code>obriens/part1:latest</code> and <code>obriens/part1:dev</code> help distinguish different versions of the same application or service. This ensures that users can choose between stable releases (<code>latest</code>) and potentially less stable development versions (<code>dev</code>).</p>
+</li>
+<li>
+<p><strong>Environment Specificity</strong>: Tags can denote images optimized for specific environments or purposes. For instance, <code>python:3.9-slim</code> indicates a Python 3.9 base image that is minimal in size (<code>slim</code>), which is preferable for lightweight deployments compared to a full version (<code>python:3.9</code>).</p>
+</li>
+<li>
+<p><strong>Dependency Management</strong>: Tags also facilitate managing dependencies. The <code>dev</code> tag might include additional libraries or tools needed for testing and development, while the <code>latest</code> tag could be streamlined for production use.</p>
+</li>
+</ol>
+<p>By using specific tags like <code>python:3.9-slim</code>, developers communicate to users the exact environment and optimizations applied to the image. This clarity helps in maintaining consistency across deployments and ensures compatibility with specific requirements.</p>
+<h3 id="understanding-image-layers">Understanding Image Layers</h3>
+<p>Previously, we introduced the concept of layers and how images are built layer by layer. Let's explore why this matters with a practical example.</p>
+<p>First, let's modify our <code>requirements.txt</code> file to include additional dependencies:</p>
+<div class="highlight"><pre><span></span><code>numpy
+matplotlib
+</code></pre></div>
+<p>Now, let's rebuild the image:
+<div class="highlight"><pre><span></span><code>docker build . -t obriens/part1
+[+] Building 17.2s (10/10) FINISHED                                                                      docker:default
+ =&gt; [internal] load .dockerignore                                                                                  0.0s
+ =&gt; =&gt; transferring context: 2B                                                                                    0.0s
+ =&gt; [internal] load build definition from Dockerfile                                                               0.0s
+ =&gt; =&gt; transferring dockerfile: 506B                                                                               0.0s
+ =&gt; [internal] load metadata for docker.io/library/python:3.9-slim                                                 0.3s
+ =&gt; [1/5] FROM docker.io/library/python:3.9-slim@sha256:e9074b2ea84e00d4a73a7d0c01c52820e7b68d8901c5fa282be4f1b28  0.0s
+ =&gt; [internal] load build context                                                                                  0.0s
+ =&gt; =&gt; transferring context: 89B                                                                                   0.0s
+ =&gt; CACHED [2/5] WORKDIR /app                                                                                      0.0s
+ =&gt; [3/5] COPY requirements.txt .                                                                                  0.0s
+ =&gt; [4/5] RUN pip install --no-cache-dir -r requirements.txt                                                      15.8s
+ =&gt; [5/5] COPY app.py .                                                                                            0.0s
+ =&gt; exporting to image                                                                                             0.8s
+ =&gt; =&gt; exporting layers                                                                                            0.8s
+ =&gt; =&gt; writing image sha256:449c5e51b012be670f98fb5f33a2b7cd1ddc50dddf4f42f2f040fb69f0e4c2c7                       0.0s
+ =&gt; =&gt; naming to docker.io/obriens/part1                                                                           0.0s
+</code></pre></div>
+Notice the output shows:
+<div class="highlight"><pre><span></span><code>...
+ =&gt; CACHED [2/5] WORKDIR /app                                                                                      0.0s
+...
+</code></pre></div></p>
+<p>What's happening here is that Docker has "cached" the previous image layers. This means that we don't need to rerun those stages. Instead, Docker starts from the last cached layer and continues building from there.</p>
+<p>Now, let's modify <code>app.py</code> to print out the median of the sample as well:
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="k">def</span> <span class="nf">generate_random_numbers</span><span class="p">(</span><span class="n">num_points</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">num_points</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">calculate_statistics</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+    <span class="n">median</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+    <span class="n">std_dev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mean</span><span class="p">,</span> <span class="n">median</span><span class="p">,</span> <span class="n">std_dev</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">num_points</span> <span class="o">=</span> <span class="mi">1000</span>  <span class="c1"># Size of the random number list</span>
+    <span class="n">numbers</span> <span class="o">=</span> <span class="n">generate_random_numbers</span><span class="p">(</span><span class="n">num_points</span><span class="p">)</span>
+    <span class="n">mean</span><span class="p">,</span> <span class="n">median</span><span class="p">,</span> <span class="n">std_dev</span> <span class="o">=</span> <span class="n">calculate_statistics</span><span class="p">(</span><span class="n">numbers</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generated </span><span class="si">{</span><span class="n">num_points</span><span class="si">}</span><span class="s2"> random numbers&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mean: </span><span class="si">{</span><span class="n">mean</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Median: </span><span class="si">{</span><span class="n">median</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Standard Deviation: </span><span class="si">{</span><span class="n">std_dev</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div></p>
+<p>and build this with:
+<div class="highlight"><pre><span></span><code>docker build . -t obriens/part1
+[+] Building 0.5s (10/10) FINISHED                                                                       docker:default
+ =&gt; [internal] load .dockerignore                                                                                  0.0s
+ =&gt; =&gt; transferring context: 2B                                                                                    0.0s
+ =&gt; [internal] load build definition from Dockerfile                                                               0.0s
+ =&gt; =&gt; transferring dockerfile: 506B                                                                               0.0s
+ =&gt; [internal] load metadata for docker.io/library/python:3.9-slim                                                 0.3s
+ =&gt; [1/5] FROM docker.io/library/python:3.9-slim@sha256:e9074b2ea84e00d4a73a7d0c01c52820e7b68d8901c5fa282be4f1b28  0.0s
+ =&gt; [internal] load build context                                                                                  0.0s
+ =&gt; =&gt; transferring context: 674B                                                                                  0.0s
+ =&gt; CACHED [2/5] WORKDIR /app                                                                                      0.0s
+ =&gt; CACHED [3/5] COPY requirements.txt .                                                                           0.0s
+ =&gt; CACHED [4/5] RUN pip install --no-cache-dir -r requirements.txt                                                0.0s
+ =&gt; [5/5] COPY app.py .                                                                                            0.0s
+ =&gt; exporting to image                                                                                             0.0s
+ =&gt; =&gt; exporting layers                                                                                            0.0s
+ =&gt; =&gt; writing image sha256:455ae0e0323b56ada03933dc2523c7e7fcbe312b25f04536aa8f6cca14943349                       0.0s
+ =&gt; =&gt; naming to docker.io/obriens/part1                                                                           0.0s
+
+What&#39;s Next?
+  View a summary of image vulnerabilities and recommendations → docker scout quickview
+</code></pre></div>
+Again, notice that Docker uses cached versions of each layer, avoiding recreating previous steps. This concept is crucial when creating images—frequent development and rebuilding can be sped up by caching unchanged steps early in the Dockerfile. However, any change detected in a later step requires rerunning all subsequent steps, regardless of whether they'll result in changes.</p>
+<h2 id="managing-docker-containers">Managing Docker Containers</h2>
+<h3 id="docker-networking-basics">Docker networking basics</h3>
+<p>We can enable networking between our Docker image and the host system. Let's create an image that requires networking. Suppose we've encountered difficulty installing a Python package on our local machine but know it installs correctly on another. We'll build an image containing this Python package, based on the <code>python:3.9-slim</code> base image. Given that the base image already includes most dependencies, our <code>Dockerfile</code> will be brief:
+<div class="highlight"><pre><span></span><code>FROM python:3.9-slim
+
+# Use pip to install the requirements
+RUN pip install numpy matplotlib jupyterlab notebook ipykernel ipython ipywidgets
+
+
+# Create a new user and change to that user
+RUN useradd europa
+USER europa
+# Move the europa&#39;s home directory
+WORKDIR /home/europa
+
+CMD [&quot;jupyter&quot;, &quot;lab&quot;, &quot;--ip=0.0.0.0&quot;, &quot;--port=8000&quot;]
+</code></pre></div></p>
+<p>Here, the <code>CMD ["jupyter", "lab"]</code> command will start a JupyterLab server. The <code>--ip=0.0.0.0</code> flag binds the server to all available IP addresses, making it accessible to the outside world. The <code>--port=8000</code> option specifies that we're starting the Jupyter server on port 8000.</p>
+<p>We've also created a new user within the container called <code>europa</code>. By default, Docker runs everything as <code>root</code>. This poses several potential issues. Firstly, anyone who can run this container gains root access to everything accessible by the container. For instance, if a file system is accessible to the container (as we'll see shortly), the user would have root privileges within that folder, enabling them to delete or modify any files. This can be particularly problematic on shared systems like computer clusters and poses a significant security concern. If an unauthorized party gains access to the container, they could execute commands as root, potentially installing and running malicious code within the container.</p>
+<p>In the example, we created a new user using <code>RUN useradd europa</code>, switched to that user using <code>USER europa</code>, and set their home directory to <code>/home/europa</code> using <code>WORKDIR /home/europa</code>. Once we invoked <code>USER europa</code>, all subsequent commands ran as that user, meaning any files created would be owned by that user. Since we haven't granted this user sudo access, they cannot execute commands requiring sudo permissions.</p>
+<p>Saving the Dockerfile in a subdirectory (<code>jupyter_example/Dockerfile</code>), we can build this as:
+<div class="highlight"><pre><span></span><code>docker build ./jupyter_example -t obriens/part1-jupyter
+</code></pre></div></p>
+<p>Note how we've specified the location of the <code>Dockerfile</code> by passing the path to <code>./jupyter_example</code> instead of <code>.</code>. Once built, this image can be run as:
+<div class="highlight"><pre><span></span><code>docker run --rm -it obriens/part1-jupyter
+</code></pre></div></p>
+<p>Initially, the Jupyter Lab server starts, but we cannot access it by navigating to <code>localhost/8000</code>. This is because we need to map ports from the container to our host system. If we stop the container and rerun it with port mapping:
+<div class="highlight"><pre><span></span><code>docker run --rm -it -p 8000:8000 obriens/part1-jupyter
+</code></pre></div></p>
+<p>Now, we can navigate to localhost/8000 and see the Jupyter Lab server running!</p>
+<p>If we shut down this container and launch a new one, we'll notice that the files created previously are no longer there. This happens because the <code>/home/europa</code> filesystem within the container is deleted when the container is deleted. To maintain persistence, we can mount a local directory at runtime using:
+<div class="highlight"><pre><span></span><code>docker run --rm -it -p 8000:8000 -v $(pwd):/home/europa obriens/part1-jupyter
+</code></pre></div>
+Here, the <code>-v</code> or <code>--volume</code> flag mounts <code>$(pwd)</code> (the current directory) on the host to <code>/home/europa</code> within the container, ensuring that files created or modified in <code>/home/europa</code> persist beyond the container's lifecycle.</p>
+<h3 id="permission-errors-build-arguments-and-entry-points">Permission errors, build arguments and entry points</h3>
+<p>It is possible that you still cannot save files to this directory. This might be because the <code>europa</code> user that we've created has a different user ID than the user who is running the Docker container.</p>
+<p>To resolve this issue, we can use an "ARG" or argument within our Docker image. When creating the <code>europa</code> user, we can specify the user ID at build time. We can add the following lines to our <code>Dockerfile</code>:
+<div class="highlight"><pre><span></span><code>...
+# Create a new user and change to that user
+ARG UID=1000
+RUN useradd -m europa -u $UID
+USER europa
+...
+</code></pre></div>
+This defines a new argument called <code>UID</code> with a default value of <code>1000</code>. The value of <code>UID</code> is then used when setting the ID of the europa user. When building the image, we can set this value to the ID of the current user with:
+<div class="highlight"><pre><span></span><code>docker build  --build-arg UID=$(id -u) ./jupyter_example -t obriens/part1-jupyter
+</code></pre></div>
+Here, <code>--build-arg UID=$(id -u)</code> sets the <code>UID</code> argument to the current user's ID (<code>$(id -u)</code>). This ensures that the user within the container has the same ID and permissions as the user who built the image.</p>
+<div class="highlight"><pre><span></span><code>docker run --rm -it -p 8000:8000 -v $(pwd):/home/europa:rw obriens/part1-jupyter
+</code></pre></div>
+<p>Note the <code>:rw</code> after the volume mounting. Similarly, we can restrict permissions when mounting using <code>:ro</code> to specify read-only. This can be useful when handling files or directories that we don't want the user to modify.</p>
+<p>Using <code>--build-arg</code> allows us to specify arguments at build time, which may not always be practical if we don't know the parameters the user will set at runtime. For example, building an image that assumes a specific user ID (e.g., <code>1000</code>) might not suit another user with a different ID (e.g., <code>1001</code>).</p>
+<p>To address this, we can refactor our image to use variables passed at runtime using an <code>ENTRYPOINT</code>. <code>ENTRYPOINT</code> defines a command or script that is executed upon starting the container, before the default command specified with <code>CMD</code> or using <code>docker run</code>. Consider the following script (<code>entrypoint.sh</code>):
+<div class="highlight"><pre><span></span><code>#!/bin/bash
+
+if [ -z &quot;$UID&quot; ] || [ $UID -eq 0 ]; then
+    USER_ID=1000
+else
+    USER_ID=$UID
+fi
+
+# Create a new user with the specified UID
+useradd -u $USER_ID -s /bin/bash europa
+
+# Change ownership of the home directory
+chown -R $USER_ID:$USER_ID /home/europa
+
+# Switch to the new user and execute the command
+exec gosu europa &quot;$@&quot;
+</code></pre></div></p>
+<p>This script sets the <code>USER_ID</code> parameter based on the <code>UID</code> passed at runtime (defaulting to <code>1000</code> if not specified or if <code>UID</code> is <code>0</code>). It then creates a new user <code>europa</code>, changes ownership of <code>/home/europa</code>, and switches to that user to execute further commands.</p>
+<p>We can incorporate this script into our <code>Dockerfile</code>:
+<div class="highlight"><pre><span></span><code>FROM python:3.9-slim
+
+RUN apt-get update &amp;&amp; apt-get install -y gosu &amp;&amp; rm -rf /var/lib/apt/lists/*
+
+# Use pip to install the requirements
+RUN pip install numpy matplotlib jupyterlab notebook ipykernel ipython ipywidgets
+
+# Create a new user and change to that user
+ADD entrypoint.sh /home/europa/entrypoint.sh
+RUN chmod +x /home/europa/entrypoint.sh
+
+# # Move the europa&#39;s home directory
+WORKDIR /home/europa
+
+# Set the entrypoint
+ENTRYPOINT [ &quot;/home/europa/entrypoint.sh&quot; ]
+
+
+CMD [&quot;jupyter&quot;, &quot;lab&quot;, &quot;--ip=0.0.0.0&quot;, &quot;--port=8000&quot;]
+</code></pre></div></p>
+<p>This <code>Dockerfile</code> installs gosu, a utility for running commands as another user, and adds <code>entrypoint.sh</code>, making it executable. The <code>ENTRYPOINT</code> directive specifies the entry point script for the image.</p>
+<p><div class="highlight"><pre><span></span><code>RUN apt-get update &amp;&amp; apt-get install -y gosu &amp;&amp; rm -rf /var/lib/apt/lists/*
+</code></pre></div>
+This command updates the OS and installs <code>gosu</code>, before cleaning up the install meta data.
+<div class="highlight"><pre><span></span><code>ADD entrypoint.sh /home/europa/entrypoint.sh
+RUN chmod +x /home/europa/entrypoint.sh
+</code></pre></div>
+This command adds the <code>entrypoint.sh</code> to the home directory of some user <code>europa</code>.</p>
+<p><div class="highlight"><pre><span></span><code># Set the entrypoint
+ENTRYPOINT [ &quot;/home/europa/entrypoint.sh&quot; ]
+</code></pre></div>
+This line specifies the entrypoint script for the image. </p>
+<p>Let's build and test the image:
+<div class="highlight"><pre><span></span><code>docker build ./jupyter_example -t obriens/part1-jupyter 
+&gt; docker run --rm -it   obriens/part1-jupyter id
+
+uid=1000(europa) gid=1000(europa) groups=1000(europa)
+</code></pre></div></p>
+<p>By default, the <code>europa</code> user's ID is set to <code>1000</code>. We can modify this at runtime using <code>-e</code> to specify a variable:
+<div class="highlight"><pre><span></span><code>&gt; docker run --rm -it  -e UID=1001  obriens/part1-jupyter id
+
+uid=1001(europa) gid=1001(europa) groups=1001(europa)
+</code></pre></div></p>
+<p>It's best practice to avoid using the <code>root</code> user by default and to avoid hard-coding values like default user IDs. Using <code>--build-arg</code> and <code>ENTRYPOINT</code> provides flexibility at build and runtime, allowing Docker images to be configured dynamically based on user requirements.</p>
+<h3 id="container-lifecycle-start-stop-remove">Container lifecycle: start, stop, remove</h3>
+<p>The above Jupyter server is an excellent example of a service that can run in the background. Let's launch the container and detach from it using:
+<div class="highlight"><pre><span></span><code>docker run -d -it -p 8000:8000 -v $(pwd):/home/europa:rw --name jupyter obriens/part1-jupyter
+</code></pre></div>
+Here's what each flag does:
+- Removed the <code>--rm</code> flag to prevent the container from automatically deleting after exiting.
+- Added <code>-d</code> to detach the running container, allowing it to run in the background.
+- Specified a name using <code>--name jupyter</code> for easier identification and management.</p>
+<p>If we navigate to <code>localhost:8000</code>, we'll notice that we need to log in to the server using a token. This token would have been printed as output if we hadn't used the <code>-d</code> flag. To retrieve the token, we can attach a new terminal to the running container:
+<div class="highlight"><pre><span></span><code>docker exec -it jupyter bash
+</code></pre></div>
+This command starts a new interactive bash shell within the <code>jupyter</code> container (<code>-it</code> ensures an interactive session). From here, we can get the login token for the Jupyter server using:
+<div class="highlight"><pre><span></span><code>jupyter server list
+Currently running servers:
+http://8de969dd1385:8000/?token=84f69c1c8c61944fd6e322526db1c236457dc9b62fe15ffb :: /home/europa
+</code></pre></div>
+Copy and paste the token (<code>84f69c1c8c61944fd6e322526db1c236457dc9b62fe15ffb</code> in this example) into your web browser to log in to the Jupyter server.
+Once we're finished with the Jupyter server, we can stop it using:
+<div class="highlight"><pre><span></span><code>docker stop jupyter
+</code></pre></div>
+To restart it later, use:
+<div class="highlight"><pre><span></span><code>docker start jupyter
+</code></pre></div></p>
+<p>Keeping regularly used containers set up and ready to run can be very useful. Some use case examples include:</p>
+<ul>
+<li><b>Debugging tools</b>: Such as <a href="https://valgrind.org/">Valgrind</a>  which can be challenging to install on Mac or Windows directly.</li>
+<li><b>Analysis Pipelines</b>: Tools like <a href="https://heasarc.gsfc.nasa.gov/docs/software/heasoft/docker.html">Heasoft</a> that allow running pipelines on locally stored data.</li>
+<li><b>Specific Development Environments</b>: Such as legacy Python versions (e.g., Python 2) that may be difficult to compile on modern systems.</li>
+</ul>
+<p>By managing containers effectively, developers can streamline their workflows and maintain consistent environments across different platforms and projects.</p>
+<h1 id="summary">Summary</h1>
+<p>In this workshop, we've covered the basics of Docker:</p>
+<ul>
+<li>Running pre-built images.</li>
+<li>Building custom images and understanding image layers to optimize development.</li>
+<li>Configuring containers that require networking and mapping ports between the host system and the container.</li>
+<li>Mounting volumes within containers and managing permissions to control file access.</li>
+</ul>
+<p>In the next workshop, we will explore more advanced Docker features and dive into using Docker Compose to simplify managing and orchestrating Docker containers.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2025 TSI <br> <a href="https://github.com/vuquangtrong/mkdocs-material-blog">Blog Theme</a> / <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "toc.integrate", "header.autohide", "content.code.annotate", "content.code.copy"], "search": "../../../assets/javascripts/workers/search.c011b7c0.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.7389ff0e.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1633 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="TSI McGill Tutorials">
+      
+      
+        <meta name="author" content="Stephan O'Brien (stephan.obrien@mcgill.ca)">
+      
+      
+        <link rel="canonical" href="https://github.com/tsi-mcgill/tsi-tutorials/Cpp/cpp-tutorial/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.4">
+    
+    
+      
+        <title>Introduction to C++ - TSI McGill Tutorials</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="sandstone" data-md-color-primary="grey" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction-to-c" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TSI McGill Tutorials" class="md-header__button md-logo" aria-label="TSI McGill Tutorials" data-md-component="logo">
+      
+  <img src="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TSI McGill Tutorials
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introduction to C++
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="sandstone" data-md-color-primary="grey" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="gray"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Python/" class="md-tabs__link">
+        
+  
+    
+  
+  Python
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link">
+        
+  
+    
+  
+  C++
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Rust/" class="md-tabs__link">
+        
+  
+    
+  
+  Rust
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../VersionControl/" class="md-tabs__link">
+        
+  
+    
+  
+  Version Control
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Containerization/" class="md-tabs__link">
+        
+  
+    
+  
+  Containerization
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Misc/" class="md-tabs__link">
+        
+  
+    
+  
+  Misc
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TSI McGill Tutorials" class="md-nav__button md-logo" aria-label="TSI McGill Tutorials" data-md-component="logo">
+      
+  <img src="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png" alt="logo">
+
+    </a>
+    TSI McGill Tutorials
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Python/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C++
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Rust/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rust
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VersionControl/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Version Control
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Containerization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Containerization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Misc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Misc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="introduction-to-c">Introduction to C++</h1>
+<h2 id="what-is-the-aim-of-this-tutorial">What is the aim of this tutorial?</h2>
+<p>The aim of this tutorial is to provide you with an introduction to the C++ programming language. I assume that you have some background in programming, so I will skip topics like boolean logic. I'll also assume that you are not coming from a computer science background. We'll skip topics such as references and pointers, which may be the subject of a future workshop. Instead, we will focus on the core components involved in writing a C++ program.</p>
+<p>By the end of this tutorial, you will be able to do the following:</p>
+<ul>
+<li><strong>Understand data types:</strong> You will understand some of the different data types in C++ and when you might want to use one over the other.</li>
+<li><strong>Understand the structure of C++ code:</strong> You'll understand how to structure your code and learn some of the best practices.</li>
+<li><strong>Understand loops and statements:</strong> You'll understand how <code>for</code> and <code>while</code> loops work. We'll also touch on <code>do while</code> loops. We'll also learn how to control flow using <code>if</code> - <code>else if</code> - <code>else</code> statements.</li>
+<li><strong>Use arrays and vectors:</strong> We'll look at how to create arrays and vectors. We'll learn about some best practices for memory safety.</li>
+<li><strong>Functions:</strong> You'll understand how to write reusable code using functions. We'll learn the difference between a value and a reference when dealing with functions.</li>
+<li><strong>Parsing files and strings:</strong> You'll understand how to print to the command line and to files. You'll learn how to read text files, parse them, and extract useful information.</li>
+</ul>
+<h2 id="how-to-run-this-tutorial">How to run this tutorial</h2>
+<p>The code used in this tutorial is available on <a href="https://github.com/steob92/c-plus-plus-tutorial">GitHub</a>. I strongly recommend checking out the exercise branch and trying to work along with the notes here. Try to answer the problems before reading the solutions. If you get stuck, you can always check out the solutions branch.</p>
+<p>To run this tutorial, you'll need <code>g++</code> or <code>clang++</code> installed. These can be installed through the <code>gcc</code> or <code>clang</code> packages. Instructions on how to install these can be found <a href="https://github.com/steob92/c-plus-plus-tutorial">here</a>. Alternatively, you can compile all the examples using the <a href="https://hub.docker.com/_/gcc">GCC Docker image</a>. You can pull the latest Docker image using:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>pull<span class="w"> </span>gcc
+</code></pre></div>
+<h2 id="simplifying-docker-setup">Simplifying Docker Setup</h2>
+<p>To save time and streamline your Docker setup, consider pre-downloading the necessary image. Once you have the image, you can easily create a container to compile and execute your code. Here's how to do it:</p>
+<ol>
+<li>
+<p><strong>Pull the Docker Image:</strong></p>
+<p>Use the following command to pull the <code>gcc</code> image:</p>
+<p><div class="highlight"><pre><span></span><code>docker<span class="w"> </span>pull<span class="w"> </span>gcc
+</code></pre></div>
+This command downloads the image and stores it locally on your system.</p>
+</li>
+<li>
+<p><strong>Create a Docker Container:</strong></p>
+<p>Now, you can create a Docker container for compiling and running your code. Use the following command:
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/data<span class="w"> </span>-w<span class="w"> </span>/data<span class="w"> </span>gcc<span class="w"> </span>bash
+</code></pre></div></p>
+<p>Let's break down this command:</p>
+<ul>
+<li>`docker run`` initiates a new container.</li>
+<li><code>-it</code> specifies that you want an interactive shell.</li>
+<li><code>--rm</code> automatically removes the container when you exit.</li>
+<li><code>-v $(pwd):/data</code> mounts the current directory into the container at the location /data.</li>
+<li><code>-w /data</code> sets the working directory to /data within the container.</li>
+</ul>
+</li>
+</ol>
+<h2 id="what-is-c">What is C++</h2>
+<p>C++ is one of the most influential programming languages today, known for its exceptional performance. It empowers developers to create memory-efficient code that often outperforms native Python in terms of speed. Whether you are delving into the world of IoT or tackling high-performance computing, C++ remains a top choice for projects that prioritize efficient memory utilization and speedy execution.</p>
+<h3 id="key-differences-from-python">Key Differences from Python</h3>
+<p>Coming from a language like Python, you will immediately notice several differences when working with C++:</p>
+<ol>
+<li>
+<p><strong>Compiled Language:</strong>
+   Unlike Python, which can be executed through an interpreter, C++ is a "compiled" language. This means that before running C++ code, it must be compiled. Compilation takes code that is relatively readable to humans and transforms it into low-level machine code. One of the benefits of a compiled language is that the compiled program can be highly optimized at compile time, resulting in high-performing code.</p>
+</li>
+<li>
+<p><strong>Statically-Typed Language:</strong>
+   Unlike Python, where variable types are determined at runtime, C++ requires knowing the type of a variable at compile time. Python is a "dynamically-typed" language, allowing you to work with variables without specifying their type in advance. In C++, specifying the type during compilation may seem limiting, but it enables the compiler to optimize the executable for better performance.</p>
+</li>
+<li>
+<p><strong>Manual Memory Management:</strong>
+   In Python, the interpreter regularly pauses execution to check which variables are no longer within scope and to free up memory, thanks to the "garbage collector." While this automated memory management is convenient, it incurs a significant performance overhead. In C++, when a variable goes out of scope, its "destructor" is typically called. The destructor is a function that handles memory cleanup. However, in C++, developers need to be mindful because they can allocate memory dynamically using <code>new</code> or <code>alloc</code>. Such allocated memory must be explicitly released using <code>delete</code> or <code>dealloc</code> to avoid memory leaks.</p>
+</li>
+<li>
+<p><strong>Limited Memory Safety:</strong>
+   In Python, attempting to access an element beyond the boundaries of an array, such as the 11th element in a 10-element array, results in an error. In C++, however, such boundary violations allow access to memory that should not be touched. This leads to completely undefined behavior.</p>
+</li>
+<li>
+<p><strong>Thread-Friendly:</strong>
+   Python imposes the "Global Interpreter Lock" (GIL), restricting the execution of CPU-bound tasks to one at a time, regardless of the available cores. This is a memory safety feature aimed at avoiding data races. In C++, there is no such constraint. Developers can create a nearly infinite number of logical threads, and the code can utilize the available CPU cores for temporally concurrent threads. Memory safety and data race avoidance are managed using atomic types or barriers (for more details, see <a href="../parallel-cpp/">Introduction to Parallel Programming in C++ with OpenMP</a>).</p>
+</li>
+</ol>
+<p>These differences reflect the unique strengths and characteristics of C++, making it a powerful and versatile programming language.</p>
+<h3 id="why-use-c">Why use C++?</h3>
+<p>C++ allows us to write fast and memory efficient code that outpaces Python on most metrics. 
+Being a compiled language, we can pass pre-compiled binaries to end users, providing highly optimized executables ready for use. 
+The low foot print makes C++ ideal for devices such as microcontrollers (e.g. Arduinos), FPGAs and any memory limited devices. </p>
+<p>C++ is very common in scientific programming. 
+Complex memory intensive code (such as scientific simulations), often require huge resources.
+C++ naturally fufills these requirements, with code that easily scales.</p>
+<h2 id="the-anatomy-of-a-c-program">The Anatomy of a C++ program</h2>
+<h3 id="hello-world">Hello World</h3>
+<p>Like all good tutorials, we start with the basic "Hello World" example:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello_world.cpp</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Hello World&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Here we have an example code that prints "Hello World" to the terminal. Let's talk through this line-by-line.</p>
+<ol>
+<li>
+<p><code>#include &lt;iostream&gt;</code> Here we are "including" an external library to our code. We're using the library "iostream", a library that allows us to use functions relating to input and output. <code>iostream</code> is part of the C++ standard library, a vast set of code that we can build upon.</p>
+</li>
+<li>
+<p><code>int main() {...}</code> Here we are defining our <code>main</code> function. Executables should have a <code>main</code> function. This tells the complier that this is the entry point to the program. </p>
+</li>
+<li>
+<p><code>std::cout &lt;&lt; "Hello World" &lt;&lt; std::endl;</code> Here we are using <code>std::cout</code> to print a message to the screen. We are specifying the standard name space <code>std</code>. We pass the string "Hello World" to <code>std::cout</code> using <code>&lt;&lt;</code>. We then pass an additional arguement <code>std::endl</code>. <code>endl</code> passes the "end line" command to the <code>cout</code> essentially terminating the line. Finally we end the line with <code>;</code>. </p>
+</li>
+<li>
+<p><code>return 0</code> Here we are ending our <code>main</code> function by return 0. A program will return an exit code when it terminates. Exit codes tell the user about how the code finishes. An exit code of 0 means the code terminated successfully. We could return any number we want, but 0 typically means a successfull termination.</p>
+</li>
+</ol>
+<p>We can compile this code using either <code>g++</code> or <code>clang++</code>:
+<div class="highlight"><pre><span></span><code>g++<span class="w"> </span>hello_world.cpp<span class="w"> </span>-o<span class="w"> </span>hello_world
+</code></pre></div></p>
+<p>or
+<div class="highlight"><pre><span></span><code>clang++<span class="w"> </span>hello_world.cpp<span class="w"> </span>-o<span class="w"> </span>hello_world
+</code></pre></div></p>
+<p>Here the first argument <code>hello_world.cpp</code> is the source code we want to compile. We specify the target binary with the <code>-o</code> flag. We name the output executable <code>hello_world</code>. We can run our code using:</p>
+<div class="highlight"><pre><span></span><code>./hello_world
+</code></pre></div>
+<h3 id="data-types">Data Types</h3>
+<p>In C++, understanding different data types is crucial due to its static typing nature. While the actual size of these types may vary depending on the compiler and system, here are common data types:</p>
+<ul>
+<li><code>int</code>: Used for integer numbers (e.g., -1, 0, 23). Typically, it occupies 4 bytes or 32 bits.</li>
+<li><code>bool</code>: Represents Boolean values, either <code>true</code> or <code>false</code>, allowing for Boolean arithmetic.</li>
+<li><code>float</code>: Used for non-integer numbers (e.g., -0.2, 43.4, 12.0) with 32-bit precision.</li>
+<li><code>double</code>: Similar to <code>float</code> but with double the precision (64 bits).</li>
+<li><code>char</code>: Represents a single character or small integer value and typically occupies 8 bits (1 byte) of memory.</li>
+</ul>
+<p>Additional data types include:</p>
+<ul>
+<li><code>unsigned int</code>: Integer numbers that are unsigned, expanding the maximum possible value of the integer.</li>
+<li><code>short int</code>: Signed integers with half the size (2 bytes or 16 bits).</li>
+<li><code>long</code>: Allows storage of larger numbers than standard <code>int</code>, typically occupying 8 bytes or 64 bits.</li>
+</ul>
+<p>Beyond these basic types, you will also encounter during this tutorial:</p>
+<ul>
+<li><code>string</code>: A sequence of characters stored as an array of <code>char</code> elements, used to represent text or character data.</li>
+<li><code>fstream</code>: Used for file input and output operations, enabling reading from and writing to files.</li>
+</ul>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">data_types.cpp</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="c1">// Include the &lt;limits&gt; header for accessing information about data type limits.</span>
+<span class="hll"><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;limits&gt;</span>
+</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="c1">// int - 4-byte integer (minimum/maximum values):</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;integer a = &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="hll"><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Minimum value for int: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;::</span><span class="n">min</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span><span class="hll"><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Maximum value for int: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;::</span><span class="n">max</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span>
+
+<span class="w">    </span><span class="c1">// Precision of float and double:</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="p">.</span><span class="n">precision</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.14159265358979323846</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;float b = </span><span class="se">\t</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.14159265358979323846</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;double c = </span><span class="se">\t</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Full      </span><span class="se">\t</span><span class="s">&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;3.14159265358979323846&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Display minimum and maximum values for float and double:</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Minimum value for float: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;::</span><span class="n">min</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Maximum value for float: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;::</span><span class="n">max</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Minimum value for double: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;::</span><span class="n">min</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Maximum value for double: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;::</span><span class="n">max</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>On line 3 we are including the <code>limits</code> library. We are using the <code>std::numeric_limits&lt;T&gt;::min()</code> and <code>std::numeric_limits&lt;T&gt;::max()</code> method to get the minimum and maximum value of a data type <code>T</code>. Don't worry too much about the sytax here, they indicate that we're using a template, allowing us to appy these functions to different types of data types.</p>
+<p>When we compile this and look at the output we see:
+<div class="highlight"><pre><span></span><code>integer a = 42
+Minimum value for int: -2147483648
+Maximum value for int: 2147483647
+float b =       3.1415927410125732422
+double c =      3.141592653589793116
+Full            3.14159265358979323846
+Minimum value for float: 1.175494350822287508e-38
+Maximum value for float: 3.4028234663852885981e+38
+Minimum value for double: 2.2250738585072013831e-308
+Maximum value for double: 1.7976931348623157081e+308
+</code></pre></div></p>
+<p>We can determine the minimum and maximum values for <code>int</code>, <code>float</code>, and <code>double</code>. It's evident that when using a <code>float</code> instead of a <code>double</code>, precision is reduced. In the example above, the value of <span class="arithmatex">\(\pi\)</span> is accurate to the 6th decimal place for <code>float</code>, but extends to the 15th decimal place for <code>double</code>. This difference becomes significant when a high degree of precision is required.</p>
+<h3 id="namespaces">Namespaces</h3>
+<p>In C++, namespaces serve as a way to organize and group related code elements, including variables, functions, and classes, into distinct logical scopes. This organization helps prevent naming conflicts and enhances the modularity of your code.</p>
+<p>In our examples, we will primarily rely on the "standard" C++ library. It's beneficial to specify which namespace we are using to save us from having to write it out every time.</p>
+<p>Consider the <code>hello_world.cpp</code> example, where we can streamline the code by explicitly indicating the namespace we're using:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello_world.cpp</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="hll"><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+</span>
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Hello World&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>By employing <code>using namespace std;</code>, we eliminate the need to specify that we are using <code>cout</code> from the <code>std</code> namespace. The compiler will automatically assume the <code>std</code> namespace.</p>
+<p>While the examples we use here may not involve multiple namespaces, it is generally considered good practice to be explicit and specify the namespace of the elements you are using. This helps avoid issues when working with libraries that may contain classes or functions sharing the same names.</p>
+<h3 id="scopes">Scopes</h3>
+<p>In C++ we can make use of multiple "Scopes". You can think of scopes as blocks of code. Within these blocks we can define variables, perform operations, enter nested scopes, etc. In general, when we exit a scope any objects created within that scope will have their <code>destructor</code> called once we exit the scope (with the execption of objects created with <code>new</code>or  <code>alloc</code>). Objects native to a scope cannot be accessed from outside that scope, but objects within a scope can be accessed from within a nested scope. We can define a scope in C++ by wrapping a body of code between curley brackets.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">scopes.cpp</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="p">;</span>
+
+<span class="hll"><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span class="hll"><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123</span><span class="p">;</span>
+</span><span class="hll"><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">456</span><span class="p">;</span>
+</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;a is &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;b is &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Creating a new &quot;nested&quot; scope within our main function</span>
+<span class="hll"><span class="w">    </span><span class="p">{</span>
+</span><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Within the nested scope&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">        </span><span class="c1">// Here, we are &quot;shadowing&quot; the variable named &#39;a&#39;.</span>
+<span class="w">        </span><span class="c1">// Within the nested scope, we have a new &#39;a&#39;, which temporarily hides the outer &#39;a&#39;.</span>
+<span class="w">        </span><span class="c1">// This is allowed, but it can lead to confusion and is generally considered poor practice.</span>
+<span class="hll"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">43</span><span class="p">;</span><span class="w">  </span><span class="c1">// Shadowing the outer &#39;a&#39;</span>
+</span>
+<span class="w">        </span><span class="c1">// The variable &#39;c&#39; is created locally within this scope.</span>
+<span class="hll"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">789</span><span class="p">;</span>
+</span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;a is &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w">    </span><span class="c1">// Refers to the &#39;a&#39; in the nested scope</span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;b is &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w">    </span><span class="c1">// Accesses the outer &#39;b&#39;</span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;c is &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w">    </span><span class="c1">// Refers to the &#39;c&#39; in the nested scope</span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Leaving the nested scope&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="hll"><span class="w">    </span><span class="p">}</span>
+</span>
+<span class="hll"><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;a is &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w">    </span><span class="c1">// Refers to the outer &#39;a&#39;</span>
+</span><span class="hll"><span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;b is &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w">    </span><span class="c1">// Accesses the outer &#39;b&#39;</span>
+</span>
+<span class="w">    </span><span class="c1">// This will cause an error!</span>
+<span class="w">    </span><span class="c1">// Introduction/scopes.cpp:27:24: error: &#39;c&#39; was not declared in this scope</span>
+<span class="w">    </span><span class="c1">// 36 |     cout &lt;&lt; &quot;c is &quot; &lt;&lt; c &lt;&lt; endl;</span>
+<span class="hll"><span class="w">    </span><span class="c1">// cout &lt;&lt; &quot;c is &quot; &lt;&lt; c &lt;&lt; endl;</span>
+</span><span class="w">    </span><span class="c1">// This is because &#39;c&#39; was only local to the nested scope; the outer scope cannot access it.</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="hll"><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>On line 3 we define a new scope associated with the <code>main</code> function, this scope ends on line 40. We define integers <code>a</code> and <code>b</code> in the <code>main</code> scope. We created a new scope on line 13 which spans until line 28. This scope is "nested" within the main scope. Within this scope we define the integer <code>a</code> on line 19. What we are doing here is known as "shadowing" we are borrowing the use of the name within this scope. When we exit the scope the varable <code>a</code> reverts back to what it was outside of the scope, this is evident on line 30. On line 22 we define an integer <code>c</code> within the scope. This variable is local to the nested scope, but inaccessible to the parent scope (the <code>main</code> scope). When we exit the nested scope the <code>destructor</code> is called and the variable is dropped. If we uncommented line 36 we would get an error.</p>
+<p>Scopes are general blocks of code, we can modify the behaviour of the scope using loops and control access to the scope using statements. We'll learn about these in the next section.</p>
+<h2 id="flow-control">Flow Control</h2>
+<p>In this sections we'll look at how to control the flow of our code using <code>for</code>, <code>while</code> and <code>do while</code> loops and control access to scopes using <code>if</code>-<code>else if</code> and <code>else</code> statements. We won't touch <code>goto</code> and neither should you. We may briefly discuss <code>switch</code>.</p>
+<h3 id="for-loops">For loops</h3>
+<p><code>for</code> loops are used when we have a loop with a known number of iterations or a regular pattern we want to iterate over. In C++ they are defined as follows:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">initialization</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">termination</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">iteration</span><span class="p">){</span>
+<span class="w">    </span><span class="c1">// block of code to be ran</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The <code>for</code> loop has 3 fields each separated by a <code>;</code>. You can think of them as the following:
+- initialization : What we want to initialize at the start of the loop. This could be variables that we want to modify within the loop. For example <code>int i = 0;</code>. We can also initilize multiple variables, for example <code>int i = 0,  j = 5;</code>. In this case we are defining <code>i</code> within the scope of the <code>for</code> loop, but <code>j</code> would be local to the parent loop.
+- termination : The condition on which we will terminate the loop. This needs to be a boolean. For example if we want to exit the loop when i passes a certain value: <code>i &lt; 10</code>. While <code>i &lt; 10</code> this will be true, however when <code>i == 10</code>, this becomes false so we exit.
+- iteration : This field allows us to change something at the end each iteration of the loop. So for example if we want to increase the value of <code>i</code> by 1 we could use <code>i++</code></p>
+<p>Putting these together we can write a for loop, to loop from 0-9 as follows:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// Print out 0-9</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="w"> </span><span class="p">){</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+Starting at <code>i = 0</code> we pass through the loop. When we reach the end of the loop on line 4, <code>i++</code> will run and we will restart at the beginning of the loop with <code>i = 1</code>. The loop will check if <code>1 &lt; 10</code>, find <code>true</code> and continue running the loop. This will contiune until <code>i = 9</code>, when we finish this iteration of the loop we will apply <code>i++</code>, so now <code>i = 10</code>. When we try to reenter the loop the <code>10 &lt; 10</code> returns <code>false</code> and we exit the loop.</p>
+<p>You can create an infinite loop by not passing a termination condition.
+<div class="highlight"><pre><span></span><code><span class="c1">// This code will run forever!</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+<span class="w">    </span><span class="c1">// block of code    </span>
+<span class="p">}</span>
+</code></pre></div></p>
+<div class="admonition info">
+<p class="admonition-title">Creating a for loop using a range</p>
+<p>Since C++ 11 (the 2011 update of C++), one can loop over ranges and arrays using the following format:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">values</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">};</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">:</span><span class="w"> </span><span class="n">values</span><span class="p">){</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+</div>
+<h3 id="while-loops">While loops</h3>
+<p>In C++, <code>while</code> loops iterate over a block of code as long as a specified condition is true. The basic format of a <code>while</code> loop is as follows:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">condition</span><span class="p">){</span>
+<span class="w">    </span><span class="c1">// block of code</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+In boolean logic, any condition that is not <code>false</code> or <code>0</code> is considered <code>true</code>. For instance, <code>while (1)</code> and <code>while (1 &lt; 10)</code> are equivalent to <code>while (true)</code>. Even conditions like <code>while ("apple")</code> are treated as true.</p>
+<p>Here's an example of a <code>while</code> loop that counts from 0 to 9:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">){</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>You can also create infinite loops by providing a condition that is always <code>true</code>:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">){</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>In the latter example, the loop will continue indefinitely until manually terminated, often by sending a kill command to the program (e.g., <code>Ctrl + C</code>).</p>
+<p>To include a condition within the <code>while</code> loop and control when it should exit, you can use the <code>break</code> statement. Here's an example:</p>
+<p><div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">while_with_break.cpp</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">){</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
+<span class="hll"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">9</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span class="hll"><span class="w">        </span><span class="k">break</span><span class="p">;</span>
+</span><span class="hll"><span class="w">    </span><span class="p">}</span>
+</span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+In this example, the loop starts with <code>i = 0</code>, prints the value of <code>i</code>, increments <code>i</code> by one (<code>i++</code>), and checks if <code>i</code> is greater than 9. After 10 iterations (0 through 9), the <code>i &gt; 9</code> condition becomes <code>true</code> (<code>10 &gt; 9</code>), triggering the <code>break</code> statement, which exits the loop.</p>
+<p>There is another type of loop known as a <code>do while</code> loop. This is very similar to a <code>while</code> loop, except the condition is check at the end of the scope, rather than at the start of the scope. </p>
+<h3 id="controlling-flow-with-if-else-if-else">Controlling flow with <code>if</code>-<code>else if</code>-<code>else</code></h3>
+<p>You can use <code>if</code>, <code>else if</code>, and <code>else</code> statements to control the flow of your program, directing it to different branches or code scopes based on conditions. Here's the format:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">condition1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Code block for condition1</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">condition2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Code block for condition2</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">condition3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Code block for condition3</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Default code block</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>In this example, the program checks conditions one by one. If <code>condition1</code> is true, it enters the scope of the first <code>if</code>. If it's <code>false</code>, it checks <code>condition2</code>, and so on. If none of the conditions are true, it enters the <code>else</code> block, which serves as the default code. Keep in mind that you always need to start with an <code>if</code> statement, but you can omit <code>else if</code> or <code>else</code> as needed. In the <code>while_with_break.cpp</code> example, only an <code>if</code> statement was used.</p>
+<p>The order of the <code>else if</code> statements are also important. If <code>condition2</code> and <code>condition3</code> are both <code>true</code> we will only enter the first block corresponding to <code>condition2</code>.</p>
+<p>Here's a more detailed example:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// Loop from 0-infinity </span>
+<span class="c1">// Loop from 0 to infinity</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+
+<span class="hll"><span class="w">    </span><span class="c1">// Check if i is even using the % operator</span>
+</span><span class="hll"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span class="hll"><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; is even!&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+</span><span class="hll"><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+</span><span class="hll"><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; is odd!&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+</span><span class="hll"><span class="w">    </span><span class="p">}</span>
+</span>
+<span class="hll"><span class="w">    </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span>
+<span class="hll"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span class="hll"><span class="w">        </span><span class="k">break</span><span class="p">;</span><span class="w">  </span><span class="c1">// Exit the loop if i is greater than 10</span>
+</span><span class="hll"><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span class="hll"><span class="w">        </span><span class="k">continue</span><span class="p">;</span><span class="w">  </span><span class="c1">// Skip to the start of the next iteration if i is 3</span>
+</span><span class="hll"><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+</span><span class="hll"><span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Back to the start!&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span><span class="w">  </span><span class="c1">// Print a message if neither condition is true</span>
+</span><span class="hll"><span class="w">    </span><span class="p">}</span>
+</span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>In this code, the <code>%</code> operator is used for the modulo operation, which returns the remainder of a division operation. <code>i % 2</code> will return <code>0</code> if the number is even or <code>1</code> if the number is odd. We increment the value of <code>i</code> by one (line 13) and use a second set of <code>if</code> statements (lines 15-21). The first <code>if</code> provides a break if <code>i &gt; 10</code>, while the <code>else if</code> allows us to skip to the start of the next iteration using a <code>continue</code> command if i is 3. The <code>else</code> block prints a message if neither of these conditions is <code>true</code>.</p>
+<p>This code will give us the following output:
+<div class="highlight"><pre><span></span><code><span class="m">0</span><span class="w"> </span>is<span class="w"> </span>even!
+Back<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>start!
+<span class="m">1</span><span class="w"> </span>is<span class="w"> </span>odd!
+Back<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>start!
+<span class="m">2</span><span class="w"> </span>is<span class="w"> </span>even!
+<span class="m">3</span><span class="w"> </span>is<span class="w"> </span>odd!
+Back<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>start!
+<span class="m">4</span><span class="w"> </span>is<span class="w"> </span>even!
+Back<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>start!
+<span class="m">5</span><span class="w"> </span>is<span class="w"> </span>odd!
+Back<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>start!
+<span class="m">6</span><span class="w"> </span>is<span class="w"> </span>even!
+Back<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>start!
+<span class="m">7</span><span class="w"> </span>is<span class="w"> </span>odd!
+Back<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>start!
+<span class="m">8</span><span class="w"> </span>is<span class="w"> </span>even!
+Back<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>start!
+<span class="m">9</span><span class="w"> </span>is<span class="w"> </span>odd!
+Back<span class="w"> </span>to<span class="w"> </span>the<span class="w"> </span>start!
+<span class="m">10</span><span class="w"> </span>is<span class="w"> </span>even!
+</code></pre></div></p>
+<p>When using <code>if</code>-<code>else if</code>-<code>else</code> we can have an infinite number of <code>else if</code> conditions, but only one <code>if</code> and at most one <code>else</code>. </p>
+<h3 id="controling-flow-with-a-switch">Controling Flow with a Switch</h3>
+<p>We can also use <code>switch</code> statements to control flow.</p>
+<p>Switch statements are a useful method for controlling the flow of code. They are particularly effective for handling errors and parsing parameters when the potential outcomes are well-known. </p>
+<p>A <code>switch</code> statement can be implemented with the following syntax:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">value</span><span class="p">){</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">value_1</span><span class="p">:</span>
+<span class="w">        </span><span class="c1">// block of code</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">value_2</span><span class="p">:</span>
+<span class="w">        </span><span class="c1">// block of code</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="no">value_n</span><span class="p">:</span>
+<span class="w">        </span><span class="c1">// block of code</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="k">default</span><span class="o">:</span>
+<span class="w">        </span><span class="c1">// block of code</span>
+<span class="w">        </span><span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>Here, the <code>value</code> is a parameter we want to test within the <code>switch</code>. When using a <code>switch</code>, we test specific cases (<code>case</code>). For example, in the <code>case value_1</code> branch, we are testing if <code>value == value_1</code>. If this is true, then the block of code within that branch will be executed. Notice here that a <code>break</code> statement is used at the end of the block of code. This prevents the other branches from being executed by <code>break</code>ing from the <code>switch</code> construct.</p>
+<p>We can have any number of <code>case</code> statements within the <code>switch</code>. 
+You'll notice that there is a special condition called <code>default</code>. 
+This block will execute if reached regardless of the value.
+It specifies the "default" behavior of the code.</p>
+<p>For example, we can write a similar block to our <code>if</code> statement example:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="hll"><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nb">true</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span>
+<span class="w">    </span><span class="c1">// Check if i is even using the % operator</span>
+<span class="hll"><span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="mi">0</span><span class="p">:</span>
+<span class="w">            </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; is even!&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span>
+<span class="w">            </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; is odd!&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
+
+<span class="hll"><span class="w">    </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">){</span>
+</span><span class="hll"><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="mi">3</span><span class="p">:</span>
+</span><span class="w">            </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; is between 0 and 3&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="mi">4</span><span class="p">:</span>
+<span class="w">            </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; is exactly 4&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="hll"><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="mi">7</span><span class="p">:</span>
+</span><span class="w">            </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; is between 5 and 7&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="k">default</span><span class="o">:</span>
+<span class="w">            </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; greter than 7&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="hll"><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>Here we are using two <code>switch</code> statements. 
+The first, on line 5, takes <code>i % 2</code>, which will be <code>0</code> if <code>i</code> is even and <code>1</code> if <code>i</code> is odd.
+The second, starting on line 16, takes the argument <code>i</code>. 
+Here we're checking the actual value of <code>i</code>. 
+On lines 17 and 23, we are checking if <code>i</code> lies within a range.
+In C++, we can do this with the <code>lower ... higher</code> syntax.
+Note this is explicitly <code>0 ... 3</code>, not <code>0...3</code>.
+On line 28, we are using a <code>return</code> to exit not just the switch but also the <code>while</code> loop.
+This is because running a <code>break</code> from within the <code>switch</code> would only break from the <code>switch</code> and not the outer <code>while</code> loop. This would output the following:</p>
+<div class="highlight"><pre><span></span><code>0 is even!
+1 is between 0 and 3
+1 is odd!
+2 is between 0 and 3
+2 is even!
+3 is between 0 and 3
+3 is odd!
+4 is exactly 4
+4 is even!
+5 is between 5 and 7
+5 is odd!
+6 is between 5 and 7
+6 is even!
+7 is between 5 and 7
+7 is odd!
+8 greter than 7
+</code></pre></div>
+<p>Let's consider a more useful example. Let's say we have a device that we are controlling with C++. 
+The device can have one of three states: on, off, or standby. 
+We can define an <code>enum</code> to handle these three options.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">enum</span><span class="w"> </span><span class="nc">Status</span><span class="w"> </span><span class="p">{</span><span class="n">On</span><span class="p">,</span><span class="w"> </span><span class="n">Off</span><span class="p">,</span><span class="w"> </span><span class="n">Standby</span><span class="p">};</span>
+</code></pre></div></td></tr></table></div>
+<p>An <code>enum</code> is very useful when considering a fixed number of possible options. 
+The option to use a human-readable <code>enum</code> can also help with debugging by providing a human-readable status (e.g., <code>Status::Standby</code>) instead of an error code that might not make sense within the correct context (e.g., <code>2</code>).</p>
+<p>Let's now define a function to get a random status. 
+This will emulate a device that we want to interface with:</p>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="n">Status</span><span class="w"> </span><span class="nf">get_status</span><span class="p">(){</span>
+</span><span class="hll"><span class="w">    </span><span class="n">srand</span><span class="w"> </span><span class="p">(</span><span class="n">time</span><span class="p">(</span><span class="nb">NULL</span><span class="p">));</span>
+</span><span class="hll"><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">stat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rand</span><span class="p">()</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+</span><span class="w">    </span><span class="k">switch</span><span class="p">(</span><span class="n">stat</span><span class="p">){</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">Status</span><span class="o">::</span><span class="n">On</span><span class="p">;</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="mi">2</span><span class="p">:</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">Status</span><span class="o">::</span><span class="n">Off</span><span class="p">;</span>
+<span class="w">        </span><span class="k">default</span><span class="o">:</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">Status</span><span class="o">::</span><span class="n">Standby</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+On line 1, we are defining that this is a function (more on functions later) that returns a <code>Status</code> type (which we defined before as an <code>enum</code>).
+On lines 2 and 3, we initialize a random number generator and get a random number between 1 and 3. 
+We then use this random number to return a status.
+When the random number is 1, we return <code>Status::On</code>.
+When the random number is 2, we return <code>Status::Off</code>. 
+The <code>default</code> case here is <code>Status::Standby</code>.</p>
+<p>We can imagine that the <code>get_status</code> function is actually part of the API for some device.
+Let's say it is a readout device; when the status is <code>On</code>, it is powered on. 
+When the status is <code>Off</code>, either the device is off or it cannot be reached.
+When the status is <code>Standby</code>, it is awaiting instructions.
+Let's assume we send a power-on command with some function <code>activate_device</code>. For now, let's take:</p>
+<div class="highlight"><pre><span></span><code><span class="kt">void</span><span class="w"> </span><span class="nf">activate_device</span><span class="p">(){</span>
+<span class="w">    </span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>In our workflow, it would be important to wait until the device has completely powered on and is in <code>Standby</code> mode before we send instructions. 
+We could write something like:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+
+<span class="hll"><span class="w">    </span><span class="n">activate_device</span><span class="p">();</span>
+</span>
+<span class="hll"><span class="w">    </span><span class="n">Status</span><span class="w"> </span><span class="n">stat</span><span class="p">;</span>
+</span><span class="hll"><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">stat</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">Status</span><span class="o">::</span><span class="n">Standby</span><span class="p">)</span>
+</span><span class="w">    </span><span class="p">{</span><span class="w">        </span>
+<span class="hll"><span class="w">        </span><span class="n">stat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_status</span><span class="p">();</span>
+</span>
+<span class="hll"><span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">stat</span><span class="p">){</span>
+</span><span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="no">Status</span><span class="o">::</span><span class="no">On</span><span class="p">:</span>
+<span class="w">                </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Device is On&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">                </span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="no">Status</span><span class="o">::</span><span class="no">Off</span><span class="p">:</span>
+<span class="w">                </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Device is Off&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="hll"><span class="w">                </span><span class="n">activate_device</span><span class="p">();</span>
+</span><span class="w">                </span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="no">Status</span><span class="o">::</span><span class="no">Standby</span><span class="p">:</span>
+<span class="w">                </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Device is in Standby&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>On line 3, we send the power-on command to our device.
+On line 5, we define a <code>Status</code> object called <code>stat</code>.
+On line 6, we use a <code>while</code> loop to repeatedly check the status of the device.
+On line 8, we retrieve the status of the device.
+On line 10, we use a <code>switch</code> statement to match the <code>stat</code> to the possible values of that <code>enum</code>.
+If the device is either <code>Status::On</code> or <code>Status::Off</code>, we sleep for 1 second and then restart the loop.
+If the status is <code>Status::Off</code>, we also resend the power-on command with the <code>activate_device</code> function. 
+Finally, if the status is <code>Status::Standby</code>, we can continue with our program.</p>
+<p>Here is an example output from such a program:</p>
+<div class="highlight"><pre><span></span><code>Device is On
+Device is Off
+Device is Off
+Device is On
+Device is On
+Device is Off
+Device is On
+Device is in Standby
+</code></pre></div>
+<h2 id="storing-data">Storing Data</h2>
+<h3 id="arrays">Arrays</h3>
+<p>We can define arrays of a data type in C++ using the following format:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="c1">// Define an array of 6 integers</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">my_array</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">};</span>
+
+<span class="w">    </span><span class="c1">// This will print the 3rd entry -&gt; 3</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;The 3rd entry in the array is: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">my_array</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div></p>
+<p>If we do not know the size of an array at compile time, we may <code>dynamically</code> allocate memory for the array:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// Where n is some integer unknown at compile time.</span>
+<span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">my_array</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="p">[</span><span class="n">n</span><span class="p">];</span>
+
+<span class="cm">/* do stuff with code */</span>
+
+<span class="k">delete</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="n">my_array</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
+On line we create a new array called <code>my_array</code> using the <code>new</code> keyword. When we do this we are dynamically allocating memory on the heap. The size of the region is going to be enough to hold <code>n</code> integers. The <code>int *my_array</code> syntax is important in C++. We have defined a "pointer" to an array of integers.  When we define a new array of values it is important to <code>delete</code> the data once we're finished with it. This is done on line 6. If we fail to do so, we will end up with a memory leak, causing our memory usage to rise over time.</p>
+<div class="admonition info">
+<p class="admonition-title">Aside on pointers</p>
+<p>We may discuss pointers later, but essentially, we can think of them not as the actual array itself, but rather as signposts to where the array is stored.
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">a_pointer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">a</span><span class="p">;</span>
+
+<span class="c1">// Access the value of the pointer</span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;The Value of a is: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; or by pointer &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">*</span><span class="n">a_pointer</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;The address of a is: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">a</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; or by pointer &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a_pointer</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;The Value of b is: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; and its address is &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">b</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+
+<span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
+This will output:
+<div class="highlight"><pre><span></span><code>The Value of a is: 42 or by pointer 42
+The address of a is: 0x7ffee5f38334 or by pointer 0x7ffee5f38334
+The Value of b is: 42 and its address is 0x7ffee5f38330
+</code></pre></div></p>
+<p>On line 1, we define the integer <code>a</code>. On line 2, we set <code>b</code> to be equal to <code>a</code>. On line 3, we create a pointer <code>a_pointer</code> and assign it to <code>&amp;a</code>. Here, <code>&amp;`` represents that we're passing a reference to</code>a<code>rather than the value of</code>a<code>. The reference can be thought of as the actual location in memory of</code>a`.</p>
+<p>From the output, we see that <code>a</code>, <code>b</code>, and <code>a_pointer</code> all return <code>42</code>. However, the address of <code>a</code> and <code>b</code> is different. While the values are equal, they are not the same. However, the address returned by <code>&amp;a</code> and <code>a_pointer</code> is identical. This is because <code>a_pointer</code> is pointing to the spot in memory that <code>a</code> occupies.</p>
+</div>
+<p>When working with arrays we need to be careful when accessing elements of the array as C++ doesn't offer protection about going out of range:</p>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="c1">// Define an array of 6 integers</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">my_array</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">};</span>
+
+<span class="w">    </span><span class="c1">// This will print the 3rd entry -&gt; 3</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;The 3rd entry in the array is: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">my_array</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;The 7th entry in the array is: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">my_array</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
+The above example will execute, but we will be accessing whatever is in the memory at that location. This will be undefined behaviour!</p>
+<h3 id="vectors">Vectors</h3>
+<p>Vectors offer a safer way to store data, and they can be defined as follows:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// Create an empty vector of integers</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">my_vector</span><span class="p">;</span>
+<span class="c1">// Create a vector of length n</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">my_vector_long</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+<span class="c1">// Create a vector of length n with a default value of 42</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="w"> </span><span class="n">my_vector_long</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="mf">42.0</span><span class="p">);</span>
+<span class="c1">// Create a vector with known values</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">my_known_vector</span><span class="p">{</span><span class="mf">1.1</span><span class="p">,</span><span class="w"> </span><span class="mf">2.3</span><span class="p">};</span>
+<span class="c1">// Create 2D vectors (vectors of vectors)</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">my_2d_vector</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div></p>
+<p>Vectors provide safety and have a known length, which can be obtained using:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">vec_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">my_vector</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+
+<span class="c1">// Get the last element of the vector</span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Last element: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">my_vector</span><span class="p">[</span><span class="n">vec_size</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div></p>
+<p>You can dynamically add values to the vector using <code>push_back</code>:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// Define an empty vector</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">my_vector</span><span class="p">;</span>
+
+<span class="c1">// Add numbers 0-9 to our vector</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+<span class="w">    </span><span class="n">my_vector</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">// This will output 10</span>
+<span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Length of vector &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">my_vector</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div></p>
+<p>You can also change the size of the vector with:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">my_vector</span><span class="p">;</span>
+
+<span class="c1">// Resize to have 10 elements</span>
+<span class="n">my_vector</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="c1">// Resize to have 5 elements</span>
+<span class="n">my_vector</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+
+<span class="c1">// Resize to have 20 elements and set the values to 0</span>
+<span class="n">my_vector</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div></p>
+<p>Vectors provide a memory-efficient way to store arrays of data. When a <code>vector</code> is removed, either by deletion or leaving scope, the destructor of the vector's elements is called, freeing the memory so that you don't need to manage it.</p>
+<h2 id="functions">Functions</h2>
+<p>So far, we have used a single function, the main function. In C++, main is a special keyword that designates the entry point for our code. Let's take a closer look at the main function to understand the basics of how functions work in C++:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+On line 1, we define a function called <code>main</code>. It's important to note that this function has a return value, which is an <code>int</code>. The code for the function is enclosed within curly brackets <code>{}</code>, defining the scope of the function. In the example above, the <code>main</code> function simply returns <code>0</code>.</p>
+<p>We can also define functions that take arguments by specifying the argument types and providing them with local names within the function's scope:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// Define a function that adds two vectors of integers together and returns the result</span>
+<span class="hll"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">add_two_vectors</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span class="w">    </span><span class="c1">// Define a vector to hold the result, ensuring it has the same size as the input vectors</span>
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="hll"><span class="w">        </span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// Return the result</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">...</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">x</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="n">y</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="hll"><span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">add_two_vectors</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
+</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>In the example above, we define a function named <code>add_two_vectors</code> that takes two vectors of integers as arguments, adds the corresponding elements together, and returns the result as a new <code>vector</code>. This demonstrates how you can define and use functions in C++ to modularize your code and perform specific tasks.</p>
+<p>In C++, unlike in Python, we can "overload" functions by defining multiple functions with the same name but accepting different argument types. For example, consider the following case:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// Define a function that adds two vectors of integers together and returns the result</span>
+<span class="hll"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">add_two_vectors</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><span class="w">    </span><span class="c1">// Define a vector to hold the result, ensuring it has the same size as the input vectors</span>
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="hll"><span class="w">        </span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// Return the result</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Define a function that adds two vectors of booleans together and returns the result</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">add_two_vectors</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Define a vector to hold the result, ensuring it has the same size as the input vectors</span>
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="hll"><span class="w">        </span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// Return the result</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>In the above example, we have "overloaded" the <code>add_two_vectors</code> function to accept vectors of integers and vectors of booleans. The structure of the two functions is very similar, with the main difference occurring on line 23. In the second function, we replaced the addition operator <code>+</code> with the logical "OR" operator <code>||</code>. This demonstrates how you can create multiple functions with the same name but different behaviors based on the types of arguments they receive.</p>
+<p>Knowing that logical '+' represents "OR" and "*" stands for "AND", we can rewrite the previous example using multiplication:</p>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1">// Define a function that multiplies two vectors of integers and returns the result</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">multiply_two_vectors</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Define a vector to hold the result, ensuring it has the same size as the input vectors</span>
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="hll"><span class="w">        </span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// Return the result</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Define a function that multiplies two vectors of booleans and returns the result</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">multiply_two_vectors</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Define a vector to hold the result, ensuring it has the same size as the input vectors</span>
+<span class="w">    </span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">result</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="hll"><span class="w">        </span><span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// Return the result</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+Here the <code>&amp;&amp;</code> operator represents the logical "and" operator. Overloading functions is super useful when you want to use common names for functions that perform similar operations on different data types.</p>
+<p>We can also set default values in functions using the following:
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="kt">void</span><span class="w"> </span><span class="nf">print_message</span><span class="p">(</span><span class="kt">bool</span><span class="w"> </span><span class="n">hello</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">){</span>
+</span><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">hello</span><span class="p">){</span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Hello World&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Goodbye World&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="p">...</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="c1">// Will print &quot;Hello World&quot;</span>
+<span class="hll"><span class="w">    </span><span class="n">print_message</span><span class="p">();</span>
+</span><span class="w">    </span><span class="c1">// Will print &quot;Goodbye World&quot;</span>
+<span class="hll"><span class="w">    </span><span class="n">print_message</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div></p>
+<p>On line 1, we define a function with a return type specified as <code>void</code>, indicating that the function doesn't return any value. When defining the function's parameters, we allow the bool parameter to have a default value of <code>true</code>. On line 14, when calling the function without passing any arguments, the default values are used. On line 16, we explicitly pass the value <code>false</code>, which overrides the default argument.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2025 TSI <br> <a href="https://github.com/vuquangtrong/mkdocs-material-blog">Blog Theme</a> / <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "toc.integrate", "header.autohide", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.c011b7c0.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.7389ff0e.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

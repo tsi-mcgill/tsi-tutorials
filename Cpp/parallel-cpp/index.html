@@ -1,0 +1,1249 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="TSI McGill Tutorials">
+      
+      
+        <meta name="author" content="Stephan O'Brien (stephan.obrien@mcgill.ca)">
+      
+      
+        <link rel="canonical" href="https://github.com/tsi-mcgill/tsi-tutorials/Cpp/parallel-cpp/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.4">
+    
+    
+      
+        <title>Introduction to Parallel Programming in C++ with OpenMP - TSI McGill Tutorials</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="sandstone" data-md-color-primary="grey" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction-to-parallel-programming-in-c-with-openmp" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TSI McGill Tutorials" class="md-header__button md-logo" aria-label="TSI McGill Tutorials" data-md-component="logo">
+      
+  <img src="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TSI McGill Tutorials
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introduction to Parallel Programming in C++ with OpenMP
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="sandstone" data-md-color-primary="grey" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="gray"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Python/" class="md-tabs__link">
+        
+  
+    
+  
+  Python
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link">
+        
+  
+    
+  
+  C++
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Rust/" class="md-tabs__link">
+        
+  
+    
+  
+  Rust
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../VersionControl/" class="md-tabs__link">
+        
+  
+    
+  
+  Version Control
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Containerization/" class="md-tabs__link">
+        
+  
+    
+  
+  Containerization
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Misc/" class="md-tabs__link">
+        
+  
+    
+  
+  Misc
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TSI McGill Tutorials" class="md-nav__button md-logo" aria-label="TSI McGill Tutorials" data-md-component="logo">
+      
+  <img src="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png" alt="logo">
+
+    </a>
+    TSI McGill Tutorials
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Python/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C++
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Rust/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rust
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../VersionControl/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Version Control
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Containerization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Containerization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Misc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Misc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="introduction-to-parallel-programming-in-c-with-openmp">Introduction to Parallel Programming in C++ with OpenMP</h1>
+<h2 id="introduction-to-openmp-in-c">Introduction to OpenMP in C++</h2>
+<p>In this tutorial, I aim to introduce you to OpenMP, a library facilitating multiprocessing in C++. I assume little-to-no background in computer science or low-level programming, and only a basic understanding of C++. I will steer clear of technical jargon wherever possible. Many online resources presume you are a seasoned programmer or computer scientist. Instead, I assume that you utilize programming as a tool and prioritize the "how" over the "why". However, for those interested in the rationale behind concepts, I will include some links at the bottom for further reading.</p>
+<p>If you are an experienced programmer, you might notice some terminology that may seem imprecise. For instance, when using <code>shared</code> and <code>private</code>, I refer to "copy" instead of delving into references and mutability intricacies. As mentioned, this tutorial caters to learners seeking to grasp concepts and initiate coding rather than the theoretical computer science underpinning these concepts.</p>
+<p>Worried about setting up your environment correctly? Want to just run the examples here? These examples can be run from a <a href="./docker.md">docker image</a>, see <a href="https://hub.docker.com/repository/docker/obriens/parallel/">here</a> for the latest image. 
+<div class="highlight"><pre><span></span><code>docker run -it --rm --gpus all obriens/parallel:latest 
+</code></pre></div></p>
+<h2 id="how-to-calculate-pi">How to Calculate <span class="arithmatex">\(\pi\)</span></h2>
+<h2 id="calculating-using-a-riemann-sum-approximation">Calculating π using a Riemann Sum Approximation</h2>
+<p>To determine the value of π, we can solve the following integral:</p>
+<div class="arithmatex">\[ \pi = \int_0^1 \frac{4}{1+x^2} \,dx. \]</div>
+<p>An approximation of this integral can be made using a Riemann Sum, also known as the "rectangle rule," defined as:</p>
+<div class="arithmatex">\[ S = \sum_{i=1}^{n} f(x^*_i) \, \Delta x, \]</div>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\(n\)</span> represents the number of "rectangles."</li>
+<li><span class="arithmatex">\(f(x^*_i)\)</span> denotes a point within the range <span class="arithmatex">\((x_{i-1}, x_{i})\)</span>.</li>
+<li><span class="arithmatex">\(\Delta x = x_{i} - x_{i-1}\)</span> represents the width of each rectangle.</li>
+<li><span class="arithmatex">\(f(x^*_i)\)</span> is the function to approximate at <span class="arithmatex">\(x^*_i\)</span>.</li>
+</ul>
+<p>Within this summation, the calculation involves finding the area of a rectangle with width <span class="arithmatex">\(\Delta x\)</span> and height <span class="arithmatex">\(f(x^*_i)\)</span>. Determining the value of <span class="arithmatex">\(n\)</span> allows full coverage of the entire integral domain by summing rectangles of width <span class="arithmatex">\(\Delta x\)</span>.</p>
+<p>For instance, in the case of approximating π using 100 steps ($ n = 100 $), the width is calculated as <span class="arithmatex">\(\Delta x = \frac{(b - a)}{n} = \frac{(1 - 0)}{100} = 0.01\)</span>.</p>
+<!-- <figure markdown>
+    ![Riemann Sum](./images/parallel-cpp-Riemann-sum-convergence.png)
+  <figcaption>Riemann sum example. [Image credit](https://en.wikipedia.org/wiki/Riemann_sum) </figcaption>
+</figure> -->
+
+<figure>
+<p><img alt="Riemann Sum" src="../../images/parallel-cpp-Riemann-sum-convergence.png" width="500" />
+  </p>
+<figcaption> Riemann sum example. (https://en.wikipedia.org/wiki/Riemann_sum) </figcaption>
+</figure>
+<h2 id="estimating-using-riemann-sum">Estimating π using Riemann Sum</h2>
+<p>To estimate the value of π, we can use the following formula:</p>
+<div class="arithmatex">\[ \pi \approx \sum_{i=1}^{n} \frac{4}{1+((i+0.5)*\Delta x)^2} \, \Delta x. \]</div>
+<p>Here, we define <span class="arithmatex">\(x^*_i\)</span> as the midpoint between <span class="arithmatex">\(x_{i-1}\)</span> and <span class="arithmatex">\(x_{i}\)</span>. As <span class="arithmatex">\(n \rightarrow \infty\)</span>, the estimation becomes independent of how we define <span class="arithmatex">\(x^*_i\)</span>.</p>
+<p>In C++, the approximation formula would look something like this:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">calc_pi_serial</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="nf">calc_pi_serial</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num_steps</span><span class="p">){</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">pi</span><span class="p">,</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="hll"><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="w"> </span><span class="n">num_steps</span><span class="p">;</span>
+</span><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="w"> </span><span class="n">num_steps</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+<span class="hll"><span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="n">step</span><span class="p">;</span>
+</span><span class="hll"><span class="w">        </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">4.0</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">);</span>
+</span><span class="w">    </span><span class="p">}</span>
+<span class="hll"><span class="w">    </span><span class="n">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sum</span><span class="p">;</span>
+</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">pi</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>On line 4, we utilize the requested number of steps (<code>num_steps</code>) to define <code>step</code>, which represents <span class="arithmatex">\(\Delta x\)</span>. Note that we "cast" the <code>int</code> <code>num_steps</code> to a <code>double</code> type in the division. </p>
+<p>Moving to line 6, we determine <span class="arithmatex">\(x^*_i\)</span> as the midpoint between <span class="arithmatex">\(x_{i-1}\)</span> and <span class="arithmatex">\(x_{i}\)</span> before adding the current iteration to the total.</p>
+<p>Finally, on line 9, we multiply the <code>sum</code> by <code>step</code>, thereby calculating the area of the rectangle. As <span class="arithmatex">\(\Delta x\)</span> remains constant, we can optimize the code by taking this operation out of the loop.</p>
+<p>Before evaluating the code's performance, let's include some useful libraries.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
+</code></pre></div>
+<p>In this implementation, we'll utilize <code>iostream</code> along with <code>cout</code> for printing the results. Additionally, we will employ <code>chrono</code> to measure the time taken for the code execution. </p>
+<p>Combining these libraries together, we get the following:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">calculate_pi.cpp</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span>
+
+<span class="c1">// Function to calculate pi</span>
+<span class="kt">double</span><span class="w"> </span><span class="nf">calculate_pi</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num_steps</span><span class="p">){</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">pi</span><span class="p">,</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.</span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="w"> </span><span class="n">num_steps</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">num_steps</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+<span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="n">step</span><span class="p">;</span>
+<span class="w">        </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">4.0</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="n">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">step</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">pi</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+
+<span class="w">    </span><span class="c1">// 1 million steps</span>
+<span class="hll"><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">num_steps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000000</span><span class="p">;</span>
+</span><span class="hll"><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n_repeat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span>
+</span>
+<span class="w">    </span><span class="c1">// mean pi value</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">serial_pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Run timer</span>
+<span class="hll"><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">start_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+</span><span class="hll"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n_repeat</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="n">serial_pi</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">calculate_pi</span><span class="p">(</span><span class="n">num_steps</span><span class="p">);</span>
+</span><span class="hll"><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">end_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">high_resolution_clock</span><span class="o">::</span><span class="n">now</span><span class="p">();</span>
+</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">serial_duration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">end_time</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_time</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Print average results</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Serial Calculation of Pi: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">serial_pi</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n_repeat</span><span class="w"> </span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Duration: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">serial_duration</span><span class="p">.</span><span class="n">count</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">n_repeat</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; seconds&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Lines 21 and 22 involve defining <code>num_steps</code> as 1 million and <code>n_repeat</code> as 50. This setup allows us to repeat the calculation of <span class="arithmatex">\(\pi\)</span> 50 times, considering the mean run time as our performance metric.</p>
+<p>Moving to lines 28-30, we initiate a timer, execute the function 50 times, and subsequently stop the timer, calculating the duration on line 32. Finally, we present the mean results.</p>
+<p>Upon compiling this example and running it, the observed output is:</p>
+<div class="highlight"><pre><span></span><code>Serial Calculation of Pi: 3.14159 
+Duration: 0.00263172 seconds 
+</code></pre></div>
+<p>An execution time of 0.003 seconds doesn't sound too bad, providing us with an accurate estimation of <span class="arithmatex">\(\pi\)</span>. However, it would be beneficial to explore how we can further enhance the speed of this code.</p>
+<p>To leverage parallel execution, we must reconsider our algorithm. This involves identifying which sections can be executed in parallel and which sections must remain in serial execution. Let's establish this as our baseline. The speedup factor is defined as:</p>
+<div class="arithmatex">\[ 
+\mathrm{speed~up} = \frac{\mathrm{baseline~runtime}}{\mathrm{test~runtime}} 
+\]</div>
+<h2 id="poorly-parallelized-code">Poorly Parallelized Code</h2>
+<p>Examining the <code>calc_pi_serial</code> function, we observe a substantial loop that appears to be a promising candidate for parallelization. Our initial step will involve optimizing this for loop to execute across multiple threads.</p>
+<div class="admonition info">
+<p class="admonition-title">Defining a parallel scope</p>
+<ul>
+<li>To define a parallel scope or a block of code to run in parallel, we are going to use openMP. First we will include the openMP library:
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="cpf">&lt;opm.h&gt;</span>
+</code></pre></div></li>
+<li>Once we identify the area of the code to run in parallel, we define a new ``scope'' for that section
+<div class="highlight"><pre><span></span><code><span class="c1">// Define a parallel block of code</span>
+<span class="cp">#pragma omp parallel</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Code we want to run in parallel</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></li>
+<li>In this example we will be using a fixed number of threads that we know at compile time. On Linux we can identify how many CPU cores we have access to using <code>lscpu</code>: 
+<div class="highlight"><pre><span></span><code>lscpu
+...
+CPU(s):                  16
+  On-line CPU(s) list:   0-15
+...
+</code></pre></div>
+Here I have access to 16 cores. I will therefore define a constant in my code equal to the number of cores: 
+<div class="highlight"><pre><span></span><code><span class="cp">#define NUM_THREADS 16</span>
+</code></pre></div></li>
+</ul>
+</div>
+<p>Here is my initial (incorrect) attempt at a parallel version for calculating <span class="arithmatex">\(\pi\)</span>:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">calculate_pi_wrong</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="nf">calculate_pi_wrong</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num_steps</span><span class="p">){</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">pi</span><span class="p">,</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.</span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="w"> </span><span class="n">num_steps</span><span class="p">;</span>
+<span class="hll"><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">chunks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">num_steps</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">NUM_THREADS</span><span class="p">;</span>
+</span>
+<span class="hll"><span class="w">    </span><span class="n">omp_set_num_threads</span><span class="p">(</span><span class="n">NUM_THREADS</span><span class="p">);</span>
+</span><span class="hll"><span class="w">    </span><span class="cp">#pragma omp parallel</span>
+</span><span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="hll"><span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_thread_num</span><span class="p">();</span>
+</span><span class="hll"><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="o">*</span><span class="n">chunks</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">chunks</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span><span class="w">            </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="n">step</span><span class="p">;</span>
+<span class="w">            </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">4.0</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">step</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">pi</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>At line 4, we define <code>chunks</code>, representing the number of iterations that will occur on each thread. Subsequently, on line 6, <code>omp_set_num_threads(NUM_THREADS)</code> is utilized to specify the number of threads to be invoked.</p>
+<p>Moving to line 7, we establish a parallel block spanning from line 8 to line 15. Within this block, on line 10, <code>omp_get_thread_num()</code> retrieves the thread ID for the currently executing thread. Following that, line 11 introduces a loop specifically iterating over the steps assigned to each thread.</p>
+<p>To compile, it's necessary to use the <code>-fopenmp</code> flag. For instance:</p>
+<p><div class="highlight"><pre><span></span><code>g++<span class="w"> </span>mycode.cpp<span class="w"> </span>-o<span class="w"> </span>mycode<span class="w"> </span>-fopenmp
+</code></pre></div>
+Running the code, produces the get the following result:
+<div class="highlight"><pre><span></span><code>Parallel (Wrong) Calculation of Pi: 0.297578
+Duration: 0.00838327 seconds (0.313425 speed up) 
+</code></pre></div>
+If we rerun the code, we also see:
+<div class="highlight"><pre><span></span><code>Parallel (Wrong) Calculation of Pi: 0.283952
+Duration: 0.00774014 seconds (0.338872 speed up) 
+</code></pre></div></p>
+<p>Our parallel implementation takes longer to execute than the serial example, and it also computes an incorrect value for <span class="arithmatex">\(\pi\)</span>. Additionally, the calculated value of <span class="arithmatex">\(\pi\)</span> is not reproducable. Let's delve deeper into understanding the code's behavior...</p>
+<div class="admonition info">
+<p class="admonition-title">What went wrong</p>
+<p>In the initial setup, we define several variables within the "parent scope" to be utilized within the parallel section of the code. However, these variables are accessed and modified in parallel, leading to read and write operations occurring simultaneously at lines 12-13.
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">calculate_pi_wrong</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="nf">calculate_pi_wrong</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num_steps</span><span class="p">){</span>
+<span class="hll"><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">pi</span><span class="p">,</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</span><span class="hll"><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.</span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="w"> </span><span class="n">num_steps</span><span class="p">;</span>
+</span><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">chunks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">num_steps</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">NUM_THREADS</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">omp_set_num_threads</span><span class="p">(</span><span class="n">NUM_THREADS</span><span class="p">);</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_thread_num</span><span class="p">();</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="o">*</span><span class="n">chunks</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">chunks</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+<span class="hll"><span class="w">            </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="n">step</span><span class="p">;</span>
+</span><span class="hll"><span class="w">            </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">4.0</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">);</span>
+</span><span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">step</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">pi</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+Running in parallel, all threads attempt to read from/write to the <code>sum</code> variable without control or predictability regarding which thread modifies the <code>sum</code> value. Threads accessing and modifying <code>sum</code> concurrently can lead to unexpected behavior. For instance, consider that on iteration 1, thread 1 takes <code>sum</code> as 0 and modifies it. Concurrently, thread 2 attempts the same, leading to different values being written to the same variable. Consequently, the calculation of <code>sum</code> becomes unreliable due to this simultaneous access.</p>
+<p>This issue, known as a <a href="https://en.wikipedia.org/wiki/Race_condition">race condition</a>, arises as the code outcome depends on the order in which threads access data.</p>
+<p>Let's look at how we may solve this issue...</p>
+</div>
+<h2 id="solving-the-race-condition-using-an-array">Solving the Race Condition using an array</h2>
+<p>To resolve the race condition, ensuring that only one thread accesses a variable at any given time is essential. For this purpose, we require a variable accessible to all threads yet controllable by a main thread for summation. An effective solution involves employing an array of size <code>NUM_THREADS</code>.</p>
+<p><div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">calculate_pi_correct</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="nf">calculate_pi_correct</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num_steps</span><span class="p">){</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="hll"><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="p">[</span><span class="n">NUM_THREADS</span><span class="p">];</span>
+</span><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="w"> </span><span class="n">num_steps</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">chunks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">num_steps</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">NUM_THREADS</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Set up the parallel loop</span>
+<span class="w">    </span><span class="n">omp_set_num_threads</span><span class="p">(</span><span class="n">NUM_THREADS</span><span class="p">);</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// get the thread id</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+<span class="hll"><span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+</span><span class="w">        </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_thread_num</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">// Each thread sums over its own chunk</span>
+<span class="hll"><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="n">id</span><span class="o">*</span><span class="n">chunks</span><span class="p">,</span><span class="w"> </span><span class="n">sum</span><span class="p">[</span><span class="n">id</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">chunks</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span><span class="w">            </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="n">step</span><span class="p">;</span>
+<span class="w">            </span><span class="c1">// Sum over each&#39;s own sum counter</span>
+<span class="hll"><span class="w">            </span><span class="n">sum</span><span class="p">[</span><span class="n">id</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mf">4.0</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">);</span>
+</span><span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Combine in serial</span>
+<span class="hll"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">NUM_THREADS</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">pi</span><span class="p">;</span>
+
+<span class="p">}</span><span class="w">    </span>
+</code></pre></div></td></tr></table></div>
+At line 4, a <code>double</code> array of size <code>NUM_THREADS</code> is initialized. On line 14, the variable <code>x</code> is localized for each thread. Moving to line 17, a loop iterates through each section for every thread, setting <code>sum[id]</code> to 0 for each thread. Then, at line 20, modification occurs solely within the thread's respective entry in the array. Finally, on line 25, the aggregated list is combined.</p>
+<p>Upon compilation and execution, the observed outcome is:</p>
+<div class="highlight"><pre><span></span><code>Parallel (Correct) Calculation of Pi: 3.14159 
+Duration: 0.00562214 seconds (0.466534 speed up)  
+</code></pre></div>
+<p>Although we accurately estimate <span class="arithmatex">\(\pi\)</span> with reproducible results, there's no observed enhancement in runtime. To comprehend this, scrutiny of lines 4, 17, and 20 is necessary.</p>
+<p>We've defined <code>sum</code> as a <code>double</code> array of size <code>NUM_THREADS</code>. In memory, <code>sum</code> refers to a contiguous block of memory. Loading <code>sum</code> into our cache requires the passing of <code>sum</code> between threads. Consider threads A and B: when <code>sum</code> enters the cache, it occupies a "cache line," awaiting CPU utilization. Both threads attempt to access <code>sum</code>. While thread A successfully accesses <code>sum</code>, thread B encounters a "cache miss," leading to a delay. This issue can be addressed by incorporating knowledge of CPU and cache behavior into our data type design.</p>
+<h3 id="pading-our-array">Pading our Array</h3>
+<!-- See aside on [optimizing cache usage](./optimize-cache.md). -->
+
+<p>Understanding our cache design allows us to optimize how data is organized, resulting in improved performance. One method for this optimization is known as "padding". By employing padding, we introduce additional, redundant information to ensure that our data is stored within the same cache line.</p>
+<p>In the context of the aforementioned example, we can implement padding for the <code>sum</code> array by transforming it into a 2D array with dimensions <code>NUM_THREADS</code><span class="arithmatex">\(\times64\)</span>. But why 64? To understand this, let's examine our CPU:</p>
+<p><div class="highlight"><pre><span></span><code>&gt; cat /proc/cpuinfo| grep cache 
+cache size : 512 KB 
+cache_alignment : 64 
+</code></pre></div>
+Imagine the cache as a traffic stop with 64 lanes. When the traffic light turns green, 64 cars pass before it turns red again. Subsequently, the next row gets the green light, and so forth.</p>
+<p>How does this analogy apply to us? When we read from the cache, our aim is to minimize how often we access an array. If we solely require one row of an array, one cache line suffices. To achieve this, we pad our row with 63 other non-essential pieces of information. Subsequently, the second read will access the second row, which is on the subsequent "row of traffic".</p>
+<p>We design our array to leverage the cache's ability to read 64 elements of a row at once. The following example demonstrates the implementation of this strategy:</p>
+<p><div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">calculate_pi_padded</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="nf">calculate_pi_padded</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num_steps</span><span class="p">){</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="hll"><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="p">[</span><span class="n">NUM_THREADS</span><span class="p">][</span><span class="n">PAD</span><span class="p">];</span>
+</span><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="w"> </span><span class="n">num_steps</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">chunks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">num_steps</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">NUM_THREADS</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Set up the parallel loop</span>
+<span class="w">    </span><span class="n">omp_set_num_threads</span><span class="p">(</span><span class="n">NUM_THREADS</span><span class="p">);</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// get the thread id</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="w">        </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_thread_num</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">// Each thread sums over its own chunk</span>
+<span class="hll"><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="n">id</span><span class="o">*</span><span class="n">chunks</span><span class="p">,</span><span class="w"> </span><span class="n">sum</span><span class="p">[</span><span class="n">id</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">chunks</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span><span class="w">            </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="n">step</span><span class="p">;</span>
+<span class="w">            </span><span class="c1">// Sum over each&#39;s own sum counter</span>
+<span class="hll"><span class="w">            </span><span class="n">sum</span><span class="p">[</span><span class="n">id</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mf">4.0</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">);</span>
+</span><span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Combine in serial</span>
+<span class="hll"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">NUM_THREADS</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sum</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">pi</span><span class="p">;</span>
+
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+This example is similar to the previous version; however, we can see on line 4 we define <code>sum</code> as a 2D <code>double</code> array. On lines 17, 20 and 25, we are only accessing the 0<span class="arithmatex">\(^{th}\)</span> element of each row.  </p>
+<div class="highlight"><pre><span></span><code>Parallel (Padded) Calculation of Pi: 3.14159 
+Duration: 0.00167924 seconds (1.56197 speed up)  
+</code></pre></div>
+<p>Success! We observe a 1.56x improvement in performance. While this approach isn't memory-efficient, it demonstrates how organizing our data can significantly enhance performance.</p>
+<h2 id="using-a-locking-construct">Using a Locking Construct</h2>
+<p>So far, we have tried to solve the race condition issue by increasing the memory requirement. We can also use a construct to control the order in which threads can access a section of the code.  </p>
+<div class="admonition info">
+<p class="admonition-title">Using constructs</p>
+<p>OpenMP has several constructs that we can use in our code to modify a thread's flow. See <a href="http://www.plutospin.com/files/OpenMP_reference.pdf">here</a> for a useful cheat sheet. </p>
+<ul>
+<li>
+<p>Thus far, we've encountered the <code>parallel</code> construct, defining a code section to run in parallel:
+<div class="highlight"><pre><span></span><code><span class="cp">#pragma omp parallel</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Code to be ran in parallel</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>The <code>master</code> construct designates a code section to execute on a single thread, identified as the "master" or main thread.
+<div class="highlight"><pre><span></span><code><span class="cp">#pragma omp parallel</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Code running on all threads</span>
+<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+
+<span class="w">    </span><span class="cp">#pragma omp master</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// Code only running on one thread</span>
+<span class="w">        </span><span class="n">b</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>A <code>barrier</code> construct synchronizes threads, ensuring that all threads reach the same point before proceeding.
+<div class="highlight"><pre><span></span><code><span class="cp">#pragma omp parallel</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Code running on all threads</span>
+<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Waiting until all threads reach this point</span>
+<span class="w">    </span><span class="cp">#pragma omp barrier</span>
+<span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>The <code>sections</code> construct specifies distinct code sections to execute in parallel across various threads.
+<div class="highlight"><pre><span></span><code><span class="c1">// Start of sections block</span>
+<span class="n">omp_get_thread_num</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="cp">#pragma omp sections</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// Section 1</span>
+<span class="w">    </span><span class="cp">#pragma omp section</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">a</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="c1">// Section 2</span>
+<span class="w">    </span><span class="cp">#pragma omp section</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="n">b</span><span class="o">+=</span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+</li>
+<li>Furthermore, the behavior of a construct can be modified using "directives".
+<div class="highlight"><pre><span></span><code><span class="cp">#pragma omp parallel private (a) shared (b)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+In the provided code, we modified the behavior of the <code>parallel</code> construct. Each thread now carries a "private" copy of <code>a</code> and shares a copy of <code>b</code>. Changes to <code>a</code> are confined to the thread locally, while modifications to <code>b</code> affect all threads uniformly.</li>
+</ul>
+</div>
+<p>Let us modify the <code>calculate_pi_correct</code> example to use constructs to improve the performance.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">calculate_pi_critical</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="nf">calculate_pi_critical</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num_steps</span><span class="p">){</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="w"> </span><span class="n">num_steps</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">chunks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">num_steps</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">NUM_THREADS</span><span class="p">;</span>
+<span class="hll"><span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">sum</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+</span>
+<span class="w">    </span><span class="c1">// Set up the parallel loop</span>
+<span class="w">    </span><span class="n">omp_set_num_threads</span><span class="p">(</span><span class="n">NUM_THREADS</span><span class="p">);</span>
+<span class="hll"><span class="w">    </span><span class="cp">#pragma omp parallel private(sum, x) shared (pi)</span>
+</span><span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// get the thread id</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+<span class="w">        </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_thread_num</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">// Each thread sums over its own chunk</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="n">id</span><span class="o">*</span><span class="n">chunks</span><span class="p">,</span><span class="w"> </span><span class="n">sum</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">chunks</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+<span class="w">            </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="n">step</span><span class="p">;</span>
+<span class="w">            </span><span class="c1">// Sum over each&#39;s own sum counter</span>
+<span class="w">            </span><span class="n">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mf">4.0</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// Use a critical barrier</span>
+<span class="w">        </span><span class="c1">// Only one thread at a time</span>
+<span class="hll"><span class="w">        </span><span class="cp">#pragma omp critical</span>
+</span><span class="w">        </span><span class="n">pi</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sum</span><span class="p">;</span>
+
+<span class="hll"><span class="w">    </span><span class="p">}</span>
+</span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">pi</span><span class="p">;</span>
+
+<span class="p">}</span><span class="w">    </span>
+</code></pre></div></td></tr></table></div>
+<p>In the above code, variables <code>pi</code>, <code>sum</code>, and <code>x</code> are defined outside the loop, making them accessible to all sub-scopes. We use the <code>private</code> and <code>shared</code> directives. This gives each thread a private copy of <code>sum</code> and <code>x</code>, and a shared copy of <code>pi</code>. This is shown on line 10.</p>
+<p>With this adjustment, concerns about moving around <code>sum</code> and <code>x</code> are eliminated since each thread possesses its own copy. However, caution is necessary regarding how threads modify <code>pi</code>. To address this, we employ a <code>critical</code> construct, designating a code region accessible to only one thread at a time.</p>
+<p>The utilizating the <code>critical</code> construct on line 24 acts as a "lock", effectively halting other threads from progressing beyond this code section. Once a thread completes the addition operation and moves to line 27, the scope ends, releasing the "lock" and enabling the subsequent thread to enter this part of the code.</p>
+<p><code>critical</code> constructs serve a valuable purpose in managing thread access when modifying shared data accessible to all threads.</p>
+<div class="highlight"><pre><span></span><code>Parallel (Critical) Calculation of Pi: 3.14159 
+Duration: 0.00025696 seconds (10.2075 speed up)  
+</code></pre></div>
+<p>We are now observing a tenfold (<span class="arithmatex">\(\times10\)</span>) enhancement over the baseline test. Through refining the management of variable passing and controlling access using constructs, we've significantly enhanced our code.</p>
+<h2 id="using-an-atomic-construct">Using an Atomic Construct</h2>
+<p>You might be familiar with <code>atomic</code> data types—these are data types that automatically trigger a lock whenever a read/write operation is executed on them. In OpenMP, we utilize an <code>atomic</code> construct to segment a section of the code where we perform such <code>atomic</code> operations.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">calculate_pi_atomic</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="nf">calculate_pi_atomic</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num_steps</span><span class="p">){</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="w"> </span><span class="n">num_steps</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">chunks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">num_steps</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">NUM_THREADS</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">sum</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Set up the parallel loop</span>
+<span class="w">    </span><span class="n">omp_set_num_threads</span><span class="p">(</span><span class="n">NUM_THREADS</span><span class="p">);</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel private(sum, x) shared(pi)</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// get the thread id</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">id</span><span class="p">;</span>
+<span class="w">        </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">omp_get_thread_num</span><span class="p">();</span>
+<span class="w">        </span><span class="c1">// Each thread sums over its own chunk</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="n">id</span><span class="o">*</span><span class="n">chunks</span><span class="p">,</span><span class="w"> </span><span class="n">sum</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">chunks</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+<span class="w">            </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="n">step</span><span class="p">;</span>
+<span class="w">            </span><span class="c1">// Sum over each&#39;s own sum counter</span>
+<span class="w">            </span><span class="n">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mf">4.0</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="c1">// Use an atomic barrier</span>
+<span class="w">        </span><span class="c1">// Only one thread at a time can modify</span>
+<span class="hll"><span class="w">        </span><span class="cp">#pragma omp atomic</span>
+</span><span class="w">        </span><span class="n">pi</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sum</span><span class="p">;</span>
+
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">pi</span><span class="p">;</span>
+
+<span class="p">}</span><span class="w">    </span>
+</code></pre></div></td></tr></table></div>
+<p>The main distinction between <code>calculate_pi_critical</code> and <code>calculate_pi_atomic</code> lies on line 24, where an <code>atomic</code> construct replaces the <code>critical</code> construct. When utilizing an <code>atomic</code> construct, the subsequent operation is treated as <code>atomic</code>, triggering a lock during read/write operations.</p>
+<p><div class="highlight"><pre><span></span><code>Parallel (Atomic) Calculation of Pi: 3.14159
+Duration: 0.000249191 seconds (10.5257 speedup) 
+</code></pre></div>
+We notice a slight improvement; however, this improvement might just be noise. It's crucial to recognize that atomic operations (<code>++</code>, <code>--</code>, <code>+</code>, <code>*</code>, <code>-</code>, <code>/</code>, <code>&amp;</code>, <code>^</code>, <code>&lt;&lt;</code>, <code>&gt;&gt;</code>, <code>|</code>) are limited and can only be applied to primitive data types (e.g., <code>int</code>, <code>float</code>, <code>double</code>). While atomic constructs are useful, they are less versatile compared to critical constructs.</p>
+<h2 id="using-a-reduction">Using a Reduction</h2>
+<p>Operations such as summations and products are frequently encountered. In fact, many of these operations can be executed using constructs and directives available in OpenMP. The <code>reduction</code> directive serves the purpose of indicating to the code that a variable is the result of a well-known operation. The compiler will then handle the necessary tasks, including ensuring memory safety, optimization, and more.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">calculate_pi_reduction</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kt">double</span><span class="w"> </span><span class="nf">calculate_pi_reduction</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num_steps</span><span class="p">){</span>
+
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.0</span><span class="o">/</span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="w"> </span><span class="n">num_steps</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Set up the parallel loop</span>
+<span class="w">    </span><span class="n">omp_set_num_threads</span><span class="p">(</span><span class="n">NUM_THREADS</span><span class="p">);</span>
+<span class="hll"><span class="w">    </span><span class="cp">#pragma omp parallel for reduction (+:sum) private (x)</span>
+</span><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">num_steps</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">){</span>
+<span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span><span class="o">*</span><span class="n">step</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// Sum over each&#39;s own sum counter</span>
+<span class="w">        </span><span class="n">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mf">4.0</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">step</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">sum</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">pi</span><span class="p">;</span>
+
+<span class="p">}</span><span class="w">    </span>
+</code></pre></div></td></tr></table></div>
+<p>All the previous steps have been consolidated into one line, specifically line 11. Here, we instruct the compiler that within a <code>for</code> loop, we intend to execute a well-known <code>reduction</code> operation, specifically adding multiple values to the variable <code>sum</code> (<code>(+:sum)</code>). Additionally, we specify that each thread requires a private copy of <code>x</code>. This approach eliminates the necessity for <code>critical</code> or <code>atomic</code> constructs, as the compiler handles these complexities on our behalf.</p>
+<div class="highlight"><pre><span></span><code>Parallel (Reduction) Calculation of Pi: 3.14159
+Duration: 0.000212785 seconds (12.3266 speed up) 
+</code></pre></div>
+<p>We observe a  <span class="arithmatex">\(\times 12\)</span> enhancement in execution speed.</p>
+<h2 id="summary">Summary</h2>
+<div class="highlight"><pre><span></span><code>Serial Calculation of Pi: 3.14159
+Duration: 0.00262292 seconds
+Parallel (Wrong) Calculation of Pi: 0.283952
+Duration: 0.00774014 seconds (0.338872 speed up) 
+Parallel (Correct) Calculation of Pi: 3.14159
+Duration: 0.00562214 seconds (0.466534 speed up) 
+Parallel (Padded) Calculation of Pi: 3.14159
+Duration: 0.00167924 seconds (1.56197 speed up) 
+Parallel (Critical) Calculation of Pi: 3.14159
+Duration: 0.00025696 seconds (10.2075 speed up) 
+Parallel (Atomic) Calculation of Pi: 3.14159
+Duration: 0.000249191 seconds (10.5257 speed up) 
+Parallel (Reduction) Calculation of Pi: 3.14159
+Duration: 0.000212785 seconds (12.3266 speed up) 
+</code></pre></div>
+<p>When comparing the baseline to optimal code, we only need an additional 4 lines of code:
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="cpf">&lt;opm.h&gt;</span>
+<span class="p">...</span>
+<span class="cp">#define NUM_THREADS 16</span>
+<span class="p">...</span>
+<span class="w">    </span><span class="n">omp_set_num_threads</span><span class="p">(</span><span class="n">NUM_THREADS</span><span class="p">);</span>
+<span class="w">    </span><span class="cp">#pragma omp parallel for reduction (+:sum) private (x)</span>
+<span class="p">...</span>
+</code></pre></div></p>
+<p>OpenMP equips us with pre-existing "constructs" and "directives" that facilitate the development of high-performing code. This allows us to emphasize the code's functionality rather than dwelling extensively on optimization techniques.</p>
+<p>Even for more generic code that cannot utilize <code>atomic</code> or <code>reduction</code>, significant performance enhancements can still be achieved by modestly rethinking how our algorithms operate.</p>
+<p>In this example, our focus has been exclusively on CPUs. The code utilized in this demonstration is available on <a href="https://github.com/steob92/parallel-cplusplus">GitHub</a>.</p>
+<!-- [How could this work with GPUs](./parallel-gpu.md)?   -->
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2025 TSI <br> <a href="https://github.com/vuquangtrong/mkdocs-material-blog">Blog Theme</a> / <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "toc.integrate", "header.autohide", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.c011b7c0.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.7389ff0e.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

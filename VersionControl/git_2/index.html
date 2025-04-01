@@ -1,0 +1,1094 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="TSI McGill Tutorials">
+      
+      
+        <meta name="author" content="Stephan O'Brien (stephan.obrien@mcgill.ca)">
+      
+      
+        <link rel="canonical" href="https://github.com/tsi-mcgill/tsi-tutorials/VersionControl/git_2/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.4">
+    
+    
+      
+        <title>Git 2 - TSI McGill Tutorials</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="sandstone" data-md-color-primary="grey" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#about" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TSI McGill Tutorials" class="md-header__button md-logo" aria-label="TSI McGill Tutorials" data-md-component="logo">
+      
+  <img src="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TSI McGill Tutorials
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Git 2
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="sandstone" data-md-color-primary="grey" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="gray"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Python/" class="md-tabs__link">
+        
+  
+    
+  
+  Python
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Cpp/" class="md-tabs__link">
+        
+  
+    
+  
+  C++
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Rust/" class="md-tabs__link">
+        
+  
+    
+  
+  Rust
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../" class="md-tabs__link">
+        
+  
+    
+  
+  Version Control
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Containerization/" class="md-tabs__link">
+        
+  
+    
+  
+  Containerization
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Misc/" class="md-tabs__link">
+        
+  
+    
+  
+  Misc
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TSI McGill Tutorials" class="md-nav__button md-logo" aria-label="TSI McGill Tutorials" data-md-component="logo">
+      
+  <img src="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png" alt="logo">
+
+    </a>
+    TSI McGill Tutorials
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Python/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Cpp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    C++
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Rust/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rust
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Version Control
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Containerization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Containerization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Misc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Misc
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  <h1>Git 2</h1>
+
+<h2 id="about">About</h2>
+<p>In this tutorial, we will build on the <a href="../git_1/">basics of git tutorial</a> by moving our codebase to <a href="https://www.github.com">GitHub</a>. 
+We'll assume the codebase developed in the <a href="../git_1/">basics of git tutorial</a>, which, at the end of the tutorial, we pushed to the repository on <a href="https://www.github.com">GitHub</a>. 
+To get the most out of this tutorial, please ensure:
+- You have a GitHub account. I strongly recommend using your McGill account to avail yourself of a free GitHub education account. See (<a href="https://docs.github.com/en/education/explore-the-benefits-of-teaching-and-learning-with-github-education/github-global-campus-for-students/apply-to-github-global-campus-as-a-student">instructions for students</a> and <a href="https://docs.github.com/en/education/explore-the-benefits-of-teaching-and-learning-with-github-education/github-global-campus-for-teachers/apply-to-github-global-campus-as-a-teacher">instructions for educators</a>).
+- You have a codebase on GitHub that you can play around with (for example, the <a href="../git_1/">basics of git tutorial</a> codebase).</p>
+<p>Here, we'll be focusing on using GitHub as a tool for development, rather than simply a place to store a codebase.
+By the end of the tutorial, you'll be able to:</p>
+<ul>
+<li>Navigate GitHub's interface for your repository</li>
+<li>Modify files from within GitHub</li>
+<li>Open and close issues, and reference specific commits when discussing them</li>
+<li>Use GitHub to merge branches using a pull request</li>
+<li>Use GitHub to streamline tasks to allow you to focus on more important things!</li>
+</ul>
+<h2 id="welcome-to-github">Welcome to GitHub</h2>
+<p>In the previous tutorial, we introduced the concept of a remote repository. While today, we'll be using <a href="https://www.github.com">GitHub</a>, there are other options such as <a href="https://www.gitlab.com">GitLab</a> and <a href="https://bitbucket.org">BitBucket</a>.</p>
+<p>Navigating to a GitHub repo, we will be presented with something like this:</p>
+<figure>
+<p><img alt="Github repository homepage" src="../../images/github-repo-home.png" />
+  </p>
+<figcaption> Annotated GitHub repo homepage </figcaption>
+</figure>
+<ol>
+<li>In the top left corner, we can see the owner and name of the repo. In this case, the owner is steob92 (me), and the name of the repo is "astro_calculations". You'll also notice a little lock icon; this signifies that the repo is a "private repo". It means that only accounts with the correct permissions can view this repo (more on this later). With the owner's account name and the name of the repo, we can quickly find the URL of the GitHub page, which takes the format <code>https://github.com/&lt;owner_name&gt;/&lt;repo_name&gt;/</code>.</li>
+<li>Here we can see the name of the repo along with the owner's icon.</li>
+<li>Here we see the latest update to the <code>main</code> branch. We can see that the last update was 2 weeks ago, with 12 commits pushed, made by a user with the profile name steob92, and the commit message was <code>Update README.md</code>.</li>
+<li>Here we can see a snapshot of the repo. We can see that we are currently looking at the <code>main</code> branch, with two branches and 1 tagged version of the code. Clicking on the <code>main</code> icon presents a dropdown menu with the active branches, allowing us to view a different branch of the codebase.</li>
+<li>Tagged versions of the code appear under the "Releases" section on the page. If we want to view different releases and download the source code for a specific release, we could click on the "1 tags" link. From here, we can also create a new tag or release of the code.</li>
+<li>Here we can see a snapshot of the programming languages used within this repo. At the moment, we have a pure Python package, so this appears as 100% Python.</li>
+<li>Here we can see the contents of the <code>README.md</code> file. GitHub will automatically render Markdown files when viewing them. Additionally, the <code>README.md</code> file is a special file name. If present in a folder, GitHub will render this page below the list of files present in the folder. This provides a useful way of providing documentation for users.</li>
+<li>Here we can see a panel of options for the repo. We'll go through some of these options in more detail later. The important thing to remember here is that these options are specific to this repository.</li>
+<li>In the top right corner, we can see notifications and the user account settings. When collaborating, we can receive notifications relating to the codebase. For example, if we're assigned to resolve an issue, we would receive a notification here. The user account settings can be accessed by clicking on the user's portrait.</li>
+</ol>
+<h2 id="viewing-and-modifying-files-on-github">Viewing and modifying files on GitHub</h2>
+<p>We can view raw files on GitHub by clicking on them. Let's start by navigating inside the <code>astro_calculations</code> folder by clicking on it and then take a look at the <code>math_operations.py</code> file. We can now see raw Python code.</p>
+<p>We can edit this code by clicking on the pencil icon in the top right of the panel. This changes our view to an edit mode. Let's modify the file by adding a function to convert from <span class="arithmatex">\(km/hr\)</span> to <span class="arithmatex">\(m/s\)</span>:</p>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts from km/hr to m/s</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">      x: input value in km/hr to be converted Quantity</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">      x in m/s</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">km</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">hr</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;m/s&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+We can commit this change by either hitting Ctrl+S or by clicking the <code>Commit changes...</code> button.</p>
+<figure>
+<p><img alt="Commiting changes via GitHub" src="../../images/github-edit-browser.png" />
+  </p>
+<figcaption> Commiting changes via GitHub </figcaption>
+</figure>
+<p>Doing so prompts us to write a commit message:</p>
+<figure>
+<p><img alt="Writing a commit message via Github " src="../../images/github-commit-browser.png" />
+  </p>
+<figcaption> Writing a commit message via Github </figcaption>
+</figure>
+<p>We see that we have the option to write a more detailed commit message. 
+We can also choose to commit directly to the <code>main</code> branch or create a new branch and start a "pull request". 
+It is bad practice to modify the <code>main</code> branch this way; we should aim to keep the <code>main</code> branch as stable as possible, so we should create a new branch and start a pull request. 
+For now, let's commit directly to the <code>main</code> branch.</p>
+<p>With the commit now committed to the <code>main</code> branch, we can now see the following message above the code:</p>
+<figure>
+<p><img alt="Latest commit to a file" src="../../images/github-latest-commit.png" />
+  </p>
+<figcaption> Details on the latest commit is shown above the file. </figcaption>
+</figure>
+<p>This tells us the latest commit to this file.
+ We can also see when the commit was made (1 minute ago), the commit message (<code>Update math_operations.py</code>), and the commit ID (<code>29d1c33</code>).
+ If we click on the three dots beside the commit message, we see the more detailed commit message <code>Adding function to convert from km/hr to m/s</code>.
+ If we click on the commit ID (<code>29d1c33</code>), we are brought to a page which shows the previous and current versions of the code side by side, with additions and subtractions highlighted with green <code>+</code> and red <code>-</code> respectively.</p>
+<figure>
+<p><img alt="Viewing the diff for a commit" src="../../images/github-commit-id.png" />
+  </p>
+<figcaption> Viewing the `diff` for a commit. </figcaption>
+</figure>
+<p>Below the code block, we can also have the option to comment on the commit.
+This can be useful for discussing changes to the code with other collaborators.
+We can write in Markdown in this comment box, with the Markdown being rendered in the preview tab.
+The submitted comment will also be rendered.</p>
+<h2 id="blaming-opening-issues-and-pull-requests">Blaming, Opening Issues and Pull Requests</h2>
+<h3 id="blaming">Blaming</h3>
+<p>You may have noticed that we have an error in our code. 
+Specifically, the <code>convert</code> function has the line:
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="o">...</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">km</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">hr</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;m/s&quot;</span><span class="p">)</span>
+</code></pre></div></p>
+<p>However, <code>u</code> is never defined.
+Here, we've omitted importing the <code>Units</code> class from the <code>astropy</code> package.
+If we attempted to run this code, there would be an error.</p>
+<p>For more complicated codebases, it might be difficult to debug this, so we might want to talk to the person who implemented this section of the code. 
+We can open the file in GitHub and click on the line number that is causing the problem. 
+This will highlight the line and present a dropdown menu accessible by clicking the three dots.</p>
+<figure>
+<p><img alt="Highlighting a line in GitHub" src="../../images/github-highlight-line.png" />
+  </p>
+<figcaption> Highlighting a line in GitHub </figcaption>
+</figure>
+<p>There are many useful options here, but let's start by looking at the <code>View git blame</code> option:</p>
+<figure>
+<p><img alt="Viewing &quot;git blame&quot;" src="../../images/github-git-blame.png" />
+  </p>
+<figcaption> Viewing `git blame` through GitHub. </figcaption>
+</figure>
+<p>Here, we can see a line-by-line breakdown of the code, with each section showing when the last modification was made, along with the developer who implemented that line.</p>
+<h3 id="opening-an-issue">Opening an Issue</h3>
+<p>Going back to the original code, we can click on the three dots again and select the "Reference in new issue" option.
+This will bring us to a new issue, with a link to the line automatically added to the issue.
+(Note: If we had used the line from the git blame page, the link would point to the git blame line.)</p>
+<p>We can write some useful debugging information for the developers.
+Since I know who should look at this problem, I am going to assign the user who last edited that line to fix the problem.
+I'm also going to label this issue as a <code>bug</code>.</p>
+<figure>
+<p><img alt="Opening an issue" src="../../images/github-first-issue.png" />
+  </p>
+<figcaption> Opening an issue on GitHub. </figcaption>
+</figure>
+<p>Submitting this issue will take us to the issue page for this problem. 
+From there, we can add additional information, comment on the issue, and close it.</p>
+<p>By clicking on the <code>Issues</code> tab in the repository options panel, we can view all the current issues.</p>
+<figure>
+<p><img alt="Viewing current issues" src="../../images/github-current-issues.png" />
+  </p>
+<figcaption> Viewing current issues on GitHub. </figcaption>
+</figure>
+<p>Note that the issue created has the number <code>#1</code>. Each issue will be assigned a unique ID.</p>
+<p>Issues are a great way to communicate bugs to developers and request new features.
+For example, let's say we want to request a new feature.
+We can create a new issue, write a brief description of the feature, and then label the issue as an <code>enhancement</code>.
+There are various options for labels, including <code>help wanted</code>, <code>good first issue</code>, and <code>question</code>.</p>
+<figure>
+<p><img alt="Labeling issues" src="../../images/github-issue-labels.png" />
+  </p>
+<figcaption> Labeling issues on GitHub. </figcaption>
+</figure>
+<p>Specifying labels can help encourage collaboration by specifying how new developers can contribute.</p>
+<p>We can also add <code>project</code> and <code>milestone</code> tags to further categorize issues. 
+For example, the development team might have identified specific goals for a particular version (e.g., V2.0.0, the next major release) of the code. 
+Issues can be used to track the progress being made on these milestones.</p>
+<h3 id="pull-requests">Pull Requests</h3>
+<p>In GitHub terminology, when we want to merge one branch into another branch, we open a "Pull Request".
+Here, we are "requesting" that one branch pull changes from another branch.
+On other platforms, this may be referred to as a "Merge Request".
+As far as we need to be concerned, these are the same processes. 
+We are requesting one branch to be merged into another branch.</p>
+<p>Let's edit the code to resolve this issue. 
+Instead of editing on GitHub, we'll use our local machine. 
+Start by pulling the version of the code on GitHub to our local machine:
+<div class="highlight"><pre><span></span><code>git-tutorial(main)» git pull                                                                 [13:13:08]
+remote: Enumerating objects: 7, done.
+remote: Counting objects: 100% (7/7), done.
+remote: Compressing objects: 100% (4/4), done.
+remote: Total 4 (delta 2), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (4/4), 1.21 KiB | 621.00 KiB/s, done.
+From github.com:steob92/astro_calculations
+   82fc7e0..29d1c33  main       -&gt; origin/main
+Updating 82fc7e0..29d1c33
+Fast-forward
+ astro_calculations/math_operations.py | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
+</code></pre></div></p>
+<p>We can see that the changes have been picked up.
+Let's create a new development branch:
+<div class="highlight"><pre><span></span><code>git checkout -b astropy_issue                                            [13:22:48]
+Switched to a new branch &#39;astropy_issue&#39;
+</code></pre></div></p>
+<p>Let's make a few changes to the code. 
+Firstly, let's add the <code>convert</code> function to our <code>astro_calculations/__init__.py</code> file so we can import it:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">astro_calculations/__init__.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">.math_operations</span> <span class="kn">import</span> <span class="n">add</span><span class="p">,</span> <span class="n">sub</span><span class="p">,</span> <span class="n">mult</span><span class="p">,</span> <span class="n">div</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">convert</span>
+</span><span class="kn">from</span> <span class="nn">.printing</span> <span class="kn">import</span> <span class="n">print_details</span>
+<span class="hll"><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;add&quot;</span><span class="p">,</span> <span class="s2">&quot;sub&quot;</span><span class="p">,</span> <span class="s2">&quot;mult&quot;</span><span class="p">,</span> <span class="s2">&quot;div&quot;</span><span class="p">,</span> <span class="s2">&quot;sqrt&quot;</span><span class="p">,</span> <span class="s2">&quot;print_details&quot;</span><span class="p">,</span> <span class="s2">&quot;convert&quot;</span><span class="p">]</span>
+</span></code></pre></div></td></tr></table></div></p>
+<p>Secondly, let's write a quick test to make sure the code will still work (<code>test.py</code>):
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">test.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">astro_calculations</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">def</span> <span class="nf">test_ranges</span><span class="p">():</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="c1"># Testing all values between 0 and 99</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">sub</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">mult</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
+        <span class="k">assert</span><span class="p">(</span><span class="n">div</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span> <span class="o">/</span> <span class="n">y</span><span class="p">)</span>
+<span class="hll">        <span class="k">assert</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+</span>        <span class="k">assert</span><span class="p">(</span><span class="n">convert</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">value</span> <span class="o">-</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">60</span> <span class="o">/</span> <span class="mi">60</span> <span class="o">&lt;</span> <span class="mf">1e-7</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">test_arrays</span><span class="p">():</span>
+    <span class="n">x_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+    <span class="n">y_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+
+    <span class="c1"># Testing numpy arrays</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="n">x_arr</span><span class="p">,</span> <span class="n">y_arr</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">x_arr</span> <span class="o">+</span> <span class="n">y_arr</span><span class="p">)))</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">sub</span><span class="p">(</span><span class="n">x_arr</span><span class="p">,</span> <span class="n">y_arr</span><span class="p">)</span> <span class="o">==</span> <span class="n">x_arr</span> <span class="o">-</span> <span class="n">y_arr</span><span class="p">))</span>
+<span class="hll">    <span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">mult</span><span class="p">(</span><span class="n">x_arr</span><span class="p">,</span> <span class="n">y_arr</span><span class="p">)</span> <span class="o">==</span> <span class="n">x_arr</span> <span class="o">*</span> <span class="n">y_arr</span><span class="p">))</span>
+</span>    <span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">div</span><span class="p">(</span><span class="n">x_arr</span><span class="p">,</span> <span class="n">y_arr</span><span class="p">)</span> <span class="o">==</span> <span class="n">x_arr</span> <span class="o">/</span> <span class="n">y_arr</span><span class="p">))</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x_arr</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_arr</span><span class="p">]))</span>
+    <span class="k">assert</span><span class="p">(</span> <span class="p">(</span><span class="n">convert</span><span class="p">(</span><span class="n">x_arr</span><span class="p">)</span><span class="o">.</span><span class="n">value</span> <span class="o">-</span> <span class="n">x_arr</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">60</span> <span class="o">/</span> <span class="mi">60</span> <span class="o">&lt;</span> <span class="mf">1e-7</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
+</code></pre></div></td></tr></table></div></p>
+<p>Here we're converting the <code>astropy.Quantity</code> to a <code>float</code> using <code>.value</code>. 
+We can run the test using <code>pytest</code>.
+<div class="highlight"><pre><span></span><code>========================================================= test session starts =========================================================
+platform linux -- Python 3.10.10, pytest-7.2.2, pluggy-1.0.0
+rootdir: /raid/RAID1/Tutorials/git-tutorial
+collected 0 items / 1 error                                                                                                           
+
+=============================================================== ERRORS ================================================================
+______________________________________________________ ERROR collecting test.py _______________________________________________________
+test.py:14: in &lt;module&gt;
+    assert(convert(i) == i * 1000 / 60 / 60)
+astro_calculations/math_operations.py:12: in convert
+    return (x * u.km / u.hr).to(&quot;m/s&quot;)
+E   NameError: name &#39;u&#39; is not defined
+======================================================= short test summary info =======================================================
+ERROR test.py - NameError: name &#39;u&#39; is not defined
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+========================================================== 1 error in 0.87s ===========================================================
+</code></pre></div></p>
+<p>Let's modify astro_calculations/math_operations.py to fix the import bug:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">astro_calculations/math_operations.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="hll"><span class="kn">from</span> <span class="nn">astropy</span> <span class="kn">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
+</span>
+<span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="o">...</span>
+</code></pre></div></td></tr></table></div></p>
+<p><code>pytest</code> should no longer report any errors. With these changes made we can commit the changes.</p>
+<div class="highlight"><pre><span></span><code>git add .
+</code></pre></div>
+<p>And commit with a useful message, adding the issue number to the commit message:
+<div class="highlight"><pre><span></span><code>git commit -m &quot;Adding astropy import to resolve issue #1&quot;  [13:41:24]
+[astropy_issue 50a9db3] Adding astropy import to resolve issue #1
+ 3 files changed, 6 insertions(+), 2 deletions(-)
+</code></pre></div></p>
+<p>Typing <code>git push</code> will inform us that there is no upstream branch:
+<div class="highlight"><pre><span></span><code>fatal: The current branch astropy_issue has no upstream branch.
+To push the current branch and set the remote as upstream, use
+
+    git push --set-upstream origin astropy_issue
+</code></pre></div></p>
+<p>Using the helpful message (in case we ever forget it!) we can add the upstream when pushing:
+<div class="highlight"><pre><span></span><code>git push --set-upstream origin astropy_issue                 [13:42:19]
+
+Enumerating objects: 11, done.
+Counting objects: 100% (11/11), done.
+Delta compression using up to 16 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 751 bytes | 751.00 KiB/s, done.
+Total 6 (delta 3), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (3/3), completed with 3 local objects.
+remote: 
+remote: Create a pull request for &#39;astropy_issue&#39; on GitHub by visiting:
+remote:      https://github.com/steob92/astro_calculations/pull/new/astropy_issue
+remote: 
+To github.com:steob92/astro_calculations.git
+ * [new branch]      astropy_issue -&gt; astropy_issue
+Branch &#39;astropy_issue&#39; set up to track remote branch &#39;astropy_issue&#39; from &#39;origin&#39;.
+</code></pre></div></p>
+<p>Switching back to GitHub, we can now see that the issue has been updated to indicate that the commit referenced this issue.</p>
+<figure>
+<p><img alt="Referencing issues" src="../../images/github-commit-reference-issue.png" />
+  </p>
+<figcaption> Referencing issues in commit messages on GitHub. </figcaption>
+</figure>
+<p>After some testing and discussion, we might decide that this change resolves all the issues, so we want to merge the changes into the <code>main</code> branch. 
+To do this, we can navigate to the <code>Pull Request</code> tab in the top panel:</p>
+<figure>
+<p><img alt="Pull requests" src="../../images/github-pullrequest-panel.png" />
+  </p>
+<figcaption> Opening a pull request. </figcaption>
+</figure>
+<p>We can see that there is a highlighted option at the top allowing us to merge in the fastest request.
+This won't always be the branch we want to merge, so let's do it the manual way by clicking <code>New pull request</code>.
+Using the drop-down menu, we can select which branches we want to merge.
+The arrow indicates which branch is being merged into which.
+In the below example, the <code>astropy_issue</code> branch is to be merged into the <code>main</code>.</p>
+<figure>
+<p><img alt="Pull Reqest" src="../../images/github-pull-requests.png" />
+  </p>
+<figcaption> Labeling issues on GitHub. </figcaption>
+</figure>
+<p>Clicking <code>Create pull request</code> brings us to a page to add a description. 
+We can add a helpful description and create the request.</p>
+<p>We can always see open pull requests by clicking on the <code>Pull requests</code> tab on the repository options panel:</p>
+<figure>
+<p><img alt="Open pull requests" src="../../images/github-pull-request-panel.png" />
+  </p>
+<figcaption> Open pull requests. </figcaption>
+</figure>
+<p>When clicking on an open pull request, we are provided with a wealth of additional information:</p>
+<figure>
+<p><img alt="Pull request page" src="../../images/github-pull-request-page.png" />
+  </p>
+<figcaption> Page for an individual pull request. </figcaption>
+</figure>
+<p>GitHub will check if the merge can happen as is, or if there are conflicts that need to be resolved.
+Like issues, we can also assign developers, <code>labels</code>, <code>projects</code>, etc.
+It is common to require a code review before accepting a pull/merge request.
+Once we're happy, we can approve the merge request by clicking <code>Merge pull request</code>, add a comment if needed, and click <code>Confirm merge</code>.
+Once merged, we can delete the branch that was just merged.</p>
+<h2 id="tagging-versions">Tagging Versions</h2>
+<p>With a new feature added to the code, it might be time to release a new version of the code. 
+To do this, we'll use the <code>Create a new release</code> button on the repository home page:</p>
+<figure>
+<p><img alt="GitHub releases" src="../../images/github-release-homepage.png" />
+  </p>
+<figcaption> GitHub releases. </figcaption>
+</figure>
+<p>From here, we can set a <code>tag</code> or version number, set the target (for example, the <code>main</code> branch), and set the previous <code>tag</code>:</p>
+<figure>
+<p><img alt="GitHub Release page" src="../../images/github-release-page.png" />
+  </p>
+<figcaption> GitHub release page. </figcaption>
+</figure>
+<p>We can use the <code>Generate release notes</code> option to automatically create a set of notes for the new release. 
+This tells the user what has changed between the new release and the previous tag. 
+GitHub will generate these notes from the commit messages. 
+When we're happy with the description of the new release, we can click <code>Publish release</code>.</p>
+<p>This brings us to a release page for the tag:</p>
+<figure>
+<p><img alt="Changelog" src="../../images/github-release-log.png" />
+  </p>
+<figcaption> Generated change log and release page. </figcaption>
+</figure>
+<p>This contains lots of useful information like what has changed since the previous release, new contributors, and who contributed to this release. 
+Additionally, a copy of the source code is available for download.</p>
+<p>From our local machine, we can retrieve all the releases using the following command:
+<div class="highlight"><pre><span></span><code>git fetch --tags
+</code></pre></div>
+We can list available tags with:
+<div class="highlight"><pre><span></span><code>git tag
+</code></pre></div>
+and checkout the v1.0.0 tag with:
+<div class="highlight"><pre><span></span><code>git checkout tags/v1.0.0
+</code></pre></div></p>
+<p>Using tagged versions allows us to control which version of the code is being used.
+Tags serve as markers or labels for specific points in the repository's history, typically representing stable releases, major milestones, or significant changes.
+They provide a convenient way to reference and track specific versions of the codebase, facilitating reproducibility, collaboration, and deployment workflows.</p>
+<h2 id="using-github-to-streamline-workflow-with-github-actions">Using GitHub to Streamline Workflow with GitHub Actions</h2>
+<p>When maintaining a project with multiple developers and users, it's crucial to ensure that one developer doesn't introduce code-breaking features.
+We've already explored how to use <code>pytest</code> to run a set of tests locally.
+However, we can leverage "GitHub Actions" to automate workflows triggered by specific events.</p>
+<p>For instance, let's consider ensuring that our <code>main</code> branch only contains code that works without any errors.
+We could define a series of tests that must be passed before pushing changes to the <code>main</code> branch.
+While we could enforce a policy requiring all developers to run these tests before pushing changes, human error or forgetfulness can occur.
+Instead, we can set up a "GitHub Action" to trigger automatically whenever a <code>push</code> attempt is made to the <code>main</code> branch.</p>
+<p>Firstly, let's clarify the dependencies required to compile and run the code.
+For new developers attempting to run the code in a new environment, they'll need a list of required packages to install.
+We can define these dependencies in a requirements file:</p>
+<p><div class="highlight"><span class="filename">requirements.txt</span><pre><span></span><code>numpy
+astropy
+</code></pre></div>
+We only have two external packages, <code>numpy</code> and <code>astropy</code>. To install them, one would run the following command:
+<div class="highlight"><pre><span></span><code>pip install -r requirements.txt
+</code></pre></div></p>
+<p>Commit and push this file to <code>main</code>.</p>
+<p>Next, on GitHub, click on the <code>Actions</code> tab on the repository options panel.
+If this is our first action, we'll see a page like this:</p>
+<figure>
+<p><img alt="GitHub Actions" src="../../images/github-actions-page.png" />
+  </p>
+<figcaption> Setting up our first GitHub Action. </figcaption>
+</figure>
+<p>There are lots of pre-made actions available to choose from.
+We'll take a pre-made action for now and revisit setting up our own workflow in a future tutorial.
+Let's select the <code>Python package</code> action by clicking <code>Configure</code> on that action's card.
+This will bring us to a new page with a pre-generated YAML file:</p>
+<p><div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">python-package.yml</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># This workflow will install Python dependencies, run tests and lint with a variety of Python versions</span>
+<span class="c1"># For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python</span>
+
+<span class="hll"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Python package</span>
+</span>
+<span class="hll"><span class="nt">on</span><span class="p">:</span>
+</span><span class="hll"><span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+</span><span class="hll"><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&quot;main&quot;</span><span class="w"> </span><span class="p p-Indicator">]</span>
+</span><span class="hll"><span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span>
+</span><span class="hll"><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="s">&quot;main&quot;</span><span class="w"> </span><span class="p p-Indicator">]</span>
+</span>
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">build</span><span class="p">:</span>
+
+<span class="hll"><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+</span><span class="w">    </span><span class="nt">strategy</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">fail-fast</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<span class="w">      </span><span class="nt">matrix</span><span class="p">:</span>
+<span class="hll"><span class="w">        </span><span class="nt">python-version</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;3.9&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;3.10&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;3.11&quot;</span><span class="p p-Indicator">]</span>
+</span>
+<span class="hll"><span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v3</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Set up Python ${{ matrix.python-version }}</span>
+<span class="w">      </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-python@v3</span>
+<span class="w">      </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">python-version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ matrix.python-version }}</span>
+<span class="hll"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install dependencies</span>
+</span><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="hll"><span class="w">        </span><span class="no">python -m pip install --upgrade pip</span>
+</span><span class="hll"><span class="w">        </span><span class="no">python -m pip install flake8 pytest</span>
+</span><span class="hll"><span class="w">        </span><span class="no">if [ -f requirements.txt ]; then pip install -r requirements.txt; fi</span>
+</span><span class="hll"><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Lint with flake8</span>
+</span><span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">        </span><span class="no"># stop the build if there are Python syntax errors or undefined names</span>
+<span class="hll"><span class="w">        </span><span class="no">flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics</span>
+</span><span class="w">        </span><span class="no"># exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide</span>
+<span class="hll"><span class="w">        </span><span class="no">flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics</span>
+</span><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Test with pytest</span>
+<span class="w">      </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="hll"><span class="w">        </span><span class="no">pytest test.py</span>
+</span></code></pre></div></td></tr></table></div>
+Let's break this down:
+- On line 4, we define the name of the test as <code>Python package</code>.
+- On lines 6-10, we define the actions to trigger (<code>push</code> and <code>pull_request</code>) and the branches to trigger on (<code>main</code>). This specific action will trigger on any <code>push</code> or <code>pull_request</code> to the <code>main</code> branch.
+- On line 15, we specify the container to run our tests on. Here, we use <code>ubuntu-latest</code>, representing the latest version of the Ubuntu Linux OS.
+- On line 19, we define a list of Python versions to test the code against.
+- From line 21 onwards, we define the steps of the action.
+- On lines 27-31, we define the <code>Install dependencies</code> step, which installs and upgrades <code>pip</code> on line 29, and installs <code>flake8</code> and <code>pytest</code> using the <code>requirements.txt</code> file on line 31.
+- On lines 32-37, we perform linting using the <code>flake8</code> command, which tests the code for bugs and formatting issues.
+- On lines 38-40, we run <code>pytest</code>.
+- I've modified line 40 to include the name of the test file (<code>test.py</code>).</p>
+<p>This file is saved to <code>.github/workflows/python-package.yml</code>. Now, let's try creating a new branch with some new code.</p>
+<div class="highlight"><pre><span></span><code>git checkout -b new_feature 
+</code></pre></div>
+<p>Modify some file to include a new dependency:
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">astro_calculations/math_operations.py</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">astropy</span> <span class="kn">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
+<span class="hll"><span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">optimize</span>
+</span>
+<span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="o">...</span>
+</code></pre></div></td></tr></table></div></p>
+<p>Commit and push this new branch:
+<div class="highlight"><pre><span></span><code>git commit -m &quot;adding new dependency&quot;
+git push --set-upstream origin new_feature
+</code></pre></div></p>
+<p>From GitHub, we can now create a pull request from this new branch. 
+After some time, we'll notice that the pull request to <code>main</code> triggered our action, and this action has failed the checks.</p>
+<figure>
+<p><img alt="GitHub Actions during pull requests" src="../../images/github-pull-request-actions.png" />
+  </p>
+<figcaption> (Failed) GitHub actions triggered by a pull request show up on the pull request page. </figcaption>
+</figure>
+<p>By clicking on the details link, we can see what caused the pull request to fail:</p>
+<figure>
+<p><img alt="Details of failed workflow" src="../../images/github-pull-request-actions-failed.png" />
+  </p>
+<figcaption> Details of the failed workflow. </figcaption>
+</figure>
+<p>The action failed because we forgot to add <code>scipy</code> to the <code>requirements.txt</code> file. 
+If we make these changes and commit them to the same branch, these changes will automatically be tested.</p>
+<figure>
+<p><img alt="Successfuly workflow" src="../../images/github-pull-request-actions-passed.png" />
+  </p>
+<figcaption> Successful workflow showing up under the pull request. </figcaption>
+</figure>
+<p>We can see that the latest commit ('adding scipy') passes all the tests, allowing us to merge the pull request knowing that we haven't introduced any new bugs to our code.</p>
+<p>By using GitHub Actions to automatically test our code, we have adopted a DevOps development practice known as "Continuous Integration" (CI).
+Continuous Integration involves continuously integrating code changes into a shared repository, where automated tests are run to detect integration errors and ensure code quality.
+This approach helps teams catch and fix bugs early in the development process, leading to faster delivery of high-quality software.</p>
+<p>In the <a href="../git_3/">next tutorial</a>, we'll delve deeper into Continuous Integration methods and practices and explore how we can leverage GitHub Actions and other tools to further improve our code quality and development workflow.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2025 TSI <br> <a href="https://github.com/vuquangtrong/mkdocs-material-blog">Blog Theme</a> / <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "toc.integrate", "header.autohide", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.c011b7c0.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.7389ff0e.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
