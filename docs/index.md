@@ -1,21 +1,36 @@
-# Welcome to My Research Page
+# Recent Tutorials
+
+## Python:
+  - [Introduction to Python](./Python/python-tutorial.ipynb)
+  - [Introduction to Gaia Data (with Python)](./Python/GaiaTutorial.ipynb)
+  - [Benchmarking and Profiling](./Python/BenchmarkingAndProfiling.ipynb)
+  - [Threading And Multiprocessing](./Python/Threading_And_Multiprocessing.ipynb)
+  - [Object Orientated Programming and Packaging](./Python/OOP/index.md)
+  - [Scientific Programming in Python](./Python/ScientificPythonProgramming.ipynb)
+  - [Calculating $\pi$ using Monte Carlo Methods](./Python/Calculating_pi.ipynb)
+  - [N-Body Simulation](./Python/N_BodySimulation.ipynb)
+  - [Introduction to Machine Learning in Astronomy (Delivered as part of Hackathon)](./Python/MachineLearningFermi_solutions.ipynb)
+
+## C++
+  - [Introduction to C++](./Cpp/cpp-tutorial.md)
+  - [Introduction to Parallel Programming in C++ with OpenMP](./Cpp/parallel-cpp.md)
+  <!-- - [Introduction to Parallel Programming in C++ (GPU extension)](./parallel-cpp-gpu.md) -->
 
 
-![Coma cluster](./media/Crab_Nebula.jpg "Crab Nebula"){align="left": style="height:150;width:150px"}
-Welcome to the digital platform of a dedicated physics graduate student committed to unraveling the intricacies of the cosmos. 
-Focused on the exploration of the profound Crab Nebula, a celestial phenomenon steeped in historical fascination, my research endeavors center on the application of advanced astrophysical methodologies and theoretical frameworks. 
-This platform serves as an invitation to accompany me on a scholarly journey into the depths of the universe. 
-Through meticulous investigation, I aim to elucidate the fundamental processes shaping the Crab Nebula, contributing substantively to the broader comprehension of the universe's extraordinary phenomena. 
-I extend a formal welcome to all who wish to engage with the frontiers of astrophysics through the lens of my ongoing research endeavors.
+## Rust
+- [Programming in Rust](./Rust/rust_intro.md)
 
 
-If you're like to learn more about me, you can find an introduction to [my research](./reasearch/research_index.md), some info on some [recent projects](./projects/project_index.md) and some more info [about me](./about/about.md).
+## Version Control
+  - [Git (I), Introduction to git and the git command line interface (CLI)](./VersionControl/git_1.md)
+  - [Git (II), GitHub as a tool](./VersionControl/git_2.md)
+  <!-- - [Git (III), Continuous Integration Tools](./git_3.md) -->
 
-## Here is an equation
 
-$$ x = \frac{-b \pm \sqrt{b^2 -4ac}}{2a}$$
+## Containerization
+  - [Introduction to Apptainer](./Containerization/apptainer.md)
+  - [Introduction to Docker](./Containerization/docker/Part1/index.md)
+  - [Using a containerized Jupyter Kernel](./Containerization/containerized_kernels.md)
 
-## Here is the Crab Nebula
-
-[![Crab Nebula](./media/Crab_Nebula.jpg "Crab Nebula")](https://en.wikipedia.org/wiki/Crab_Nebula#)
-I got this image from [Wikipedia](https://en.wikipedia.org/wiki/Crab_Nebula).
+## Misc
+  - [Website building with MkDocs](./Misc/websites.md)

@@ -1,5 +1,0 @@
-# Olympic Success
-
-An extract from Olympic medal times:
-
-Despite her profound dedication to astrophysics, Dr. Lisa Simpson possesses a unique and unexpected talent that sets her apart in diverse pursuits. In a surprising turn of events, Dr. Simpson achieved a remarkable feat by securing an Olympic medal in fishing. Her passion for this age-old practice, cultivated during moments of respite from the rigors of academic research, led her to compete on the international stage. Driven by discipline, patience, and an innate connection to nature, she demonstrated an exceptional skill in the art of angling. Her Olympic success not only reflects her versatility but also serves as a testament to the notion that the pursuit of excellence transcends conventional boundaries, showcasing the multifaceted nature of an individual whose talents extend beyond the confines of a laboratory or observatory.

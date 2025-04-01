@@ -1,32 +1,35 @@
 # Change to your own name
-site_name: My Research Page
+site_name: TSI McGill Tutorials
 # Change to your own site
-site_url: https://steob92.github.io/mcgill-tutorial/ # must have the trailing slash
-site_author: Your Name (stephan.obrien@mcgill.ca)
-site_description: Research site for Your Name 
+site_url: https://github.com/tsi-mcgill/tsi-tutorials # must have the trailing slash
+site_author: Stephan O'Brien (stephan.obrien@mcgill.ca)
+site_description: TSI McGill Tutorials
 copyright: > # should remain a link to the original theme
-  &copy; 2023 Your Name <br>
+  &copy; 2025 TSI <br>
   <a href="https://github.com/vuquangtrong/mkdocs-material-blog">Blog Theme</a> /
   <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>
 
 
 
 theme:
+    logo: assests/TSI_Logo_Acronym_Alone_Red_Flat.png
+    favicon: assests/TSI_Logo_Acronym_Alone_Red_Flat.png
     name: material
     palette:
       # Palette toggle for light mode
-      - scheme: default
+      - scheme: sandstone
         # Color of the top bar
-        primary: deep purple
+        primary: grey
         # Link highlight color
-        accent : orange
-        
+        accent : purple
         toggle:
           icon: material/brightness-7 
           name: Switch to dark mode
 
       # Palette toggle for dark mode
       - scheme: slate
+        primary: red
+        accent: gray
         toggle:
           icon: material/brightness-4
           name: Switch to light mode
@@ -48,24 +51,36 @@ theme:
 extra_javascript:
   
   # For rendering latex
-  - javascripts/mathjax.js
+  # - javascripts/mathjax.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 
 # For describing the navigation panel
 nav:
-  - Home: index.md
-  - About Me: about/index.md
-  - Research: reasearch/index.md
-  - Projects: projects/index.md
+  - Python: Python/index.md
+  - C++: Cpp/index.md
+  - Rust: Rust/index.md
+  - Version Control: VersionControl/index.md
+  - Containerization: Containerization/index.md
+  - Misc: Misc/index.md
+
+
 
 # Extensions that we want to use
 markdown_extensions:
   - attr_list   # For adding attributes such as right/left align to images
   - md_in_html  # Using Figures
-
-
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  # - attr_list
+  # - md_in_html
+  - footnotes
 
 # Additional plugins
 plugins:
