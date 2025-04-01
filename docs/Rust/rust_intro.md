@@ -1153,3 +1153,5 @@ Distance from TRAPPIST-1e to it's star: 0.029 AU
 ```
 
 In this example, the `PlanetarySystem` struct doesn't differentiate between using `Point3D` or `Point2D`.
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

@@ -1203,3 +1203,6 @@ In this tutorial we've gone over the basics of the git command line interface (C
 We've learned the commands used to create a new repository, commit local changes to the repository, create branches to work on new features within our code base, merge these branches back into the main, revert to previous versions and tag specific instances of the code base.
 We finally showed how to push a repository to a remote respository hosting service such as GitHub. 
 In the [next tutorial](./git_2.md) we'll focus on how to use GitHub as a tool for collaborative development.
+
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

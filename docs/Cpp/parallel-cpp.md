@@ -639,3 +639,5 @@ Even for more generic code that cannot utilize `atomic` or `reduction`, signific
 In this example, our focus has been exclusively on CPUs. The code utilized in this demonstration is available on [GitHub](https://github.com/steob92/parallel-cplusplus).
 
 <!-- [How could this work with GPUs](./parallel-gpu.md)?   -->
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

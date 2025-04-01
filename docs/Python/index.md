@@ -9,3 +9,6 @@
 - [Calculating $\pi$ using Monte Carlo Methods (Delivered as part of Hackathon)](./Calculating_pi.ipynb)
 - [N-Body Simulation (Delivered as part of Hackathon)](./N_BodySimulation.ipynb)
 - [Introduction to Machine Learning in Astronomy (Delivered as part of Hackathon)](./MachineLearningFermi_solutions.ipynb)
+
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

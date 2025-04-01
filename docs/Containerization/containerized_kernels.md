@@ -350,3 +350,6 @@ In this set up, all the communication between the container and Jupyter lab is h
 
 In contrast to launching a Jupyter instance from within a container, we don't actually need to know what ports should be mapped within the container.
 This greatly simplifies the setup, instead allowing ports to be determined at launch, without the need to reconfigure a run command of a docker-compose file.
+
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

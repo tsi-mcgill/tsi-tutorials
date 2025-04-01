@@ -895,3 +895,6 @@ int main(){
 ```
 
 On line 1, we define a function with a return type specified as `void`, indicating that the function doesn't return any value. When defining the function's parameters, we allow the bool parameter to have a default value of `true`. On line 14, when calling the function without passing any arguments, the default values are used. On line 16, we explicitly pass the value `false`, which overrides the default argument.
+
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

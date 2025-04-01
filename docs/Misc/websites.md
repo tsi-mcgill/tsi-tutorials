@@ -326,3 +326,5 @@ The GitHub Page can be managed from the Settings of the GitHub repo.
 ## Themes
 
 MkDocs has many supported themes to allow for customization to one's desire. Changing the theme is handled from the `mkdocs.yml` file. See [here](https://www.mkdocs.org/user-guide/choosing-your-theme/) for examples of how to change the theme and [here](https://github.com/mkdocs/catalog#-theming) for a list of popular third-party themes.
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

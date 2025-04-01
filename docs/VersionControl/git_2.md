@@ -585,3 +585,6 @@ Continuous Integration involves continuously integrating code changes into a sha
 This approach helps teams catch and fix bugs early in the development process, leading to faster delivery of high-quality software.
 
 In the [next tutorial](./git_3.md), we'll delve deeper into Continuous Integration methods and practices and explore how we can leverage GitHub Actions and other tools to further improve our code quality and development workflow.
+
+
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
