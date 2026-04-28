@@ -1,0 +1,798 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="TSI McGill Tutorials">
+      
+      
+        <meta name="author" content="Siddharth Mohite (siddharth.mohite@mcgill.ca) & Stephan O'Brien (stephan.obrien@mcgill.ca)">
+      
+      
+        <link rel="canonical" href="https://github.com/tsi-mcgill/tsi-tutorials/VersionControl/3-publishing-to-pypi/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Publishing to PyPI: Share Your Package Worldwide - TSI McGill Tutorials</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="sandstone" data-md-color-primary="grey" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#publishing-to-pypi-share-your-package-worldwide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TSI McGill Tutorials" class="md-header__button md-logo" aria-label="TSI McGill Tutorials" data-md-component="logo">
+      
+  <img src="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TSI McGill Tutorials
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Publishing to PyPI: Share Your Package Worldwide
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="sandstone" data-md-color-primary="grey" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="gray"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Current/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Current
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Past/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Past
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TSI McGill Tutorials" class="md-nav__button md-logo" aria-label="TSI McGill Tutorials" data-md-component="logo">
+      
+  <img src="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png" alt="logo">
+
+    </a>
+    TSI McGill Tutorials
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Current/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Current
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Past/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Past
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="publishing-to-pypi-share-your-package-worldwide">Publishing to PyPI: Share Your Package Worldwide</h1>
+<p>Building on <a href="../2-python-packages/">Python Packages</a>, this tutorial teaches you to publish packages to PyPI so users can install with <code>pip</code>.</p>
+<h2 id="what-is-pypi">What is PyPI?</h2>
+<p>The <strong>Python Package Index</strong> (PyPI, pronounced "pie-pee-eye") is the official repository for Python packages. It's how <code>pip install numpy</code> works.</p>
+<p><strong>Key facts</strong>:
+- Public and free for open-source packages
+- Packages are discoverable and searchable
+- Automatically indexes documentation links
+- Integrates with GitHub for easy installation</p>
+<h2 id="preparing-your-package">Preparing Your Package</h2>
+<p>Before publishing, ensure your package meets these requirements:</p>
+<h3 id="1-check-your-pyprojecttoml">1. Check Your <code>pyproject.toml</code></h3>
+<div class="highlight"><pre><span></span><code><span class="k">[project]</span>
+<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;my-awesome-package&quot;</span><span class="w">  </span><span class="c1"># Must be unique on PyPI</span>
+<span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span><span class="w">            </span><span class="c1"># Semantic versioning</span>
+<span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Clear, concise description&quot;</span>
+<span class="n">readme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;README.md&quot;</span>
+<span class="n">requires-python</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&gt;=3.8&quot;</span>
+<span class="n">license</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">text</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;MIT&quot;</span><span class="p">}</span>
+<span class="n">authors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[{</span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;Your Name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;your@email.com&quot;</span><span class="p">}]</span>
+<span class="n">keywords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;astronomy&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;statistics&quot;</span><span class="p">]</span>
+<span class="n">classifiers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;Development Status :: 3 - Alpha&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;Intended Audience :: Science/Research&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;License :: OSI Approved :: MIT License&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;Programming Language :: Python :: 3&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;Programming Language :: Python :: 3.8&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;Programming Language :: Python :: 3.9&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;Programming Language :: Python :: 3.10&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;Programming Language :: Python :: 3.11&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</code></pre></div>
+<h3 id="classifiers">Classifiers</h3>
+<p>Classifiers help users find your package. Common ones:</p>
+<div class="highlight"><pre><span></span><code>Development Status :: 3 - Alpha
+Development Status :: 4 - Beta
+Development Status :: 5 - Production/Stable
+
+Intended Audience :: Developers
+Intended Audience :: Science/Research
+Intended Audience :: Education
+
+License :: OSI Approved :: MIT License
+License :: OSI Approved :: Apache Software License
+License :: OSI Approved :: BSD License
+
+Programming Language :: Python :: 3 :: Only
+Programming Language :: Python :: 3.8
+Programming Language :: Python :: 3.9
+Programming Language :: Python :: 3.10
+Programming Language :: Python :: 3.11
+
+Topic :: Scientific/Engineering
+Topic :: Scientific/Engineering :: Astronomy
+Topic :: Scientific/Engineering :: Physics
+</code></pre></div>
+<h3 id="2-create-a-license-file">2. Create a License File</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Download a license from choosealicense.com</span>
+<span class="c1"># Save as LICENSE (no extension)</span>
+</code></pre></div>
+<p>Common licenses:
+- <strong>MIT</strong>: Permissive, simple
+- <strong>Apache 2.0</strong>: Permissive, includes patent clause
+- <strong>GPL 3.0</strong>: Requires derived works to be open-source</p>
+<h3 id="3-write-a-good-readme">3. Write a Good README</h3>
+<p>Your README is shown on PyPI and GitHub:</p>
+<div class="highlight"><pre><span></span><code><span class="gh"># My Awesome Package</span>
+
+Brief one-liner description.
+
+[<span class="nt">![Tests</span>](<span class="na">https://github.com/username/my-package/actions/workflows/tests.yml/badge.svg</span>)](...)
+[<span class="nt">![PyPI</span>](<span class="na">https://img.shields.io/pypi/v/my-package</span>)](...)
+
+<span class="gu">## Features</span>
+
+<span class="k">-</span><span class="w"> </span>Feature 1
+<span class="k">-</span><span class="w"> </span>Feature 2
+<span class="k">-</span><span class="w"> </span>Feature 3
+
+<span class="gu">## Installation</span>
+
+\`\`\`bash
+pip install my-awesome-package
+\`\`\`
+
+<span class="gu">## Quick Start</span>
+
+\`\`\`python
+from my_package import main_function
+
+result = main_function(data)
+print(result)
+\`\`\`
+
+<span class="gu">## Documentation</span>
+
+See [<span class="nt">the docs</span>](<span class="na">https://my-package.readthedocs.io</span>)
+
+<span class="gu">## Contributing</span>
+
+Contributions welcome! See CONTRIBUTING.md
+
+<span class="gu">## License</span>
+
+MIT License (see LICENSE)
+
+<span class="gu">## Citation</span>
+
+If you use this in research, cite as:
+
+\`\`\`bibtex
+<span class="ni">@software</span>{mypackage2024,
+  author = {Your Name},
+  title = {My Awesome Package},
+  year = {2024},
+  url = {https://github.com/username/my-package}
+}
+\`\`\`
+</code></pre></div>
+<h3 id="4-include-all-necessary-files">4. Include All Necessary Files</h3>
+<div class="highlight"><pre><span></span><code>my_package/
+├── my_package/
+│   ├── __init__.py
+│   └── ...
+├── tests/
+│   └── ...
+├── docs/
+│   └── ...
+├── README.md       ← Required
+├── LICENSE         ← Required
+├── pyproject.toml  ← Required
+├── MANIFEST.in     ← Optional (include non-Python files)
+└── .gitignore
+</code></pre></div>
+<h2 id="create-a-pypi-account">Create a PyPI Account</h2>
+<h3 id="testpypi-recommended-first">TestPyPI (Recommended First)</h3>
+<p>Before publishing to the real PyPI, test with TestPyPI:</p>
+<ol>
+<li>Go to <a href="https://test.pypi.org">test.pypi.org</a></li>
+<li>Sign up</li>
+<li>Go to Account Settings</li>
+<li>Generate API token</li>
+<li>Save token securely</li>
+</ol>
+<h3 id="pypi-production">PyPI (Production)</h3>
+<ol>
+<li>Go to <a href="https://pypi.org">pypi.org</a></li>
+<li>Sign up</li>
+<li>Generate API token (Account Settings)</li>
+</ol>
+<p><strong>Important</strong>: Store tokens in <code>~/.pypirc</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[distutils]</span>
+<span class="na">index-servers</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="na">testpypi</span>
+<span class="w">    </span><span class="na">pypi</span>
+
+<span class="k">[testpypi]</span>
+<span class="na">repository</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">https://test.pypi.org/legacy/</span>
+<span class="na">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">__token__</span>
+<span class="na">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">pypi-AgEIc...</span>
+
+<span class="k">[pypi]</span>
+<span class="na">repository</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">https://upload.pypi.org/legacy/</span>
+<span class="na">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">__token__</span>
+<span class="na">password</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">pypi-AgEIc...</span>
+</code></pre></div>
+<p>Or use environment variables:
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">TWINE_PASSWORD</span><span class="o">=</span><span class="s2">&quot;pypi-AgEIc...&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">TWINE_USERNAME</span><span class="o">=</span><span class="s2">&quot;__token__&quot;</span>
+</code></pre></div></p>
+<h2 id="building-your-distribution">Building Your Distribution</h2>
+<h3 id="install-build-tools">Install Build Tools</h3>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>build<span class="w"> </span>twine
+</code></pre></div>
+<h3 id="build-distributions">Build Distributions</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Clean previous builds</span>
+rm<span class="w"> </span>-rf<span class="w"> </span>dist/<span class="w"> </span>build/<span class="w"> </span>*.egg-info/
+
+<span class="c1"># Build</span>
+python<span class="w"> </span>-m<span class="w"> </span>build
+
+<span class="c1"># Verify contents</span>
+tar<span class="w"> </span>-tzf<span class="w"> </span>dist/my-package-0.1.0.tar.gz
+</code></pre></div>
+<p>This creates:
+- <code>dist/my-package-0.1.0.tar.gz</code> (source distribution)
+- <code>dist/my-package-0.1.0-py3-none-any.whl</code> (wheel)</p>
+<h3 id="check-metadata">Check Metadata</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Verify package metadata</span>
+twine<span class="w"> </span>check<span class="w"> </span>dist/*
+</code></pre></div>
+<p>Should show: <code>Checking distribution for my-package-0.1.0-py3-none-any.whl: PASSED</code></p>
+<h2 id="publish-to-testpypi">Publish to TestPyPI</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Upload to TestPyPI</span>
+twine<span class="w"> </span>upload<span class="w"> </span>--repository<span class="w"> </span>testpypi<span class="w"> </span>dist/*
+
+<span class="c1"># Or with token in command:</span>
+twine<span class="w"> </span>upload<span class="w"> </span>--repository<span class="w"> </span>testpypi<span class="w"> </span>--username<span class="w"> </span>__token__<span class="w"> </span>--password<span class="w"> </span><span class="s2">&quot;pypi-...&quot;</span><span class="w"> </span>dist/*
+</code></pre></div>
+<p>Check at <a href="https://test.pypi.org/project/my-package">test.pypi.org/project/my-package</a></p>
+<h3 id="test-installation-from-testpypi">Test Installation from TestPyPI</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a test environment</span>
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>test_env
+<span class="nb">source</span><span class="w"> </span>test_env/bin/activate
+
+<span class="c1"># Install from TestPyPI</span>
+pip<span class="w"> </span>install<span class="w"> </span>-i<span class="w"> </span>https://test.pypi.org/simple/<span class="w"> </span>my-package
+
+<span class="c1"># Try importing</span>
+python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import my_package; print(my_package.__version__)&quot;</span>
+
+<span class="c1"># Cleanup</span>
+deactivate
+rm<span class="w"> </span>-rf<span class="w"> </span>test_env/
+</code></pre></div>
+<h2 id="publish-to-pypi">Publish to PyPI</h2>
+<p>Once you're confident, publish to the real PyPI:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Upload to PyPI</span>
+twine<span class="w"> </span>upload<span class="w"> </span>dist/*
+
+<span class="c1"># Or directly:</span>
+python<span class="w"> </span>-m<span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>twine<span class="w"> </span>upload<span class="w"> </span>dist/*
+</code></pre></div>
+<p>⚠️ <strong>Important</strong>: You cannot overwrite versions on PyPI! Always increment version numbers.</p>
+<h2 id="verify-your-package">Verify Your Package</h2>
+<p>Visit <code>https://pypi.org/project/my-package/</code></p>
+<p>You should see:
+- Your package name
+- README rendered as HTML
+- Installation instructions
+- Version history
+- Classifiers
+- Links to documentation and repository</p>
+<h2 id="making-future-releases">Making Future Releases</h2>
+<p>For each new version:</p>
+<ol>
+<li>
+<p><strong>Update version</strong> in <code>pyproject.toml</code>:
+   <div class="highlight"><pre><span></span><code><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.2.0&quot;</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Update <code>CHANGELOG.md</code></strong>:
+   <div class="highlight"><pre><span></span><code><span class="gu">## 0.2.0 (2024-01-15)</span>
+
+<span class="gu">### Added</span>
+<span class="k">-</span><span class="w"> </span>New feature X
+
+<span class="gu">### Fixed</span>
+<span class="k">-</span><span class="w"> </span>Bug fix Y
+
+<span class="gu">### Changed</span>
+<span class="k">-</span><span class="w"> </span>API change Z (breaking)
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Commit and tag</strong>:
+   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>pyproject.toml<span class="w"> </span>CHANGELOG.md
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Release v0.2.0&quot;</span>
+git<span class="w"> </span>tag<span class="w"> </span>v0.2.0
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main<span class="w"> </span>--tags
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Build and publish</strong>:
+   <div class="highlight"><pre><span></span><code>rm<span class="w"> </span>-rf<span class="w"> </span>dist/<span class="w"> </span>build/<span class="w"> </span>*.egg-info/
+python<span class="w"> </span>-m<span class="w"> </span>build
+twine<span class="w"> </span>upload<span class="w"> </span>dist/*
+</code></pre></div></p>
+</li>
+</ol>
+<h2 id="automating-releases">Automating Releases</h2>
+<h3 id="github-actions-for-auto-publish">GitHub Actions for Auto-Publish</h3>
+<p>Create <code>.github/workflows/publish.yml</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Publish to PyPI</span>
+
+<span class="nt">on</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">push</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">tags</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;v*&#39;</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">build-and-publish</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v3</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-python@v4</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">python-version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;3.10&#39;</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip install build twine</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python -m build</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pypa/gh-action-pypi-publish@release/v1</span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">          </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.PYPI_API_TOKEN }}</span>
+</code></pre></div>
+<p>Now pushing a tag automatically publishes:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>tag<span class="w"> </span>v0.2.0
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>v0.2.0
+<span class="c1"># GitHub Actions builds and publishes automatically!</span>
+</code></pre></div>
+<h2 id="managing-versions">Managing Versions</h2>
+<h3 id="semantic-versioning-semver">Semantic Versioning (SemVer)</h3>
+<p>Version format: <code>MAJOR.MINOR.PATCH[-prerelease][+build]</code></p>
+<ul>
+<li><strong>MAJOR</strong> (1.0.0): Breaking changes, backwards incompatible</li>
+<li><strong>MINOR</strong> (1.1.0): New features, backwards compatible</li>
+<li><strong>PATCH</strong> (1.0.1): Bug fixes, backwards compatible</li>
+<li><strong>Pre-release</strong> (1.0.0-beta.1): Alpha, beta, release candidate</li>
+</ul>
+<p>Example progression:
+<div class="highlight"><pre><span></span><code>0.1.0 (initial release)
+0.2.0 (new features)
+0.2.1 (bug fix)
+1.0.0 (stable release)
+1.1.0 (new features)
+</code></pre></div></p>
+<h3 id="handling-version-in-code">Handling Version in Code</h3>
+<p>Define version in one place:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># my_package/__init__.py</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;0.2.0&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># pyproject.toml</span>
+<span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.2.0&quot;</span><span class="w">  </span><span class="c1"># Keep synchronized</span>
+</code></pre></div>
+<p>Or use dynamic versioning:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[project]</span>
+<span class="n">dynamic</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">]</span>
+
+<span class="k">[tool.setuptools.dynamic]</span>
+<span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">attr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;my_package.__version__&quot;</span><span class="p">}</span>
+</code></pre></div>
+<h2 id="advanced-uploading-to-other-indices">Advanced: Uploading to Other Indices</h2>
+<h3 id="conda-forge">Conda-Forge</h3>
+<p>For maximum reach, publish to conda-forge:</p>
+<ol>
+<li>Create <code>recipe/meta.yaml</code> with build instructions</li>
+<li>Create PR at <a href="https://github.com/conda-forge/staged-recipes">conda-forge/staged-recipes</a></li>
+<li>Conda-Forge maintainers review and merge</li>
+<li>Users can install with: <code>conda install -c conda-forge my-package</code></li>
+</ol>
+<h3 id="github-releases">GitHub Releases</h3>
+<p>Attach distributions to GitHub releases for direct download:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create release with assets</span>
+gh<span class="w"> </span>release<span class="w"> </span>create<span class="w"> </span>v0.2.0<span class="w"> </span>dist/*
+</code></pre></div>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="package-already-exists">"Package already exists"</h3>
+<p>You're trying to upload a version that already exists. Increment version and rebuild.</p>
+<h3 id="invalid-distribution">"Invalid distribution"</h3>
+<p>Run <code>twine check dist/*</code> to see metadata errors.</p>
+<h3 id="unauthorized">"Unauthorized"</h3>
+<p>Check your API token and username in <code>.pypirc</code>.</p>
+<h3 id="repository-not-found">"Repository not found"</h3>
+<p>For TestPyPI: use <code>--repository testpypi</code></p>
+<h2 id="best-practices">Best Practices</h2>
+<ol>
+<li><strong>Start with <code>0.1.0</code></strong>: Reserve <code>1.0.0</code> for stable API</li>
+<li><strong>Test on TestPyPI first</strong>: Always!</li>
+<li><strong>Keep CHANGELOG updated</strong>: Users need to know what changed</li>
+<li><strong>Tag releases</strong>: Use git tags for reproducibility</li>
+<li><strong>Document dependencies</strong>: Be explicit about requirements</li>
+<li><strong>Use long_description</strong>: GitHub + PyPI usually link</li>
+<li><strong>Add CI/CD</strong>: Automate testing and releases</li>
+</ol>
+<h2 id="next-steps">Next Steps</h2>
+<ul>
+<li><a href="../4-cicd-best-practices/">CI/CD Best Practices</a>: Automate testing and releases</li>
+<li><a href="https://readthedocs.org">Hosting Documentation</a>: Free documentation hosting</li>
+<li><a href="https://conda-forge.org/docs/">Conda-Forge Guide</a>: Package for conda users</li>
+</ul>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://packaging.python.org">Packaging.python.org</a></li>
+<li><a href="https://pypi.org/help/">PyPI Help</a></li>
+<li><a href="https://twine.readthedocs.io/">Twine Documentation</a></li>
+<li><a href="https://realpython.com/how-to-publish-an-open-source-python-package-to-pypi/">Real Python: Publishing Packages</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2026 TSI <br> <a href="https://github.com/vuquangtrong/mkdocs-material-blog">Blog Theme</a> / <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "toc.integrate", "header.autohide", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

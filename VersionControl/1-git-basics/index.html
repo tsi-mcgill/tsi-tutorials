@@ -1,0 +1,745 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="TSI McGill Tutorials">
+      
+      
+        <meta name="author" content="Siddharth Mohite (siddharth.mohite@mcgill.ca) & Stephan O'Brien (stephan.obrien@mcgill.ca)">
+      
+      
+        <link rel="canonical" href="https://github.com/tsi-mcgill/tsi-tutorials/VersionControl/1-git-basics/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Git Basics: Version Control for Research Workflows - TSI McGill Tutorials</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="sandstone" data-md-color-primary="grey" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#git-basics-version-control-for-research-workflows" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TSI McGill Tutorials" class="md-header__button md-logo" aria-label="TSI McGill Tutorials" data-md-component="logo">
+      
+  <img src="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TSI McGill Tutorials
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Git Basics: Version Control for Research Workflows
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="sandstone" data-md-color-primary="grey" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="gray"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Current/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Current
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Past/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Past
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TSI McGill Tutorials" class="md-nav__button md-logo" aria-label="TSI McGill Tutorials" data-md-component="logo">
+      
+  <img src="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png" alt="logo">
+
+    </a>
+    TSI McGill Tutorials
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Current/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Current
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Past/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Past
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="git-basics-version-control-for-research-workflows">Git Basics: Version Control for Research Workflows</h1>
+<h2 id="what-is-version-control">What is Version Control?</h2>
+<p><strong>Version control</strong> is a system that tracks and manages changes to files over time. It allows you to:</p>
+<ul>
+<li><strong>Track history</strong>: See what changed, when, and why</li>
+<li><strong>Revert changes</strong>: Go back to previous versions if something breaks</li>
+<li><strong>Collaborate</strong>: Multiple people can work on the same project simultaneously</li>
+<li><strong>Understand context</strong>: Commit messages document the "why" behind changes</li>
+</ul>
+<p>Imagine you're writing a paper and you save versions like: <code>paper_v1.docx</code>, <code>paper_v1_revised.docx</code>, <code>paper_v1_final.docx</code>, <code>paper_v1_FINAL_ACTUAL.docx</code>. Version control automates this and makes it sane.</p>
+<figure>
+<p><img alt="xkcd version control" src="../../images/git_version_control.png" style="height:300px;width:500px" />
+  </p>
+<figcaption>Why version control matters (source: <a href="https://xkcd.com/1296/">xkcd #1296</a>)</figcaption>
+</figure>
+<h2 id="distributed-version-control-with-git">Distributed Version Control with Git</h2>
+<p><strong>Git</strong> is a distributed version control system, meaning:</p>
+<ul>
+<li>Every developer has a complete copy of the project history on their machine</li>
+<li>No single point of failure (unlike centralized systems)</li>
+<li>You can work offline and sync later</li>
+<li>Multiple developers can work on the same codebase without interfering</li>
+</ul>
+<h3 id="key-concepts">Key Concepts</h3>
+<p><strong>Repository (Repo)</strong>: A folder containing your project and its entire history.</p>
+<p><strong>Commit</strong>: A snapshot of your project at a point in time, with a message explaining what changed.</p>
+<p><strong>Branch</strong>: A parallel version of your code. You can work on features independently without touching the main branch.</p>
+<p><strong>Remote</strong>: A version of your repository hosted elsewhere (e.g., GitHub).</p>
+<p><strong>Push/Pull</strong>: Push sends your local changes to the remote; pull fetches changes from the remote.</p>
+<h2 id="setting-up-git">Setting Up Git</h2>
+<h3 id="installation">Installation</h3>
+<p><strong>Linux/macOS</strong>:
+<div class="highlight"><pre><span></span><code>brew<span class="w"> </span>install<span class="w"> </span>git<span class="w">        </span><span class="c1"># macOS</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>git<span class="w">    </span><span class="c1"># Ubuntu/Debian</span>
+</code></pre></div></p>
+<p><strong>Windows</strong>: Download from <a href="https://git-scm.com">git-scm.com</a></p>
+<h2 id="your-first-repository">Your First Repository</h2>
+<h3 id="initialize-a-local-repository">Initialize a Local Repository</h3>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>my_project
+<span class="nb">cd</span><span class="w"> </span>my_project
+git<span class="w"> </span>init
+</code></pre></div>
+<h3 id="initial-configuration">Initial Configuration</h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>config<span class="w"> </span>user.name<span class="w"> </span><span class="s1">&#39;Tutorial User&#39;</span>
+git<span class="w"> </span>config<span class="w"> </span>user.email<span class="w"> </span><span class="s1">&#39;tutorial@example.com&#39;</span>
+git<span class="w"> </span>config<span class="w"> </span>--list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s1">&#39;user.name|user.email&#39;</span>
+
+This<span class="w"> </span>creates<span class="w"> </span>a<span class="w"> </span>hidden<span class="w"> </span><span class="sb">`</span>.git<span class="sb">`</span><span class="w"> </span>folder<span class="w"> </span>containing<span class="w"> </span>all<span class="w"> </span>version<span class="w"> </span>control<span class="w"> </span>information.
+
+<span class="c1">### Add and Commit Files</span>
+
+<span class="sb">```</span>bash
+<span class="c1"># Create a file</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;print(&#39;Hello, World!&#39;)&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>script.py
+
+<span class="c1"># Check status</span>
+git<span class="w"> </span>status
+
+<span class="c1"># Stage the file for commit</span>
+git<span class="w"> </span>add<span class="w"> </span>script.py
+git<span class="w"> </span>status
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;Initial commit: add hello world script&#39;</span>
+</code></pre></div>
+<h3 id="understanding-the-workflow">Understanding the Workflow</h3>
+<div class="highlight"><pre><span></span><code>Working Directory  →  Staging Area  →  Repository
+   (your files)      (git add)       (git commit)
+</code></pre></div>
+<ol>
+<li><strong>Working Directory</strong>: Your actual files</li>
+<li><strong>Staging Area</strong>: Files you've marked for commit</li>
+<li><strong>Repository</strong>: Committed snapshots stored in <code>.git/</code></li>
+</ol>
+<figure>
+<p><img alt="Git staging area" src="../../images/git_staging_area.png" style="height:300px;width:500px" />
+  </p>
+<figcaption>The three states of Git (source: <a href="https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F">git-scm.com</a>)</figcaption>
+</figure>
+<h3 id="why-staging-matters">Why Staging Matters</h3>
+<p>The staging area lets you be selective about what goes into a commit. For example:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Check what&#39;s changed</span>
+git<span class="w"> </span>status
+
+<span class="c1"># Stage only specific files</span>
+git<span class="w"> </span>add<span class="w"> </span>file1.py<span class="w"> </span>file2.py
+
+<span class="c1"># Stage specific changes within a file (interactive)</span>
+git<span class="w"> </span>add<span class="w"> </span>-p<span class="w"> </span>file3.py<span class="w">   </span><span class="c1"># Shows each change, you can accept/reject</span>
+
+<span class="c1"># See what&#39;s staged vs unstaged</span>
+git<span class="w"> </span>diff<span class="w">              </span><span class="c1"># unstaged changes</span>
+git<span class="w"> </span>diff<span class="w"> </span>--staged<span class="w">     </span><span class="c1"># staged changes</span>
+</code></pre></div>
+<p>This flexibility is crucial when you make multiple unrelated changes and want to commit them separately.</p>
+<h2 id="viewing-history">Viewing History</h2>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>log
+git<span class="w"> </span>log<span class="w"> </span>--oneline
+git<span class="w"> </span>log<span class="w"> </span>--graph<span class="w"> </span>--oneline<span class="w"> </span>--all
+</code></pre></div>
+<h3 id="understanding-commits">Understanding Commits</h3>
+<p>Each commit has:
+- <strong>Hash</strong>: Unique identifier (e.g., <code>a1b2c3d</code>)
+- <strong>Author</strong>: Who made the change
+- <strong>Date</strong>: When it was committed
+- <strong>Message</strong>: Description of changes</p>
+<p>A good commit message follows this structure:
+<div class="highlight"><pre><span></span><code>[type](scope): brief summary
+
+Detailed explanation of why this change was made.
+What problem does it solve?
+
+Fixes #123
+</code></pre></div></p>
+<p><strong>Types</strong>: <code>feat</code>, <code>fix</code>, <code>docs</code>, <code>style</code>, <code>refactor</code>, <code>test</code>, <code>chore</code></p>
+<p>Example:
+<div class="highlight"><pre><span></span><code>feat(calculations): add distance calculation function
+
+Implements the Haversine formula for calculating great-circle
+distances between two points on a sphere given their longitudes
+and latitudes. This is useful for geographic calculations.
+
+Fixes #15
+</code></pre></div></p>
+<h2 id="making-changes">Making Changes</h2>
+<h3 id="modifying-files">Modifying Files</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;def add(a, b):&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>math_ops.py<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;    return a + b&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>math_ops.py
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;def subtract(a, b):&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>utils.py<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;    return a - b&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>utils.py
+git<span class="w"> </span>status
+git<span class="w"> </span>add<span class="w"> </span>math_ops.py
+git<span class="w"> </span>status
+git<span class="w"> </span>diff
+git<span class="w"> </span>diff<span class="w"> </span>--staged
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;print(&quot;Math operations module&quot;)&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>math_ops.py
+git<span class="w"> </span>diff<span class="w"> </span>math_ops.py
+git<span class="w"> </span>add<span class="w"> </span>.
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;feat(math): add math operations and utils modules&#39;</span>
+</code></pre></div>
+<h3 id="reverting-changes">Reverting Changes</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;This is an unwanted change&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>script.py
+git<span class="w"> </span>status
+git<span class="w"> </span>diff<span class="w"> </span>script.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-5
+git<span class="w"> </span>checkout<span class="w"> </span>--<span class="w"> </span>script.py
+cat<span class="w"> </span>script.py
+</code></pre></div>
+<h2 id="branching">Branching</h2>
+<p>Branches allow parallel development without interfering with your main code.</p>
+<figure>
+<p><img alt="Git branching diagram" src="../../images/git-branching.png" style="height:300px;width:500px" />
+  </p>
+<figcaption>Branching strategy: develop features on separate branches, merge to main (source: <a href="https://www.nobledesktop.com/learn/git/git-branches">nobledesktop.com</a>)</figcaption>
+</figure>
+<h3 id="create-and-switch-branches">Create and Switch Branches</h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>branch
+git<span class="w"> </span>branch<span class="w"> </span>feature/new-calculation
+git<span class="w"> </span>branch
+git<span class="w"> </span>checkout<span class="w"> </span>feature/new-calculation
+git<span class="w"> </span>branch
+</code></pre></div>
+<h3 id="branch-naming-conventions">Branch Naming Conventions</h3>
+<p>Good branch names are descriptive and follow patterns:
+- <code>feature/user-authentication</code> - new features
+- <code>fix/memory-leak</code> - bug fixes
+- <code>docs/api-reference</code> - documentation
+- <code>refactor/database-layer</code> - code reorganization
+- <code>experiment/ml-model-v2</code> - exploratory work</p>
+<h3 id="merging-branches">Merging Branches</h3>
+<p>When your feature is ready:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;def multiply(a, b):&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>advanced_math.py<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;    return a * b&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>advanced_math.py
+git<span class="w"> </span>add<span class="w"> </span>advanced_math.py
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;feat(math): add multiply function&#39;</span>
+git<span class="w"> </span>log<span class="w"> </span>--oneline
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>main
+git<span class="w"> </span>branch
+git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-3
+git<span class="w"> </span>merge<span class="w"> </span>feature/new-calculation<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;Merge feature/new-calculation into main&#39;</span>
+ls<span class="w"> </span>-1<span class="w"> </span>*.py
+git<span class="w"> </span>log<span class="w"> </span>--oneline
+</code></pre></div>
+<p><strong>Merge vs Rebase</strong> (for advanced users):</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feature/division
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;def divide(a, b):&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>division.py<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;    return a / b if b != 0 else &quot;Error&quot;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>division.py
+git<span class="w"> </span>add<span class="w"> </span>division.py<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;feat(math): add divide function&#39;</span>
+git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span>-5
+git<span class="w"> </span>rebase<span class="w"> </span>main
+git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span>-5
+git<span class="w"> </span>checkout<span class="w"> </span>main
+git<span class="w"> </span>merge<span class="w"> </span>feature/division<span class="w"> </span>--ff-only
+git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span>--graph<span class="w"> </span>-10
+</code></pre></div>
+<h2 id="collaboration-remote-repositories">Collaboration: Remote Repositories</h2>
+<p>To share your code and collaborate with others, you need a remote repository.</p>
+<h3 id="add-a-remote">Add a Remote</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Add a remote called &#39;origin&#39; pointing to your GitHub repo</span>
+git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>https://github.com/your-username/your-repo.git
+
+<span class="c1"># View remotes</span>
+git<span class="w"> </span>remote<span class="w"> </span>-v
+</code></pre></div>
+<h3 id="push-and-pull">Push and Pull</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Push your commits to the remote</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
+
+<span class="c1"># Pull changes from remote</span>
+git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>main
+
+<span class="c1"># Set upstream tracking (so you can just use git push)</span>
+git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>main
+</code></pre></div>
+<h2 id="advanced-topics-intermediate-to-expert">Advanced Topics (Intermediate to Expert)</h2>
+<h3 id="powerful-log-viewing">Powerful Log Viewing</h3>
+<p>Understand your project history better:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>log<span class="w"> </span>--graph<span class="w"> </span>--oneline<span class="w"> </span>--all<span class="w"> </span>--decorate
+git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span>--author<span class="o">=</span><span class="s1">&#39;Tutorial User&#39;</span>
+git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-5
+git<span class="w"> </span>log<span class="w"> </span>-p<span class="w"> </span>-1<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-20
+git<span class="w"> </span>log<span class="w"> </span>--stat<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-25
+</code></pre></div>
+<h3 id="undoing-things-advanced">Undoing Things (Advanced)</h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>reflog<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-10
+git<span class="w"> </span>blame<span class="w"> </span>script.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-3
+git<span class="w"> </span>show<span class="w"> </span>HEAD<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-30
+git<span class="w"> </span>show<span class="w"> </span>HEAD:script.py
+</code></pre></div>
+<h3 id="advanced-branching">Advanced Branching</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;test feature 1&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>feature1.py
+git<span class="w"> </span>add<span class="w"> </span>feature1.py<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;test commit to reset&#39;</span>
+git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-2
+git<span class="w"> </span>reset<span class="w"> </span>--soft<span class="w"> </span>HEAD~1
+git<span class="w"> </span>status
+git<span class="w"> </span>reset<span class="w"> </span>HEAD<span class="w"> </span>feature1.py
+git<span class="w"> </span>status
+rm<span class="w"> </span>feature1.py
+</code></pre></div>
+<h3 id="stashing-work-in-progress">Stashing Work in Progress</h3>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;work in progress&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>wip.py
+git<span class="w"> </span>add<span class="w"> </span>wip.py
+git<span class="w"> </span>stash
+git<span class="w"> </span>status
+git<span class="w"> </span>stash<span class="w"> </span>list
+git<span class="w"> </span>stash<span class="w"> </span>pop
+git<span class="w"> </span>status
+rm<span class="w"> </span>wip.py
+</code></pre></div>
+<h3 id="cherry-picking-specific-commits">Cherry-Picking Specific Commits</h3>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feature/power
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;def power(a, b):&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>power.py<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;    return a ** b&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>power.py
+git<span class="w"> </span>add<span class="w"> </span>power.py<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;feat(math): add power function&#39;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;def square(a):&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>square.py<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;    return a ** 2&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>square.py
+git<span class="w"> </span>add<span class="w"> </span>square.py<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;feat(math): add square function&#39;</span>
+git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-3
+git<span class="w"> </span>checkout<span class="w"> </span>main
+git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-3
+git<span class="w"> </span>cherry-pick<span class="w"> </span><span class="k">$(</span>git<span class="w"> </span>log<span class="w"> </span>feature/power<span class="w"> </span>--oneline<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">&#39;add power function&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="s1">&#39; &#39;</span><span class="w"> </span>-f1<span class="k">)</span>
+git<span class="w"> </span>log<span class="w"> </span>--oneline<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-4
+ls<span class="w"> </span>-1<span class="w"> </span>*.py<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>power
+</code></pre></div>
+<h3 id="gitignore-best-practices">.gitignore Best Practices</h3>
+<div class="highlight"><pre><span></span><code>cat<span class="w"> </span>&gt;<span class="w"> </span>.gitignore<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s"># Python</span>
+<span class="s">__pycache__/</span>
+<span class="s">*.py[cod]</span>
+<span class="s">*$py.class</span>
+<span class="s">*.so</span>
+<span class="s">.Python</span>
+<span class="s">venv/</span>
+<span class="s">env/</span>
+<span class="s">.venv</span>
+
+<span class="s"># IDE</span>
+<span class="s">.vscode/</span>
+<span class="s">.idea/</span>
+<span class="s">*.swp</span>
+<span class="s">*.swo</span>
+<span class="s">*~</span>
+
+<span class="s"># OS</span>
+<span class="s">.DS_Store</span>
+<span class="s">Thumbs.db</span>
+
+<span class="s"># Build/Distribution</span>
+<span class="s">build/</span>
+<span class="s">dist/</span>
+<span class="s">*.egg-info/</span>
+<span class="s">.eggs/</span>
+
+<span class="s"># Testing</span>
+<span class="s">.pytest_cache/</span>
+<span class="s">.coverage</span>
+<span class="s">htmlcov/</span>
+
+<span class="s"># Secrets</span>
+<span class="s">.env</span>
+<span class="s">.secrets</span>
+<span class="s">secrets.json</span>
+<span class="s">EOF</span>
+cat<span class="w"> </span>.gitignore
+git<span class="w"> </span>add<span class="w"> </span>.gitignore<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;Add .gitignore file&#39;</span>
+</code></pre></div>
+<h3 id="dealing-with-force-push-dangerous">Dealing with Force Push (Dangerous!)</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Never force push to main/shared branches!</span>
+
+<span class="c1"># Safe force push (only if no one else has fetched yet)</span>
+git<span class="w"> </span>push<span class="w"> </span>--force-with-lease<span class="w"> </span>origin<span class="w"> </span>feature-branch
+
+<span class="c1"># This safer variant fails if remote has changes you don&#39;t have locally</span>
+<span class="c1"># It prevents accidentally overwriting others&#39; work</span>
+</code></pre></div>
+<h2 id="best-practices">Best Practices</h2>
+<ol>
+<li><strong>Commit Often</strong>: Small, logical commits are easier to understand and revert if needed</li>
+<li><strong>Write Clear Messages</strong>: Explain the "why", not just the "what"</li>
+<li><strong>Never Commit Secrets</strong>: Use <code>.gitignore</code> for sensitive files</li>
+<li><strong>Branch for Features</strong>: Keep main stable; develop features on branches</li>
+<li><strong>Pull Before You Push</strong>: Always sync with remote before pushing</li>
+<li><strong>Review Before Committing</strong>: Use <code>git diff</code> to verify changes</li>
+</ol>
+<h2 id="next-steps">Next Steps</h2>
+<p>You now understand Git fundamentals! Next, we'll explore GitHub for collaboration and hosting your repositories online.</p>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://git-scm.com/doc">Official Git Documentation</a></li>
+<li><a href="https://learngitbranching.js.org/">Git Branching Visualizer</a></li>
+<li><a href="https://www.conventionalcommits.org/">Conventional Commits</a></li>
+<li><a href="https://semver.org/">Semantic Versioning</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2026 TSI <br> <a href="https://github.com/vuquangtrong/mkdocs-material-blog">Blog Theme</a> / <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "toc.integrate", "header.autohide", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

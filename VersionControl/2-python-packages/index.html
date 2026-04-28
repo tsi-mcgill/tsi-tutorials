@@ -1,0 +1,820 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="TSI McGill Tutorials">
+      
+      
+        <meta name="author" content="Siddharth Mohite (siddharth.mohite@mcgill.ca) & Stephan O'Brien (stephan.obrien@mcgill.ca)">
+      
+      
+        <link rel="canonical" href="https://github.com/tsi-mcgill/tsi-tutorials/VersionControl/2-python-packages/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Building a Python Package - TSI McGill Tutorials</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="sandstone" data-md-color-primary="grey" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#building-a-python-package" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TSI McGill Tutorials" class="md-header__button md-logo" aria-label="TSI McGill Tutorials" data-md-component="logo">
+      
+  <img src="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TSI McGill Tutorials
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Building a Python Package
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="sandstone" data-md-color-primary="grey" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="gray"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Current/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Current
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Past/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Past
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TSI McGill Tutorials" class="md-nav__button md-logo" aria-label="TSI McGill Tutorials" data-md-component="logo">
+      
+  <img src="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png" alt="logo">
+
+    </a>
+    TSI McGill Tutorials
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Current/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Current
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Past/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Past
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="building-a-python-package">Building a Python Package</h1>
+<p>Building on <a href="../1-git-basics/">Git Basics</a> and <a href="../2-github-collaboration/">GitHub Collaboration</a>, this tutorial teaches you to structure Python code as an installable package.</p>
+<h2 id="why-packaging">Why Packaging?</h2>
+<p>Single-file scripts work for simple projects, but as complexity grows, packages provide:</p>
+<ul>
+<li><strong>Organization</strong>: Logical grouping of related code</li>
+<li><strong>Reusability</strong>: Install and import from anywhere</li>
+<li><strong>Dependency management</strong>: Declare what your project needs</li>
+<li><strong>Versioning</strong>: Semantic versioning for releases</li>
+<li><strong>Distribution</strong>: Share via PyPI, conda, GitHub</li>
+<li><strong>Testing</strong>: Easier to test modular code</li>
+<li><strong>Documentation</strong>: Standard structure for docs</li>
+</ul>
+<h2 id="package-anatomy">Package Anatomy</h2>
+<p>A well-structured Python package looks like:</p>
+<div class="highlight"><pre><span></span><code>my_project/
+├── my_package/          # Main package (Python code)
+│   ├── __init__.py      # Marks as package, defines API
+│   ├── module1.py       # Code modules
+│   ├── module2.py
+│   └── subpackage/
+│       ├── __init__.py
+│       └── module3.py
+├── tests/               # Unit tests
+│   ├── __init__.py
+│   ├── test_module1.py
+│   └── test_module2.py
+├── docs/                # Documentation
+│   ├── index.md
+│   └── api.md
+├── examples/            # Example scripts
+│   └── basic_usage.py
+├── .gitignore           # Git ignore patterns
+├── README.md            # Project description
+├── LICENSE              # Open source license
+├── setup.py             # Package configuration (legacy)
+├── setup.cfg            # Package metadata
+├── pyproject.toml       # Modern Python project config
+└── MANIFEST.in          # Include non-Python files
+</code></pre></div>
+<h2 id="modern-python-packaging-pyprojecttoml">Modern Python Packaging: <code>pyproject.toml</code></h2>
+<p>The modern standard is <code>pyproject.toml</code> (PEP 517, 518, 621). This replaces separate <code>setup.py</code> and <code>setup.cfg</code> files.</p>
+<h3 id="basic-pyprojecttoml">Basic <code>pyproject.toml</code></h3>
+<div class="highlight"><pre><span></span><code><span class="k">[build-system]</span>
+<span class="n">requires</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;setuptools&gt;=61.0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;wheel&quot;</span><span class="p">]</span>
+<span class="n">build-backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;setuptools.build_meta&quot;</span>
+
+<span class="k">[project]</span>
+<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;my-package&quot;</span>
+<span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.1.0&quot;</span>
+<span class="n">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;A brief description of what your package does&quot;</span>
+<span class="n">readme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;README.md&quot;</span>
+<span class="n">requires-python</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&gt;=3.8&quot;</span>
+<span class="n">license</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">text</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;MIT&quot;</span><span class="p">}</span>
+<span class="n">authors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;Your Name&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">email</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s2">&quot;your.email@example.com&quot;</span><span class="p">},</span>
+<span class="p">]</span>
+<span class="n">keywords</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;keyword1&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;keyword2&quot;</span><span class="p">]</span>
+<span class="n">classifiers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;Development Status :: 3 - Alpha&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;Intended Audience :: Developers&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;License :: OSI Approved :: MIT License&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;Programming Language :: Python :: 3&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;Programming Language :: Python :: 3.8&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;Programming Language :: Python :: 3.9&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;Programming Language :: Python :: 3.10&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;Programming Language :: Python :: 3.11&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">dependencies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;numpy&gt;=1.20&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;scipy&gt;=1.7&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="k">[project.optional-dependencies]</span>
+<span class="n">dev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;pytest&gt;=6.0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;black&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;flake8&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;mypy&quot;</span><span class="p">]</span>
+<span class="n">docs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;sphinx&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;sphinx-rtd-theme&quot;</span><span class="p">]</span>
+
+<span class="k">[project.urls]</span>
+<span class="s2">&quot;Homepage&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://github.com/username/my-package&quot;</span>
+<span class="s2">&quot;Bug Tracker&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://github.com/username/my-package/issues&quot;</span>
+<span class="s2">&quot;Documentation&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://my-package.readthedocs.io&quot;</span>
+
+<span class="k">[tool.setuptools]</span>
+<span class="n">packages</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;my_package&quot;</span><span class="p">]</span>
+
+<span class="k">[tool.setuptools.package-data]</span>
+<span class="n">my_package</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;data/*.csv&quot;</span><span class="p">]</span>
+</code></pre></div>
+<h2 id="creating-your-package-structure">Creating Your Package Structure</h2>
+<h3 id="step-1-create-directory-structure">Step 1: Create Directory Structure</h3>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>my_project
+<span class="nb">cd</span><span class="w"> </span>my_project
+git<span class="w"> </span>init
+mkdir<span class="w"> </span>my_package<span class="w"> </span>tests<span class="w"> </span>docs<span class="w"> </span>examples
+</code></pre></div>
+<h3 id="step-2-create-__init__py">Step 2: Create <code>__init__.py</code></h3>
+<p>This file marks a directory as a Python package and defines the public API.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># my_package/__init__.py</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">My Package - A description of your package</span>
+
+<span class="sd">This package provides tools for calculating astronomical distances.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;0.1.0&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.module1</span><span class="w"> </span><span class="kn">import</span> <span class="n">calculate_distance</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.module2</span><span class="w"> </span><span class="kn">import</span> <span class="n">AngularVelocity</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;calculate_distance&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;AngularVelocity&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</code></pre></div>
+<p><strong>Why this matters</strong>: Users can now do:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">my_package</span><span class="w"> </span><span class="kn">import</span> <span class="n">calculate_distance</span>
+
+<span class="c1"># Instead of:</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">my_package.module1</span><span class="w"> </span><span class="kn">import</span> <span class="n">calculate_distance</span>
+</code></pre></div>
+<h3 id="step-3-organize-your-code">Step 3: Organize Your Code</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># my_package/module1.py</span>
+
+<span class="sd">&quot;&quot;&quot;Calculations for astronomical distances&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_distance</span><span class="p">(</span><span class="n">ra1</span><span class="p">,</span> <span class="n">dec1</span><span class="p">,</span> <span class="n">ra2</span><span class="p">,</span> <span class="n">dec2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate great-circle distance between two points on a sphere.</span>
+
+<span class="sd">    Uses the Haversine formula.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ra1, dec1 : float</span>
+<span class="sd">        Right ascension and declination of first point (degrees)</span>
+<span class="sd">    ra2, dec2 : float</span>
+<span class="sd">        Right ascension and declination of second point (degrees)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    distance : float</span>
+<span class="sd">        Angular distance in degrees</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Convert to radians</span>
+    <span class="n">ra1</span><span class="p">,</span> <span class="n">dec1</span><span class="p">,</span> <span class="n">ra2</span><span class="p">,</span> <span class="n">dec2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">([</span><span class="n">ra1</span><span class="p">,</span> <span class="n">dec1</span><span class="p">,</span> <span class="n">ra2</span><span class="p">,</span> <span class="n">dec2</span><span class="p">])</span>
+
+    <span class="c1"># Haversine formula</span>
+    <span class="n">dra</span> <span class="o">=</span> <span class="n">ra2</span> <span class="o">-</span> <span class="n">ra1</span>
+    <span class="n">ddec</span> <span class="o">=</span> <span class="n">dec2</span> <span class="o">-</span> <span class="n">dec1</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">ddec</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">dec1</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">dec2</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">dra</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="step-4-create-tests">Step 4: Create Tests</h3>
+<p>Tests verify your code works correctly and document expected behavior.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># tests/test_module1.py</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">my_package.module1</span><span class="w"> </span><span class="kn">import</span> <span class="n">calculate_distance</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_calculate_distance_same_point</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Distance between a point and itself should be 0&quot;&quot;&quot;</span>
+    <span class="n">distance</span> <span class="o">=</span> <span class="n">calculate_distance</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">distance</span> <span class="o">==</span> <span class="n">pytest</span><span class="o">.</span><span class="n">approx</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_calculate_distance_pole_to_equator</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Distance from pole to equator should be ~90 degrees&quot;&quot;&quot;</span>
+    <span class="n">distance</span> <span class="o">=</span> <span class="n">calculate_distance</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">distance</span> <span class="o">==</span> <span class="n">pytest</span><span class="o">.</span><span class="n">approx</span><span class="p">(</span><span class="mf">90.0</span><span class="p">,</span> <span class="nb">abs</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_calculate_distance_array_input</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Should handle array inputs&quot;&quot;&quot;</span>
+    <span class="n">ra1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+    <span class="n">dec1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+    <span class="n">ra2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">])</span>
+    <span class="n">dec2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">distance</span> <span class="o">=</span> <span class="n">calculate_distance</span><span class="p">(</span><span class="n">ra1</span><span class="p">,</span> <span class="n">dec1</span><span class="p">,</span> <span class="n">ra2</span><span class="p">,</span> <span class="n">dec2</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">distance</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+</code></pre></div>
+<h3 id="step-5-create-setup-files">Step 5: Create Setup Files</h3>
+<p><strong>Modern approach with <code>pyproject.toml</code></strong> (recommended):</p>
+<p>Create <code>pyproject.toml</code> with the configuration above.</p>
+<p><strong>Legacy approach with <code>setup.py</code></strong> (for compatibility):</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># setup.py</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">setuptools</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup</span><span class="p">,</span> <span class="n">find_packages</span>
+
+<span class="n">setup</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;my-package&quot;</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s2">&quot;0.1.0&quot;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s2">&quot;A brief description&quot;</span><span class="p">,</span>
+    <span class="n">author</span><span class="o">=</span><span class="s2">&quot;Your Name&quot;</span><span class="p">,</span>
+    <span class="n">author_email</span><span class="o">=</span><span class="s2">&quot;your.email@example.com&quot;</span><span class="p">,</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://github.com/username/my-package&quot;</span><span class="p">,</span>
+    <span class="n">packages</span><span class="o">=</span><span class="n">find_packages</span><span class="p">(),</span>
+    <span class="n">python_requires</span><span class="o">=</span><span class="s2">&quot;&gt;=3.8&quot;</span><span class="p">,</span>
+    <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;numpy&gt;=1.20&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;scipy&gt;=1.7&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+    <span class="n">extras_require</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;dev&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;pytest&quot;</span><span class="p">,</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="s2">&quot;flake8&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;docs&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;sphinx&quot;</span><span class="p">],</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</code></pre></div>
+<h2 id="installing-your-package">Installing Your Package</h2>
+<h3 id="development-installation">Development Installation</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install in development mode (editable)</span>
+<span class="c1"># Changes to source code are immediately reflected</span>
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+
+<span class="c1"># Or with dev dependencies:</span>
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[dev]&quot;</span>
+</code></pre></div>
+<h3 id="regular-installation">Regular Installation</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Build and install</span>
+pip<span class="w"> </span>install<span class="w"> </span>.
+
+<span class="c1"># From a specific directory</span>
+pip<span class="w"> </span>install<span class="w"> </span>/path/to/my_project
+</code></pre></div>
+<h3 id="using-virtual-environments">Using Virtual Environments</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create isolated environment</span>
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+<span class="nb">source</span><span class="w"> </span>venv/bin/activate<span class="w">  </span><span class="c1"># On Windows: venv\Scripts\activate</span>
+
+<span class="c1"># Install your package</span>
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;.[dev]&quot;</span>
+
+<span class="c1"># Deactivate environment</span>
+deactivate
+</code></pre></div>
+<h2 id="testing-your-package">Testing Your Package</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install pytest</span>
+pip<span class="w"> </span>install<span class="w"> </span>pytest
+
+<span class="c1"># Run tests</span>
+pytest
+
+<span class="c1"># Run with verbose output</span>
+pytest<span class="w"> </span>-v
+
+<span class="c1"># Run specific test file</span>
+pytest<span class="w"> </span>tests/test_module1.py
+
+<span class="c1"># Run with coverage</span>
+pip<span class="w"> </span>install<span class="w"> </span>pytest-cov
+pytest<span class="w"> </span>--cov<span class="o">=</span>my_package
+</code></pre></div>
+<h2 id="building-distributions">Building Distributions</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install build tools</span>
+pip<span class="w"> </span>install<span class="w"> </span>build
+
+<span class="c1"># Build source and wheel distributions</span>
+python<span class="w"> </span>-m<span class="w"> </span>build
+
+<span class="c1"># Creates:</span>
+<span class="c1"># dist/my_package-0.1.0.tar.gz  (source distribution)</span>
+<span class="c1"># dist/my_package-0.1.0-py3-none-any.whl  (wheel)</span>
+</code></pre></div>
+<h2 id="publishing-to-github">Publishing to GitHub</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Commit all files</span>
+git<span class="w"> </span>add<span class="w"> </span>.
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Initial package structure&quot;</span>
+
+<span class="c1"># Add GitHub remote</span>
+git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>https://github.com/username/my_package.git
+
+<span class="c1"># Push to GitHub</span>
+git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>main
+</code></pre></div>
+<h2 id="documentation">Documentation</h2>
+<p>Add a <code>README.md</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="gh"># My Package</span>
+
+Brief description.
+
+<span class="gu">## Installation</span>
+
+\`\`\`bash
+pip install my-package
+\`\`\`
+
+Or from source:
+
+\`\`\`bash
+git clone https://github.com/username/my_package.git
+cd my_package
+pip install -e .
+\`\`\`
+
+<span class="gu">## Quick Start</span>
+
+\`\`\`python
+from my_package import calculate_distance
+
+<span class="gh"># Calculate angular distance between two points</span>
+distance = calculate_distance(0, 0, 1, 0)
+print(f&quot;Distance: {distance} degrees&quot;)
+\`\`\`
+
+<span class="gu">## Requirements</span>
+
+<span class="k">-</span><span class="w"> </span>Python 3.8+
+<span class="k">-</span><span class="w"> </span>numpy
+<span class="k">-</span><span class="w"> </span>scipy
+
+<span class="gu">## Contributing</span>
+
+See CONTRIBUTING.md
+
+<span class="gu">## License</span>
+
+MIT License (see LICENSE file)
+</code></pre></div>
+<h2 id="best-practices">Best Practices</h2>
+<ol>
+<li><strong>Use semantic versioning</strong>: MAJOR.MINOR.PATCH</li>
+<li><strong>Write docstrings</strong>: Use NumPy or Google style</li>
+<li><strong>Add type hints</strong>: Improves code clarity</li>
+<li><strong>Version in one place</strong>: Define <code>__version__</code> once (in <code>__init__.py</code> or <code>pyproject.toml</code>)</li>
+<li><strong>Use <code>.gitignore</code></strong>: Exclude build artifacts, virtual environments</li>
+</ol>
+<h3 id="gitignore-template"><code>.gitignore</code> Template</h3>
+<div class="highlight"><pre><span></span><code># Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.venv
+
+# Build
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# OS
+.DS_Store
+Thumbs.db
+</code></pre></div>
+<h2 id="advanced-topics">Advanced Topics</h2>
+<h3 id="namespace-packages">Namespace Packages</h3>
+<p>For distributing components of a larger project:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># my_namespace/subpackage/module.py</span>
+<span class="c1"># No __init__.py in my_namespace/</span>
+</code></pre></div>
+<h3 id="entry-points">Entry Points</h3>
+<p>Create command-line tools:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># pyproject.toml</span>
+<span class="k">[project.scripts]</span>
+<span class="n">my-command</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;my_package.cli:main&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>my-command<span class="w"> </span>--help
+</code></pre></div>
+<h3 id="conditional-dependencies">Conditional Dependencies</h3>
+<div class="highlight"><pre><span></span><code><span class="n">dependencies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s1">&#39;importlib-metadata; python_version &lt; &quot;3.8&quot;&#39;</span><span class="p">,</span>
+<span class="p">]</span>
+</code></pre></div>
+<h2 id="next-steps">Next Steps</h2>
+<ul>
+<li><a href="../3-publishing-to-pypi/">Publishing to PyPI</a>: Make your package installable via pip</li>
+<li><a href="../4-cicd-best-practices/">CI/CD Best Practices</a>: Automate testing and releases</li>
+<li><a href="https://packaging.python.org/">Python Packaging Guide</a>: Comprehensive reference</li>
+</ul>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://www.python.org/dev/peps/pep-0517/">PEP 517</a>: Build system spec</li>
+<li><a href="https://www.python.org/dev/peps/pep-0621/">PEP 621</a>: Project metadata</li>
+<li><a href="https://setuptools.pypa.io/">setuptools Documentation</a></li>
+<li><a href="https://realpython.com/python-modules-packages/">Python Package Structure Guide</a></li>
+<li><a href="https://google.github.io/styleguide/pyguide.html">Google Python Style Guide</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2026 TSI <br> <a href="https://github.com/vuquangtrong/mkdocs-material-blog">Blog Theme</a> / <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "toc.integrate", "header.autohide", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

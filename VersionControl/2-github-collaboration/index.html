@@ -1,0 +1,843 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="TSI McGill Tutorials">
+      
+      
+        <meta name="author" content="Siddharth Mohite (siddharth.mohite@mcgill.ca) & Stephan O'Brien (stephan.obrien@mcgill.ca)">
+      
+      
+        <link rel="canonical" href="https://github.com/tsi-mcgill/tsi-tutorials/VersionControl/2-github-collaboration/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>GitHub: Collaboration and Remote Repositories - TSI McGill Tutorials</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="sandstone" data-md-color-primary="grey" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#github-collaboration-and-remote-repositories" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="TSI McGill Tutorials" class="md-header__button md-logo" aria-label="TSI McGill Tutorials" data-md-component="logo">
+      
+  <img src="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TSI McGill Tutorials
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              GitHub: Collaboration and Remote Repositories
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="sandstone" data-md-color-primary="grey" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="gray"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Current/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Current
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Past/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Past
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="TSI McGill Tutorials" class="md-nav__button md-logo" aria-label="TSI McGill Tutorials" data-md-component="logo">
+      
+  <img src="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png" alt="logo">
+
+    </a>
+    TSI McGill Tutorials
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Current/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Current
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Past/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Past
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="github-collaboration-and-remote-repositories">GitHub: Collaboration and Remote Repositories</h1>
+<p>Building on <a href="../1-git-basics/">Git Basics</a>, this tutorial covers using GitHub for hosting, collaboration, and project management.</p>
+<h2 id="introduction-to-github">Introduction to GitHub</h2>
+<p><a href="https://github.com">GitHub</a> is a web-based platform for hosting Git repositories. While alternatives exist (GitLab, Gitea, Forgea), GitHub is the most widely used in open science and academia.</p>
+<p><strong>Benefits of GitHub</strong>:
+- Free public repositories (unlimited)
+- Issue tracking and project management
+- Pull request workflow for code review
+- CI/CD integration (GitHub Actions)
+- Community and discoverability
+- Educational benefits (GitHub Student Pack)</p>
+<h2 id="getting-started-with-github">Getting Started with GitHub</h2>
+<h3 id="create-an-account">Create an Account</h3>
+<ol>
+<li>Go to <a href="https://github.com">github.com</a></li>
+<li>Sign up with your email</li>
+<li><strong>Recommended</strong>: Use your institutional email for student/educator benefits</li>
+<li><a href="https://docs.github.com/en/education/explore-the-benefits-of-teaching-and-learning-with-github-education/github-global-campus-for-students">Students</a></li>
+<li><a href="https://docs.github.com/en/education/explore-the-benefits-of-teaching-and-learning-with-github-education/github-global-campus-for-teachers">Educators</a></li>
+</ol>
+<h3 id="authentication">Authentication</h3>
+<p>You need to authenticate to push code to GitHub. Choose one:</p>
+<p><strong>Option 1: HTTPS with Personal Access Token</strong> (easier for beginners)</p>
+<ol>
+<li>Go to Settings → Developer settings → Personal access tokens</li>
+<li>Create a new token with <code>repo</code> scope</li>
+<li>When <code>git push</code> prompts for password, use your token</li>
+</ol>
+<p><strong>Option 2: SSH Keys</strong> (more secure long-term)</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Generate keys (if you don&#39;t have them)</span>
+ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;your.email@example.com&quot;</span>
+
+<span class="c1"># Add public key to GitHub</span>
+<span class="c1"># Settings → SSH and GPG keys → New SSH key</span>
+cat<span class="w"> </span>~/.ssh/id_ed25519.pub
+</code></pre></div>
+<p>Configure Git to use SSH:
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>set-url<span class="w"> </span>origin<span class="w"> </span>git@github.com:username/repo.git
+</code></pre></div></p>
+<h2 id="creating-your-first-repository">Creating Your First Repository</h2>
+<h3 id="create-on-github">Create on GitHub</h3>
+<ol>
+<li>Click <strong>+</strong> in top right → New repository</li>
+<li>Name it (lowercase, hyphens for spaces)</li>
+<li>Add description</li>
+<li>Choose public or private</li>
+<li>Initialize with README (optional)</li>
+<li>Click Create</li>
+</ol>
+<h3 id="push-local-code-to-github">Push Local Code to GitHub</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Navigate to your local repo</span>
+<span class="nb">cd</span><span class="w"> </span>my_project
+
+<span class="c1"># Add GitHub as remote (if not already done)</span>
+git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>https://github.com/your-username/my_project.git
+
+<span class="c1"># Rename branch to main (GitHub default)</span>
+git<span class="w"> </span>branch<span class="w"> </span>-M<span class="w"> </span>main
+
+<span class="c1"># Push code</span>
+git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>main
+</code></pre></div>
+<h2 id="navigating-your-repository">Navigating Your Repository</h2>
+<p>Your repository page shows:</p>
+<ol>
+<li><strong>Repository name and description</strong>: At the top</li>
+<li><strong>Branch selector</strong>: See and switch branches</li>
+<li><strong>Code tab</strong>: View files and folder structure</li>
+<li><strong>File listing</strong>: The current directory contents</li>
+<li><strong>README rendering</strong>: If <code>README.md</code> exists, it displays here</li>
+<li><strong>About section</strong> (right side): Links, topics, license</li>
+<li><strong>Releases</strong>: Tagged versions of your code</li>
+</ol>
+<figure>
+<p><img alt="GitHub repository homepage" src="../../images/github-repo-home.png" style="height:300px;width:500px" />
+  </p>
+<figcaption>GitHub repository interface showing the main components you'll interact with</figcaption>
+</figure>
+<h2 id="managing-your-repository">Managing Your Repository</h2>
+<h3 id="edit-files-on-github">Edit Files on GitHub</h3>
+<p>You can edit files directly in the browser:</p>
+<ol>
+<li>Navigate to a file</li>
+<li>Click the <strong>pencil icon</strong> to edit</li>
+<li>Make changes</li>
+<li>Scroll to bottom and commit</li>
+<li>Write commit message</li>
+<li>Choose branch (create new for important changes)</li>
+<li>Click "Commit changes"</li>
+</ol>
+<figure>
+<p><img alt="GitHub edit interface" src="../../images/github-edit-browser.png" style="height:300px;width:500px" />
+  </p>
+<figcaption>Click the pencil icon to edit files directly in the browser</figcaption>
+</figure>
+<figure>
+<p><img alt="GitHub commit dialog" src="../../images/github-commit-browser.png" style="height:300px;width:500px" />
+  </p>
+<figcaption>Commit dialog: always write descriptive messages and create a new branch for non-trivial changes</figcaption>
+</figure>
+<p>After committing, you'll see the latest commit information:</p>
+<figure>
+<p><img alt="GitHub commit details" src="../../images/github-latest-commit.png" style="height:300px;width:500px" />
+  </p>
+<figcaption>Latest commit metadata displayed above the file</figcaption>
+</figure>
+<h3 id="best-practice-use-branches">Best Practice: Use Branches</h3>
+<p>⚠️ <strong>Never commit directly to <code>main</code></strong>. Instead:</p>
+<ol>
+<li>Create a branch for your work: <code>git checkout -b fix/typo</code></li>
+<li>Make commits</li>
+<li>Push to GitHub: <code>git push -u origin fix/typo</code></li>
+<li>Open a Pull Request (see below)</li>
+<li>Merge after review</li>
+</ol>
+<h2 id="issues-and-project-management">Issues and Project Management</h2>
+<h3 id="creating-issues">Creating Issues</h3>
+<p>Use Issues to track:
+- Bugs
+- Feature requests
+- Documentation needs
+- Questions</p>
+<p><strong>To create an issue</strong>:</p>
+<ol>
+<li>Go to repository → Issues tab</li>
+<li>Click "New issue"</li>
+<li>Add title and detailed description</li>
+<li>Assign to yourself or others</li>
+<li>Add labels (bug, enhancement, documentation, etc.)</li>
+<li>Add to Projects (optional)</li>
+</ol>
+<h3 id="linking-issues-to-code">Linking Issues to Code</h3>
+<p>In commits or PRs, reference issues:</p>
+<div class="highlight"><pre><span></span><code>Fix #42           # Closes issue 42 when merged
+Fixes #42, #43    # Closes multiple issues
+Close #42         # Also closes (same as Fix)
+See #42           # Just references, doesn&#39;t close
+Resolves #42      # Another way to close
+</code></pre></div>
+<p>This automatically links code changes to the issues they address, and can auto-close issues when the PR is merged.</p>
+<figure>
+<p><img alt="GitHub linking issues" src="../../images/github-commit-reference-issue.png" style="height:300px;width:500px" />
+  </p>
+<figcaption>Reference issues in commit messages to create connections</figcaption>
+</figure>
+<h2 id="pull-requests-the-collaboration-workflow">Pull Requests: The Collaboration Workflow</h2>
+<p>A <strong>Pull Request (PR)</strong> is a request to merge changes from one branch into another, with code review.</p>
+<figure>
+<p><img alt="GitHub pull request page" src="../../images/github-pull-request-page.png" style="height:300px;width:500px" />
+  </p>
+<figcaption>Pull request interface showing the conversation and review tabs</figcaption>
+</figure>
+<h3 id="creating-a-pull-request">Creating a Pull Request</h3>
+<ol>
+<li>Push your branch to GitHub</li>
+<li>Go to repository → Pull requests</li>
+<li>Click "New pull request"</li>
+<li>Select:</li>
+<li><strong>base</strong>: branch you want to merge into (usually <code>main</code>)</li>
+<li><strong>compare</strong>: your feature branch</li>
+<li>Add title and description</li>
+<li>Reference issues: "Fixes #42"</li>
+<li>Click "Create pull request"</li>
+</ol>
+<h3 id="pull-request-description-template">Pull Request Description Template</h3>
+<div class="highlight"><pre><span></span><code><span class="gu">## Description</span>
+Briefly describe the changes.
+
+<span class="gu">## Type of Change</span>
+<span class="k">- [ ]</span> Bug fix
+<span class="k">- [ ]</span> New feature
+<span class="k">- [ ]</span> Breaking change
+<span class="k">- [ ]</span> Documentation
+
+<span class="gu">## Testing</span>
+How to test these changes:
+<span class="k">1.</span> Step 1
+<span class="k">2.</span> Step 2
+
+<span class="gu">## Checklist</span>
+<span class="k">- [ ]</span> Code follows style guidelines
+<span class="k">- [ ]</span> Added tests
+<span class="k">- [ ]</span> Updated documentation
+<span class="k">- [ ]</span> No new warnings generated
+
+Closes <span class="ni">#42</span>
+</code></pre></div>
+<h3 id="viewing-diffs-what-changed">Viewing Diffs (What Changed)</h3>
+<p>When reviewing code, understanding diffs is crucial:</p>
+<div class="highlight"><pre><span></span><code>+ Added lines (green)
+- Removed lines (red)
+  Context lines (unchanged)
+</code></pre></div>
+<p>Click on files in "Files changed" tab to see side-by-side diffs:</p>
+<figure>
+<p><img alt="GitHub commit diff" src="../../images/github-commit-id.png" style="height:300px;width:500px" />
+  </p>
+<figcaption>Detailed diff view showing what changed in each commit</figcaption>
+</figure>
+<h3 id="code-review">Code Review</h3>
+<p><strong>As a code reviewer</strong>:</p>
+<ol>
+<li>Read the PR description</li>
+<li>Click "Files changed"</li>
+<li>Review the diff (green = additions, red = deletions)</li>
+<li>Click <strong>+</strong> to comment on specific lines</li>
+<li>Request changes or approve</li>
+</ol>
+<p><strong>Advanced review features</strong>:
+<div class="highlight"><pre><span></span><code><span class="c1"># Viewing the diff locally before reviewing</span>
+git<span class="w"> </span>fetch<span class="w"> </span>origin<span class="w"> </span>pull/PR_NUMBER/head:local-branch-name
+git<span class="w"> </span>checkout<span class="w"> </span>local-branch-name
+<span class="c1"># Now you can test the code locally!</span>
+</code></pre></div></p>
+<p><strong>As a PR author</strong>:</p>
+<ol>
+<li>Read review comments</li>
+<li>Make requested changes</li>
+<li>Push new commits (they auto-add to PR)</li>
+<li>Reply to comments explaining your choices</li>
+<li>Request re-review when ready</li>
+</ol>
+<h3 id="merging-a-pull-request">Merging a Pull Request</h3>
+<p>Once approved:</p>
+<ol>
+<li>Click "Merge pull request"</li>
+<li>Choose merge strategy:</li>
+<li><strong>Create a merge commit</strong>: Keeps full history (safest for main)</li>
+<li><strong>Squash and merge</strong>: Combines commits (cleaner history, good for feature branches)</li>
+<li><strong>Rebase and merge</strong>: Replays commits (linear history, use with caution on shared branches)</li>
+<li>Optionally delete the branch</li>
+<li>PR is closed and merged</li>
+</ol>
+<p><strong>Best practice</strong>: Use "Squash and merge" for most feature branches to keep main history clean.</p>
+<h2 id="collaboration-workflows">Collaboration Workflows</h2>
+<h3 id="forking-and-contributing">Forking and Contributing</h3>
+<p>To contribute to someone else's repository:</p>
+<ol>
+<li>Click <strong>Fork</strong> at top right (creates your copy)</li>
+<li>Clone your fork:
+   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/your-username/repo.git
+<span class="nb">cd</span><span class="w"> </span>repo
+</code></pre></div></li>
+<li>Add upstream remote:
+   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>upstream<span class="w"> </span>https://github.com/original-author/repo.git
+</code></pre></div></li>
+<li>Create a feature branch:
+   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>fix/issue-description
+</code></pre></div></li>
+<li>Make changes and commit</li>
+<li>Push to your fork:
+   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>fix/issue-description
+</code></pre></div></li>
+<li>On GitHub, click "Create pull request"</li>
+<li>Target the original repository</li>
+</ol>
+<h3 id="keeping-your-fork-updated">Keeping Your Fork Updated</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Fetch latest from original repo</span>
+git<span class="w"> </span>fetch<span class="w"> </span>upstream
+
+<span class="c1"># Merge into your main branch</span>
+git<span class="w"> </span>checkout<span class="w"> </span>main
+git<span class="w"> </span>merge<span class="w"> </span>upstream/main
+
+<span class="c1"># Push to your fork</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
+</code></pre></div>
+<h2 id="repository-settings">Repository Settings</h2>
+<p>Important settings (Settings tab):</p>
+<ul>
+<li><strong>Branch protection</strong>: Require reviews before merging to <code>main</code></li>
+<li>Require status checks (CI/CD) to pass</li>
+<li>Require reviews before merging</li>
+<li>Dismiss stale PR approvals when new commits are pushed</li>
+<li>
+<p>Require code owners review</p>
+</li>
+<li>
+<p><strong>Code owners</strong>: Specify who reviews changes to specific files (CODEOWNERS file)</p>
+</li>
+<li><strong>Secrets</strong>: Store API keys, tokens (for Actions)</li>
+<li><strong>Pages</strong>: Enable GitHub Pages for documentation</li>
+<li><strong>Actions</strong>: Configure CI/CD workflows</li>
+</ul>
+<h3 id="branch-protection-best-practices">Branch Protection Best Practices</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># .github/CODEOWNERS</span>
+<span class="c1"># Automatically request reviews from these people</span>
+
+<span class="c1"># Everyone</span>
+<span class="err">*</span><span class="w"> </span><span class="err">@</span><span class="l l-Scalar l-Scalar-Plain">username</span>
+
+<span class="l l-Scalar l-Scalar-Plain"># Python files</span>
+<span class="l l-Scalar l-Scalar-Plain">*.py @python-maintainer</span>
+
+<span class="l l-Scalar l-Scalar-Plain"># Documentation</span>
+<span class="l l-Scalar l-Scalar-Plain">docs/ @docs-maintainer</span>
+
+<span class="l l-Scalar l-Scalar-Plain"># Tests</span>
+<span class="l l-Scalar l-Scalar-Plain">tests/ @qa-team</span>
+</code></pre></div>
+<h2 id="advanced-github-features">Advanced GitHub Features</h2>
+<h3 id="github-issues-beyond-basics">GitHub Issues (Beyond Basics)</h3>
+<p><strong>Labels for organization</strong>:
+- <code>bug</code>: Something is broken
+- <code>enhancement</code>: New feature request
+- <code>good first issue</code>: Good for new contributors
+- <code>help wanted</code>: Need external help
+- <code>documentation</code>: Doc improvements
+- <code>wontfix</code>: Deliberately not fixing
+- <code>duplicate</code>: Same as another issue</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Filter issues locally</span>
+<span class="c1"># View only bugs assigned to you: </span>
+<span class="c1"># github.com/owner/repo/issues?assignee=me&amp;labels=bug</span>
+
+<span class="c1"># Create issue templates (auto-populate issue forms)</span>
+<span class="c1"># Add to .github/ISSUE_TEMPLATE/bug_report.md</span>
+</code></pre></div>
+<h3 id="watching-and-notifications">Watching and Notifications</h3>
+<div class="highlight"><pre><span></span><code>Watch button options:
+- Not watching: Only notified if mentioned
+- Watching: All activity on this repo
+- Ignoring: Never notified
+- Custom: Choose specific events
+</code></pre></div>
+<h3 id="gists-and-snippets">Gists and Snippets</h3>
+<p>Share code quickly without creating a full repo:
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a gist from command line</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;print(&quot;hello&quot;)&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gh<span class="w"> </span>gist<span class="w"> </span>create<span class="w"> </span>-
+
+<span class="c1"># View: https://gist.github.com/your-username/gist-id</span>
+</code></pre></div></p>
+<h3 id="github-discussions">GitHub Discussions</h3>
+<p>For Q&amp;A and announcements (alternative to Issues):
+- Announcements: Share news
+- Ideas: Brainstorm features
+- Polls: Get community input
+- Q&amp;A: Answer questions</p>
+<h3 id="using-git-blame-and-git-log-on-github">Using <code>git blame</code> and <code>git log</code> on GitHub</h3>
+<p>View file history and who made changes:
+<div class="highlight"><pre><span></span><code># On GitHub: Click any file, then top-right menu → &quot;Blame&quot; or &quot;History&quot;
+# See commit details and author info
+</code></pre></div></p>
+<figure>
+<p><img alt="GitHub blame view" src="../../images/github-git-blame.png" style="height:300px;width:500px" />
+  </p>
+<figcaption>View author history for each line of code</figcaption>
+</figure>
+<h3 id="security-features-advanced">Security Features (Advanced)</h3>
+<p><strong>Dependabot</strong> (automatic):
+- Detects vulnerable dependencies
+- Creates PRs with security updates</p>
+<p><strong>Code scanning</strong>:
+- Integrated with SAST tools
+- Warns about security issues</p>
+<p><strong>Secret scanning</strong>:
+- Detects exposed API keys, tokens
+- Prevents credential leaks</p>
+<h2 id="github-pages">GitHub Pages</h2>
+<h3 id="host-static-sites-from-your-repo">Host Static Sites from Your Repo</h3>
+<ol>
+<li>Push content to <code>main</code> branch (or <code>gh-pages</code>)</li>
+<li>Settings → Pages</li>
+<li>Choose source branch</li>
+<li>Your site is live at <code>https://username.github.io/repo-name</code></li>
+</ol>
+<p><strong>For documentation</strong>:
+- Use Markdown files
+- Build with MkDocs, Sphinx, Jekyll
+- Automatically deploy on push</p>
+<figure>
+<p><img alt="GitHub Pages settings" src="../../images/gh-pages-settings.png" style="height:300px;width:500px" />
+  </p>
+<figcaption>Enable GitHub Pages for automatic documentation hosting</figcaption>
+</figure>
+<h2 id="best-practices-for-github">Best Practices for GitHub</h2>
+<ol>
+<li><strong>Always use descriptive branch names</strong>:</li>
+<li>Good: <code>feat/user-authentication</code>, <code>fix/memory-leak</code></li>
+<li>
+<p>Bad: <code>feature</code>, <code>bugfix</code>, <code>test-123</code></p>
+</li>
+<li>
+<p><strong>Write clear commit messages</strong>: See <a href="https://www.conventionalcommits.org/">Conventional Commits</a></p>
+</li>
+<li>
+<p><strong>Keep <code>main</code> deployable</strong>: Use branches for all development</p>
+</li>
+<li>
+<p><strong>Code review everything</strong>: No direct commits to <code>main</code></p>
+</li>
+<li>
+<p><strong>Use issues for discussions</strong>: Don't discuss bugs in PRs</p>
+</li>
+<li>
+<p><strong>Automate with CI/CD</strong>: See <a href="../4-cicd-best-practices/">CI/CD tutorial</a></p>
+</li>
+<li>
+<p><strong>Document everything</strong>: </p>
+</li>
+<li>README with setup instructions</li>
+<li>Contributing guidelines</li>
+<li>
+<p>Code of Conduct</p>
+</li>
+<li>
+<p><strong>Communicate with collaborators</strong>: Use clear PR descriptions and review comments</p>
+</li>
+</ol>
+<h2 id="next-steps">Next Steps</h2>
+<p>Now that you can collaborate on GitHub, learn how to structure Python packages and publish them:</p>
+<ul>
+<li><a href="../2-python-packages/">Python Package Structure</a></li>
+<li><a href="../3-publishing-to-pypi/">Publishing to PyPI</a></li>
+</ul>
+<h2 id="resources">Resources</h2>
+<ul>
+<li><a href="https://docs.github.com">GitHub Docs</a></li>
+<li><a href="https://guides.github.com">GitHub Guides</a></li>
+<li><a href="https://docs.github.com/en/pull-requests">Collaborating with Pull Requests</a></li>
+<li><a href="https://docs.github.com/en/issues">GitHub Issues Documentation</a></li>
+<li><a href="https://docs.github.com/en/get-started/quickstart/fork-a-repo">Fork a Repository</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2026 TSI <br> <a href="https://github.com/vuquangtrong/mkdocs-material-blog">Blog Theme</a> / <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>
+
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "toc.integrate", "header.autohide", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -9,7 +9,7 @@
         <meta name="description" content="TSI McGill Tutorials">
       
       
-        <meta name="author" content="Stephan O'Brien (stephan.obrien@mcgill.ca)">
+        <meta name="author" content="Siddharth Mohite (siddharth.mohite@mcgill.ca) & Stephan O'Brien (stephan.obrien@mcgill.ca)">
       
       
         <link rel="canonical" href="https://github.com/tsi-mcgill/tsi-tutorials/Rust/rust_intro/">
@@ -17,8 +17,11 @@
       
       
       
+        
+      
+      
       <link rel="icon" href="../../assests/TSI_Logo_Acronym_Alone_Red_Flat.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.4">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -26,10 +29,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.50c56a3b.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -48,11 +51,10 @@
       
     
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
-    
     
     
   </head>
@@ -97,7 +99,7 @@
     </a>
     <label class="md-header__button md-icon" for="__drawer">
       
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -125,7 +127,7 @@
     <input class="md-option" data-md-color-media="" data-md-color-scheme="sandstone" data-md-color-primary="grey" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
     
       <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
       </label>
     
   
@@ -135,7 +137,7 @@
     <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="gray"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
     
       <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
       </label>
     
   
@@ -143,36 +145,38 @@
       
     
     
-      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
     
     
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
         <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
       </nav>
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
@@ -183,6 +187,7 @@
     </div>
   </div>
 </div>
+      
     
     
   </nav>
@@ -197,13 +202,15 @@
   
   
   
+  
     <li class="md-tabs__item">
-      <a href="../../Python/" class="md-tabs__link">
+      <a href="../../Current/" class="md-tabs__link">
         
+  
   
     
   
-  Python
+  Current
 
       </a>
     </li>
@@ -214,81 +221,15 @@
   
   
   
+  
     <li class="md-tabs__item">
-      <a href="../../Cpp/" class="md-tabs__link">
+      <a href="../../Past/" class="md-tabs__link">
         
+  
   
     
   
-  C++
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../" class="md-tabs__link">
-        
-  
-    
-  
-  Rust
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../../VersionControl/" class="md-tabs__link">
-        
-  
-    
-  
-  Version Control
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../../Containerization/" class="md-tabs__link">
-        
-  
-    
-  
-  Containerization
-
-      </a>
-    </li>
-  
-
-      
-        
-  
-  
-  
-    <li class="md-tabs__item">
-      <a href="../../Misc/" class="md-tabs__link">
-        
-  
-    
-  
-  Misc
+  Past
 
       </a>
     </li>
@@ -342,12 +283,19 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Python/" class="md-nav__link">
+      <a href="../../Current/" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
-    Python
+    
+  
+    Current
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -362,92 +310,19 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Cpp/" class="md-nav__link">
+      <a href="../../Past/" class="md-nav__link">
         
   
-  <span class="md-ellipsis">
-    C++
-  </span>
   
-
-      </a>
-    </li>
+  <span class="md-ellipsis">
+    
+  
+    Past
   
 
     
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Rust
   </span>
   
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../VersionControl/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Version Control
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../Containerization/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Containerization
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../Misc/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Misc
-  </span>
   
 
       </a>
@@ -465,9 +340,11 @@
           
           
             <div class="md-content" data-md-component="content">
+              
               <article class="md-content__inner md-typeset">
                 
                   
+
 
 
   <h1>Rust intro</h1>
@@ -561,7 +438,7 @@ This file contains details about the project, including external dependencies, p
 Cargo also sets up a <code>src</code> directory with a <code>main.rs</code> file containing an example program that will print "Hello, world": 
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">hello.rs</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;Hello, world!&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div></p>
@@ -631,12 +508,12 @@ Hello, world!
 <span class="normal">33</span>
 <span class="normal">34</span>
 <span class="normal">35</span>
-<span class="normal">36</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="normal">36</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// Explicitly declaring the type of the variable</span>
-<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_integer</span>: <span class="kt">i32</span> <span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
-</span><span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_float</span>: <span class="kt">f64</span> <span class="o">=</span><span class="w"> </span><span class="mf">3.14</span><span class="p">;</span>
-</span><span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_character</span>: <span class="kt">char</span> <span class="o">=</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">;</span>
-</span><span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_boolean</span>: <span class="kt">bool</span> <span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_integer</span><span class="p">:</span><span class="w"> </span><span class="kt">i32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+</span><span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_float</span><span class="p">:</span><span class="w"> </span><span class="kt">f64</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.14</span><span class="p">;</span>
+</span><span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_character</span><span class="p">:</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;A&#39;</span><span class="p">;</span>
+</span><span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_boolean</span><span class="p">:</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
 </span>
 <span class="w">    </span><span class="c1">// Rust can infer types in many cases, so explicit annotation is not always necessary</span>
 <span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">inferred_integer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
@@ -689,24 +566,24 @@ Hello, world!
 <span class="normal">16</span>
 <span class="normal">17</span>
 <span class="normal">18</span>
-<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">integer_a</span>: <span class="kt">i32</span> <span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">;</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">float_b</span>:<span class="kt">f32</span> <span class="o">=</span><span class="w"> </span><span class="n">integer_a</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">f32</span><span class="p">;</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">integer_a</span><span class="p">:</span><span class="w"> </span><span class="kt">i32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">float_b</span><span class="p">:</span><span class="kt">f32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">integer_a</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">f32</span><span class="p">;</span>
 
 
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">integer_c</span>: <span class="kt">i32</span> <span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">integer_c</span><span class="p">:</span><span class="w"> </span><span class="kt">i32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 <span class="w">    </span><span class="c1">// We&#39;re using &quot;try into&quot; here because we could have a negative integer</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">unsigned_d</span>: <span class="kt">u32</span> <span class="o">=</span><span class="w"> </span><span class="n">integer_c</span><span class="p">.</span><span class="n">try_into</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">unsigned_d</span><span class="p">:</span><span class="w"> </span><span class="kt">u32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">integer_c</span><span class="p">.</span><span class="n">try_into</span><span class="p">().</span><span class="n">unwrap</span><span class="p">();</span>
 
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">float_64_e</span>: <span class="kt">f64</span> <span class="o">=</span><span class="w"> </span><span class="mf">6.5</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">float_64_e</span><span class="p">:</span><span class="w"> </span><span class="kt">f64</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">6.5</span><span class="p">;</span>
 <span class="w">    </span><span class="c1">// This wont work because going from f64-&gt;f32 loses percision and range</span>
 <span class="w">    </span><span class="c1">// There are also some funky behaviour around inf</span>
 <span class="w">    </span><span class="c1">// let float_32_f: f32 = f32::try_from(float_64_e).unwrap();</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">float_32_f</span>: <span class="kt">f32</span> <span class="o">=</span><span class="w"> </span><span class="n">float_64_e</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">f32</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">float_32_f</span><span class="p">:</span><span class="w"> </span><span class="kt">f32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">float_64_e</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">f32</span><span class="p">;</span>
 
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">float_32_g</span>:<span class="kt">f32</span> <span class="o">=</span><span class="w"> </span><span class="kt">f32</span>::<span class="n">from</span><span class="p">(</span><span class="mf">3.13</span><span class="p">);</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">i8_h</span>:<span class="kt">i8</span> <span class="o">=</span><span class="w"> </span><span class="kt">i8</span>::<span class="n">from</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">);</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">u32_i</span><span class="w"> </span>:<span class="kt">u32</span> <span class="o">=</span><span class="w">  </span><span class="kt">u32</span>::<span class="n">try_from</span><span class="p">(</span><span class="mi">8</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">float_32_g</span><span class="p">:</span><span class="kt">f32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">f32</span><span class="p">::</span><span class="n">from</span><span class="p">(</span><span class="mf">3.13</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">i8_h</span><span class="p">:</span><span class="kt">i8</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">i8</span><span class="p">::</span><span class="n">from</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">u32_i</span><span class="w"> </span><span class="p">:</span><span class="kt">u32</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="kt">u32</span><span class="p">::</span><span class="n">try_from</span><span class="p">(</span><span class="mi">8</span><span class="p">).</span><span class="n">unwrap</span><span class="p">();</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div></p>
 <h3 id="ownership-in-rust">Ownership in Rust</h3>
@@ -726,9 +603,9 @@ Hello, world!
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span><span class="p">::</span><span class="n">from</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span>
 
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
 <span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
@@ -760,9 +637,9 @@ Hello, world!
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span><span class="p">::</span><span class="n">from</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span>
 
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
 <span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
@@ -782,9 +659,9 @@ In the above example once we have finished using <code>y</code> we have passed o
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span><span class="p">::</span><span class="n">from</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span>
 
 <span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
 </span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
@@ -805,9 +682,9 @@ In the above example once we have finished using <code>y</code> we have passed o
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
 <span class="normal">10</span>
-<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span><span class="p">::</span><span class="n">from</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span>
 
 <span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
 </span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
@@ -879,15 +756,15 @@ While it might not appear problematic for sequential code like this, attempting 
 <span class="normal">35</span>
 <span class="normal">36</span>
 <span class="normal">37</span>
-<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="normal">38</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 
-<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">x</span>:<span class="kt">i32</span> <span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="kt">i32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
 </span>
-<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">y</span>: <span class="kp">&amp;</span><span class="kt">i32</span> <span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="kt">i32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">;</span>
 </span>
 <span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;y = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
 
-<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">z</span>: <span class="kt">i32</span> <span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">z</span><span class="p">:</span><span class="w"> </span><span class="kt">i32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
 </span><span class="w">    </span><span class="n">z</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 
 <span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;x = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
@@ -963,23 +840,23 @@ While it might not appear problematic for sequential code like this, attempting 
 <span class="normal">25</span>
 <span class="normal">26</span>
 <span class="normal">27</span>
-<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="k">fn</span> <span class="nf">add_numbers</span><span class="p">(</span><span class="n">a</span>: <span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="n">b</span>: <span class="kt">i32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">i32</span><span class="p">{</span>
+<span class="normal">28</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="k">fn</span><span class="w"> </span><span class="nf">add_numbers</span><span class="p">(</span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">:</span><span class="w"> </span><span class="kt">i32</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kt">i32</span><span class="p">{</span>
 </span><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="hll"><span class="k">fn</span> <span class="nf">multiply_numbers</span><span class="p">(</span><span class="n">a</span><span class="w"> </span>:<span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span>:<span class="kt">i32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">i32</span><span class="p">{</span>
+<span class="hll"><span class="k">fn</span><span class="w"> </span><span class="nf">multiply_numbers</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="p">:</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="p">:</span><span class="kt">i32</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kt">i32</span><span class="p">{</span>
 </span><span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span>
 <span class="p">}</span>
 
-<span class="hll"><span class="k">fn</span> <span class="nf">print_numbers</span><span class="p">(</span><span class="n">a</span><span class="w"> </span>:<span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span>:<span class="kt">i32</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="hll"><span class="k">fn</span><span class="w"> </span><span class="nf">print_numbers</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="p">:</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="p">:</span><span class="kt">i32</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{} + {} = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">);</span>
 <span class="p">}</span>
 
-<span class="hll"><span class="k">fn</span> <span class="nf">print_numbers_multiply</span><span class="p">(</span><span class="n">a</span><span class="w"> </span>:<span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span>:<span class="kt">i32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="hll"><span class="k">fn</span><span class="w"> </span><span class="nf">print_numbers_multiply</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="p">:</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="p">:</span><span class="kt">i32</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 </span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{} * {} = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">);</span>
 <span class="p">}</span>
 
-<span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
 
@@ -1005,13 +882,13 @@ Consider the following example:</p>
 <span class="normal">6</span>
 <span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">print_string</span><span class="p">(</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span>: <span class="nb">String</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">(){</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span><span class="w"> </span><span class="nf">print_string</span><span class="p">(</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">(){</span>
 <span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">);</span>
 <span class="p">}</span>
 
 
-<span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&quot;Save Ferris!&quot;</span><span class="p">);</span>
+<span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span><span class="p">::</span><span class="n">from</span><span class="p">(</span><span class="s">&quot;Save Ferris!&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="n">print_string</span><span class="p">(</span><span class="n">my_string</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
@@ -1043,18 +920,18 @@ Remember that strings have variable lengths, making direct copying non-trivial. 
 <span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
-<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">print_string</span><span class="p">(</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span>: <span class="nb">String</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">(){</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span><span class="w"> </span><span class="nf">print_string</span><span class="p">(</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">(){</span>
 <span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">);</span>
 <span class="p">}</span>
 
 
-<span class="k">fn</span> <span class="nf">print_string_borrow</span><span class="p">(</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span>: <span class="kp">&amp;</span><span class="nb">String</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">(){</span>
+<span class="k">fn</span><span class="w"> </span><span class="nf">print_string_borrow</span><span class="p">(</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nb">String</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">(){</span>
 <span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">msg</span><span class="p">);</span>
 <span class="p">}</span>
 
 
-<span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&quot;Save Ferris!&quot;</span><span class="p">);</span>
+<span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_string</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">String</span><span class="p">::</span><span class="n">from</span><span class="p">(</span><span class="s">&quot;Save Ferris!&quot;</span><span class="p">);</span>
 <span class="w">    </span><span class="n">print_string</span><span class="p">(</span><span class="n">my_string</span><span class="p">.</span><span class="n">clone</span><span class="p">());</span>
 <span class="w">    </span><span class="n">print_string_borrow</span><span class="p">(</span><span class="o">&amp;</span><span class="n">my_string</span><span class="p">);</span>
 <span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">my_string</span><span class="p">);</span>
@@ -1073,15 +950,15 @@ Remember that strings have variable lengths, making direct copying non-trivial. 
 <span class="normal">10</span>
 <span class="normal">11</span>
 <span class="normal">12</span>
-<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="k">fn</span> <span class="nf">get_powers</span><span class="p">(</span><span class="w"> </span><span class="n">a</span>: <span class="kt">i32</span> <span class="p">)</span><span class="w"> </span>-&gt; <span class="p">(</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="kt">f32</span><span class="p">){</span>
+<span class="normal">13</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="k">fn</span><span class="w"> </span><span class="nf">get_powers</span><span class="p">(</span><span class="w"> </span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="kt">i32</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="kt">f32</span><span class="p">){</span>
 </span><span class="w">    </span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="kt">f32</span><span class="p">).</span><span class="n">powf</span><span class="p">(</span><span class="mf">0.33</span><span class="p">))</span>
 <span class="p">}</span>
 
-<span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span>:<span class="kt">i32</span> <span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">:</span><span class="kt">i32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
 <span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">tup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_powers</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
 </span><span class="w">    </span><span class="c1">// Deconstruct tuple</span>
-<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">)</span><span class="w"> </span>: <span class="p">(</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="kt">f32</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_powers</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="kt">f32</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_powers</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
 </span>
 <span class="hll"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}, {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">tup</span><span class="p">.</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">tup</span><span class="p">.</span><span class="mi">1</span><span class="w"> </span><span class="p">);</span>
 </span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}, {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="w"> </span><span class="p">);</span>
@@ -1102,7 +979,7 @@ Remember that strings have variable lengths, making direct copying non-trivial. 
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
-<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">pi</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mf">3.14_</span><span class="k">f32</span><span class="p">;</span>
 
 <span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">area</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">|</span><span class="n">x</span><span class="o">|</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">;</span>
@@ -1127,7 +1004,7 @@ Remember that strings have variable lengths, making direct copying non-trivial. 
 <span class="normal">6</span>
 <span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="n">a</span><span class="w"> </span>:<span class="kt">i32</span> <span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="p">:</span><span class="kt">i32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
 
 <span class="hll"><span class="k">if</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="p">{</span>
 </span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;a is greater than 3&quot;</span><span class="p">);</span>
@@ -1147,9 +1024,9 @@ Remember that strings have variable lengths, making direct copying non-trivial. 
 <span class="normal">6</span>
 <span class="normal">7</span>
 <span class="normal">8</span>
-<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="n">a</span><span class="w"> </span>:<span class="kt">i32</span> <span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="p">:</span><span class="kt">i32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
 
-<span class="hll"><span class="kd">let</span><span class="w"> </span><span class="n">my_string</span><span class="w"> </span>:<span class="nb">String</span> <span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="p">{</span>
+<span class="hll"><span class="kd">let</span><span class="w"> </span><span class="n">my_string</span><span class="w"> </span><span class="p">:</span><span class="nb">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="p">{</span>
 </span><span class="hll"><span class="w">    </span><span class="s">&quot;a is greater than 3&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">()</span>
 </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">{</span>
 <span class="hll"><span class="w">    </span><span class="s">&quot;a is less than 3&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">()</span>
@@ -1190,9 +1067,9 @@ Line 2 defines an immutable string <code>my_string</code>, assigned the value fr
 <span class="normal">27</span>
 <span class="normal">28</span>
 <span class="normal">29</span>
-<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="normal">30</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
 
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">a</span><span class="w"> </span>:<span class="kt">i32</span> <span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="p">:</span><span class="kt">i32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
 
 <span class="hll"><span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="p">{</span>
 </span><span class="hll"><span class="w">        </span><span class="mi">0</span><span class="o">..=</span><span class="mi">3</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
@@ -1239,7 +1116,7 @@ Line 2 defines an immutable string <code>my_string</code>, assigned the value fr
 <span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
-<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 
 <span class="hll"><span class="w">    </span><span class="k">loop</span><span class="w"> </span><span class="p">{</span>
@@ -1274,13 +1151,13 @@ Line 2 defines an immutable string <code>my_string</code>, assigned the value fr
 <span class="normal">16</span>
 <span class="normal">17</span>
 <span class="normal">18</span>
-<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
 <span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 
-<span class="hll"><span class="w">    </span><span class="o">&#39;</span><span class="na">astra</span><span class="w"> </span>: <span class="nc">loop</span><span class="w"> </span><span class="p">{</span>
+<span class="hll"><span class="w">    </span><span class="o">&#39;</span><span class="na">astra</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">loop</span><span class="w"> </span><span class="p">{</span>
 </span><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
 <span class="hll">
-</span><span class="w">        </span><span class="o">&#39;</span><span class="na">kafka</span><span class="w"> </span>: <span class="nc">loop</span><span class="p">{</span>
+</span><span class="w">        </span><span class="o">&#39;</span><span class="na">kafka</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">loop</span><span class="p">{</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="p">{</span>
 <span class="hll"><span class="w">                </span><span class="k">break</span><span class="w"> </span><span class="nl">&#39;astra</span><span class="p">;</span>
 </span><span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="p">{</span>
@@ -1314,8 +1191,8 @@ i,j = 10,3
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">n</span>:<span class="kt">i32</span> <span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">n</span><span class="p">:</span><span class="kt">i32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
 
 <span class="hll"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">0</span><span class="o">..</span><span class="n">n</span><span class="p">{</span>
 </span><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;i = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">);</span>
@@ -1330,8 +1207,8 @@ In this context, we define a range <code>0..n</code>, representing the inclusive
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
-<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_arr</span>: <span class="p">[</span><span class="kt">f32</span><span class="p">;</span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="mf">43.</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14</span><span class="p">];</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_arr</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="kt">f32</span><span class="p">;</span><span class="mi">5</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="mf">43.</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14</span><span class="p">];</span>
 </span><span class="hll"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">my_arr</span><span class="p">{</span>
 </span><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="n">a</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
@@ -1346,8 +1223,8 @@ In this context, we define a range <code>0..n</code>, representing the inclusive
 <span class="normal">5</span>
 <span class="normal">6</span>
 <span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
-<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_arr</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="mf">43.</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14</span><span class="p">];</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_arr</span><span class="p">:</span><span class="w"> </span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="mf">43.</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14</span><span class="p">];</span>
 </span><span class="hll"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">my_arr</span><span class="p">{</span>
 </span><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="n">a</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
@@ -1384,8 +1261,8 @@ Here we see some of the awesome features of the Rust compile. It is smart enough
 <span class="normal">5</span>
 <span class="normal">6</span>
 <span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_arr</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="mf">43.</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14</span><span class="p">];</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_arr</span><span class="p">:</span><span class="w"> </span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="mf">43.</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14</span><span class="p">];</span>
 <span class="hll"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">&amp;</span><span class="n">my_arr</span><span class="p">{</span>
 </span><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="n">a</span><span class="p">);</span>
 <span class="w">    </span><span class="p">}</span>
@@ -1406,10 +1283,10 @@ At line 3, we're iterating over a reference to a slice of the vector. In this in
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
-<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="mf">43.</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14</span><span class="p">];</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">y</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mf">2.</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">5.3</span><span class="p">,</span><span class="mf">0.001</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14</span><span class="p">];</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">z</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mf">0.0_</span><span class="k">f32</span><span class="p">;</span><span class="w"> </span><span class="mi">5</span><span class="p">];</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="mf">43.</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14</span><span class="p">];</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mf">2.</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">5.3</span><span class="p">,</span><span class="mf">0.001</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14</span><span class="p">];</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">z</span><span class="p">:</span><span class="w"> </span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mf">0.0_</span><span class="k">f32</span><span class="p">;</span><span class="w"> </span><span class="mi">5</span><span class="p">];</span>
 
 <span class="hll"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">((</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">),</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">iter</span><span class="p">().</span><span class="n">zip</span><span class="p">(</span><span class="o">&amp;</span><span class="n">y</span><span class="p">).</span><span class="n">zip</span><span class="p">(</span><span class="mi">0</span><span class="o">..</span><span class="n">x</span><span class="p">.</span><span class="n">len</span><span class="p">()){</span>
 </span><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{},{}&quot;</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
@@ -1436,11 +1313,11 @@ At line 3, we're iterating over a reference to a slice of the vector. In this in
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
-<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="mf">43.</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14</span><span class="p">];</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">y</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mf">2.</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">5.3</span><span class="p">,</span><span class="mf">0.001</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14</span><span class="p">];</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">,</span><span class="mf">3.</span><span class="p">,</span><span class="mf">43.</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14</span><span class="p">];</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mf">2.</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">5.3</span><span class="p">,</span><span class="mf">0.001</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14</span><span class="p">];</span>
 
-<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">z</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">iter</span><span class="p">().</span><span class="n">zip</span><span class="p">(</span><span class="o">&amp;</span><span class="n">y</span><span class="p">).</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="o">|</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">).</span><span class="n">collect</span>::<span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">z</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">iter</span><span class="p">().</span><span class="n">zip</span><span class="p">(</span><span class="o">&amp;</span><span class="n">y</span><span class="p">).</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span><span class="o">|</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">).</span><span class="n">collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;&gt;</span><span class="p">();</span>
 </span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">z</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
@@ -1463,18 +1340,18 @@ At line 3, we're iterating over a reference to a slice of the vector. In this in
 <span class="normal">13</span>
 <span class="normal">14</span>
 <span class="normal">15</span>
-<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
 <span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="o">..</span><span class="mi">100</span><span class="p">;</span>
 </span>
 <span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">even_squared</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">values</span><span class="p">.</span><span class="n">clone</span><span class="p">()</span>
 </span><span class="hll"><span class="w">        </span><span class="p">.</span><span class="n">filter</span><span class="p">(</span><span class="o">|</span><span class="n">x</span><span class="o">|</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
 </span><span class="hll"><span class="w">        </span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="n">x</span><span class="o">|</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
-</span><span class="hll"><span class="w">        </span><span class="p">.</span><span class="n">collect</span>::<span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">i32</span><span class="o">&gt;&gt;</span><span class="p">();</span>
+</span><span class="hll"><span class="w">        </span><span class="p">.</span><span class="n">collect</span><span class="p">::</span><span class="o">&lt;</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">i32</span><span class="o">&gt;&gt;</span><span class="p">();</span>
 </span>
 
 <span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">odd_sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">values</span><span class="p">.</span><span class="n">clone</span><span class="p">()</span>
 </span><span class="hll"><span class="w">        </span><span class="p">.</span><span class="n">filter</span><span class="p">(</span><span class="o">|</span><span class="n">x</span><span class="o">|</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
-</span><span class="hll"><span class="w">        </span><span class="p">.</span><span class="n">sum</span>::<span class="o">&lt;</span><span class="kt">i32</span><span class="o">&gt;</span><span class="p">();</span>
+</span><span class="hll"><span class="w">        </span><span class="p">.</span><span class="n">sum</span><span class="p">::</span><span class="o">&lt;</span><span class="kt">i32</span><span class="o">&gt;</span><span class="p">();</span>
 </span>
 <span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{:?}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">even_squared</span><span class="p">);</span>
 <span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;Sum of the odd values = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">odd_sum</span><span class="p">);</span>
@@ -1499,11 +1376,11 @@ This trait-based approach fosters modularity and flexibility while ensuring safe
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">struct</span> <span class="nc">Point3D</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">x</span>: <span class="kt">f32</span><span class="p">,</span>
-<span class="w">    </span><span class="n">y</span>: <span class="kt">f32</span><span class="p">,</span>
-<span class="w">    </span><span class="n">z</span>: <span class="kt">f32</span><span class="p">,</span>
-<span class="w">    </span><span class="n">coord_system</span>: <span class="nb">String</span><span class="p">,</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">Point3D</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="kt">f32</span><span class="p">,</span>
+<span class="w">    </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="kt">f32</span><span class="p">,</span>
+<span class="w">    </span><span class="n">z</span><span class="p">:</span><span class="w"> </span><span class="kt">f32</span><span class="p">,</span>
+<span class="w">    </span><span class="n">coord_system</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>We've created a <code>struct</code> named <code>Point3D</code>, representing a point in 3D space. 
@@ -1540,23 +1417,23 @@ The presence of a trailing <code>,</code> after the last field doesn't cause a c
 <span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="hll"><span class="k">impl</span><span class="w"> </span><span class="n">Point3D</span><span class="w"> </span><span class="p">{</span>
 </span>
 <span class="w">    </span><span class="c1">// Return a new Point3D</span>
-<span class="hll"><span class="w">    </span><span class="k">fn</span> <span class="nf">new</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Point3D</span><span class="p">{</span>
+<span class="hll"><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">new</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">Point3D</span><span class="p">{</span>
 </span><span class="w">        </span><span class="n">Point3D</span><span class="p">{</span>
-<span class="w">            </span><span class="n">x</span>: <span class="mf">0.0_</span><span class="k">f32</span><span class="p">,</span>
-<span class="w">            </span><span class="n">y</span>: <span class="mf">0.0_</span><span class="k">f32</span><span class="p">,</span>
-<span class="w">            </span><span class="n">z</span>: <span class="mf">0.0_</span><span class="k">f32</span><span class="p">,</span>
-<span class="w">            </span><span class="n">coord_system</span>: <span class="s">&quot;cartesian&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0_</span><span class="k">f32</span><span class="p">,</span>
+<span class="w">            </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0_</span><span class="k">f32</span><span class="p">,</span>
+<span class="w">            </span><span class="n">z</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0_</span><span class="k">f32</span><span class="p">,</span>
+<span class="w">            </span><span class="n">coord_system</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cartesian&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="c1">// Get the magnitude of the Point3D</span>
-<span class="hll"><span class="w">    </span><span class="k">fn</span> <span class="nf">get_magnitude</span><span class="p">(</span><span class="bp">self</span><span class="w"> </span>:<span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">f32</span><span class="p">{</span>
+<span class="hll"><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">get_magnitude</span><span class="p">(</span><span class="bp">self</span><span class="w"> </span><span class="p">:</span><span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kt">f32</span><span class="p">{</span>
 </span><span class="w">        </span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">x</span><span class="p">.</span><span class="n">powi</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">y</span><span class="p">.</span><span class="n">powi</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">z</span><span class="p">.</span><span class="n">powi</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 <span class="w">        </span><span class="p">.</span><span class="n">sqrt</span><span class="p">()</span><span class="w">  </span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="c1">// Add a constant value to the Point3D</span>
-<span class="hll"><span class="w">    </span><span class="k">fn</span> <span class="nf">add_constant</span><span class="p">(</span><span class="bp">self</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="bp">Self</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span>: <span class="kp">&amp;</span><span class="kt">f32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">(){</span>
+<span class="hll"><span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">add_constant</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="bp">Self</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="kt">f32</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">(){</span>
 </span><span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">3.0_</span><span class="k">f32</span><span class="p">.</span><span class="n">sqrt</span><span class="p">();</span>
 <span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">3.0_</span><span class="k">f32</span><span class="p">.</span><span class="n">sqrt</span><span class="p">();</span>
 <span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">z</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">3.0_</span><span class="k">f32</span><span class="p">.</span><span class="n">sqrt</span><span class="p">();</span>
@@ -1582,10 +1459,10 @@ The presence of a trailing <code>,</code> after the last field doesn't cause a c
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">struct</span> <span class="nc">Point2D</span><span class="p">{</span>
-<span class="w">    </span><span class="n">x</span>: <span class="kt">f32</span><span class="p">,</span>
-<span class="w">    </span><span class="n">y</span>: <span class="kt">f32</span><span class="p">,</span>
-<span class="w">    </span><span class="n">coord_system</span>: <span class="nb">String</span><span class="p">,</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">Point2D</span><span class="p">{</span>
+<span class="w">    </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="kt">f32</span><span class="p">,</span>
+<span class="w">    </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="kt">f32</span><span class="p">,</span>
+<span class="w">    </span><span class="n">coord_system</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>The <code>Point2D</code> struct shares similarities with <code>Point3D</code>. It would be beneficial if these structs had some common methods. To achieve this, we can define a <code>trait</code> that provides a shared interface for both structs. This approach allows for greater code flexibility and consistency. Let's explore this concept:</p>
@@ -1593,8 +1470,8 @@ The presence of a trailing <code>,</code> after the last field doesn't cause a c
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">trait</span><span class="w"> </span><span class="n">PointLike</span><span class="p">{</span>
-<span class="w">    </span><span class="k">fn</span> <span class="nf">get_magnitude</span><span class="p">(</span><span class="bp">self</span>: <span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">f32</span><span class="p">;</span>
-<span class="w">    </span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="bp">Self</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span>: <span class="kp">&amp;</span><span class="kt">f32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">();</span><span class="w">    </span>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">get_magnitude</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kt">f32</span><span class="p">;</span>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="bp">Self</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="kt">f32</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">();</span><span class="w">    </span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>The <code>PointLike</code> trait defines a common interface for types that exhibit point-like behavior. For a type to be considered <code>PointLike</code>, it must implement two functions:</p>
@@ -1650,39 +1527,39 @@ The presence of a trailing <code>,</code> after the last field doesn't cause a c
 <span class="normal">45</span>
 <span class="normal">46</span>
 <span class="normal">47</span>
-<span class="normal">48</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">struct</span> <span class="nc">Point3D</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">x</span>: <span class="kt">f32</span><span class="p">,</span>
-<span class="w">    </span><span class="n">y</span>: <span class="kt">f32</span><span class="p">,</span>
-<span class="w">    </span><span class="n">z</span>: <span class="kt">f32</span><span class="p">,</span>
-<span class="w">    </span><span class="n">coord_system</span>: <span class="nb">String</span><span class="p">,</span>
+<span class="normal">48</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">Point3D</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="kt">f32</span><span class="p">,</span>
+<span class="w">    </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="kt">f32</span><span class="p">,</span>
+<span class="w">    </span><span class="n">z</span><span class="p">:</span><span class="w"> </span><span class="kt">f32</span><span class="p">,</span>
+<span class="w">    </span><span class="n">coord_system</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span>
 <span class="p">}</span>
 
 
 <span class="k">trait</span><span class="w"> </span><span class="n">PointLike</span><span class="p">{</span>
-<span class="w">    </span><span class="k">fn</span> <span class="nf">get_magnitude</span><span class="p">(</span><span class="bp">self</span>: <span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">f32</span><span class="p">;</span>
-<span class="w">    </span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="bp">Self</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span>: <span class="kp">&amp;</span><span class="kt">f32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">();</span><span class="w">    </span>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">get_magnitude</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kt">f32</span><span class="p">;</span>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="bp">Self</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="kt">f32</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">();</span><span class="w">    </span>
 <span class="p">}</span>
 
 <span class="k">impl</span><span class="w"> </span><span class="n">Point3D</span><span class="w"> </span><span class="p">{</span>
 
 <span class="w">    </span><span class="c1">// Return a new Point3D</span>
-<span class="w">    </span><span class="k">fn</span> <span class="nf">new</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">Point3D</span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">new</span><span class="p">()</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="nc">Point3D</span><span class="p">{</span>
 <span class="w">        </span><span class="n">Point3D</span><span class="p">{</span>
-<span class="w">            </span><span class="n">x</span>: <span class="mf">0.0_</span><span class="k">f32</span><span class="p">,</span>
-<span class="w">            </span><span class="n">y</span>: <span class="mf">0.0_</span><span class="k">f32</span><span class="p">,</span>
-<span class="w">            </span><span class="n">z</span>: <span class="mf">0.0_</span><span class="k">f32</span><span class="p">,</span>
-<span class="w">            </span><span class="n">coord_system</span>: <span class="s">&quot;cartesian&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0_</span><span class="k">f32</span><span class="p">,</span>
+<span class="w">            </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0_</span><span class="k">f32</span><span class="p">,</span>
+<span class="w">            </span><span class="n">z</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0_</span><span class="k">f32</span><span class="p">,</span>
+<span class="w">            </span><span class="n">coord_system</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cartesian&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="c1">// Get the magnitude of the Point3D</span>
-<span class="w">    </span><span class="k">fn</span> <span class="nf">get_magnitude</span><span class="p">(</span><span class="bp">self</span><span class="w"> </span>:<span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">f32</span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">get_magnitude</span><span class="p">(</span><span class="bp">self</span><span class="w"> </span><span class="p">:</span><span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kt">f32</span><span class="p">{</span>
 <span class="w">        </span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">x</span><span class="p">.</span><span class="n">powi</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">y</span><span class="p">.</span><span class="n">powi</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">z</span><span class="p">.</span><span class="n">powi</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 <span class="w">        </span><span class="p">.</span><span class="n">sqrt</span><span class="p">()</span><span class="w">  </span>
 <span class="w">    </span><span class="p">}</span>
 
 <span class="w">    </span><span class="c1">// Add a constant value to the Point3D</span>
-<span class="w">    </span><span class="k">fn</span> <span class="nf">add_constant</span><span class="p">(</span><span class="bp">self</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="bp">Self</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span>: <span class="kp">&amp;</span><span class="kt">f32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">(){</span>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">add_constant</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="bp">Self</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="kt">f32</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">(){</span>
 <span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">3.0_</span><span class="k">f32</span><span class="p">.</span><span class="n">sqrt</span><span class="p">();</span>
 <span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">3.0_</span><span class="k">f32</span><span class="p">.</span><span class="n">sqrt</span><span class="p">();</span>
 <span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">z</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">3.0_</span><span class="k">f32</span><span class="p">.</span><span class="n">sqrt</span><span class="p">();</span>
@@ -1690,11 +1567,11 @@ The presence of a trailing <code>,</code> after the last field doesn't cause a c
 <span class="p">}</span>
 
 <span class="k">impl</span><span class="w"> </span><span class="n">PointLike</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Point3D</span><span class="p">{</span>
-<span class="w">    </span><span class="k">fn</span> <span class="nf">get_magnitude</span><span class="p">(</span><span class="bp">self</span>: <span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">f32</span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">get_magnitude</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kt">f32</span><span class="p">{</span>
 <span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">get_magnitude</span><span class="p">()</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="bp">Self</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span>: <span class="kp">&amp;</span><span class="kt">f32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">(){</span>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="bp">Self</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="kt">f32</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">(){</span>
 <span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 <span class="w">    </span><span class="p">}</span><span class="w">    </span>
 <span class="p">}</span>
@@ -1725,28 +1602,28 @@ Above, we've implemented the <code>PointLike</code> trait for the <code>Point3D<
 <span class="normal">23</span>
 <span class="normal">24</span>
 <span class="normal">25</span>
-<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">struct</span> <span class="nc">Point2D</span><span class="p">{</span>
-<span class="w">    </span><span class="n">x</span>: <span class="kt">f32</span><span class="p">,</span>
-<span class="w">    </span><span class="n">y</span>: <span class="kt">f32</span><span class="p">,</span>
-<span class="w">    </span><span class="n">coord_system</span>: <span class="nb">String</span><span class="p">,</span>
+<span class="normal">26</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">Point2D</span><span class="p">{</span>
+<span class="w">    </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="kt">f32</span><span class="p">,</span>
+<span class="w">    </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="kt">f32</span><span class="p">,</span>
+<span class="w">    </span><span class="n">coord_system</span><span class="p">:</span><span class="w"> </span><span class="nb">String</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="k">impl</span><span class="w"> </span><span class="n">Point2D</span><span class="p">{</span>
-<span class="w">    </span><span class="k">fn</span> <span class="nf">new</span><span class="p">()</span>-&gt;<span class="nc">Point2D</span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">new</span><span class="p">()-&gt;</span><span class="nc">Point2D</span><span class="p">{</span>
 <span class="w">        </span><span class="n">Point2D</span><span class="p">{</span>
-<span class="w">            </span><span class="n">x</span>: <span class="mf">0.0_</span><span class="k">f32</span><span class="p">,</span>
-<span class="w">            </span><span class="n">y</span>: <span class="mf">0.0_</span><span class="k">f32</span><span class="p">,</span>
-<span class="w">            </span><span class="n">coord_system</span>: <span class="s">&quot;cartesian&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0_</span><span class="k">f32</span><span class="p">,</span>
+<span class="w">            </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0_</span><span class="k">f32</span><span class="p">,</span>
+<span class="w">            </span><span class="n">coord_system</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;cartesian&quot;</span><span class="p">,</span>
 <span class="w">        </span><span class="p">}</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
 <span class="k">impl</span><span class="w"> </span><span class="n">PointLike</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Point2D</span><span class="p">{</span>
-<span class="w">    </span><span class="k">fn</span> <span class="nf">get_magnitude</span><span class="p">(</span><span class="bp">self</span>: <span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">f32</span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">get_magnitude</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kt">f32</span><span class="p">{</span>
 <span class="w">        </span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">x</span><span class="p">.</span><span class="n">powi</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">y</span><span class="p">.</span><span class="n">powi</span><span class="p">(</span><span class="mi">2</span><span class="p">)).</span><span class="n">sqrt</span><span class="p">()</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="bp">Self</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span>: <span class="kp">&amp;</span><span class="kt">f32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">(){</span>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="bp">Self</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="kt">f32</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">(){</span>
 <span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">/</span><span class="mf">2.0_</span><span class="k">f32</span><span class="p">.</span><span class="n">sqrt</span><span class="p">();</span>
 <span class="w">        </span><span class="bp">self</span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">/</span><span class="mf">2.0_</span><span class="k">f32</span><span class="p">.</span><span class="n">sqrt</span><span class="p">();</span>
 <span class="w">    </span><span class="p">}</span><span class="w">    </span>
@@ -1764,10 +1641,10 @@ Above, we've implemented the <code>PointLike</code> trait for the <code>Point3D<
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
-<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
 
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">my_3d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Point3D</span>::<span class="n">new</span><span class="p">();</span>
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">my_2d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Point2D</span>::<span class="n">new</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">my_3d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Point3D</span><span class="p">::</span><span class="n">new</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">my_2d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Point2D</span><span class="p">::</span><span class="n">new</span><span class="p">();</span>
 
 <span class="w">    </span><span class="n">my_3d</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="o">&amp;</span><span class="mf">4.5</span><span class="p">);</span>
 <span class="w">    </span><span class="n">my_2d</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="o">&amp;</span><span class="mf">5.0</span><span class="p">);</span>
@@ -1783,8 +1660,8 @@ Above, we've implemented the <code>PointLike</code> trait for the <code>Point3D<
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">Point2D</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">{</span>
-<span class="w">    </span><span class="n">x</span>:<span class="nc">T</span><span class="p">,</span>
-<span class="w">    </span><span class="n">y</span>:<span class="nc">T</span><span class="p">,</span>
+<span class="w">    </span><span class="n">x</span><span class="p">:</span><span class="nc">T</span><span class="p">,</span>
+<span class="w">    </span><span class="n">y</span><span class="p">:</span><span class="nc">T</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Here we have defined a generic <code>Point2D</code> struct that represents a 2D point in space. This struct is designed to work with any data type, as it utilizes the placeholder type <code>T</code> for both the <code>x</code> and <code>y</code> coordinates. Using this placeholder type allows the struct to remain agnostic to the specific data type used for its coordinates.</p>
@@ -1802,17 +1679,17 @@ Above, we've implemented the <code>PointLike</code> trait for the <code>Point3D<
 <span class="normal">11</span>
 <span class="normal">12</span>
 <span class="normal">13</span>
-<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">struct</span> <span class="nc">Point2D</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">{</span>
-<span class="w">    </span><span class="n">x</span>:<span class="nc">T</span><span class="p">,</span>
-<span class="w">    </span><span class="n">y</span>:<span class="nc">T</span><span class="p">,</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">Point2D</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">{</span>
+<span class="w">    </span><span class="n">x</span><span class="p">:</span><span class="nc">T</span><span class="p">,</span>
+<span class="w">    </span><span class="n">y</span><span class="p">:</span><span class="nc">T</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="k">impl</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Point2D</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">{</span>
-<span class="w">    </span><span class="k">fn</span> <span class="nf">get_x</span><span class="p">(</span><span class="bp">self</span><span class="w"> </span>: <span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kp">&amp;</span><span class="nc">T</span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">get_x</span><span class="p">(</span><span class="bp">self</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">T</span><span class="p">{</span>
 <span class="w">        </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">.</span><span class="n">x</span>
 <span class="w">    </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k">fn</span> <span class="nf">get_y</span><span class="p">(</span><span class="bp">self</span><span class="w"> </span>: <span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kp">&amp;</span><span class="nc">T</span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span><span class="w"> </span><span class="nf">get_y</span><span class="p">(</span><span class="bp">self</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">T</span><span class="p">{</span>
 <span class="w">        </span><span class="o">&amp;</span><span class="bp">self</span><span class="p">.</span><span class="n">y</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
@@ -1822,8 +1699,8 @@ Above, we've implemented the <code>PointLike</code> trait for the <code>Point3D<
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
-<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_point</span><span class="w"> </span>:<span class="nc">Point2D</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Point2D</span><span class="p">{</span><span class="n">x</span>:<span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span>:<span class="mf">4.3</span><span class="p">};</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
+<span class="hll"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">my_point</span><span class="w"> </span><span class="p">:</span><span class="nc">Point2D</span><span class="o">&lt;</span><span class="kt">f32</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Point2D</span><span class="p">{</span><span class="n">x</span><span class="p">:</span><span class="mf">0.1</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="mf">4.3</span><span class="p">};</span>
 </span><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;x = : {} &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">my_point</span><span class="p">.</span><span class="n">get_x</span><span class="p">());</span>
 <span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;y = : {} &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">my_point</span><span class="p">.</span><span class="n">get_y</span><span class="p">());</span>
 <span class="p">}</span>
@@ -1846,14 +1723,14 @@ On line two, we are explicitly specifying the data type as <code>f32</code>.</p>
 <span class="normal">14</span>
 <span class="normal">15</span>
 <span class="normal">16</span>
-<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">struct</span> <span class="nc">PlanetarySystem</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">{</span>
-<span class="w">    </span><span class="n">planet_location</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span>
-<span class="w">    </span><span class="n">planet_name</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">struct</span><span class="w"> </span><span class="nc">PlanetarySystem</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">{</span>
+<span class="w">    </span><span class="n">planet_location</span><span class="p">:</span><span class="w"> </span><span class="nb">Vec</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">planet_name</span><span class="p">:</span><span class="w"> </span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">,</span>
 <span class="p">}</span>
 
 
-<span class="k">impl</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span>: <span class="nc">PointLike</span><span class="o">&gt;</span><span class="w"> </span><span class="n">PlanetarySystem</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">fn</span>  <span class="nf">print_distance_from_star</span><span class="p">(</span><span class="bp">self</span><span class="w"> </span>: <span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">(){</span>
+<span class="k">impl</span><span class="w"> </span><span class="o">&lt;</span><span class="n">T</span><span class="p">:</span><span class="w"> </span><span class="nc">PointLike</span><span class="o">&gt;</span><span class="w"> </span><span class="n">PlanetarySystem</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">fn</span><span class="w">  </span><span class="nf">print_distance_from_star</span><span class="p">(</span><span class="bp">self</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kp">&amp;</span><span class="nc">Self</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">(){</span>
 <span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">0</span><span class="o">..</span><span class="bp">self</span><span class="p">.</span><span class="n">planet_location</span><span class="p">.</span><span class="n">len</span><span class="p">(){</span>
 <span class="w">            </span><span class="fm">println!</span><span class="p">(</span>
 <span class="w">                    </span><span class="s">&quot;Distance from {} to it&#39;s star: {} AU&quot;</span><span class="p">,</span>
@@ -1865,15 +1742,15 @@ On line two, we are explicitly specifying the data type as <code>f32</code>.</p>
 <span class="p">}</span>
 </code></pre></div></td></tr></table></div></p>
 <p>Here, we've defined a struct called <code>PlanetarySystem</code> that takes a generic type implementing the <code>PointLike</code> trait. As the <code>PointLike</code> trait includes the <code>get_magnitude</code> method, this code is applicable to any generic type adhering to the <code>PointLike</code> trait. This flexibility allows us to use the code as demonstrated below:</p>
-<div class="highlight"><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">(){</span>
+<div class="highlight"><pre><span></span><code><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">(){</span>
 
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">solar_system</span>: <span class="nc">PlanetarySystem</span><span class="o">&lt;</span><span class="n">Point3D</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PlanetarySystem</span><span class="p">{</span>
-<span class="w">        </span><span class="n">planet_location</span>: <span class="nc">vec</span><span class="o">!</span><span class="p">[</span>
-<span class="w">            </span><span class="n">Point3D</span>::<span class="n">new</span><span class="p">(),</span><span class="w"> </span>
-<span class="w">            </span><span class="n">Point3D</span>::<span class="n">new</span><span class="p">(),</span><span class="w"> </span>
-<span class="w">            </span><span class="n">Point3D</span>::<span class="n">new</span><span class="p">()</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">solar_system</span><span class="p">:</span><span class="w"> </span><span class="nc">PlanetarySystem</span><span class="o">&lt;</span><span class="n">Point3D</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PlanetarySystem</span><span class="p">{</span>
+<span class="w">        </span><span class="n">planet_location</span><span class="p">:</span><span class="w"> </span><span class="nc">vec</span><span class="o">!</span><span class="p">[</span>
+<span class="w">            </span><span class="n">Point3D</span><span class="p">::</span><span class="n">new</span><span class="p">(),</span><span class="w"> </span>
+<span class="w">            </span><span class="n">Point3D</span><span class="p">::</span><span class="n">new</span><span class="p">(),</span><span class="w"> </span>
+<span class="w">            </span><span class="n">Point3D</span><span class="p">::</span><span class="n">new</span><span class="p">()</span>
 <span class="w">        </span><span class="p">],</span>
-<span class="w">        </span><span class="n">planet_name</span>: <span class="nc">vec</span><span class="o">!</span><span class="p">[</span>
+<span class="w">        </span><span class="n">planet_name</span><span class="p">:</span><span class="w"> </span><span class="nc">vec</span><span class="o">!</span><span class="p">[</span>
 <span class="w">            </span><span class="s">&quot;Mercury&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w"> </span>
 <span class="w">            </span><span class="s">&quot;Venus&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w"> </span>
 <span class="w">            </span><span class="s">&quot;Earth&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">()</span>
@@ -1886,9 +1763,9 @@ On line two, we are explicitly specifying the data type as <code>f32</code>.</p>
 <span class="w">    </span><span class="n">solar_system</span><span class="p">.</span><span class="n">print_distance_from_star</span><span class="p">();</span>
 
 
-<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">trappst_system</span>: <span class="nc">PlanetarySystem</span><span class="o">&lt;</span><span class="n">Point2D</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PlanetarySystem</span><span class="p">{</span>
-<span class="w">        </span><span class="n">planet_location</span>: <span class="nc">vec</span><span class="o">!</span><span class="p">[</span><span class="n">Point2D</span>::<span class="n">new</span><span class="p">(),</span><span class="w"> </span><span class="n">Point2D</span>::<span class="n">new</span><span class="p">(),</span><span class="w"> </span><span class="n">Point2D</span>::<span class="n">new</span><span class="p">()],</span>
-<span class="w">        </span><span class="n">planet_name</span>: <span class="nc">vec</span><span class="o">!</span><span class="p">[</span><span class="w"> </span><span class="s">&quot;TRAPPIST-1b&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;TRAPPIST-1c&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;TRAPPIST-1e&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">()],</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">trappst_system</span><span class="p">:</span><span class="w"> </span><span class="nc">PlanetarySystem</span><span class="o">&lt;</span><span class="n">Point2D</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PlanetarySystem</span><span class="p">{</span>
+<span class="w">        </span><span class="n">planet_location</span><span class="p">:</span><span class="w"> </span><span class="nc">vec</span><span class="o">!</span><span class="p">[</span><span class="n">Point2D</span><span class="p">::</span><span class="n">new</span><span class="p">(),</span><span class="w"> </span><span class="n">Point2D</span><span class="p">::</span><span class="n">new</span><span class="p">(),</span><span class="w"> </span><span class="n">Point2D</span><span class="p">::</span><span class="n">new</span><span class="p">()],</span>
+<span class="w">        </span><span class="n">planet_name</span><span class="p">:</span><span class="w"> </span><span class="nc">vec</span><span class="o">!</span><span class="p">[</span><span class="w"> </span><span class="s">&quot;TRAPPIST-1b&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;TRAPPIST-1c&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">(),</span><span class="w"> </span><span class="s">&quot;TRAPPIST-1e&quot;</span><span class="p">.</span><span class="n">to_string</span><span class="p">()],</span>
 
 <span class="w">    </span><span class="p">};</span>
 
@@ -1931,7 +1808,7 @@ Distance from TRAPPIST-1e to it&#39;s star: 0.029 AU
         
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
   Back to top
 </button>
         
@@ -1944,7 +1821,7 @@ Distance from TRAPPIST-1e to it&#39;s star: 0.029 AU
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      &copy; 2025 TSI <br> <a href="https://github.com/vuquangtrong/mkdocs-material-blog">Blog Theme</a> / <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>
+      &copy; 2026 TSI <br> <a href="https://github.com/vuquangtrong/mkdocs-material-blog">Blog Theme</a> / <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>
 
     </div>
   
@@ -1966,10 +1843,13 @@ Distance from TRAPPIST-1e to it&#39;s star: 0.029 AU
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "toc.integrate", "header.autohide", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.c011b7c0.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.indexes", "navigation.top", "toc.integrate", "header.autohide", "content.code.annotate", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.7389ff0e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
         <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
