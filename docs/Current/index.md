@@ -13,7 +13,7 @@ Learn the fundamentals of version control with Git, including:
 - Collaborative workflows
 - Troubleshooting common issues
 
-**[Start Git Basics Tutorial →](./VersionControl/1-git-basics.md)**
+**[Start Git Basics Tutorial →](../VersionControl/1-git-basics.md)**
 
 ---
 

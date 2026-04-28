@@ -2,10 +2,10 @@
 site_name: TSI McGill Tutorials
 # Change to your own site
 site_url: https://github.com/tsi-mcgill/tsi-tutorials # must have the trailing slash
-site_author: Stephan O'Brien (stephan.obrien@mcgill.ca)
+site_author: Siddharth Mohite (siddharth.mohite@mcgill.ca) & Stephan O'Brien (stephan.obrien@mcgill.ca)
 site_description: TSI McGill Tutorials
 copyright: > # should remain a link to the original theme
-  &copy; 2025 TSI <br>
+  &copy; 2026 TSI <br>
   <a href="https://github.com/vuquangtrong/mkdocs-material-blog">Blog Theme</a> /
   <a href="https://squidfunk.github.io/mkdocs-material/">Material for MkDocs</a>
 
@@ -58,12 +58,8 @@ extra_javascript:
 
 # For describing the navigation panel
 nav:
-  - Python: Python/index.md
-  - C++: Cpp/index.md
-  - Rust: Rust/index.md
-  - Version Control: VersionControl/index.md
-  - Containerization: Containerization/index.md
-  - Misc: Misc/index.md
+  - Current: Current/index.md
+  - Past: Past/index.md
 
 
 
