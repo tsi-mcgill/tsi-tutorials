@@ -62,6 +62,7 @@ git init
 ### Initial Configuration
 
 ```bash
+git branch -M main  #Rename master to main for modern naming convention 
 git config user.name 'Tutorial User'
 git config user.email 'tutorial@example.com'
 git config --list | grep -E 'user.name|user.email'
@@ -72,7 +73,7 @@ This creates a hidden `.git` folder containing all version control information.
 
 ```bash
 # Create a file
-echo "print('Hello, World!')" > script.py
+echo 'print("Hello, World!")' > script.py
 
 # Check status
 git status
@@ -99,26 +100,6 @@ Working Directory  →  Staging Area  →  Repository
   <figcaption>The three states of Git (source: <a href="https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F">git-scm.com</a>)</figcaption>
 </figure>
 
-### Why Staging Matters
-
-The staging area lets you be selective about what goes into a commit. For example:
-
-```bash
-# Check what's changed
-git status
-
-# Stage only specific files
-git add file1.py file2.py
-
-# Stage specific changes within a file (interactive)
-git add -p file3.py   # Shows each change, you can accept/reject
-
-# See what's staged vs unstaged
-git diff              # unstaged changes
-git diff --staged     # staged changes
-```
-
-This flexibility is crucial when you make multiple unrelated changes and want to commit them separately.
 
 ## Viewing History
 
@@ -182,7 +163,7 @@ git commit -m 'feat(math): add math operations and utils modules'
 ```bash
 echo 'This is an unwanted change' >> script.py
 git status
-git diff script.py | head -5
+git diff script.py
 git checkout -- script.py
 cat script.py
 ```
@@ -224,7 +205,7 @@ echo 'def multiply(a, b):' > advanced_math.py && echo '    return a * b' >> adva
 git add advanced_math.py
 git commit -m 'feat(math): add multiply function'
 git log --oneline
-git checkout -b main
+git checkout main
 git branch
 git log --oneline | head -3
 git merge feature/new-calculation -m 'Merge feature/new-calculation into main'
@@ -244,33 +225,6 @@ git log --oneline -5
 git checkout main
 git merge feature/division --ff-only
 git log --oneline --graph -10
-```
-
-## Collaboration: Remote Repositories
-
-To share your code and collaborate with others, you need a remote repository.
-
-### Add a Remote
-
-```bash
-# Add a remote called 'origin' pointing to your GitHub repo
-git remote add origin https://github.com/your-username/your-repo.git
-
-# View remotes
-git remote -v
-```
-
-### Push and Pull
-
-```bash
-# Push your commits to the remote
-git push origin main
-
-# Pull changes from remote
-git pull origin main
-
-# Set upstream tracking (so you can just use git push)
-git push -u origin main
 ```
 
 ## Advanced Topics (Intermediate to Expert)
@@ -383,26 +337,13 @@ cat .gitignore
 git add .gitignore && git commit -m 'Add .gitignore file'
 ```
 
-### Dealing with Force Push (Dangerous!)
-
-```bash
-# Never force push to main/shared branches!
-
-# Safe force push (only if no one else has fetched yet)
-git push --force-with-lease origin feature-branch
-
-# This safer variant fails if remote has changes you don't have locally
-# It prevents accidentally overwriting others' work
-```
-
 ## Best Practices
 
 1. **Commit Often**: Small, logical commits are easier to understand and revert if needed
 2. **Write Clear Messages**: Explain the "why", not just the "what"
 3. **Never Commit Secrets**: Use `.gitignore` for sensitive files
 4. **Branch for Features**: Keep main stable; develop features on branches
-5. **Pull Before You Push**: Always sync with remote before pushing
-6. **Review Before Committing**: Use `git diff` to verify changes
+5. **Review Before Committing**: Use `git diff` to verify changes
 
 ## Next Steps
 
