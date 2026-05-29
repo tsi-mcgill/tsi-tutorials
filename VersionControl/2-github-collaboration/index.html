@@ -350,7 +350,7 @@
 <h1 id="github-collaboration-and-remote-repositories">GitHub: Collaboration and Remote Repositories</h1>
 <p>Building on <a href="../1-git-basics/">Git Basics</a>, this tutorial covers using GitHub for hosting, collaboration, and project management.</p>
 <h2 id="introduction-to-github">Introduction to GitHub</h2>
-<p><a href="https://github.com">GitHub</a> is a web-based platform for hosting Git repositories. While alternatives exist (GitLab, Gitea, Forgea), GitHub is the most widely used in open science and academia.</p>
+<p><a href="https://github.com">GitHub</a> is a web-based platform for hosting Git repositories. While alternatives exist (GitLab, Gitea, Forgejo), GitHub is the most widely used in open science and academia.</p>
 <p><strong>Benefits of GitHub</strong>:
 - Free public repositories (unlimited)
 - Issue tracking and project management
@@ -372,8 +372,10 @@
 <p><strong>Option 1: HTTPS with Personal Access Token</strong> (easier for beginners)</p>
 <ol>
 <li>Go to Settings → Developer settings → Personal access tokens</li>
-<li>Create a new token with <code>repo</code> scope</li>
-<li>When <code>git push</code> prompts for password, use your token</li>
+<li>Create a fine-grained token with <code>repo</code> scope</li>
+<li>In the Permissions section check <code>Contents</code> and provide <code>read</code> and <code>write</code> access</li>
+<li>Creating the token will give you a passkey (only appears once) that you can save to a safe place</li>
+<li>When <code>git push</code> prompts for password, use your token passkey</li>
 </ol>
 <p><strong>Option 2: SSH Keys</strong> (more secure long-term)</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Generate keys (if you don&#39;t have them)</span>
@@ -383,384 +385,342 @@ ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="
 <span class="c1"># Settings → SSH and GPG keys → New SSH key</span>
 cat<span class="w"> </span>~/.ssh/id_ed25519.pub
 </code></pre></div>
+<h2 id="hands-on-example-creating-and-contributing-to-a-repository">Hands-On Example: Creating and Contributing to a Repository</h2>
+<p>Let's walk through a complete workflow together. You'll create a simple project, make changes on a feature branch, and merge it back to main using a Pull Request.</p>
+<h3 id="step-1-create-a-repository-on-github">Step 1: Create a Repository on GitHub</h3>
+<ol>
+<li>Click the <strong>+</strong> icon in the top right corner of GitHub</li>
+<li>Select <strong>New repository</strong></li>
+</ol>
+<figure>
+<p><img alt="Create new repository button" src="../../images/github-new-repo-button.png" style="height:400px;width:650px" />
+  </p>
+<figcaption>Click the + icon and select "New repository"</figcaption>
+</figure>
+<ol>
+<li>Name your repository: <code>hello-github</code> (use lowercase)</li>
+<li>Add a description: "My test GitHub repository"</li>
+<li>Choose <strong>Public</strong> (so everyone can see it)</li>
+<li>Check the box: <strong>Add a README file</strong></li>
+<li>Click <strong>Create repository</strong></li>
+</ol>
+<figure>
+<p><img alt="Repository creation form" src="../../images/github-create-repo-form.png" style="height:800px;width:800px" />
+  </p>
+<figcaption>Fill in the repository details</figcaption>
+</figure>
+<p>Congratulations! Your repository is now live at <code>github.com/your-username/hello-github</code>.</p>
+<h3 id="step-2-clone-the-repository-to-your-computer">Step 2: Clone the Repository to Your Computer</h3>
+<p>Open your terminal and run:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/your-username/hello-github.git
+<span class="nb">cd</span><span class="w"> </span>hello-github
+</code></pre></div>
+<figure>
+<p><img alt="Clone repository from GitHub" src="../../images/github-clone-button.png" style="height:400px;width:800px" />
+  </p>
+<figcaption>Click the blue "Code" button to copy the clone URL</figcaption>
+</figure>
 <p>Configure Git to use SSH:
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>set-url<span class="w"> </span>origin<span class="w"> </span>git@github.com:username/repo.git
 </code></pre></div></p>
-<h2 id="creating-your-first-repository">Creating Your First Repository</h2>
-<h3 id="create-on-github">Create on GitHub</h3>
-<ol>
-<li>Click <strong>+</strong> in top right → New repository</li>
-<li>Name it (lowercase, hyphens for spaces)</li>
-<li>Add description</li>
-<li>Choose public or private</li>
-<li>Initialize with README (optional)</li>
-<li>Click Create</li>
-</ol>
-<h3 id="push-local-code-to-github">Push Local Code to GitHub</h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Navigate to your local repo</span>
-<span class="nb">cd</span><span class="w"> </span>my_project
-
-<span class="c1"># Add GitHub as remote (if not already done)</span>
-git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>https://github.com/your-username/my_project.git
-
-<span class="c1"># Rename branch to main (GitHub default)</span>
-git<span class="w"> </span>branch<span class="w"> </span>-M<span class="w"> </span>main
-
-<span class="c1"># Push code</span>
-git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>main
-</code></pre></div>
-<h2 id="navigating-your-repository">Navigating Your Repository</h2>
-<p>Your repository page shows:</p>
-<ol>
-<li><strong>Repository name and description</strong>: At the top</li>
-<li><strong>Branch selector</strong>: See and switch branches</li>
-<li><strong>Code tab</strong>: View files and folder structure</li>
-<li><strong>File listing</strong>: The current directory contents</li>
-<li><strong>README rendering</strong>: If <code>README.md</code> exists, it displays here</li>
-<li><strong>About section</strong> (right side): Links, topics, license</li>
-<li><strong>Releases</strong>: Tagged versions of your code</li>
-</ol>
-<figure>
-<p><img alt="GitHub repository homepage" src="../../images/github-repo-home.png" style="height:300px;width:500px" />
-  </p>
-<figcaption>GitHub repository interface showing the main components you'll interact with</figcaption>
-</figure>
-<h2 id="managing-your-repository">Managing Your Repository</h2>
-<h3 id="edit-files-on-github">Edit Files on GitHub</h3>
-<p>You can edit files directly in the browser:</p>
-<ol>
-<li>Navigate to a file</li>
-<li>Click the <strong>pencil icon</strong> to edit</li>
-<li>Make changes</li>
-<li>Scroll to bottom and commit</li>
-<li>Write commit message</li>
-<li>Choose branch (create new for important changes)</li>
-<li>Click "Commit changes"</li>
-</ol>
-<figure>
-<p><img alt="GitHub edit interface" src="../../images/github-edit-browser.png" style="height:300px;width:500px" />
-  </p>
-<figcaption>Click the pencil icon to edit files directly in the browser</figcaption>
-</figure>
-<figure>
-<p><img alt="GitHub commit dialog" src="../../images/github-commit-browser.png" style="height:300px;width:500px" />
-  </p>
-<figcaption>Commit dialog: always write descriptive messages and create a new branch for non-trivial changes</figcaption>
-</figure>
-<p>After committing, you'll see the latest commit information:</p>
-<figure>
-<p><img alt="GitHub commit details" src="../../images/github-latest-commit.png" style="height:300px;width:500px" />
-  </p>
-<figcaption>Latest commit metadata displayed above the file</figcaption>
-</figure>
-<h3 id="best-practice-use-branches">Best Practice: Use Branches</h3>
-<p>⚠️ <strong>Never commit directly to <code>main</code></strong>. Instead:</p>
-<ol>
-<li>Create a branch for your work: <code>git checkout -b fix/typo</code></li>
-<li>Make commits</li>
-<li>Push to GitHub: <code>git push -u origin fix/typo</code></li>
-<li>Open a Pull Request (see below)</li>
-<li>Merge after review</li>
-</ol>
-<h2 id="issues-and-project-management">Issues and Project Management</h2>
-<h3 id="creating-issues">Creating Issues</h3>
-<p>Use Issues to track:
-- Bugs
-- Feature requests
-- Documentation needs
-- Questions</p>
-<p><strong>To create an issue</strong>:</p>
-<ol>
-<li>Go to repository → Issues tab</li>
-<li>Click "New issue"</li>
-<li>Add title and detailed description</li>
-<li>Assign to yourself or others</li>
-<li>Add labels (bug, enhancement, documentation, etc.)</li>
-<li>Add to Projects (optional)</li>
-</ol>
-<h3 id="linking-issues-to-code">Linking Issues to Code</h3>
-<p>In commits or PRs, reference issues:</p>
-<div class="highlight"><pre><span></span><code>Fix #42           # Closes issue 42 when merged
-Fixes #42, #43    # Closes multiple issues
-Close #42         # Also closes (same as Fix)
-See #42           # Just references, doesn&#39;t close
-Resolves #42      # Another way to close
-</code></pre></div>
-<p>This automatically links code changes to the issues they address, and can auto-close issues when the PR is merged.</p>
-<figure>
-<p><img alt="GitHub linking issues" src="../../images/github-commit-reference-issue.png" style="height:300px;width:500px" />
-  </p>
-<figcaption>Reference issues in commit messages to create connections</figcaption>
-</figure>
-<h2 id="pull-requests-the-collaboration-workflow">Pull Requests: The Collaboration Workflow</h2>
-<p>A <strong>Pull Request (PR)</strong> is a request to merge changes from one branch into another, with code review.</p>
-<figure>
-<p><img alt="GitHub pull request page" src="../../images/github-pull-request-page.png" style="height:300px;width:500px" />
-  </p>
-<figcaption>Pull request interface showing the conversation and review tabs</figcaption>
-</figure>
-<h3 id="creating-a-pull-request">Creating a Pull Request</h3>
-<ol>
-<li>Push your branch to GitHub</li>
-<li>Go to repository → Pull requests</li>
-<li>Click "New pull request"</li>
-<li>Select:</li>
-<li><strong>base</strong>: branch you want to merge into (usually <code>main</code>)</li>
-<li><strong>compare</strong>: your feature branch</li>
-<li>Add title and description</li>
-<li>Reference issues: "Fixes #42"</li>
-<li>Click "Create pull request"</li>
-</ol>
-<h3 id="pull-request-description-template">Pull Request Description Template</h3>
-<div class="highlight"><pre><span></span><code><span class="gu">## Description</span>
-Briefly describe the changes.
-
-<span class="gu">## Type of Change</span>
-<span class="k">- [ ]</span> Bug fix
-<span class="k">- [ ]</span> New feature
-<span class="k">- [ ]</span> Breaking change
-<span class="k">- [ ]</span> Documentation
-
-<span class="gu">## Testing</span>
-How to test these changes:
-<span class="k">1.</span> Step 1
-<span class="k">2.</span> Step 2
-
-<span class="gu">## Checklist</span>
-<span class="k">- [ ]</span> Code follows style guidelines
-<span class="k">- [ ]</span> Added tests
-<span class="k">- [ ]</span> Updated documentation
-<span class="k">- [ ]</span> No new warnings generated
-
-Closes <span class="ni">#42</span>
-</code></pre></div>
-<h3 id="viewing-diffs-what-changed">Viewing Diffs (What Changed)</h3>
-<p>When reviewing code, understanding diffs is crucial:</p>
-<div class="highlight"><pre><span></span><code>+ Added lines (green)
-- Removed lines (red)
-  Context lines (unchanged)
-</code></pre></div>
-<p>Click on files in "Files changed" tab to see side-by-side diffs:</p>
-<figure>
-<p><img alt="GitHub commit diff" src="../../images/github-commit-id.png" style="height:300px;width:500px" />
-  </p>
-<figcaption>Detailed diff view showing what changed in each commit</figcaption>
-</figure>
-<h3 id="code-review">Code Review</h3>
-<p><strong>As a code reviewer</strong>:</p>
-<ol>
-<li>Read the PR description</li>
-<li>Click "Files changed"</li>
-<li>Review the diff (green = additions, red = deletions)</li>
-<li>Click <strong>+</strong> to comment on specific lines</li>
-<li>Request changes or approve</li>
-</ol>
-<p><strong>Advanced review features</strong>:
-<div class="highlight"><pre><span></span><code><span class="c1"># Viewing the diff locally before reviewing</span>
-git<span class="w"> </span>fetch<span class="w"> </span>origin<span class="w"> </span>pull/PR_NUMBER/head:local-branch-name
-git<span class="w"> </span>checkout<span class="w"> </span>local-branch-name
-<span class="c1"># Now you can test the code locally!</span>
+<p>Verify the repository is set up:
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>-v<span class="w">  </span><span class="c1"># Shows that origin points to GitHub</span>
 </code></pre></div></p>
-<p><strong>As a PR author</strong>:</p>
-<ol>
-<li>Read review comments</li>
-<li>Make requested changes</li>
-<li>Push new commits (they auto-add to PR)</li>
-<li>Reply to comments explaining your choices</li>
-<li>Request re-review when ready</li>
-</ol>
-<h3 id="merging-a-pull-request">Merging a Pull Request</h3>
-<p>Once approved:</p>
-<ol>
-<li>Click "Merge pull request"</li>
-<li>Choose merge strategy:</li>
-<li><strong>Create a merge commit</strong>: Keeps full history (safest for main)</li>
-<li><strong>Squash and merge</strong>: Combines commits (cleaner history, good for feature branches)</li>
-<li><strong>Rebase and merge</strong>: Replays commits (linear history, use with caution on shared branches)</li>
-<li>Optionally delete the branch</li>
-<li>PR is closed and merged</li>
-</ol>
-<p><strong>Best practice</strong>: Use "Squash and merge" for most feature branches to keep main history clean.</p>
-<h2 id="collaboration-workflows">Collaboration Workflows</h2>
-<h3 id="forking-and-contributing">Forking and Contributing</h3>
-<p>To contribute to someone else's repository:</p>
-<ol>
-<li>Click <strong>Fork</strong> at top right (creates your copy)</li>
-<li>Clone your fork:
-   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/your-username/repo.git
-<span class="nb">cd</span><span class="w"> </span>repo
-</code></pre></div></li>
-<li>Add upstream remote:
-   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>upstream<span class="w"> </span>https://github.com/original-author/repo.git
-</code></pre></div></li>
-<li>Create a feature branch:
-   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>fix/issue-description
-</code></pre></div></li>
-<li>Make changes and commit</li>
-<li>Push to your fork:
-   <div class="highlight"><pre><span></span><code>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>fix/issue-description
-</code></pre></div></li>
-<li>On GitHub, click "Create pull request"</li>
-<li>Target the original repository</li>
-</ol>
-<h3 id="keeping-your-fork-updated">Keeping Your Fork Updated</h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Fetch latest from original repo</span>
-git<span class="w"> </span>fetch<span class="w"> </span>upstream
+<h3 id="step-3-make-your-first-edit-locally">Step 3: Make Your First Edit Locally</h3>
+<p>Create a simple Python script:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a new file</span>
+cat<span class="w"> </span>&gt;<span class="w"> </span>hello.py<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+<span class="s">def greet(name):</span>
+<span class="s">    &quot;&quot;&quot;A simple greeting function.&quot;&quot;&quot;</span>
+<span class="s">    return f&quot;Hello, {name}!&quot;</span>
 
-<span class="c1"># Merge into your main branch</span>
+<span class="s">if __name__ == &quot;__main__&quot;:</span>
+<span class="s">    print(greet(&quot;World&quot;))</span>
+<span class="s">EOF</span>
+</code></pre></div>
+<h3 id="step-4-create-a-feature-branch">Step 4: Create a Feature Branch</h3>
+<p>Never work directly on <code>main</code>. Instead, create a branch:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feature/add-greeting
+</code></pre></div>
+<p>Now verify you're on the new branch:
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>branch<span class="w">  </span><span class="c1"># Shows you&#39;re on feature/add-greeting</span>
+</code></pre></div></p>
+<h3 id="step-5-commit-and-push-your-changes">Step 5: Commit and Push Your Changes</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Stage your changes</span>
+git<span class="w"> </span>add<span class="w"> </span>hello.py
+
+<span class="c1"># Commit with a descriptive message</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;feat: add greeting function&quot;</span>
+
+<span class="c1"># Push to GitHub</span>
+git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>feature/add-greeting
+</code></pre></div>
+<figure>
+<p><img alt="Push confirmation in terminal" src="../../images/github-push-output.png" style="height:300px;width:800px" />
+  </p>
+<figcaption>Git output after pushing to GitHub</figcaption>
+</figure>
+<h3 id="step-6-create-a-pull-request">Step 6: Create a Pull Request</h3>
+<p>Go to your repository on GitHub. You'll see a notification about your new branch:</p>
+<figure>
+<p><img alt="Pull request prompt" src="../../images/github-pr-prompt.png" style="height:300px;width:1050px" />
+  </p>
+<figcaption>GitHub prompts you to create a PR for your new branch</figcaption>
+</figure>
+<p>Click <strong>Compare &amp; pull request</strong>. Fill in the PR form:</p>
+<ul>
+<li><strong>Title</strong>: "Add greeting function"</li>
+<li><strong>Description</strong>: 
+  <div class="highlight"><pre><span></span><code>This PR adds a simple greeting function.
+
+## Changes
+- Added greet() function
+- Added example usage
+</code></pre></div></li>
+</ul>
+<figure>
+<p><img alt="Pull request form" src="../../images/github-pr-form.png" style="height:600px;width:1000px" />
+  </p>
+<figcaption>Fill in your PR title and description</figcaption>
+</figure>
+<p>Click <strong>Create pull request</strong>.</p>
+<h3 id="step-7-review-the-pull-request">Step 7: Review the Pull Request</h3>
+<p>Your PR page shows:</p>
+<ul>
+<li>The changes you made (blue = additions)</li>
+<li>A "Conversation" tab for comments</li>
+<li>A "Files changed" tab to review the diff</li>
+</ul>
+<figure>
+<p><img alt="Pull request overview" src="../../images/github-pr-overview.png" style="height:600px;width:1000px" />
+  </p>
+<figcaption>Your pull request is ready for review</figcaption>
+</figure>
+<p>Click on the <strong>Files changed</strong> tab to see exactly what you modified:</p>
+<figure>
+<p><img alt="Pull request diff view" src="../../images/github-pr-diff.png" style="height:350px;width:1000px" />
+  </p>
+<figcaption>Green lines show what you added</figcaption>
+</figure>
+<h3 id="step-8-merge-your-pull-request">Step 8: Merge Your Pull Request</h3>
+<p>Once you're satisfied with your changes, merge the PR:</p>
+<ol>
+<li>Click the drop-down button next to <strong>Merge pull request</strong></li>
+<li>Choose <strong>Squash and merge</strong> and click it (keeps history clean)</li>
+<li>Click <strong>Confirm squash and merge</strong></li>
+</ol>
+<figure>
+<p><img alt="Merge button and options" src="../../images/github-merge-button.png" style="height:600px;width:1000px" />
+  </p>
+<figcaption>Click "Merge pull request" to integrate your changes</figcaption>
+</figure>
+<p>Your code is now on <code>main</code>! You can optionally delete the feature branch.</p>
+<h3 id="step-9-update-your-local-repository">Step 9: Update Your Local Repository</h3>
+<p>Back on your computer, switch to main and pull the changes:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>main
+git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>main
+</code></pre></div>
+<p>Verify your file is there:
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>hello.py
+python<span class="w"> </span>hello.py<span class="w">  </span><span class="c1"># Runs your script!</span>
+</code></pre></div></p>
+<h3 id="step-10-create-an-issue-to-track-future-work">Step 10: Create an Issue to Track Future Work</h3>
+<p>Issues are how teams track bugs, feature requests, and tasks. Let's create one:</p>
+<ol>
+<li>Go to your repository on GitHub</li>
+<li>Click the <strong>Issues</strong> tab</li>
+<li>Click <strong>New issue</strong></li>
+</ol>
+<figure>
+<p><img alt="New issue button" src="../../images/github-new-issue-button.png" style="height:300px;width:600px" />
+  </p>
+<figcaption>Click "New issue" to create a task</figcaption>
+</figure>
+<ol>
+<li>Fill in the issue form:</li>
+<li><strong>Title</strong>: "Add farewell function"</li>
+<li><strong>Description</strong>:
+     <div class="highlight"><pre><span></span><code>We should add a farewell function to complement the greeting.
+
+## Acceptance Criteria
+- Function returns a goodbye message
+- Follows the same style as greet()
+- Include example usage
+</code></pre></div></li>
+<li>Click <strong>Submit new issue</strong></li>
+</ol>
+<figure>
+<p><img alt="Issue creation form" src="../../images/github-issue-form.png" style="height:600px;width:1000px" />
+  </p>
+<figcaption>Fill in the issue title and description</figcaption>
+</figure>
+<p>Notice GitHub assigns your issue a number (e.g., #2). You can now reference this in commits and PRs!
+<strong>Bonus point : Do you know why the issue gets assigned #2 and not #1?</strong></p>
+<h3 id="step-11-create-a-feature-branch-linked-to-the-issue">Step 11: Create a Feature Branch Linked to the Issue</h3>
+<p>Create a new branch for this issue:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>main
+git<span class="w"> </span>pull<span class="w"> </span>origin<span class="w"> </span>main
+git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feature/add-farewell
+</code></pre></div>
+<p>Now implement the farewell function:</p>
+<div class="highlight"><pre><span></span><code>cat<span class="w"> </span>&gt;&gt;<span class="w"> </span>hello.py<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+
+<span class="s">def farewell(name):</span>
+<span class="s">    &quot;&quot;&quot;A simple farewell function.&quot;&quot;&quot;</span>
+<span class="s">    return f&quot;Goodbye, {name}!&quot;</span>
+
+<span class="s">if __name__ == &quot;__main__&quot;:</span>
+<span class="s">    print(greet(&quot;World&quot;))</span>
+<span class="s">    print(farewell(&quot;World&quot;))</span>
+<span class="s">EOF</span>
+</code></pre></div>
+<p>Commit your changes <strong>referencing the issue number</strong>:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>hello.py
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;feat: add farewell function</span>
+
+<span class="s2">- Implement farewell() function</span>
+<span class="s2">- Add to main execution</span>
+
+<span class="s2">Closes #2&quot;</span>
+</code></pre></div>
+<p>The <code>Closes #2</code> keyword tells GitHub to automatically close issue #2 when this PR is merged!</p>
+<p>Push to GitHub:</p>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>feature/add-farewell
+</code></pre></div>
+<h3 id="step-12-create-a-pr-and-link-it-to-the-issue">Step 12: Create a PR and Link It to the Issue</h3>
+<p>Go to GitHub and create a new PR:</p>
+<ol>
+<li>Click <strong>Compare &amp; pull request</strong></li>
+<li>Fill in:</li>
+<li><strong>Title</strong>: "Add farewell function"</li>
+<li><strong>Description</strong>:
+     <div class="highlight"><pre><span></span><code>Implements the farewell function requested in issue #2.
+
+## Changes
+- Added farewell() function
+- Updated main execution
+
+Closes #2
+</code></pre></div></li>
+</ol>
+<figure>
+<p><img alt="PR linked to issue" src="../../images/github-pr-form.png" style="height:500px;width:800px" />
+  </p>
+<figcaption>Reference the issue number in your PR description</figcaption>
+</figure>
+<ol>
+<li>Click <strong>Create pull request</strong></li>
+</ol>
+<p>When you merge this PR, GitHub will automatically close issue #2!</p>
+<h3 id="step-13-enable-branch-protection-rules">Step 13: Enable Branch Protection Rules</h3>
+<p>Let's set up best practices to require code review before merging to <code>main</code>:</p>
+<ol>
+<li>Go to your repository → <strong>Settings</strong> tab</li>
+<li>Click <strong>Branches</strong> in the left sidebar</li>
+<li>Click <strong>Add classic branch protection rule</strong> under "Branch protection rules"</li>
+</ol>
+<figure>
+<p><img alt="Branch protection settings" src="../../images/github-branch-protection.png" style="height:350px;width:1000px" />
+  </p>
+<figcaption>Navigate to branch protection rules</figcaption>
+</figure>
+<ol>
+<li>Configure the rule:</li>
+<li><strong>Branch name pattern</strong>: <code>main</code></li>
+<li>Check: <strong>Require a pull request before merging</strong></li>
+<li>Check: <strong>Require at least 1 approval</strong></li>
+<li>Check: <strong>Dismiss stale pull request approvals</strong></li>
+<li>Click <strong>Create</strong></li>
+</ol>
+<figure>
+<p><img alt="Branch protection options" src="../../images/github-branch-protection-config.png" style="height:600px;width:900px" />
+  </p>
+<figcaption>Select protection rules for the main branch</figcaption>
+</figure>
+<p>Now, direct pushes to <code>main</code> are blocked! All code must go through a PR with review.</p>
+<h3 id="step-14-collaboration-forking-and-contributing-optional">Step 14: Collaboration - Forking and Contributing (Optional)</h3>
+<p>Want to contribute to someone else's project? Use fork workflow:</p>
+<ol>
+<li>Go to the repository you want to contribute to - <strong>https://github.com/sidmohite/hello-github-fork</strong></li>
+<li>Click <strong>Fork</strong> in the top right</li>
+</ol>
+<figure>
+<p><img alt="Fork button" src="../../images/github-fork-button.png" style="height:300px;width:900px" />
+  </p>
+<figcaption>Fork creates a copy of the repository under your account</figcaption>
+</figure>
+<ol>
+<li>
+<p>Clone your fork:
+Locally, change your directory to where you want to place this "forked" project and then
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/your-username/hello-github-fork.git
+<span class="nb">cd</span><span class="w"> </span>hello-github-fork
+</code></pre></div></p>
+</li>
+<li>
+<p>Add upstream remote to track the original repo:
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>upstream<span class="w"> </span>https://github.com/sidmohite/hello-github-fork.git
+git<span class="w"> </span>remote<span class="w"> </span>-v<span class="w">  </span><span class="c1"># Verify you have both origin and upstream</span>
+</code></pre></div></p>
+</li>
+<li>
+<p>Create a feature branch and make changes:
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>fix/bug-fix
+<span class="c1"># ... make changes ...</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;fix: resolve issue with feature&quot;</span>
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>fix/bug-fix
+</code></pre></div></p>
+</li>
+<li>
+<p>On GitHub, click <strong>Compare &amp; pull request</strong> to submit PR to the original repo</p>
+</li>
+<li>Maintain your fork by pulling updates from upstream:
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>fetch<span class="w"> </span>upstream
 git<span class="w"> </span>checkout<span class="w"> </span>main
 git<span class="w"> </span>merge<span class="w"> </span>upstream/main
-
-<span class="c1"># Push to your fork</span>
 git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main
-</code></pre></div>
-<h2 id="repository-settings">Repository Settings</h2>
-<p>Important settings (Settings tab):</p>
-<ul>
-<li><strong>Branch protection</strong>: Require reviews before merging to <code>main</code></li>
-<li>Require status checks (CI/CD) to pass</li>
-<li>Require reviews before merging</li>
-<li>Dismiss stale PR approvals when new commits are pushed</li>
-<li>
-<p>Require code owners review</p>
-</li>
-<li>
-<p><strong>Code owners</strong>: Specify who reviews changes to specific files (CODEOWNERS file)</p>
-</li>
-<li><strong>Secrets</strong>: Store API keys, tokens (for Actions)</li>
-<li><strong>Pages</strong>: Enable GitHub Pages for documentation</li>
-<li><strong>Actions</strong>: Configure CI/CD workflows</li>
-</ul>
-<h3 id="branch-protection-best-practices">Branch Protection Best Practices</h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># .github/CODEOWNERS</span>
-<span class="c1"># Automatically request reviews from these people</span>
-
-<span class="c1"># Everyone</span>
-<span class="err">*</span><span class="w"> </span><span class="err">@</span><span class="l l-Scalar l-Scalar-Plain">username</span>
-
-<span class="l l-Scalar l-Scalar-Plain"># Python files</span>
-<span class="l l-Scalar l-Scalar-Plain">*.py @python-maintainer</span>
-
-<span class="l l-Scalar l-Scalar-Plain"># Documentation</span>
-<span class="l l-Scalar l-Scalar-Plain">docs/ @docs-maintainer</span>
-
-<span class="l l-Scalar l-Scalar-Plain"># Tests</span>
-<span class="l l-Scalar l-Scalar-Plain">tests/ @qa-team</span>
-</code></pre></div>
-<h2 id="advanced-github-features">Advanced GitHub Features</h2>
-<h3 id="github-issues-beyond-basics">GitHub Issues (Beyond Basics)</h3>
-<p><strong>Labels for organization</strong>:
-- <code>bug</code>: Something is broken
-- <code>enhancement</code>: New feature request
-- <code>good first issue</code>: Good for new contributors
-- <code>help wanted</code>: Need external help
-- <code>documentation</code>: Doc improvements
-- <code>wontfix</code>: Deliberately not fixing
-- <code>duplicate</code>: Same as another issue</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># Filter issues locally</span>
-<span class="c1"># View only bugs assigned to you: </span>
-<span class="c1"># github.com/owner/repo/issues?assignee=me&amp;labels=bug</span>
-
-<span class="c1"># Create issue templates (auto-populate issue forms)</span>
-<span class="c1"># Add to .github/ISSUE_TEMPLATE/bug_report.md</span>
-</code></pre></div>
-<h3 id="watching-and-notifications">Watching and Notifications</h3>
-<div class="highlight"><pre><span></span><code>Watch button options:
-- Not watching: Only notified if mentioned
-- Watching: All activity on this repo
-- Ignoring: Never notified
-- Custom: Choose specific events
-</code></pre></div>
-<h3 id="gists-and-snippets">Gists and Snippets</h3>
-<p>Share code quickly without creating a full repo:
-<div class="highlight"><pre><span></span><code><span class="c1"># Create a gist from command line</span>
-<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;print(&quot;hello&quot;)&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gh<span class="w"> </span>gist<span class="w"> </span>create<span class="w"> </span>-
-
-<span class="c1"># View: https://gist.github.com/your-username/gist-id</span>
-</code></pre></div></p>
-<h3 id="github-discussions">GitHub Discussions</h3>
-<p>For Q&amp;A and announcements (alternative to Issues):
-- Announcements: Share news
-- Ideas: Brainstorm features
-- Polls: Get community input
-- Q&amp;A: Answer questions</p>
-<h3 id="using-git-blame-and-git-log-on-github">Using <code>git blame</code> and <code>git log</code> on GitHub</h3>
-<p>View file history and who made changes:
-<div class="highlight"><pre><span></span><code># On GitHub: Click any file, then top-right menu → &quot;Blame&quot; or &quot;History&quot;
-# See commit details and author info
-</code></pre></div></p>
-<figure>
-<p><img alt="GitHub blame view" src="../../images/github-git-blame.png" style="height:300px;width:500px" />
-  </p>
-<figcaption>View author history for each line of code</figcaption>
-</figure>
-<h3 id="security-features-advanced">Security Features (Advanced)</h3>
-<p><strong>Dependabot</strong> (automatic):
-- Detects vulnerable dependencies
-- Creates PRs with security updates</p>
-<p><strong>Code scanning</strong>:
-- Integrated with SAST tools
-- Warns about security issues</p>
-<p><strong>Secret scanning</strong>:
-- Detects exposed API keys, tokens
-- Prevents credential leaks</p>
-<h2 id="github-pages">GitHub Pages</h2>
-<h3 id="host-static-sites-from-your-repo">Host Static Sites from Your Repo</h3>
-<ol>
-<li>Push content to <code>main</code> branch (or <code>gh-pages</code>)</li>
-<li>Settings → Pages</li>
-<li>Choose source branch</li>
-<li>Your site is live at <code>https://username.github.io/repo-name</code></li>
+</code></pre></div></li>
 </ol>
-<p><strong>For documentation</strong>:
-- Use Markdown files
-- Build with MkDocs, Sphinx, Jekyll
-- Automatically deploy on push</p>
-<figure>
-<p><img alt="GitHub Pages settings" src="../../images/gh-pages-settings.png" style="height:300px;width:500px" />
-  </p>
-<figcaption>Enable GitHub Pages for automatic documentation hosting</figcaption>
-</figure>
-<h2 id="best-practices-for-github">Best Practices for GitHub</h2>
-<ol>
-<li><strong>Always use descriptive branch names</strong>:</li>
-<li>Good: <code>feat/user-authentication</code>, <code>fix/memory-leak</code></li>
-<li>
-<p>Bad: <code>feature</code>, <code>bugfix</code>, <code>test-123</code></p>
-</li>
-<li>
-<p><strong>Write clear commit messages</strong>: See <a href="https://www.conventionalcommits.org/">Conventional Commits</a></p>
-</li>
-<li>
-<p><strong>Keep <code>main</code> deployable</strong>: Use branches for all development</p>
-</li>
-<li>
-<p><strong>Code review everything</strong>: No direct commits to <code>main</code></p>
-</li>
-<li>
-<p><strong>Use issues for discussions</strong>: Don't discuss bugs in PRs</p>
-</li>
-<li>
-<p><strong>Automate with CI/CD</strong>: See <a href="../4-cicd-best-practices/">CI/CD tutorial</a></p>
-</li>
-<li>
-<p><strong>Document everything</strong>: </p>
-</li>
-<li>README with setup instructions</li>
-<li>Contributing guidelines</li>
-<li>
-<p>Code of Conduct</p>
-</li>
-<li>
-<p><strong>Communicate with collaborators</strong>: Use clear PR descriptions and review comments</p>
-</li>
-</ol>
-<h2 id="next-steps">Next Steps</h2>
-<p>Now that you can collaborate on GitHub, learn how to structure Python packages and publish them:</p>
-<ul>
-<li><a href="../2-python-packages/">Python Package Structure</a></li>
-<li><a href="../3-publishing-to-pypi/">Publishing to PyPI</a></li>
-</ul>
+<hr />
+<h3 id="step-15-best-practices-checklist">Step 15: Best Practices Checklist</h3>
+<p>Now that you've gone through the full workflow, here's what you should always follow:</p>
+<p>✓ <strong>Always use feature branches</strong>
+  <div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feat/description<span class="w"> </span>or<span class="w"> </span>fix/description
+</code></pre></div></p>
+<p>✓ <strong>Write clear, atomic commits</strong>
+  <div class="highlight"><pre><span></span><code>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;feat: concise description of change&quot;</span>
+</code></pre></div></p>
+<p>✓ <strong>Link commits to issues</strong>
+  <div class="highlight"><pre><span></span><code>Closes #42  or  Fixes #1
+</code></pre></div></p>
+<p>✓ <strong>Require code review before merging</strong> (via branch protection)
+  - Set in Settings → Branches → Add rule</p>
+<p>✓ <strong>Use squash and merge for feature branches</strong> to keep history clean
+  - Keep <code>main</code> history readable</p>
+<p>✓ <strong>Never force push to main</strong>
+  <div class="highlight"><pre><span></span><code><span class="c1"># Never do this on main:</span>
+git<span class="w"> </span>push<span class="w"> </span>--force<span class="w"> </span>origin<span class="w"> </span>main<span class="w">  </span><span class="c1"># ❌ Dangerous!</span>
+</code></pre></div></p>
+<p>✓ <strong>Keep PRs focused and small</strong>
+  - Easier to review
+  - Easier to revert if needed
+  - Fewer merge conflicts</p>
+<p>✓ <strong>Add meaningful PR descriptions</strong>
+  - Explain the "why", not just the "what"
+  - Reference related issues
+  - Include testing instructions</p>
+<hr />
+<h3 id="key-concepts-from-this-workflow">Key Concepts from This Workflow</h3>
+<p>✓ <strong>Branching</strong>: Separate branches protect the main code<br />
+✓ <strong>Commits</strong>: Each commit is a checkpoint with a clear message<br />
+✓ <strong>Issues</strong>: Track bugs, features, and tasks<br />
+✓ <strong>Pull Requests</strong>: A review gate before code reaches main<br />
+✓ <strong>Merging</strong>: Integrating changes with full history<br />
+✓ <strong>Branch Protection</strong>: Enforce code review requirements<br />
+✓ <strong>Forking</strong>: Contribute to projects you don't own  </p>
+<p>This workflow is the standard across industry and open source projects. Practice it repeatedly!</p>
+<h2 id="summary">Summary</h2>
+<p>You now have the knowledge to effectively use GitHub for collaboration, code review, and project management. Practice these workflows in your own repositories!</p>
 <h2 id="resources">Resources</h2>
 <ul>
 <li><a href="https://docs.github.com">GitHub Docs</a></li>
