@@ -17,6 +17,21 @@ Learn the fundamentals of version control with Git, including:
 
 ---
 
-This section covers essential Git concepts and workflows for software development.
+### GitHub: Collaboration and Remote Repositories
+
+Building on Git basics, learn to use GitHub for hosting, collaboration, and project management, including:
+
+- Setting up a GitHub account and authentication
+- Creating and managing repositories
+- The Pull Request workflow for code review
+- Issues and project management
+- Collaboration workflows (forking, branching, merging)
+- Repository settings and best practices
+
+**[Start GitHub Collaboration Tutorial →](../VersionControl/2-github-collaboration.md)**
+
+---
+
+These tutorials cover essential Git and GitHub concepts and workflows for modern software development.
 
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
