@@ -1,22 +1,11 @@
 # Current Tutorials
 
-## Version Control
+Check out our current tutorials on **Version Control** fundamentals and best practices:
 
-### Git Basics
-
-Learn the fundamentals of version control with Git, including:
-
-- What is version control and why it matters
-- Setting up Git on your machine
-- Creating your first repository
-- Understanding commits, branches, and remotes
-- Collaborative workflows
-- Troubleshooting common issues
-
-**[Start Git Basics Tutorial →](./VersionControl/1-git-basics.md)**
+**[View Current Tutorials →](./Current/index.md)**
 
 ---
 
-This section covers essential Git concepts and workflows for software development.
+We regularly update our curriculum with new and improved content. Browse the tabs above to explore all available tutorials.
 
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
